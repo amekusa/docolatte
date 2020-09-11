@@ -2,7 +2,7 @@
 var data = obj;
 var self = this;
 ?>
-<div class="section-method">
+<div class="section section-method">
 <?js if (data.kind !== 'module' && !data.hideconstructor) { ?>
     <?js if (data.kind === 'class' && data.classdesc) { ?>
     <h2>Constructor</h2>
@@ -32,7 +32,7 @@ var self = this;
 <?js } ?>
 
 <?js if (kind === 'event' && data.type && data.type.names) {?>
-<div class="section-type">
+<div class="section section-type">
     <h5>Type:</h5>
     <ul>
         <li>
@@ -74,7 +74,7 @@ var self = this;
 <?js } ?>
 
 <?js if (data.listeners && listeners.length) { ?>
-<div class="section-event-listeners">
+<div class="section section-event-listeners">
 <h5>Listeners of This Event:</h5>
 <ul><?js listeners.forEach(function(f) { ?>
     <li><?js= self.linkto(f) ?></li>
@@ -83,7 +83,7 @@ var self = this;
 <?js } ?>
 
 <?js if (data.modifies && modifies.length) { ?>
-<div class="section-modifies">
+<div class="section section-modifies">
 <h5>Modifies:</h5>
 <?js if (modifies.length > 1) { ?><ul><?js
     modifies.forEach(function(r) { ?>
@@ -97,7 +97,7 @@ var self = this;
 <?js } ?>
 
 <?js if (data.exceptions && exceptions.length) { ?>
-<div class="section-throws">
+<div class="section section-throws">
 <h5>Throws:</h5>
 <?js if (exceptions.length > 1) { ?><ul><?js
     exceptions.forEach(function(r) { ?>
@@ -111,7 +111,7 @@ var self = this;
 <?js } ?>
 
 <?js if (data.returns && returns.length) { ?>
-<div class="section-returns">
+<div class="section section-returns">
 <h5>Returns:</h5>
 <?js if (returns.length > 1) { ?><ul><?js
     returns.forEach(function(r) { ?>
@@ -125,7 +125,7 @@ var self = this;
 <?js } ?>
 
 <?js if (data.yields && yields.length) { ?>
-<div class="section-yields">
+<div class="section section-yields">
 <h5>Yields:</h5>
 <?js if (yields.length > 1) { ?><ul><?js
     yields.forEach(function(r) { ?>
@@ -139,7 +139,7 @@ var self = this;
 <?js } ?>
 
 <?js if (data.examples && examples.length) { ?>
-<div class="section-examples">
+<div class="section section-examples">
 <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
 <?js= this.partial('examples.tmpl', examples) ?>
 </div>

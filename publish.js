@@ -141,7 +141,7 @@ function buildAttribsString(attribs) {
   var attribsString = ""
 
   if (attribs && attribs.length) {
-    attribsString = htmlsafe(util.format("(%s) ", attribs.join(", ")))
+    attribsString = attribs.map(x => `<span class="attribute">${htmlsafe(x)}</span>`).join('')
   }
 
   return attribsString
@@ -189,9 +189,9 @@ function addSignatureReturns(f) {
   }
   if (returnTypes.length) {
     returnTypesString = util.format(
-      " &rarr; %s{%s}",
+      ' &rarr; %s<span class="type">%s</span>',
       attribsString,
-      returnTypes.join("|")
+      returnTypes.join('<i class="sep"></i>')
     )
   }
 
@@ -210,8 +210,8 @@ function addSignatureTypes(f) {
   f.signature =
     (f.signature || "") +
     '<span class="type-signature">' +
-    (types.length ? " :" + types.join("|") : "") +
-    "</span>"
+    (types.length ? ' <span class="type">' + types.join('<i class="sep"></i>') : "") +
+    "</span></span>"
 }
 
 function addAttribs(f) {
@@ -219,7 +219,7 @@ function addAttribs(f) {
   var attribsString = buildAttribsString(attribs)
 
   f.attribs = util.format(
-    '<span class="type-signature">%s</span>',
+    '<span class="attributes">%s</span>',
     attribsString
   )
 }
@@ -497,9 +497,9 @@ function buildNavItem (itemContent) {
 
 function buildNavType (type, typeLink) {
   return [
-    '<span class="nav-item-type type-' + type + '">',
+    '<span class="nav-item-type type-' + type + '"><span class="label">',
     type[0].toUpperCase(),
-    '</span>',
+    '</span></span>',
 
     '<span class="nav-item-name">',
     typeLink,

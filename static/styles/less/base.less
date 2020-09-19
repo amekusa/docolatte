@@ -1,0 +1,58 @@
+:root {
+	font-size: @fs-base;
+}
+
+body {
+	font-size: @fs-m;
+	line-height: @lh-base;
+}
+
+h1 + *,
+h2 + *,
+h3 + *,
+h4 + *,
+h5 + *,
+h6 + * {
+	margin-top: 0;
+}
+h1 {
+	font-size: @fs-xl;
+}
+h2, h3 {
+	font-size: @fs-l;
+}
+h4, h5, h6 {
+	font-size: @fs-m;
+}
+
+p {
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+hr {
+	border-style: solid;
+	border-color: #eee;
+}
+
+tt, code, kbd, samp {
+	font-size: @fs-s;
+}
+
+code {
+	.ph(.25em);
+	background-color: transparent;
+	color: lightseagreen;
+
+	a > & {
+		color: #0095dd;
+	}
+	pre > & {
+		display: block;
+		color: #4d4d4c;
+	}
+}

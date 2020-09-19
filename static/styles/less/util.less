@@ -1,0 +1,140 @@
+// Dimension
+.w(@w) { width: @w }
+.h(@h) { height: @h }
+.dim(@wh) { .dim(@wh; @wh) }
+.dim(@w; @h) {
+	.w(@w);
+	.h(@h);
+}
+
+// Margin
+.m(@m) { margin: @m }
+.mt(@t) { margin-top: @t }
+.mb(@b) { margin-bottom: @b }
+.mv(@v) { .mv(@v; @v) }
+.mv(@t; @b) {
+	.mt(@t);
+	.mb(@b);
+}
+.ml(@l) { margin-left: @l }
+.mr(@r) { margin-right: @r }
+.mh(@h) { .mh(@h; @h) }
+.mh(@l; @r) {
+	.ml(@l);
+	.mr(@r);
+}
+.m-t(@-t) {
+	.mb(@-t);
+	.ml(@-t);
+	.mr(@-t);
+}
+.m-b(@-b) {
+	.mt(@-b);
+	.ml(@-b);
+	.mr(@-b);
+}
+.m-l(@-l) {
+	.mt(@-l);
+	.mb(@-l);
+	.mr(@-l);
+}
+.m-r(@-r) {
+	.mt(@-r);
+	.mb(@-r);
+	.ml(@-r);
+}
+
+// Padding
+.p(@p) { padding: @p }
+.pt(@t) { padding-top: @t }
+.pb(@b) { padding-bottom: @b }
+.pv(@v) { .pv(@v; @v) }
+.pv(@t; @b) {
+	.pt(@t);
+	.pb(@b);
+}
+.pl(@l) { padding-left: @l }
+.pr(@r) { padding-right: @r }
+.ph(@h) { .ph(@h; @h) }
+.ph(@l; @r) {
+	.pl(@l);
+	.pr(@r);
+}
+.p-t(@-t) {
+	.pb(@-t);
+	.pl(@-t);
+	.pr(@-t);
+}
+.p-b(@-b) {
+	.pt(@-b);
+	.pl(@-b);
+	.pr(@-b);
+}
+.p-l(@-l) {
+	.pt(@-l);
+	.pb(@-l);
+	.pr(@-l);
+}
+.p-r(@-r) {
+	.pt(@-r);
+	.pb(@-r);
+	.pl(@-r);
+}
+
+// Border
+.b(@b) { border: @b }
+.bt(@t) { border-top: @t }
+.bb(@b) { border-bottom: @b }
+.bv(@v) { .bv(@v; @v) }
+.bv(@t; @b) {
+	.bt(@t);
+	.bb(@b);
+}
+.bl(@l) { border-left: @l }
+.br(@r) { border-right: @r }
+.bh(@h) { .bh(@h; @h) }
+.bh(@l; @r) {
+	.bl(@l);
+	.br(@r);
+}
+.b-t(@-t) {
+	.bb(@-t);
+	.bl(@-t);
+	.br(@-t);
+}
+.b-b(@-b) {
+	.bt(@-b);
+	.bl(@-b);
+	.br(@-b);
+}
+.b-l(@-l) {
+	.bt(@-l);
+	.bb(@-l);
+	.br(@-l);
+}
+.b-r(@-r) {
+	.bt(@-r);
+	.bb(@-r);
+	.bl(@-r);
+}
+
+.bare() {
+	.m(0);
+	.p(0);
+	.b(0);
+}
+
+// Background
+.bg(@c) {
+	background-color: @c;
+}
+.img(@src) {
+	background-image: @src;
+}
+
+// Centering
+.center(@method: absolute) {
+	position: absolute;
+	top: 0; bottom: 0; left: 0; right: 0;
+	margin: auto;
+}

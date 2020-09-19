@@ -1,0 +1,166 @@
+h2, h3, h4, h5, h6 {
+	color: @c-ink;
+	font-weight: bold;
+}
+
+> .readme {
+	.pt(@gutter);
+	font-size: @fs-m;
+
+	h1, h2, h3, h4, h5, h6 {
+		.p(0);
+		.mv(1em; .5em);
+	}
+	h1 {
+		font-size: @fs-xl;
+		color: @c-ink;
+	}
+	h2, h3 {
+		font-size: @fs-l;
+	}
+	h2 {
+		.bl(.5em solid);
+		.pl(.75em);
+		.mt(@gutter*3);
+	}
+	h4, h5, h6 {
+		font-size: @fs-m;
+	}
+	pre > code {
+		font-size: @fs-s;
+	}
+}
+
+> .source {
+}
+
+.container-overview {
+	> .section {
+		h3 {
+			.subsection-title;
+		}
+		&:first-child {
+			h3 {
+				.mt(@gutter*2);
+			}
+		}
+	}
+}
+
+.subsection-title {
+	color: @c-ink;
+	.mt(@gutter*3);
+	.bl(.5em solid);
+	.pl(.75em);
+}
+
+article > .section,
+.container-overview > .section {
+	.bare;
+
+	+ .section {
+		.mt(@gutter);
+		.pt(@gutter);
+		.bt(1px dashed @c-latte);
+	}
+	> h4.name {
+		@offset: @titlebar-h + @gutter; // Anchor offset
+		.pt(@offset);
+		.mt(-@offset);
+		color: @c-pink;
+		font-weight: normal;
+
+		> .type-signature > a {
+			opacity: .5;
+		}
+		> .signature {
+			margin-left: .5em;
+			color: lightpink;
+		}
+		> .attributes {
+			vertical-align: .1em;
+
+			> .attribute {
+				display: inline-block;
+				font-size: @fs-xs;
+				color: white;
+				.bg(@c-pink);
+				.ph(.5em);
+				border-radius: .25em;
+				.mr(.5em);
+
+				&:last-child {
+					.mr(.5rem);
+				}
+			}
+		}
+	}
+	> .description {
+		.mt(0);
+	}
+}
+
+.signature-attributes {
+	font-size: @fs-s;
+}
+
+.type-signature {
+	color: @c-gray;
+
+	.type {
+		&::before,
+		&::after {
+			font-weight: normal;
+		}
+		&::before {
+			content: "<";
+			.pr(.25em);
+		}
+		&::after {
+			content: ">";
+			.pl(.25em);
+		}
+		.sep {
+			.mh(.5em);
+			.bl(1px solid @c-gray);
+		}
+	}
+}
+
+.code-caption {
+	font-size: 1em;
+}
+
+.prettyprint {
+	@g: @gutter / 2;
+	font-size: @fs-s;
+
+	code {
+		font-size: @fs-s;
+		line-height: 1.75;
+	}
+	> code {
+		.pv(@g / 2);
+		.ph(@g);
+	}
+	.linenums {
+		code {
+			padding: 0 @g;
+		}
+		li:first-of-type code {
+			padding-top: @g / 2;
+		}
+	}
+}
+
+.params, .props {
+	font-size: @fs-m;
+}
+
+dl.param-type {
+	font-size: @fs-m;
+
+	dd {
+		font-size: @fs-m;
+	}
+}

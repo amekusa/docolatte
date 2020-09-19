@@ -21,6 +21,16 @@ var view
 
 var outdir = path.normalize(env.opts.destination)
 
+function merge(x, y) {
+  if (typeof x != 'object' || typeof y != 'object') return y;
+  var r = {};
+  for (var i in x) r[i] = (i in y) ? merge(x[i], y[i]) : x[i];
+  for (var i in y) {
+    if (!(i in x)) r[i] = y[i];
+  }
+  return r;
+}
+
 function find(spec) {
   return helper.find(data, spec)
 }
@@ -517,6 +527,11 @@ exports.publish = function(taffyData, opts, tutorials) {
 
   var conf = env.conf.templates || {}
   conf.default = conf.default || {}
+  conf.theme = merge({
+    branding: {
+      link: 'index.html'
+    }
+  }, conf['docolatte'] || {});
 
   var templatePath = path.normalize(opts.template)
   view = new template.Template(path.join(templatePath, "tmpl"))
@@ -705,6 +720,7 @@ exports.publish = function(taffyData, opts, tutorials) {
   view.tutoriallink = tutoriallink
   view.htmlsafe = htmlsafe
   view.outputSourceFiles = outputSourceFiles
+  view.theme = conf.theme
 
   // once for all
   view.nav = buildNav(members)

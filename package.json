@@ -1,16 +1,23 @@
 {
-  "name": "minami",
-  "version": "1.2.3",
-  "description": "Clean and minimal JSDoc 3 Template / Theme",
+  "name": "docolatte",
+  "version": "1.0.0",
+  "description": "cool JSDoc 3 template",
   "main": "publish.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "build": {
+      "patterns": "static/styles/less",
+      "extensions": "less"
+    }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nijikokun/minami.git"
+    "url": "https://github.com/amekusa/docolatte.git"
   },
-  "author": "Nijiko Yonskai <nijikokun@gmail.com>",
+  "author": "amekusa (https://amekusa.com)",
   "licenses": [
     {
       "type": "Apache-2.0",
@@ -18,7 +25,10 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/Nijikokun/minami/issues"
+    "url": "https://github.com/amekusa/docolatte/issues"
   },
-  "homepage": "https://github.com/Nijikokun/minami"
+  "homepage": "https://github.com/amekusa/docolatte",
+  "devDependencies": {
+    "less": "^3.12.2"
+  }
 }

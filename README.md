@@ -1,87 +1,70 @@
-# Minami
+# Docolatte
 
-A clean, responsive documentation template theme for JSDoc 3.
+A theme for JSDoc 3.
 
-![Minami Screenshot](http://i.imgur.com/rPCIFqT.png)
+## Features
 
-
-## Uses
-
-- [the Taffy Database library](http://taffydb.com/)
-- [Underscore Template library](http://underscorejs.org/#template)
-- [Montserrat](https://fonts.google.com/specimen/Montserrat) & Helvetica Neue
+- Responsive
+- Focused on legibility
+- Colorful, but not distracting
+- Customizable options for your branding
 
 
 ## Install
 
-```bash
-$ npm install --save-dev minami
+```sh
+$ npm i --save-dev docolatte
 ```
 
 
 ## Usage
 
-Clone repository to your designated `jsdoc` template directory, then:
+Specify the path to docolatte ( normally: `node_modules/docolatte` ) as the JSDoc template with `-t` option of `jsdoc` command:
 
-```bash
-$ jsdoc entry-file.js -t path/to/minami
+```sh
+$ jsdoc entry-file.js -t node_modules/docolatte
 ```
 
-
-### Node.js Dependency
-
-In your projects `package.json` file add a generate script:
-
-```json
-"scripts": {
-  "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
-}
-```
-
-In your `.jsdoc.json` file, add a template option.
-
-```json
-"opts": {
-  "template": "node_modules/minami"
-}
-```
-
-
-### Example JSDoc Config
+Or set the path to `opts.template` in your JSDoc configuration file:
 
 ```json
 {
-    "tags": {
-        "allowUnknownTags": true,
-        "dictionaries": ["jsdoc"]
-    },
-    "source": {
-        "include": ["lib", "package.json", "README.md"],
-        "includePattern": ".js$",
-        "excludePattern": "(node_modules/|docs)"
-    },
-    "plugins": [
-        "plugins/markdown"
-    ],
-    "templates": {
-        "cleverLinks": false,
-        "monospaceLinks": true,
-        "useLongnameInNav": false,
-        "showInheritedInNav": true
-    },
-    "opts": {
-        "destination": "./docs/",
-        "encoding": "utf8",
-        "private": true,
-        "recurse": true,
-        "template": "./node_modules/minami"
-    }
+  ...
+  "opts": {
+    "template": "node_modules/docolatte",
+  }
+  ...
 }
 ```
 
-Specifying a number for useLongnameInNav it will be the max number of path elements to show in nav (starting from Class).
+## Customize
 
+Docolatte supports some configuration options to customize the end result.
+
+```json
+// Configuration Example
+{
+  ...
+  "docolatte": {
+    "branding": {
+      "title": "My Project",
+      "link": "https://example.com/project/"
+    }
+  }
+  ...
+}
+```
+
+#### Available Options
+
+- `docolate`
+	- `branding`
+		- `title` &mdash; Title of the documentations. Used in the top left header
+		- `link` &mdash; Link URL of the top left header
+
+More options are planned to be implemented in the future.
 
 ## License
 
-Licensed under the Apache2 license.
+Docolatte is a fork of [Minami](https://github.com/nijikokun/minami). The modified or added codes are licensed under the Apache License 2.0.
+The unchanged codes belong to [the original license](https://github.com/nijikokun/minami/blob/master/LICENSE).

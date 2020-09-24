@@ -545,9 +545,7 @@ exports.publish = (taffyData, opts) => {
             // `require.resolve()` has trouble with this package, so we use an extra-hacky way to
             // get the filepath.
             path.join(
-                templatePath,
-                '..',
-                '..',
+                __dirname,
                 'node_modules',
                 'color-themes-for-google-code-prettify',
                 'dist',

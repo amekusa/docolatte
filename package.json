@@ -1,0 +1,41 @@
+{
+  "name": "docolatte",
+  "version": "1.0.0",
+  "description": "cool JSDoc 3 template",
+  "main": "publish.js",
+  "scripts": {
+    "build": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
+    "test": "jsdoc -c fixtures/fixtures.conf.json",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "build": {
+      "patterns": "static/styles/less",
+      "extensions": "less"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amekusa/docolatte.git"
+  },
+  "author": "amekusa (https://amekusa.com)",
+  "license": {
+    "type": "Apache-2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "bugs": {
+    "url": "https://github.com/amekusa/docolatte/issues"
+  },
+  "homepage": "https://github.com/amekusa/docolatte",
+  "devDependencies": {
+    "less": "^3.12.2"
+  },
+  "dependencies": {
+    "@jsdoc/util": "^0.2.2",
+    "code-prettify": "^0.1.0",
+    "color-themes-for-google-code-prettify": "^2.0.4",
+    "common-path-prefix": "^3.0.0",
+    "lodash": "^4.17.20",
+    "open-sans-fonts": "^1.6.2"
+  }
+}

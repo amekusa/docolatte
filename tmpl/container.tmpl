@@ -17,8 +17,6 @@
     <?js= self.partial('source.tmpl', doc) ?>
 <?js } else { ?>
 
-<section>
-
 <header>
     <?js if (!doc.longname || doc.kind !== 'module') { ?>
         <h2><?js if (doc.attribs) { ?><span class="attribs"><?js= doc.attribs ?></span><?js }
@@ -190,7 +188,6 @@
     <?js } ?>
 </article>
 
-</section>
 <?js } ?>
 
 <?js }); ?>

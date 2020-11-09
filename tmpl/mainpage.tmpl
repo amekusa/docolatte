@@ -6,3 +6,9 @@ var self = this;
 <?js if (data.kind === 'package') { ?>
     <h3><?js= data.name ?> <?js= data.version ?></h3>
 <?js } ?>
+
+<?js if (data.readme) { ?>
+    <article class="readme">
+        <?js= data.readme ?>
+    </article>
+<?js } ?>

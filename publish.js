@@ -1,46 +1,43 @@
-const _ = require('lodash');
-const commonPathPrefix = require('common-path-prefix');
+const doop = require('jsdoc/util/doop');
 const env = require('jsdoc/env');
-const fs = require('fs');
+const fs = require('jsdoc/fs');
 const helper = require('jsdoc/util/templateHelper');
-const { log } = require('@jsdoc/util');
-const { lsSync } = require('@jsdoc/util').fs;
-const path = require('path');
-const { taffy } = require('taffydb');
+const logger = require('jsdoc/util/logger');
+const path = require('jsdoc/path');
+const taffy = require('taffydb').taffy;
 const template = require('jsdoc/template');
+const util = require('util');
 
 const htmlsafe = helper.htmlsafe;
 const linkto = helper.linkto;
 const resolveAuthorLinks = helper.resolveAuthorLinks;
 const hasOwnProp = Object.prototype.hasOwnProperty;
 
-const FONT_NAMES = [
-    'OpenSans-Bold',
-    'OpenSans-BoldItalic',
-    'OpenSans-Italic',
-    'OpenSans-Light',
-    'OpenSans-LightItalic',
-    'OpenSans-Regular'
-];
-const PRETTIFIER_CSS_FILES = [
-    'tomorrow.min.css'
-];
-const PRETTIFIER_SCRIPT_FILES = [
-    'lang-css.js',
-    'prettify.js'
-];
-
 let data;
 let view;
 
 let outdir = path.normalize(env.opts.destination);
 
-function mkdirpSync(filepath) {
-    return fs.mkdirSync(filepath, { recursive: true });
+function merge(x, y) {
+    if (typeof x != 'object' || typeof y != 'object') return y;
+    var r = {};
+    for (var i in x) r[i] = (i in y) ? merge(x[i], y[i]) : x[i];
+    for (var i in y) {
+        if (!(i in x)) r[i] = y[i];
+    }
+    return r;
 }
 
 function find(spec) {
     return helper.find(data, spec);
+}
+
+function tutoriallink(tutorial) {
+    return helper.toTutorial(tutorial, null, {
+        tag: 'em',
+        classname: 'disabled',
+        prefix: 'Tutorial: '
+    });
 }
 
 function getAncestorLinks(doclet) {
@@ -113,7 +110,8 @@ function updateItemName(item) {
     }
 
     if (attributes && attributes.length) {
-        itemName = `${itemName}<span class="signature-attributes">${attributes.join(', ')}</span>`;
+        itemName = util.format( '%s<sup class="signature-attributes">%s</sup>', itemName,
+            attributes.join(', ') );
     }
 
     return itemName;
@@ -139,7 +137,7 @@ function buildAttribsString(attribs) {
     let attribsString = '';
 
     if (attribs && attribs.length) {
-        htmlsafe(`(${attribs.join(', ')}) `);
+        attribsString = htmlsafe( util.format('(%s) ', attribs.join(', ')) );
     }
 
     return attribsString;
@@ -158,7 +156,7 @@ function addNonParamAttributes(items) {
 function addSignatureParams(f) {
     const params = f.params ? addParamAttributes(f.params) : [];
 
-    f.signature = `${f.signature || ''}(${params.join(', ')})`;
+    f.signature = util.format( '%s(%s)', (f.signature || ''), params.join(', ') );
 }
 
 function addSignatureReturns(f) {
@@ -187,25 +185,24 @@ function addSignatureReturns(f) {
         returnTypes = addNonParamAttributes(source);
     }
     if (returnTypes.length) {
-        returnTypesString = ` &rarr; ${attribsString}{${returnTypes.join('|')}}`;
+        returnTypesString = util.format( ' &rarr; %s<span class="type">%s</span>', attribsString, returnTypes.join('<i class="sep"></i>') );
     }
 
-    f.signature = `<span class="signature">${f.signature || ''}</span>` +
-        `<span class="type-signature">${returnTypesString}</span>`;
+    f.signature = `<span class="signature">${f.signature || ''}</span><span class="type-signature">${returnTypesString}</span>`;
 }
 
 function addSignatureTypes(f) {
     const types = f.type ? buildItemTypeStrings(f) : [];
+    const typesString = types.length ? (' <span class="type">' + types.join('<i class="sep"></i>') + '</span>') : '';
 
-    f.signature = `${f.signature || ''}<span class="type-signature">` +
-        `${types.length ? ` :${types.join('|')}` : ''}</span>`;
+    f.signature = `${f.signature || ''}<span class="type-signature">${typesString}</span>`;
 }
 
 function addAttribs(f) {
     const attribs = helper.getAttribs(f);
-    const attribsString = buildAttribsString(attribs);
+    const attribsString = attribs.map(item => `<span class="attribute">${htmlsafe(item)}</span>`).join('')
 
-    f.attribs = `<span class="type-signature">${attribsString}</span>`;
+    f.attribs = util.format('<span class="attributes">%s</span>', attribsString);
 }
 
 function shortenPaths(files, commonPrefix) {
@@ -266,7 +263,7 @@ function generateSourceFiles(sourceFiles, encoding = 'utf8') {
             };
         }
         catch (e) {
-            log.error(`Error while generating source file ${file}: ${e.message}`);
+            logger.error('Error while generating source file %s: %s', file, e.message);
         }
 
         generate(`Source: ${sourceFiles[file].shortened}`, [source], sourceOutfile,
@@ -301,7 +298,7 @@ function attachModuleSymbols(doclets, modules) {
                 // we want to show the constructor-signature heading no matter what.
                 .filter(({description, kind}) => description || kind === 'class')
                 .map(symbol => {
-                    symbol = _.cloneDeep(symbol);
+                    symbol = doop(symbol);
 
                     if (symbol.kind === 'class' || symbol.kind === 'function') {
                         symbol.name = `${symbol.name.replace('module:', '(require("')}"))`;
@@ -338,11 +335,15 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         });
 
         if (itemsNav !== '') {
-            nav += `<h3>${itemHeading}</h3><ul>${itemsNav}</ul>`;
+            nav += `<nav><h3>${itemHeading}</h3><ul>${itemsNav}</ul></nav>`;
         }
     }
 
     return nav;
+}
+
+function linktoTutorial(longName, name) {
+    return tutoriallink(name);
 }
 
 function linktoExternal(longName, name) {
@@ -358,6 +359,7 @@ function linktoExternal(longName, name) {
  * @param {array<object>} members.mixins
  * @param {array<object>} members.modules
  * @param {array<object>} members.namespaces
+ * @param {array<object>} members.tutorials
  * @param {array<object>} members.events
  * @param {array<object>} members.interfaces
  * @return {string} The HTML for the navigation sidebar.
@@ -366,6 +368,7 @@ function buildNav(members) {
     let globalNav;
     let nav = '<h2><a href="index.html">Home</a></h2>';
     const seen = {};
+    const seenTutorials = {};
 
     nav += buildMemberNav(members.modules, 'Modules', {}, linkto);
     nav += buildMemberNav(members.externals, 'Externals', seen, linktoExternal);
@@ -374,6 +377,7 @@ function buildNav(members) {
     nav += buildMemberNav(members.interfaces, 'Interfaces', seen, linkto);
     nav += buildMemberNav(members.events, 'Events', seen, linkto);
     nav += buildMemberNav(members.mixins, 'Mixins', seen, linkto);
+    nav += buildMemberNav(members.tutorials, 'Tutorials', seenTutorials, linktoTutorial);
 
     if (members.globals.length) {
         globalNav = '';
@@ -387,30 +391,24 @@ function buildNav(members) {
 
         if (!globalNav) {
             // turn the heading into a link so you can actually get to the global page
-            nav += `<h3>${linkto('global', 'Global')}</h3>`;
+            nav += `<nav><h3>${linkto('global', 'Global')}</h3></nav>`;
         }
         else {
-            nav += `<h3>Global</h3><ul>${globalNav}</ul>`;
+            nav += `<nav><h3>Global</h3><ul>${globalNav}</ul></nav>`;
         }
     }
 
     return nav;
 }
 
-function sourceToDestination(parentDir, sourcePath, destDir) {
-    const relativeSource = path.relative(parentDir, sourcePath);
-
-    return path.resolve(path.join(destDir, relativeSource));
-}
-
 /**
     @param {TAFFY} taffyData See <http://taffydb.com/>.
     @param {object} opts
+    @param {Tutorial} tutorials
  */
-exports.publish = (taffyData, opts) => {
+exports.publish = (taffyData, opts, tutorials) => {
     let classes;
     let conf;
-    let cwd;
     let externals;
     let files;
     let fromDir;
@@ -436,6 +434,16 @@ exports.publish = (taffyData, opts) => {
 
     conf = env.conf.templates || {};
     conf.default = conf.default || {};
+    conf.docolatte = merge({
+        branding: {
+            title: 'My Project',
+            link: 'index.html'
+        },
+        footer: {
+            hide: false,
+            hideCredits: false
+        }
+    }, conf['docolatte'] || {});
 
     templatePath = path.normalize(opts.template);
     view = new template.Template( path.join(templatePath, 'tmpl') );
@@ -450,8 +458,12 @@ exports.publish = (taffyData, opts) => {
 
     // set up templating
     view.layout = conf.default.layoutFile ?
-        path.resolve(conf.default.layoutFile) :
+        path.getResourcePath(path.dirname(conf.default.layoutFile),
+            path.basename(conf.default.layoutFile) ) :
         'layout.tmpl';
+
+    // set up tutorials for helper
+    helper.setTutorials(tutorials);
 
     data = helper.prune(data);
     data.sort('longname, version, since');
@@ -502,58 +514,17 @@ exports.publish = (taffyData, opts) => {
     if (packageInfo && packageInfo.name) {
         outdir = path.join( outdir, packageInfo.name, (packageInfo.version || '') );
     }
-    mkdirpSync(outdir);
+    fs.mkPath(outdir);
 
     // copy the template's static files to outdir
     fromDir = path.join(templatePath, 'static');
-    staticFiles = lsSync(fromDir);
+    staticFiles = fs.ls(fromDir, 3);
 
     staticFiles.forEach(fileName => {
-        const toPath = sourceToDestination(fromDir, fileName, outdir);
+        const toDir = fs.toDir( fileName.replace(fromDir, outdir) );
 
-        mkdirpSync(path.dirname(toPath));
-        fs.copyFileSync(fileName, toPath);
-    });
-
-    // copy the fonts used by the template to outdir
-    staticFiles = lsSync(path.join(require.resolve('open-sans-fonts'), '..', 'open-sans'));
-
-    staticFiles.forEach(fileName => {
-        const toPath = path.join(outdir, 'fonts', path.basename(fileName));
-
-        if (FONT_NAMES.includes(path.parse(fileName).name)) {
-            mkdirpSync(path.dirname(toPath));
-            fs.copyFileSync(fileName, toPath);
-        }
-    });
-
-    // copy the prettify script to outdir
-    PRETTIFIER_SCRIPT_FILES.forEach(fileName => {
-        const toPath = path.join(outdir, 'scripts', path.basename(fileName));
-
-        fs.copyFileSync(
-            path.join(require.resolve('code-prettify'), '..', fileName),
-            toPath
-        );
-    });
-
-    // copy the prettify CSS to outdir
-    PRETTIFIER_CSS_FILES.forEach(fileName => {
-        const toPath = path.join(outdir, 'styles', path.basename(fileName));
-
-        fs.copyFileSync(
-            // `require.resolve()` has trouble with this package, so we use an extra-hacky way to
-            // get the filepath.
-            path.join(
-                __dirname,
-                'node_modules',
-                'color-themes-for-google-code-prettify',
-                'dist',
-                'themes',
-                fileName
-            ),
-            toPath
-        );
+        fs.mkPath(toDir);
+        fs.copyFileSync(fileName, toDir);
     });
 
     // copy user-specified static files to outdir
@@ -565,25 +536,25 @@ exports.publish = (taffyData, opts) => {
             [];
         staticFileFilter = new (require('jsdoc/src/filter').Filter)(conf.default.staticFiles);
         staticFileScanner = new (require('jsdoc/src/scanner').Scanner)();
-        cwd = process.cwd();
 
         staticFilePaths.forEach(filePath => {
             let extraStaticFiles;
 
-            filePath = path.resolve(cwd, filePath);
+            filePath = path.resolve(env.pwd, filePath);
             extraStaticFiles = staticFileScanner.scan([filePath], 10, staticFileFilter);
 
             extraStaticFiles.forEach(fileName => {
-                const toPath = sourceToDestination(fromDir, fileName, outdir);
+                const sourcePath = fs.toDir(filePath);
+                const toDir = fs.toDir( fileName.replace(sourcePath, outdir) );
 
-                mkdirpSync(path.dirname(toPath));
-                fs.copyFileSync(fileName, toPath);
+                fs.mkPath(toDir);
+                fs.copyFileSync(fileName, toDir);
             });
         });
     }
 
     if (sourceFilePaths.length) {
-        sourceFiles = shortenPaths( sourceFiles, commonPathPrefix(sourceFilePaths) );
+        sourceFiles = shortenPaths( sourceFiles, path.commonPrefix(sourceFilePaths) );
     }
     data().each(doclet => {
         let docletPath;
@@ -635,6 +606,7 @@ exports.publish = (taffyData, opts) => {
     });
 
     members = helper.getMembers(data);
+    members.tutorials = tutorials.children;
 
     // output pretty-printed source files by default
     outputSourceFiles = conf.default && conf.default.outputSourceFiles !== false;
@@ -643,8 +615,10 @@ exports.publish = (taffyData, opts) => {
     view.find = find;
     view.linkto = linkto;
     view.resolveAuthorLinks = resolveAuthorLinks;
+    view.tutoriallink = tutoriallink;
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
+    view.theme = conf.docolatte;
 
     // once for all
     view.nav = buildNav(members);
@@ -665,6 +639,7 @@ exports.publish = (taffyData, opts) => {
         packages.concat(
             [{
                 kind: 'mainpage',
+                readme: opts.readme,
                 longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'
             }]
         ).concat(files), indexUrl);
@@ -709,4 +684,31 @@ exports.publish = (taffyData, opts) => {
             generate(`Interface: ${myInterfaces[0].name}`, myInterfaces, helper.longnameToUrl[longname]);
         }
     });
+
+    // TODO: move the tutorial functions to templateHelper.js
+    function generateTutorial(title, tutorial, filename) {
+        const tutorialData = {
+            title: title,
+            header: tutorial.title,
+            content: tutorial.parse(),
+            children: tutorial.children
+        };
+        const tutorialPath = path.join(outdir, filename);
+        let html = view.render('tutorial.tmpl', tutorialData);
+
+        // yes, you can use {@link} in tutorials too!
+        html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
+
+        fs.writeFileSync(tutorialPath, html, 'utf8');
+    }
+
+    // tutorials can have only one parent so there is no risk for loops
+    function saveChildren({children}) {
+        children.forEach(child => {
+            generateTutorial(`Tutorial: ${child.title}`, child, helper.tutorialToUrl(child.name));
+            saveChildren(child);
+        });
+    }
+
+    saveChildren(tutorials);
 };

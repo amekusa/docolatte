@@ -1,0 +1,473 @@
+@charset "utf-8";
+:root,
+body {
+  height: 100%;
+}
+:root {
+  font-size: 18px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-family: "Open Sans", sans-serif;
+  background-color: white;
+  color: #4d4e53;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+h1 {
+  font-size: 1.5rem;
+}
+h2,
+h3 {
+  font-size: 1.25rem;
+}
+h4,
+h5,
+h6 {
+  font-size: 1rem;
+}
+a {
+  color: #0095dd;
+  text-decoration: none;
+}
+a:visited,
+a:active {
+  color: #0095dd;
+}
+a:hover {
+  text-decoration: underline;
+}
+p:first-child {
+  margin-top: 0;
+}
+p:last-child {
+  margin-bottom: 0;
+}
+small {
+  font-size: 0.85rem;
+}
+sub,
+sup {
+  font-size: 0.85rem;
+}
+tt,
+code,
+kbd,
+samp {
+  font-size: 0.85rem;
+  font-family: "Source Code Pro", Consolas, Monaco, "Andale Mono", monospace;
+}
+hr {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+th,
+thead > tr > td {
+  font-weight: bold;
+}
+td,
+th {
+  padding: 0.5em 1em;
+  vertical-align: text-top;
+  text-align: left;
+}
+td:first-child,
+th:first-child {
+  text-align: right;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #5e5f91;
+}
+.page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+.masthead {
+  display: flex;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 3rem;
+}
+.masthead .branding {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 16rem;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 1.25rem;
+  line-height: 1;
+  font-weight: bold;
+}
+.masthead .branding a {
+  color: white;
+}
+.masthead .branding a:hover {
+  text-decoration: none;
+}
+.masthead .branding img {
+  display: block;
+  width: 100%;
+}
+.masthead .topbar {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: auto;
+  height: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+.masthead .topbar .page-title {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-weight: normal;
+  text-shadow: 0 0.05em 0.25em #000000;
+}
+.masthead .topbar .page-title a {
+  color: inherit;
+  text-decoration: none;
+}
+main {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding-top: 4.5rem;
+  padding-bottom: 3rem;
+  padding-left: 16rem;
+  padding-right: 0;
+  background-color: white;
+}
+main.has-footer {
+  padding-bottom: 19rem;
+}
+main > * {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+main code {
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  color: lightseagreen;
+}
+main table {
+  border: 1px solid #d4c9bb;
+}
+main tr + tr {
+  border-top: 1px solid #e8e2da;
+}
+main td + td,
+main th + th,
+main th + td {
+  border-left: 1px dashed #e8e2da;
+}
+main td + th {
+  border-left: 1px solid #e8e2da;
+}
+main thead > tr > td,
+main thead > tr > th {
+  background-color: #e8e2da;
+}
+main hr {
+  border-top: 1px dashed #c4c4c4;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+main > article.readme h1 {
+  font-size: 1.5rem;
+  color: #5e5f91;
+}
+main > article.readme h2,
+main > article.readme h3 {
+  font-size: 1.25rem;
+}
+main > article.readme h2 {
+  margin-top: 4.5rem;
+  border-left: 0.5em solid;
+  padding-left: 0.75em;
+}
+main > article.readme h4,
+main > article.readme h5,
+main > article.readme h6 {
+  font-size: 1rem;
+}
+main > article.readme pre > code {
+  font-size: 0.85rem;
+}
+main > article > .table-wrap {
+  position: relative;
+  max-height: 24em;
+  overflow: auto;
+}
+main > article > .table-wrap > table > thead {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+}
+main .container-overview h2 {
+  margin-top: 4.5rem;
+  border-left: 0.5em solid;
+  padding-left: 0.75em;
+}
+main .signature {
+  margin-left: 0.25em;
+}
+main .signature .signature-attributes {
+  margin-left: 0.25em;
+}
+main h2.name .ancestors,
+main h2.name .attribs,
+main h2.name .ancestors a,
+main h2.name .attribs a {
+  color: #c4c4c4;
+}
+main h4.name {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #c4c4c4;
+  font-weight: normal;
+  font-family: "Source Code Pro", Consolas, Monaco, "Andale Mono", monospace;
+  color: hotpink;
+}
+main h4.name .attributes {
+  vertical-align: 0.1em;
+}
+main h4.name .attributes > .attribute {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: white;
+  background-color: hotpink;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+}
+main h4.name .attributes > .attribute:last-child {
+  margin-right: 0.5rem;
+}
+main h4.name .signature {
+  color: lightpink;
+}
+main h4.name .signature .signature-attributes {
+  color: #ffdcb6;
+}
+main h4.name .type-signature {
+  color: #c4c4c4;
+}
+main h4.name .type-signature .type::before,
+main h4.name .type-signature .type::after {
+  font-weight: normal;
+  color: #dfdfdf;
+}
+main h4.name .type-signature .type::before {
+  content: "<";
+  padding-right: 0.25em;
+}
+main h4.name .type-signature .type::after {
+  content: ">";
+  padding-left: 0.25em;
+}
+main h4.name .type-signature .type .sep {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  border-left: 1px solid #dfdfdf;
+}
+main h4.name:first-of-type,
+main .subsection-title + h4.name {
+  margin-top: 1.5rem;
+  padding-top: 0;
+  border-top: 0;
+}
+main .subsection-title {
+  margin-top: 4.5rem;
+  border-left: 0.5em solid;
+  padding-left: 0.75em;
+}
+main table.params td.type,
+main table.props td.type {
+  font-family: "Source Code Pro", Consolas, Monaco, "Andale Mono", monospace;
+  font-size: 0.85rem;
+}
+main .code-caption {
+  font-size: 1em;
+}
+main .prettyprint {
+  font-size: 0.85rem;
+}
+main .prettyprint code {
+  line-height: 1.75;
+}
+main .prettyprint .linenums code {
+  padding: 0 0.75rem;
+}
+main .prettyprint .linenums li:first-of-type code {
+  padding-top: 0.375rem;
+}
+main .params,
+main .props {
+  font-size: 1rem;
+}
+main .params .name,
+main .props .name {
+  font-family: "Source Code Pro", Consolas, Monaco, "Andale Mono", monospace;
+}
+main dl.param-type {
+  font-size: 1rem;
+}
+main dl.param-type dd {
+  font-size: 1rem;
+}
+.colophon {
+  font-size: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  max-height: 16rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-left: 17.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1.5rem solid #e8e2da;
+  background-image: repeating-linear-gradient(-60deg, white 0, #e8e2da 1px, #e8e2da 1px, white 2px, white 5px);
+}
+.colophon > * + * {
+  margin-top: 1.5rem;
+}
+.colophon .copyright,
+.colophon .credits {
+  text-align: right;
+  color: #ad987c;
+  text-shadow: -0.05em 0.1em 0 white;
+}
+.colophon .credits {
+  font-size: 0.85rem;
+}
+.sidebar {
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 16rem;
+  height: 100%;
+  overflow: hidden;
+  background-color: #e8e2da;
+}
+.sidebar .toc {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100% - 3rem);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  overflow: auto;
+}
+.sidebar .toc > *:last-child {
+  padding-bottom: 6rem;
+}
+.sidebar .toc nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.sidebar .toc nav ul ul {
+  padding-left: 1.5rem;
+}
+.sidebar .toc nav ul li a {
+  margin-right: 1.5rem;
+}
+@media only screen and (max-width: 1280px) {
+  :root {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  :root {
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 828px) {
+  :root {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 680px) {
+  :root {
+    font-size: 16px;
+  }
+  body {
+    overflow: auto;
+  }
+  main {
+    min-width: 320px;
+    padding-left: 0;
+  }
+  main > section {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  main h1.page-title {
+    justify-content: center;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .sidebar {
+    width: 24rem;
+    left: -24rem;
+  }
+  .sidebar ul.nav li {
+    font-size: 1.5rem;
+  }
+  .overlay {
+    z-index: 2;
+  }
+}
+@media only screen and (max-width: 414px) {
+  :root {
+    font-size: 15px;
+  }
+}
+/*# sourceMappingURL=theme.css.map */

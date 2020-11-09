@@ -4,14 +4,34 @@
   "description": "cool JSDoc 3 template",
   "main": "publish.js",
   "scripts": {
-    "build": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
+    "build:js": "rollup -c",
     "test": "jsdoc -c fixtures/fixtures.conf.json",
     "watch": "npm-watch"
   },
   "watch": {
-    "build": {
+    "build:css": {
       "patterns": "static/styles/less",
       "extensions": "less"
+    },
+    "build:js": {
+      "patterns": "static/scripts/src",
+      "extensions": "js"
+    },
+    "test": {
+      "patterns": [
+        "publish.js",
+        "tmpl",
+        "static",
+        "fixtures"
+      ],
+      "extensions": [
+        "tmpl",
+        "js",
+        "css",
+        "json"
+      ]
     }
   },
   "repository": {

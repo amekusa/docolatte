@@ -1,0 +1,341 @@
+// Positioning
+.pos(@pos; @z: -) {
+	position: @pos;
+	& when not(@z = -) { z-index: @z }
+}
+.pos-t(@t; @pos: -; @z: -) {
+	& when not(@pos = -) { position: @pos }
+	& when not(@z = -) { z-index: @z }
+	top: @t;
+}
+.pos-b(@b; @pos: -; @z: -) {
+	& when not(@pos = -) { position: @pos }
+	& when not(@z = -) { z-index: @z }
+	bottom: @b;
+}
+.pos-l(@l; @pos: -; @z: -) {
+	& when not(@pos = -) { position: @pos }
+	& when not(@z = -) { z-index: @z }
+	left: @l;
+}
+.pos-r(@r; @pos: -; @z: -) {
+	& when not(@pos = -) { position: @pos }
+	& when not(@z = -) { z-index: @z }
+	right: @r;
+}
+.pos-tl(@t; @l; @pos: -; @z: -) {
+	& when not(@pos = -) { position: @pos }
+	& when not(@z = -) { z-index: @z }
+	top: @t;
+	left: @l;
+}
+.pos-tr(@t; @r; @pos: -; @z: -) {
+	& when not(@pos = -) { position: @pos }
+	& when not(@z = -) { z-index: @z }
+	top: @t;
+	right: @r;
+}
+.pos-bl(@b; @l; @pos: -; @z: -) {
+	& when not(@pos = -) { position: @pos }
+	& when not(@z = -) { z-index: @z }
+	bottom: @b;
+	left: @l;
+}
+.pos-br(@b; @r; @pos: -; @z: -) {
+	& when not(@pos = -) { position: @pos }
+	& when not(@z = -) { z-index: @z }
+	bottom: @b;
+	right: @r;
+}
+.pos-center(@z: -) {
+	.pos(absolute; @z);
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.pos-center-v(@z: -) {
+	.pos(absolute; @z);
+	top: 0;
+	bottom: 0;
+	.mv(auto);
+}
+.pos-center-h(@z: -) {
+	.pos(absolute; @z);
+	left: 0;
+	right: 0;
+	.mh(auto);
+}
+
+// Alignment
+.flex-center() {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.flex-center-v() {
+	display: flex;
+	align-items: center;
+}
+.flex-center-h() {
+	display: flex;
+	justify-content: center;
+}
+
+// Dimension
+.w(@w; @sizing: -) {
+	& when not(@sizing = -) { box-sizing: @sizing }
+	width: @w;
+}
+.h(@h; @sizing: -) {
+	& when not(@sizing = -) { box-sizing: @sizing }
+	height: @h;
+}
+.square(@wh; @sizing: -) { .dim(@wh; @wh; @sizing) }
+.spread() { .dim(100%; 100%; border-box) }
+.dim(@w; @h; @sizing: -) {
+	.w(@w; @sizing);
+	.h(@h);
+}
+.w-max(@x) { max-width: @x }
+.w-min(@x) { min-width: @x }
+.h-max(@x) { max-height: @x }
+.h-min(@x) { min-height: @x }
+
+// Margin
+.m(@m) { margin: @m }
+.mt(@t; @others: -) {
+	& when (@others = -) { margin-top: @t }
+	& when not(@others = -) { margin: @t @others @others @others }
+}
+.mb(@b; @others: -) {
+	& when (@others = -) { margin-bottom: @b }
+	& when not(@others = -) { margin: @others @others @b @others }
+}
+.mv(@v) { .mv(@v; @v) }
+.mv(@t; @b) {
+	margin-top: @t;
+	margin-bottom: @b;
+}
+.ml(@l; @others: -) {
+	& when (@others = -) { margin-left: @l }
+	& when not(@others = -) { margin: @others @others @others @l }
+}
+.mr(@r; @others: -) {
+	& when (@others = -) { margin-right: @r }
+	& when not(@others = -) { margin: @others @r @others @others }
+}
+.mh(@h) { .mh(@h; @h) }
+.mh(@l; @r) {
+	margin-left: @l;
+	margin-right: @r;
+}
+.m-t(@-t; @t: -) {
+	& when (@t = -) {
+		margin-bottom: @-t;
+		margin-left: @-t;
+		margin-right: @-t;
+	}
+	& when not(@t = -) { margin: @t @-t @-t @-t }
+}
+.m-b(@-b; @b: -) {
+	& when (@b = -) {
+		margin-top: @-b;
+		margin-left: @-b;
+		margin-right: @-b;
+	}
+	& when not(@b = -) { margin: @-b @-b @b @-b }
+}
+.m-l(@-l; @l: -) {
+	& when (@l = -) {
+		margin-top: @-l;
+		margin-bottom: @-l;
+		margin-right: @-l;
+	}
+	& when not(@l = -) { margin: @-l @-l @-l @l }
+}
+.m-r(@-r; @r: -) {
+	& when (@r = -) {
+		margin-top: @-r;
+		margin-bottom: @-r;
+		margin-left: @-r;
+	}
+	& when not(@r = -) { margin: @-r @r @-r @-r }
+}
+
+// Padding
+.p(@p) { padding: @p }
+.pt(@t; @others: -) {
+	& when (@others = -) { padding-top: @t }
+	& when not(@others = -) { padding: @t @others @others @others }
+}
+.pb(@b; @others: -) {
+	& when (@others = -) { padding-bottom: @b }
+	& when not(@others = -) { padding: @others @others @b @others }
+}
+.pv(@v) { .pv(@v; @v) }
+.pv(@t; @b) {
+	padding-top: @t;
+	padding-bottom: @b;
+}
+.pl(@l; @others: -) {
+	& when (@others = -) { padding-left: @l }
+	& when not(@others = -) { padding: @others @others @others @l }
+}
+.pr(@r; @others: -) {
+	& when (@others = -) { padding-right: @r }
+	& when not(@others = -) { padding: @others @r @others @others }
+}
+.ph(@h) { .ph(@h; @h) }
+.ph(@l; @r) {
+	padding-left: @l;
+	padding-right: @r;
+}
+.p-t(@-t; @t: -) {
+	& when (@t = -) {
+		padding-bottom: @-t;
+		padding-left: @-t;
+		padding-right: @-t;
+	}
+	& when not(@t = -) { padding: @t @-t @-t @-t }
+}
+.p-b(@-b; @b: -) {
+	& when (@b = -) {
+		padding-top: @-b;
+		padding-left: @-b;
+		padding-right: @-b;
+	}
+	& when not(@b = -) { padding: @-b @-b @b @-b }
+}
+.p-l(@-l; @l: -) {
+	& when (@l = -) {
+		padding-top: @-l;
+		padding-bottom: @-l;
+		padding-right: @-l;
+	}
+	& when not(@l = -) { padding: @-l @-l @-l @l }
+}
+.p-r(@-r; @r: -) {
+	& when (@r = -) {
+		padding-top: @-r;
+		padding-bottom: @-r;
+		padding-left: @-r;
+	}
+	& when not(@r = -) { padding: @-r @r @-r @-r }
+}
+
+// Border
+.b(@b) { border: @b }
+.bt(@t; @others: -) {
+	border-top: @t;
+	& when not(@others = -) {
+		border-bottom: @others;
+		border-left: @others;
+		border-right: @others;
+	}
+}
+.bb(@b; @others: -) {
+	border-bottom: @b;
+	& when not(@others = -) {
+		border-top: @others;
+		border-left: @others;
+		border-right: @others;
+	}
+}
+.bv(@v) { .bv(@v; @v) }
+.bv(@t; @b) {
+	border-top: @t;
+	border-bottom: @b;
+}
+.bl(@l; @others: -) {
+	border-left: @l;
+	& when not(@others = -) {
+		border-top: @others;
+		border-bottom: @others;
+		border-right: @others;
+	}
+}
+.br(@r; @others: -) {
+	border-right: @r;
+	& when not(@others = -) {
+		border-top: @others;
+		border-bottom: @others;
+		border-left: @others;
+	}
+}
+.bh(@h) { .bh(@h; @h) }
+.bh(@l; @r) {
+	border-left: @l;
+	border-right: @r;
+}
+.b-t(@-t; @t: -) {
+	& when not(@t = -) { border-top: @t }
+	border-bottom: @-t;
+	border-left: @-t;
+	border-right: @-t;
+}
+.b-b(@-b; @b: -) {
+	& when not(@b = -) { border-bottom: @b }
+	border-top: @-b;
+	border-left: @-b;
+	border-right: @-b;
+}
+.b-l(@-l; @l: -) {
+	& when not(@l = -) { border-left: @l }
+	border-top: @-l;
+	border-bottom: @-l;
+	border-right: @-l;
+}
+.b-r(@-r; @r: -) {
+	& when not(@r = -) { border-right: @r }
+	border-top: @-r;
+	border-bottom: @-r;
+	border-left: @-r;
+}
+
+.bare() {
+	.m(0);
+	.p(0);
+	.b(0);
+}
+
+.c(@c) {
+	&, a {
+		color: @c;
+	}
+}
+
+// Background
+.bg(@c) {
+	background-color: @c;
+}
+.img(@src) {
+	background-image: @src;
+}
+
+// Font
+.fs(@size; @lh: -) {
+	font-size: @size;
+	& when not(@lh = -) { line-height: @lh }
+}
+
+// Clearfix
+.clearfix() {
+	&::after {
+		display: table;
+		clear: both;
+	}
+}
+
+.stripe(@angle; @color1; @color2; @c1-width; @c2-width: -) {
+	@c2w: if((@c2-width = -), @c1-width, @c2-width);
+	background-image: repeating-linear-gradient(
+		@angle,
+		@color2 0,
+		@color1 1px,
+		@color1 @c1-width,
+		@color2 @c1-width+1,
+		@color2 @c1-width+@c2w
+	);
+}

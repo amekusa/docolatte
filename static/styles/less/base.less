@@ -1,0 +1,92 @@
+:root, body {
+	.h(100%);
+}
+
+:root {
+	.fs(@fs-base);
+}
+
+body {
+	.bare;
+	.fs(@fs-m; @lh-base);
+	font-family: @ff-body;
+	.bg(white);
+	color: @c-black;
+}
+
+h2, h3, h4, h5, h6 {
+	.mv(2em; .5em);
+}
+h1 + *,
+h2 + *,
+h3 + *,
+h4 + *,
+h5 + *,
+h6 + * {
+	// margin-top: 0;
+}
+h1 {
+	.fs(@fs-xl);
+}
+h2, h3 {
+	.fs(@fs-l);
+}
+h4, h5, h6 {
+	.fs(@fs-m);
+}
+
+a {
+	color: @c-link;
+	text-decoration: none;
+
+	&:visited, &:active {
+		color: @c-link;
+	}
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+p {
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+small {
+	.fs(@fs-s);
+}
+
+sub, sup {
+	.fs(@fs-s);
+}
+
+tt, code, kbd, samp {
+	.fs(@fs-s);
+	font-family: @ff-code;
+}
+
+hr {
+	.mv(@gutter*2; @gutter);
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+th,
+thead > tr > td {
+	font-weight: bold;
+}
+td, th {
+	.p(.5em 1em);
+	vertical-align: text-top;
+	text-align: left;
+
+	&:first-child {
+		text-align: right;
+	}
+}

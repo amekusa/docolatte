@@ -58,7 +58,9 @@ hr {
 		}
 	}
 	&.src {
-		// TODO
+		> .prettyprint {
+			.mt(0);
+		}
 	}
 	&.tutorial {
 		// TODO
@@ -187,10 +189,6 @@ table {
 			.fs(@fs-s);
 		}
 	}
-}
-
-.code-caption {
-	font-size: 1em;
 }
 
 .params, .props {

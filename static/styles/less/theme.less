@@ -96,15 +96,17 @@ main {
 	.pv(@gutter);
 	.bb(@gutter solid @c-latte);
 	.stripe(-60deg; @c-latte; white; 1px; 4px);
+	background-attachment: fixed;
 
-	> * + * {
-		margin-top: @gutter;
-	}
 	.copyright,
 	.credits {
-		text-align: right;
+		.m(0);
+		// text-align: right;
 		color: @c-latte-dim2;
-		text-shadow: -.05em .1em 0 white;
+		text-shadow: -.1em -.1em 0 white;
+	}
+	.copyright {
+		font-weight: bold;
 	}
 	.credits {
 		.fs(@fs-s);
@@ -137,6 +139,9 @@ main {
 					.pl(@gutter);
 				}
 				li {
+					&::before {
+						content: none;
+					}
 					a {
 						.mr(@gutter);
 					}
@@ -173,6 +178,13 @@ main {
 		body {
 			overflow: auto;
 		}
+		.masthead {
+			display: block;
+
+			.branding {
+
+			}
+		}
 		main {
 			min-width: 320px;
 			padding-left: 0;
@@ -185,6 +197,9 @@ main {
 				.ph(@gutter / 2);
 				.mv(0);
 			}
+		}
+		.colophon {
+			.pl(@gutter);
 		}
 		.sidebar {
 			@w: @sidebar-w * 1.5;

@@ -2,10 +2,6 @@
     margin: 0;
 }
 
-article dl {
-    margin-bottom: 40px;
-}
-
 article img {
   max-width: 100%;
 }
@@ -33,42 +29,14 @@ article img {
     color: #aaa;
 }
 
-.details { margin-top: 14px; border-left: 2px solid #DDD; }
-.details dt { width: 120px; float: left; padding-left: 10px;  padding-top: 6px; }
-.details dd { margin-left: 70px; }
-.details ul { margin: 0; }
-.details ul { list-style-type: none; }
-.details li { margin-left: 30px; padding-top: 6px; }
-.details pre.prettyprint { margin: 0 }
-.details .object-value { padding-top: 0; }
-
 .code-caption
 {
     font-style: italic;
-    font-size: 107%;
     margin: 0;
-}
-
-.source
-{
-    border: 1px solid #ddd;
-    width: 80%;
-    overflow: auto;
 }
 
 .prettyprint.source {
     width: inherit;
-}
-
-.source code
-{
-    font-size: 100%;
-    line-height: 18px;
-    display: block;
-    padding: 4px 12px;
-    margin: 0;
-    background-color: #fff;
-    color: #4D4E53;
 }
 
 .prettyprint code span.line
@@ -78,7 +46,6 @@ article img {
 
 .prettyprint.linenums
 {
-  padding-left: 70px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -88,17 +55,6 @@ article img {
 .prettyprint.linenums ol
 {
   padding-left: 0;
-}
-
-.prettyprint.linenums li
-{
-  border-left: 3px #ddd solid;
-}
-
-.prettyprint.linenums li.selected,
-.prettyprint.linenums li.selected *
-{
-  background-color: lightyellow;
 }
 
 .prettyprint.linenums li *

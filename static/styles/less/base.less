@@ -1,5 +1,6 @@
 :root, body {
 	.h(100%);
+	scroll-behavior: smooth;
 }
 
 :root {
@@ -69,8 +70,32 @@ tt, code, kbd, samp {
 	font-family: @ff-code;
 }
 
+pre {
+	-moz-tab-size: 4;
+	tab-size: 4;
+}
+
 hr {
 	.mv(@gutter*2; @gutter);
+}
+
+ul {
+	.pl(1.5em);
+	list-style-type: none;
+
+	li {
+		.pos(relative);
+
+		// list bullet
+		&::before {
+			content: "";
+			display: block;
+			.square(.5em);
+			.pos-tl(.75em; -1em; absolute);
+			.bt(1px solid);
+			opacity: .5;
+		}
+	}
 }
 
 table {

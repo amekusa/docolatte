@@ -5,7 +5,7 @@ code {
 }
 
 table {
-	.b(1px solid @c-latte-dim);
+	.bb(4px solid @c-latte; 1px solid @c-latte);
 }
 tr + tr {
 	.bt(1px solid @c-latte);
@@ -199,10 +199,19 @@ table {
 	}
 }
 
-dl.param-type {
-	font-size: @fs-m;
-
-	dd {
-		font-size: @fs-m;
-	}
+dl {
+	.mv(@gutter/2; 0);
+	// .bl(1px solid @c-ink-thin);
+	.bl(1px solid @c-latte);
+	.pl(@gutter/2);
+}
+dt {
+	.fs(@fs-s);
+	font-weight: bold;
+	font-style: italic;
+	// color: @c-ink;
+	color: @c-latte-dim;
+}
+dd {
+	.m(0);
 }

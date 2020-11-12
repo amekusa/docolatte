@@ -1,4 +1,4 @@
-# Docolatte
+# docolatte
 
 A theme for JSDoc 3.
 

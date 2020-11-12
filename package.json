@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "cool JSDoc 3 template",
   "main": "publish.js",
+  "files": [
+    "static",
+    "tmpl"
+  ],
   "scripts": {
     "build": "npm run build:css && npm run build:js",
     "build:css": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",

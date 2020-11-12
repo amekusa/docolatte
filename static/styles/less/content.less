@@ -204,14 +204,22 @@ dl {
 	// .bl(1px solid @c-ink-thin);
 	.bl(1px solid @c-latte);
 	.pl(@gutter/2);
+
+	&.details {
+		.mt(@gutter);
+	}
 }
 dt {
 	.fs(@fs-s);
 	font-weight: bold;
 	font-style: italic;
-	// color: @c-ink;
-	color: @c-latte-dim;
+	color: @c-ink;
+	// color: @c-latte-dim;
 }
 dd {
 	.m(0);
+
+	&:not(:empty) + dt {
+		.mt(@gutter/2);
+	}
 }

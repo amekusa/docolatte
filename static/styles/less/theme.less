@@ -10,7 +10,7 @@
 @page-w-max: 1280px;
 @topbar-h: 3rem;
 @sidebar-w: 16rem;
-@footer-h: 16rem;
+@footer-h: 12rem;
 
 h2, h3, h4, h5, h6 {
 	color: @c-ink;
@@ -20,11 +20,12 @@ h2, h3, h4, h5, h6 {
 	.pos(relative);
 	.dim(100%; 100%);
 	.h-min(100%);
+	.w-min(320px);
 }
 
 .masthead {
 	display: flex;
-	.pos-tl(0; 0; fixed; 2);
+	.pos-tl(0; 0; fixed; 3);
 	.dim(100%; @topbar-h; border-box);
 
 	.branding {
@@ -70,10 +71,10 @@ h2, h3, h4, h5, h6 {
 }
 
 main {
-	.pos(relative);
+	.pos(relative; 1);
 	.w(100%; border-box);
 	.h-min(100%);
-	.pv(@topbar-h+@gutter; @gutter*2);
+	.pv(@topbar-h+@gutter; @gutter);
 	.ph(@sidebar-w; 0);
 	.bg(white);
 
@@ -88,7 +89,7 @@ main {
 }
 
 .colophon {
-	font-size: @fs-m;
+	.fs(@fs-m);
 	.dim(100%; auto; border-box);
 	.h-max(@footer-h);
 	.pos-br(0; 0; absolute);
@@ -97,6 +98,7 @@ main {
 	.bb(@gutter solid @c-latte);
 	.stripe(-60deg; @c-latte; white; 1px; 4px);
 	background-attachment: fixed;
+	font-style: italic;
 
 	.copyright,
 	.credits {
@@ -114,9 +116,8 @@ main {
 }
 
 .sidebar {
-	font-size: @fs-m;
-	.bare;
-	.pos-tl(0; 0; fixed);
+	.fs(@fs-m);
+	.pos-tl(0; 0; fixed; 2);
 	.dim(@sidebar-w; 100%; border-box);
 	overflow: hidden;
 	.bg(@c-latte);
@@ -151,6 +152,44 @@ main {
 	}
 }
 
+input#docolatte-shows-sidebar,
+.menu-button {
+	display: none;
+}
+.menu-button {
+	@size: 4rem;
+	.pos-br(@gutter; @gutter; fixed; 6);
+	.square(@size);
+	background: @c-latte url("@{img}/burger.svg") no-repeat center/50%;
+	border-radius: @size/2;
+	box-shadow: -.1rem .1rem .3rem rgba(0, 0, 0, .38);
+	transition: all .25s ease-out;
+	cursor: pointer;
+
+	&:active {
+		transform: scale(.8, .8);
+		transition: all .05s ease-out;
+	}
+}
+.overlay,
+.overlay::before {
+	display: block;
+	.pos-tl(0; 0; fixed);
+	.spread;
+}
+.overlay {
+	z-index: -1; // hidden behind the entire page
+
+	// actual overlay
+	&::before {
+		content: "";
+		z-index: auto;
+		.bg(black);
+		opacity: 0;
+		transition: opacity .25s ease-out;
+	}
+}
+
 @media only screen {
 
 	@media (max-width: 1280px) {
@@ -171,6 +210,7 @@ main {
 		}
 	}
 
+	// mobile mode
 	@media (max-width: 680px) {
 		:root {
 			font-size: 16px;
@@ -178,16 +218,29 @@ main {
 		body {
 			overflow: auto;
 		}
+
+		@branding-h: @topbar-h*1.618;
 		.masthead {
 			display: block;
+			overflow: visible;
+			.pos(absolute);
+			.h(auto);
 
 			.branding {
-
+				.w(auto);
+				.h(@branding-h);
+				.fs(@fs-xl);
+			}
+			.topbar {
+				.pos-t(0; sticky);
+				.h(@topbar-h);
+				justify-content: center;
 			}
 		}
 		main {
-			min-width: 320px;
-			padding-left: 0;
+			.w-min(320px);
+			.pt(@topbar-h + @branding-h + @gutter);
+			.pl(0);
 
 			> section {
 				.ph(@gutter / 2);
@@ -201,26 +254,68 @@ main {
 		.colophon {
 			.pl(@gutter);
 		}
+
+		@sidebar-w2: @sidebar-w * 1.5;
 		.sidebar {
-			@w: @sidebar-w * 1.5;
-			.w(@w);
-			left: -@w;
+			z-index: 5;
+			.pos-l(-@sidebar-w2);
+			.w(@sidebar-w2);
+			transition: left .16s ease-out;
 
-			ul.nav {
-				li {
-					font-size: @fs-xl;
+			.toc {
+				.fs(@fs-xl);
+				.h(100%);
+				.pt(@gutter);
 
+				h2, h3 {
+					.fs(@fs-xxl);
+					.mt(@gutter);
+				}
+				> nav {
+					> ul {
+						> li {
+							+ li {
+								.mt(.25em);
+							}
+						}
+					}
 				}
 			}
 		}
-		.overlay {
-			z-index: 2;
+
+		// pop-up sidebar mechanic
+		input#docolatte-shows-sidebar:checked {
+			~ .sidebar {
+				.pos-l(0);
+				box-shadow: .5rem 0 .5rem rgba(0, 0, 0, .25);
+			}
+			~ .overlay {
+				z-index: 4;
+
+				&::before {
+					opacity: .618;
+				}
+			}
+			~ .menu-button {
+				.bg(white);
+			}
+		}
+		.menu-button {
+			display: block;
 		}
 	}
 
 	@media (max-width: 414px) {
 		:root {
 			font-size: 15px;
+		}
+		.masthead {
+			.branding {
+				.fs(@fs-l);
+			}
+			.topbar {
+				.fs(@fs-m);
+			}
 		}
 	}
 }

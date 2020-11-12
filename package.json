@@ -30,6 +30,7 @@
         "tmpl",
         "js",
         "css",
+        "svg",
         "json"
       ]
     }

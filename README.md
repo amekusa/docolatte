@@ -1,9 +1,10 @@
 # Docolatte
 
-![screenshot-desktop](https://raw.githubusercontent.com/amekusa/docolatte/trunk/static/images/screenshot-desktop.png) ![screenshot-mobile](https://raw.githubusercontent.com/amekusa/docolatte/trunk/static/images/screenshot-mobile.png)
-
 A theme for JSDoc 3.
 
+![screenshot-desktop](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/screenshot-desktop.png)
+
+[More Screenshots](https://github.com/amekusa/docolatte/tree/trunk/gallery)
 
 ## Features
 

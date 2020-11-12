@@ -1,7 +1,13 @@
 {
   "name": "docolatte",
   "version": "2.0.0",
-  "description": "cool JSDoc 3 template",
+  "description": "Sweet, bitter, and juicy theme for JSDoc 3",
+  "keywords": [
+    "jsdoc",
+    "jsdoc template",
+    "jsdoc theme",
+    "responsive"
+  ],
   "main": "publish.js",
   "files": [
     "static",

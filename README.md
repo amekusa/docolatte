@@ -1,13 +1,16 @@
 # Docolatte
 
+![screenshot-desktop](https://raw.githubusercontent.com/amekusa/docolatte/trunk/static/images/screenshot-desktop.png) ![screenshot-mobile](https://raw.githubusercontent.com/amekusa/docolatte/trunk/static/images/screenshot-mobile.png)
+
 A theme for JSDoc 3.
+
 
 ## Features
 
 - Responsive
 - Focused on legibility
 - Colorful, but not distracting
-- Customizable options for your branding
+- Customizable options for branding your project
 
 
 ## Install
@@ -45,10 +48,15 @@ Docolatte supports some configuration options to customize the end result.
 // Configuration Example
 {
   ...
-  "docolatte": {
-    "branding": {
-      "title": "My Project",
-      "link": "https://example.com/project/"
+  "templates": {
+    "docolatte": {
+      "branding": {
+        "title": "My Project",
+        "link": "https://example.com/project/"
+      },
+      "footer": {
+        "copyright": "(c) 2020 John Doe"
+      }
     }
   }
   ...
@@ -57,9 +65,13 @@ Docolatte supports some configuration options to customize the end result.
 
 #### Available Options
 
-- `docolate`
-	- `branding`
-		- `title` &mdash; Title of the documentations. Used in the top left header
-		- `link` &mdash; Link URL of the top left header
+- `docolatte`
+  - `branding`
+  	- `title` :  Title of the documentations. Used in the top left header
+  	- `link` :  Link URL of the header
+  - `footer`
+  	- `copyright` :  Copyright text. Used in the footer
+  	- `hide` :  Whether to hide the entire footer ( `true` | `false` )
+- `default` :  All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
 
 More options are planned to be implemented in the future.

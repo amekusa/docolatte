@@ -1,3 +1,7 @@
+**NOTICE:**
+`master` branch is no longer used. The main branch has been switched to `trunk`.  
+This branch will be deleted soon.
+
 # Docolatte
 
 A theme for JSDoc 3.

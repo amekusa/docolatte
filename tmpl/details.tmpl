@@ -84,9 +84,11 @@ if (data.defaultvalue && (data.defaultvaluetype === 'object' || data.defaultvalu
     <?js if (data.author && author.length) {?>
     <dt class="tag-author">Author:</dt>
     <dd class="tag-author">
+        <?js if (author.length > 1) { ?>
         <ul><?js author.forEach(function(a) { ?>
             <li><?js= self.resolveAuthorLinks(a) ?></li>
         <?js }); ?></ul>
+        <?js } else { ?><?js= author[0] ?><?js } ?>
     </dd>
     <?js } ?>
 

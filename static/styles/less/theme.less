@@ -105,7 +105,7 @@ main {
 		.m(0);
 		// text-align: right;
 		color: @c-latte-dim2;
-		text-shadow: -.1em -.1em 0 white;
+		text-shadow: .05em .1em 0 @c-latte;
 	}
 	.copyright {
 		font-weight: bold;
@@ -121,6 +121,7 @@ main {
 	.dim(@sidebar-w; 100%; border-box);
 	overflow: hidden;
 	.bg(@c-latte);
+	text-shadow: 0 2px 0 white;
 
 	.toc {
 		.pos-bl(0; 0; absolute; 1);
@@ -129,15 +130,20 @@ main {
 		overflow: auto;
 
 		> *:last-child {
-			.pb(@gutter*4);
+			.pb(@gutter*2);
 		}
 		nav {
 			ul {
+				.pl(0);
 				list-style: none;
-				.bare;
+				font-weight: bold;
 
+				// methods, members
 				ul {
-					.pl(@gutter);
+					.mv(.35em; .75em);
+					.pl(1.5em);
+					font-family: @ff-code;
+					font-weight: normal;
 				}
 				li {
 					&::before {

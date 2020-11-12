@@ -317,19 +317,25 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         let itemsNav = '';
 
         items.forEach(item => {
-            let displayName;
 
             if ( !hasOwnProp.call(item, 'longname') ) {
-                itemsNav += `<li>${linktoFn('', item.name)}</li>`;
-            }
-            else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                if (env.conf.templates.default.useLongnameInNav) {
-                    displayName = item.longname;
-                } else {
-                    displayName = item.name;
-                }
-                itemsNav += `<li>${linktoFn(item.longname, displayName.replace(/\b(module|event):/g, ''))}</li>`;
+                itemsNav += '<li>' + linktoFn('', item.name) + '</li>';
 
+            } else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
+                itemsNav += `<li>`;
+
+                let displayName = env.conf.templates.default.useLongnameInNav ? item.longname : item.name;
+                itemsNav += linktoFn(item.longname, displayName.replace(/\b(module|event):/g, ''));
+
+                let methods = find({ kind:'function', memberof: item.longname });
+                if (methods.length) {
+                    itemsNav += `<ul class="methods">`;
+                    methods.forEach(method => {
+                        itemsNav += `<li>${linkto(method.longname, method.name)}</li>`;
+                    });
+                    itemsNav += `</ul>`;
+                }
+                itemsNav += `</li>`;
                 itemsSeen[item.longname] = true;
             }
         });

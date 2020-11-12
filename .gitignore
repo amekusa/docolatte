@@ -1,1 +1,8 @@
 package-lock.json
+
+/static/scripts/main.js
+/static/styles/theme.css
+/static/styles/theme.css.map
+
+/fixtures
+/fixtures-doc

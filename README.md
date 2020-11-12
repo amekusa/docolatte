@@ -2,7 +2,7 @@
 
 A theme for JSDoc 3.
 
-![screenshot-desktop](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/screenshot-desktop.png)
+![screenshot-desktop](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/desktop.png)
 
 [More Screenshots](https://github.com/amekusa/docolatte/tree/trunk/gallery)
 

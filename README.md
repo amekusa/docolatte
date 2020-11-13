@@ -33,11 +33,9 @@ Or set the path to `opts.template` in your JSDoc configuration file:
 
 ```json
 {
-  ...
   "opts": {
     "template": "node_modules/docolatte",
   }
-  ...
 }
 ```
 
@@ -48,7 +46,6 @@ Docolatte supports some configuration options to customize the end result.
 ```json
 // Configuration Example
 {
-  ...
   "templates": {
     "docolatte": {
       "branding": {
@@ -60,7 +57,6 @@ Docolatte supports some configuration options to customize the end result.
       }
     }
   }
-  ...
 }
 ```
 

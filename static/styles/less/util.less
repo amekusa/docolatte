@@ -343,3 +343,12 @@
 		@color2 @c1-width+@c2w
 	);
 }
+
+// animation
+.a(state; @value) { animation-play-state: @value }
+.a(curve; @value) { animation-timing-function: @value }
+.a(count; @value) { animation-iteration-count: @value }
+.a(dir;   @value) { animation-direction: @value }
+.a(@prop; @value) when (default()) {
+	animation-@{prop}: @value;
+}

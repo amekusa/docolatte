@@ -168,17 +168,30 @@ input#docolatte-shows-sidebar,
 }
 .menu-button {
 	@size: 4rem;
-	.pos-br(@gutter; @gutter; fixed; 6);
 	.square(@size);
-	background: @c-latte url("@{img}/burger.svg") no-repeat center/50%;
-	border-radius: @size/2;
-	box-shadow: -.1rem .1rem .3rem rgba(0, 0, 0, .38);
-	transition: all .25s ease-out;
 	cursor: pointer;
 
+	.pos-br(@gutter; @gutter; fixed; @z-masthead+10);
+
+	> .shape {
+		.flex-center;
+		.spread;
+		border-radius: @size/2;
+
+		.bg(@c-latte);
+		box-shadow: -.1rem .1rem .3rem rgba(0, 0, 0, .38);
+		transition: all .25s ease-out;
+
+		.icon {
+			opacity: .5;
+		}
+	}
+	// *boop*
 	&:active {
-		transform: scale(.8, .8);
-		transition: all .05s ease-out;
+		> .shape {
+			transform: scale(.8, .8);
+			transition: all .05s ease-out;
+		}
 	}
 }
 .overlay,
@@ -306,7 +319,17 @@ input#docolatte-shows-sidebar,
 				}
 			}
 			~ .menu-button {
-				.bg(white);
+				> .shape {
+					.bg(white);
+
+					.icon {
+						opacity: .75;
+
+						&.burger {
+							.icon.burger.animate;
+						}
+					}
+				}
 			}
 		}
 		.menu-button {

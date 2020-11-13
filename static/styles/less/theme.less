@@ -12,12 +12,16 @@
 @sidebar-w: 16rem;
 @footer-h: 12rem;
 
+@z-sidebar: 10;
+@z-masthead: 20;
+
+
 h2, h3, h4, h5, h6 {
 	color: @c-ink;
 }
 
 .page {
-	.pos(relative);
+	.pos(relative; 0);
 	.dim(100%; 100%);
 	.h-min(100%);
 	.w-min(320px);
@@ -25,7 +29,7 @@ h2, h3, h4, h5, h6 {
 
 .masthead {
 	display: flex;
-	.pos-tl(0; 0; fixed; 3);
+	.pos-tl(0; 0; fixed; @z-masthead);
 	.dim(100%; @topbar-h; border-box);
 
 	.branding {
@@ -71,7 +75,7 @@ h2, h3, h4, h5, h6 {
 }
 
 main {
-	.pos(relative; 1);
+	.pos(relative);
 	.w(100%; border-box);
 	.h-min(100%);
 	.pv(@topbar-h+@gutter; @gutter);
@@ -117,14 +121,14 @@ main {
 
 .sidebar {
 	.fs(@fs-m);
-	.pos-tl(0; 0; fixed; 2);
+	.pos-tl(0; 0; fixed; @z-sidebar);
 	.dim(@sidebar-w; 100%; border-box);
 	overflow: hidden;
 	.bg(@c-latte);
 	text-shadow: 0 2px 0 white;
 
 	.toc {
-		.pos-bl(0; 0; absolute; 1);
+		.pos-bl(0; 0; absolute);
 		.dim(100%; calc(100% - @topbar-h); border-box);
 		.ph(@gutter);
 		overflow: auto;
@@ -180,16 +184,16 @@ input#docolatte-shows-sidebar,
 .overlay,
 .overlay::before {
 	display: block;
-	.pos-tl(0; 0; fixed);
-	.spread;
+	.pos-tl(0; 0);
+	.square(100%);
 }
 .overlay {
-	z-index: -1; // hidden behind the entire page
+	.pos(fixed; -1); // hidden behind the entire page
 
 	// actual overlay
 	&::before {
 		content: "";
-		z-index: auto;
+		.pos(absolute; auto);
 		.bg(black);
 		opacity: 0;
 		transition: opacity .25s ease-out;
@@ -263,7 +267,7 @@ input#docolatte-shows-sidebar,
 
 		@sidebar-w2: @sidebar-w * 1.5;
 		.sidebar {
-			z-index: 5;
+			z-index: @z-masthead+2;
 			.pos-l(-@sidebar-w2);
 			.w(@sidebar-w2);
 			transition: left .16s ease-out;
@@ -296,7 +300,7 @@ input#docolatte-shows-sidebar,
 				box-shadow: .5rem 0 .5rem rgba(0, 0, 0, .25);
 			}
 			~ .overlay {
-				z-index: 4;
+				z-index: @z-masthead+1;
 
 				&::before {
 					opacity: .618;

@@ -93,7 +93,6 @@
 	height: @h;
 }
 .square(@wh; @sizing: -) { .dim(@wh; @wh; @sizing) }
-.spread() { .dim(100%; 100%; border-box) }
 .dim(@w; @h; @sizing: -) {
 	.w(@w; @sizing);
 	.h(@h);
@@ -102,6 +101,11 @@
 .w-min(@x) { min-width: @x }
 .h-max(@x) { max-height: @x }
 .h-min(@x) { min-height: @x }
+
+.spread(@z: -) {
+	.pos-tl(0; 0; absolute; @z);
+	.dim(100%; 100%; border-box);
+}
 
 // Margin
 .m(@m) { margin: @m }

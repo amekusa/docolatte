@@ -124,6 +124,7 @@ main {
 	.dim(@sidebar-w; 100%; border-box);
 	overflow: hidden;
 	.bg(@c-latte);
+	.c(@c-ink);
 	text-shadow: 0 2px 0 white;
 
 	.toc {
@@ -134,6 +135,16 @@ main {
 
 		> *:last-child {
 			.pb(@gutter*2);
+		}
+
+		h2, h3 {
+			.fs(unit(@fs-m, em));
+			text-transform: uppercase;
+		}
+		h3 {
+			.pl(.75em);
+			.bl(.5em solid);
+			font-weight: normal;
 		}
 		nav {
 			ul {
@@ -288,10 +299,6 @@ input#docolatte-shows-sidebar,
 				.h(100%);
 				.pt(@gutter);
 
-				h2, h3 {
-					.fs(@fs-xxl);
-					.mt(@gutter);
-				}
 				> nav {
 					> ul {
 						> li {

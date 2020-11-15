@@ -59,7 +59,8 @@
   },
   "homepage": "https://github.com/amekusa/docolatte",
   "devDependencies": {
-    "less": "^3.12.2"
+    "less": "^3.12.2",
+    "puppeteer-core": "^5.4.1"
   },
   "dependencies": {
     "@jsdoc/util": "^0.2.2",

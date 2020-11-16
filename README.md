@@ -1,10 +1,16 @@
 # docolatte
 
-A theme for JSDoc 3.
+:chocolate_bar: Bittersweet JSDoc 3 template/theme
 
-![screenshot-desktop](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/desktop.png)
+![screenshot home](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/home.png)  
+![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/class.png)  
+![screenshot methods](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/methods.png)  
+![screenshot source](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/source.png)  
+![screenshot mobile](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile.png) ![screenshot mobile menu](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile-menu.png)
 
-[More Screenshots](https://github.com/amekusa/docolatte/tree/trunk/gallery)
+(The sample codes in the screenshots are derived from [docdash/fixtures](https://github.com/clenemt/docdash/tree/master/fixtures))
+
+[All screenshots](https://github.com/amekusa/docolatte/tree/trunk/gallery)
 
 ## Features
 
@@ -72,3 +78,6 @@ Docolatte supports some configuration options to customize the end result.
 - `default` :  All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
 
 More options are planned to be implemented in the future.
+
+## Thanks
+[Docdash](https://github.com/clenemt/docdash) &mdash; Lodash inspired JSDoc 3 template/theme

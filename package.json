@@ -18,6 +18,7 @@
     "build:css": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
     "build:js": "rollup -c",
     "test": "jsdoc -c fixtures/fixtures.conf.json",
+    "screenshot": "node screenshot.js",
     "watch": "npm-watch"
   },
   "watch": {

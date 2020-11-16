@@ -1,6 +1,6 @@
 # docolatte
 
-:chocolate_bar: Bittersweet JSDoc 3 template/theme
+:chocolate_bar: Bittersweet theme for JSDoc 3
 
 ![screenshot home](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/home.png)  
 ![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/class.png)  

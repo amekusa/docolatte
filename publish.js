@@ -7,6 +7,7 @@ const path = require('jsdoc/path');
 const taffy = require('taffydb').taffy;
 const template = require('jsdoc/template');
 const util = require('util');
+const Fuse = require('fuse.js');
 
 const htmlsafe = helper.htmlsafe;
 const linkto = helper.linkto;
@@ -408,6 +409,33 @@ function buildNav(members) {
 }
 
 /**
+ * Generates index for Fuse.js
+ * @param {TAFFY} data
+ */
+function generateIndex(data) {
+    console.log('Generating index...');
+
+    let records = [];
+    data().each(doclet => { records.push(doclet) });
+
+    let keys = [
+        { name: 'name', weight: 10 },
+        { name: 'longname', weight: 9 },
+        { name: 'classdesc', weight: 6 }, // class description
+        { name: 'description', weight: 6 },
+        { name: 'examples', weight: 1 },
+        { name: 'meta.filename', weight: 5 }, // filename
+        { name: 'meta.path', weight: 1 }, // directory path
+        { name: 'meta.code.name', weight: 8 } // member name
+        // { name: '', weight: 1 },
+    ];
+    let index = Fuse.createIndex(keys, records);
+    fs.writeFileSync(__dirname + '/static/scripts/fuse-index.json', JSON.stringify(index.toJSON()));
+
+    console.log(`${records.length} records have been indexed`);
+}
+
+/**
     @param {TAFFY} taffyData See <http://taffydb.com/>.
     @param {object} opts
     @param {Tutorial} tutorials
@@ -474,6 +502,8 @@ exports.publish = (taffyData, opts, tutorials) => {
     data = helper.prune(data);
     data.sort('longname, version, since');
     helper.addEventListeners(data);
+
+    generateIndex(data);
 
     data().each(doclet => {
         let sourcePath;

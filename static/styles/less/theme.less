@@ -107,8 +107,7 @@ main {
 	.credits {
 		.m(0);
 		// text-align: right;
-		color: @c-latte-dim2;
-		text-shadow: .05em .1em 0 @c-latte;
+		color: @c-choco;
 	}
 	.copyright {
 		font-weight: bold;
@@ -127,19 +126,29 @@ main {
 	.c(@c-ink);
 	// text-shadow: 0 2px 0 white;
 
+	a {
+		opacity: .618;
+
+		&:hover, &:focus {
+			opacity: 1;
+		}
+	}
 	.toc {
 		.pos-bl(0; 0; absolute);
 		.dim(100%; calc(100% - @topbar-h); border-box);
 		.ph(@gutter);
 		overflow: auto;
 
+		> *:first-child {
+			.mt(@gutter);
+		}
 		> *:last-child {
 			.pb(@gutter*2);
 		}
-
 		h2, h3 {
 			.fs(unit(@fs-m, em));
 			text-transform: uppercase;
+			letter-spacing: .12em;
 		}
 		h3 {
 			.pl(.75em);

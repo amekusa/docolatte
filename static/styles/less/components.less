@@ -56,7 +56,7 @@ pre.prettyprint {
 				.dim(@linenums-w; 100%; border-box);
 				.pr(.5rem);
 				.bg(rgba(96, 96, 96, .6));
-				color: #cdcdcd;
+				color: #c6c6c6;
 				text-align: right;
 				text-shadow: .1em .1em .1em rgba(0, 0, 0, 1);
 				font-style: italic;
@@ -64,6 +64,10 @@ pre.prettyprint {
 			// line highlight
 			&.selected,
 			&:target {
+				&::before {
+					color: white;
+					.bg(rgba(127, 127, 127, .6));
+				}
 				> code {
 					.bg(rgba(127, 127, 127, .35));
 				}

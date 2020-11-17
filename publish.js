@@ -425,8 +425,6 @@ function generateSearchList(data) {
             { name: 'classdesc', weight: 6 }, // class description
             { name: 'description', weight: 6 },
             { name: 'examples', weight: 1 },
-            { name: 'meta.filename', weight: 5 }, // filename
-            { name: 'meta.code.name', weight: 8 }, // member name
         ]
     };
 

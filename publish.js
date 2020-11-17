@@ -246,6 +246,9 @@ function generate(title, docs, filename, resolveLinks) {
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
     }
 
+    // insert data
+    html = html.replace('<!-- %DATA_GOES_HERE% -->', view.partial('data.tmpl'));
+
     fs.writeFileSync(outpath, html, 'utf8');
 }
 
@@ -409,30 +412,42 @@ function buildNav(members) {
 }
 
 /**
- * Generates index for Fuse.js
+ * Generates list and index for Fuse.js
  * @param {TAFFY} data
  */
-function generateIndex(data) {
-    console.log('Generating index...');
+function generateSearchList(data) {
+    console.log('Generating search list...');
 
-    let records = [];
-    data().each(doclet => { records.push(doclet) });
+    let options = {
+        keys: [
+            { name: 'name', weight: 10 },
+            { name: 'longname', weight: 9 },
+            { name: 'classdesc', weight: 6 }, // class description
+            { name: 'description', weight: 6 },
+            { name: 'examples', weight: 1 },
+            { name: 'meta.filename', weight: 5 }, // filename
+            { name: 'meta.code.name', weight: 8 }, // member name
+        ]
+    };
 
-    let keys = [
-        { name: 'name', weight: 10 },
-        { name: 'longname', weight: 9 },
-        { name: 'classdesc', weight: 6 }, // class description
-        { name: 'description', weight: 6 },
-        { name: 'examples', weight: 1 },
-        { name: 'meta.filename', weight: 5 }, // filename
-        { name: 'meta.path', weight: 1 }, // directory path
-        { name: 'meta.code.name', weight: 8 } // member name
-        // { name: '', weight: 1 },
-    ];
-    let index = Fuse.createIndex(keys, records);
-    fs.writeFileSync(__dirname + '/static/scripts/fuse-index.json', JSON.stringify(index.toJSON()));
+    let list = [];
+    data().each(doclet => {
+        let item = {};
+        for (let key of options.keys) {
+            if (!(key.name in doclet)) continue;
+            item[key.name] = doclet[key.name];
+        }
+        list.push(item);
+    });
 
-    console.log(`${records.length} records have been indexed`);
+    let index = Fuse.createIndex(options.keys, list);
+    console.log(`${list.length} records have been found`);
+
+    return {
+        list: JSON.stringify(list),
+        index: JSON.stringify(index.toJSON()),
+        options: JSON.stringify(options)
+    };
 }
 
 /**
@@ -502,8 +517,6 @@ exports.publish = (taffyData, opts, tutorials) => {
     data = helper.prune(data);
     data.sort('longname, version, since');
     helper.addEventListeners(data);
-
-    generateIndex(data);
 
     data().each(doclet => {
         let sourcePath;
@@ -655,6 +668,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
     view.theme = conf.docolatte;
+    view.search = generateSearchList(data);
 
     // once for all
     view.nav = buildNav(members);

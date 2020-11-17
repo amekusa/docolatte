@@ -377,6 +377,10 @@ function linktoExternal(longName, name) {
 function buildNav(members) {
     let globalNav;
     let nav = '<h2><a href="index.html">Home</a></h2>';
+
+    // search box
+    nav += view.partial('search-box.tmpl');
+
     const seen = {};
     const seenTutorials = {};
 

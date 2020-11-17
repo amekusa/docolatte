@@ -179,6 +179,31 @@ main {
 			}
 		}
 	}
+	.search-box {
+		.pos(relative);
+
+		input[type=text] {
+			.pos(relative);
+			.block;
+			.fs(unit(@fs-m, em));
+			@h: 1.75em;
+			.dim(100%; @h; border-box);
+			.ph(.75em; 2em);
+			.b(none);
+			border-radius: @h / 2;
+
+			&::placeholder {
+				color: @c-gray;
+			}
+			+ .icon {
+				.pos-tr(.35em; .5em; absolute);
+				opacity: .5;
+			}
+		}
+		.suggestions {
+			list-style: none;
+		}
+	}
 }
 
 input#docolatte-shows-sidebar,

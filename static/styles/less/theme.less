@@ -179,6 +179,63 @@ main {
 			}
 		}
 	}
+	.search-box {
+		.pos(relative);
+
+		input[type=text] {
+			.pos(relative);
+			.block;
+			.fs(unit(@fs-m, em));
+			@h: 1.75em;
+			.dim(100%; @h; border-box);
+			.ph(.75em; 2em);
+			.b(none);
+			border-radius: @h / 2;
+
+			&::placeholder {
+				color: @c-gray;
+			}
+			&:focus ~ ol.suggestions {
+				visibility: visible;
+			}
+			+ .icon {
+				.pos-tr(.35em; .5em; absolute);
+				opacity: .5;
+			}
+		}
+		ol.suggestions {
+			list-style: none;
+			.block;
+			.pos-l(0; absolute; @z-sidebar+1);
+			.w-max(100%);
+			overflow: hidden;
+			.m(0);
+			.p(0);
+			.bg(white);
+			border-radius: .5em;
+			box-shadow: .1em .2em .4em rgba(0, 0, 0, .25);
+
+			visibility: hidden;
+			transition: visibility .25s; // needs delay for touch devices (because no :hover)
+
+			&:hover {
+				visibility: visible;
+			}
+			li {
+				> a {
+					.block;
+					.p(.5em .75em);
+					line-height: 1.25;
+					overflow-wrap: break-word;
+				}
+				+ li {
+					> a {
+						.bt(1px dashed @c-gray-thin);
+					}
+				}
+			}
+		}
+	}
 }
 
 input#docolatte-shows-sidebar,

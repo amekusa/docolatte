@@ -88,11 +88,11 @@ pre.prettyprint {
 
 // icons
 .icon {
-	display: inline-block;
+	.pos(relative);
+	.iblock;
 
 	// juicy hamburger
 	&.burger {
-		.pos(relative);
 		.dim(26px; 20px);
 
 		.top, .middle, .bottom {
@@ -136,6 +136,38 @@ pre.prettyprint {
 			@{k1} { transform: translateY(-8px); opacity: 1 }
 			@{k2} { transform: translateY(-8px); opacity: 0 }
 			100% { transform: translateY(-8px) rotateZ(45deg) }
+		}
+	}
+
+	// shiny magnifier
+	&.magnifier {
+		@size: 1em;
+		@thickness: 1px;
+		@color: @c-ink;
+		.square(@size);
+
+		&::before,
+		&::after {
+			content: "";
+			.pos(absolute);
+			.block;
+			box-sizing: border-box;
+		}
+		// lense
+		&::before {
+			.pos-tl(0; 0);
+			.square(80%);
+			.b(@thickness solid @color);
+			border-radius: @size/2;
+		}
+		// handle
+		&::after {
+			.dim(@thickness; 40%);
+			.pos-br(0; -@thickness/2);
+			// transform-box: fill-box;
+			transform-origin: bottom right;
+			transform: translate(-@thickness, -@thickness) rotateZ(-45deg);
+			.bg(@color);
 		}
 	}
 }

@@ -7,6 +7,7 @@ const path = require('jsdoc/path');
 const taffy = require('taffydb').taffy;
 const template = require('jsdoc/template');
 const util = require('util');
+const Fuse = require('fuse.js');
 
 const htmlsafe = helper.htmlsafe;
 const linkto = helper.linkto;
@@ -245,6 +246,9 @@ function generate(title, docs, filename, resolveLinks) {
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
     }
 
+    // insert data
+    html = html.replace('<!-- %DOCOLATTE::DATA_GOES_HERE% -->', view.partial('data.tmpl'));
+
     fs.writeFileSync(outpath, html, 'utf8');
 }
 
@@ -373,6 +377,10 @@ function linktoExternal(longName, name) {
 function buildNav(members) {
     let globalNav;
     let nav = '<h2><a href="index.html">Home</a></h2>';
+
+    // search box
+    nav += view.partial('search-box.tmpl');
+
     const seen = {};
     const seenTutorials = {};
 
@@ -405,6 +413,43 @@ function buildNav(members) {
     }
 
     return nav;
+}
+
+/**
+ * Generates list and index for Fuse.js
+ * @param {TAFFY} data
+ */
+function generateSearchList(data) {
+    console.log('Generating search list...');
+
+    let options = {
+        keys: [
+            { name: 'name', weight: 10 },
+            { name: 'longname', weight: 9 },
+            { name: 'classdesc', weight: 6 }, // class description
+            { name: 'description', weight: 6 },
+            { name: 'examples', weight: 1 },
+        ]
+    };
+
+    let list = [];
+    data().each(doclet => {
+        let item = { url: helper.createLink(doclet) };
+        for (let key of options.keys) {
+            if (!(key.name in doclet)) continue;
+            item[key.name] = doclet[key.name];
+        }
+        list.push(item);
+    });
+
+    let index = Fuse.createIndex(options.keys, list);
+    console.log(`${list.length} records have been found`);
+
+    return {
+        list: JSON.stringify(list),
+        index: JSON.stringify(index.toJSON()),
+        options: JSON.stringify(options)
+    };
 }
 
 /**
@@ -625,6 +670,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
     view.theme = conf.docolatte;
+    view.search = generateSearchList(data);
 
     // once for all
     view.nav = buildNav(members);

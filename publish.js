@@ -430,7 +430,7 @@ function generateSearchList(data) {
 
     let list = [];
     data().each(doclet => {
-        let item = {};
+        let item = { url: helper.createLink(doclet) };
         for (let key of options.keys) {
             if (!(key.name in doclet)) continue;
             item[key.name] = doclet[key.name];

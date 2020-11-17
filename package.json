@@ -1,6 +1,6 @@
 {
   "name": "docolatte",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Bittersweet theme for JSDoc 3",
   "keywords": [
     "jsdoc",
@@ -44,7 +44,9 @@
         "svg",
         "json"
       ],
-      "ignore": ["static/scripts/fuse-index.json"]
+      "ignore": [
+        "static/scripts/fuse-index.json"
+      ]
     }
   },
   "repository": {

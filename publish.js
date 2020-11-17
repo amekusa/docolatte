@@ -247,7 +247,7 @@ function generate(title, docs, filename, resolveLinks) {
     }
 
     // insert data
-    html = html.replace('<!-- %DATA_GOES_HERE% -->', view.partial('data.tmpl'));
+    html = html.replace('<!-- %DOCOLATTE::DATA_GOES_HERE% -->', view.partial('data.tmpl'));
 
     fs.writeFileSync(outpath, html, 'utf8');
 }

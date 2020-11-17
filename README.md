@@ -2,7 +2,6 @@
 
 :chocolate_bar: Bittersweet theme for JSDoc 3
 
-![screenshot home](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/home.png)  
 ![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/class.png)  
 ![screenshot methods](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/methods.png)  
 ![screenshot source](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/source.png)  

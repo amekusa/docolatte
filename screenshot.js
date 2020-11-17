@@ -18,11 +18,6 @@ const puppeteer = require('puppeteer-core');
 	let base = 'file://' + __dirname + '/fixtures-doc/';
 	let pages = [
 		{
-			url: base + 'index.html',
-			viewport: [1024, 768],
-			scroll: [0, 950],
-			saveAs: 'home.png'
-		}, {
 			url: base + 'module-mixins_signalable-Signal.html',
 			viewport: [1024, 640],
 			scroll: [0, 0],

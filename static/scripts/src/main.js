@@ -1,5 +1,10 @@
 import Fuse from 'fuse.js';
 
+/**
+ * The main script for docolatte
+ * @author Satoshi Soma (amekusa.com)
+ */
+
 (() => {
 	/**
 	* @param {string} query
@@ -44,7 +49,11 @@ import Fuse from 'fuse.js';
 		return r;
 	}
 
+	// DOM setup
 	document.addEventListener('DOMContentLoaded', () => {
+		const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
+		// console.debug('CURRENT PAGE:', currentPage);
+
 		// close the sidebar menu
 		// when user clicked one of the menu items
 		q('.sidebar a').forEach(a => {
@@ -85,6 +94,51 @@ import Fuse from 'fuse.js';
 			});
 		})();
 
-	});
+		// scroll related features
+		(() => {
+			let scroll = window.scrollY;
+			let ticking = false;
+
+			window.addEventListener('scroll', ev => {
+				if (ticking) return;
+				if (window.scrollY == scroll) return;
+				scroll = window.scrollY;
+				ticking = true;
+				window.requestAnimationFrame(update);
+			});
+
+			let headings = q('article.doc h4.name[id]');
+			let currentH, prevH = null;
+			let currentA, prevA = null;
+			function update() {
+				// console.debug('SCROLL:', scroll);
+
+				// process headings from bottom to top
+				// (assuming the list is ordered by 'offsetTop')
+				for (let i = headings.length - 1; i >= 0; i--) {
+					let item = headings.item(i);
+					if ((item.offsetTop-12) > scroll) continue;
+					if (i === currentH) break;
+
+					prevH = currentH;
+					currentH = i;
+					// console.debug('CURRENT H:', currentH, item);
+
+					// highlight the current anchor in TOC
+					prevA = currentA;
+					currentA = q(`.sidebar .toc a[href="${currentPage + '#' + item.id}"]`, 0);
+					// console.debug('CURRENT A:', currentA);
+					if (currentA) currentA.classList.add('current');
+					if (prevA) prevA.classList.remove('current');
+					break;
+				}
+
+				ticking = false;
+			}
+
+			update(window.scrollY)
+		})();
+
+	}); // DOM setup
 
 })(); // END

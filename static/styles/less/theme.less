@@ -145,6 +145,11 @@ main {
 		> *:last-child {
 			.pb(@gutter*2);
 		}
+		a {
+			&.current {
+				opacity: 1;
+			}
+		}
 		h2, h3 {
 			.fs(unit(@fs-m, em));
 			text-transform: uppercase;
@@ -167,21 +172,38 @@ main {
 					.pl(1.5em);
 					font-family: @ff-code;
 					font-weight: normal;
+
+					a {
+						.pos(relative);
+						transition: padding-left .25s ease-out;
+
+						// highlighted
+						&.current {
+							font-weight: bold;
+							.pl(.25em);
+							opacity: 1;
+
+							// arrow
+							&::before {
+								content: "";
+								@w: .5em;
+								@h: .75em;
+								.pos-tl(.25em; -1em; absolute);
+								.block;
+								.dim(@w; @h; border-box);
+								.bh(@w solid; none);
+								.bv(@h/2 solid transparent);
+							}
+						}
+					}
 				}
 				li {
 					&::before {
 						content: none;
 					}
-					a {
-						.mr(@gutter);
-						transition: padding-left .25s ease-out;
-
-						&.current {
-							font-weight: bold;
-							.pl(.25em);
-							opacity: 1;
-						}
-					}
+				}
+				a {
+					.mr(@gutter);
 				}
 			}
 		}

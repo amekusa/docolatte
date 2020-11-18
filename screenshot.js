@@ -64,7 +64,16 @@ const puppeteer = require('puppeteer-core');
 			timeout: 60000
 		});
 
-		// scroll
+		// reset TOC scroll position
+		await page.evaluate(i => {
+			document.querySelector('.sidebar .toc').scrollTo({
+				left: 0, top: 0,
+				behavior: 'auto'
+			});
+			Promise.resolve();
+		}, i);
+
+		// scroll window
 		if (i.scroll) {
 			await page.evaluate(i => {
 				window.scrollTo({

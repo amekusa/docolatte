@@ -18,6 +18,10 @@
 - Colorful, but not distracting
 - Customizable options for branding your project
 - Search
+- Interactive navigation (New)
+
+![screenshot nav-demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/nav-demo.gif)
+
 
 ## Install
 

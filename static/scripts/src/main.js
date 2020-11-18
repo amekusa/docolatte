@@ -1,5 +1,10 @@
 import Fuse from 'fuse.js';
 
+/**
+ * The main script for docolatte
+ * @author Satoshi Soma (amekusa.com)
+ */
+
 (() => {
 	/**
 	* @param {string} query
@@ -44,10 +49,52 @@ import Fuse from 'fuse.js';
 		return r;
 	}
 
+	/**
+	 * Gets the offset position of an element from the specific ascendent node
+	 * @param {Element} elem Node to get offset
+	 * @param {Element} from Offset parent
+	 * @param {number} depth Recursion limit
+	 * @return {number} offset.top
+	 * @return {number} offset.left
+	 */
+	function getOffset(elem, from, depth = 8) {
+		let r = { top: 0, left: 0 };
+		let child = elem;
+		while (true) {
+			let parent = child.offsetParent;
+			if (!parent) return r;
+			if (parent.isSameNode(from)) break;
+			if (depth < 1) break;
+			depth--;
+			child = parent;
+		}
+		if ('offsetTop'  in child) r.top  = child.offsetTop;
+		if ('offsetLeft' in child) r.left = child.offsetLeft;
+		return r;
+	}
+
+	// DOM setup
 	document.addEventListener('DOMContentLoaded', () => {
+		const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
+		// console.debug('CURRENT PAGE:', currentPage);
+		const toc = q('.sidebar .toc', 0); // table of contents
+
+		// highlight the current anchors
+		find(toc, `a[href="${currentPage}"]`).forEach(a => {
+			a.classList.add('current');
+
+			// scroll TOC to the anchor
+			let offset = getOffset(a, toc);
+			toc.scrollTo({
+				left: 0,
+				top: offset.top - 24,
+				behavior: 'auto' // 'smooth'
+			});
+		});
+
 		// close the sidebar menu
 		// when user clicked one of the menu items
-		q('.sidebar a').forEach(a => {
+		find(toc, 'a').forEach(a => {
 			a.addEventListener('click', ev => {
 				let checkbox = q('input#docolatte-shows-sidebar', 0);
 				if (!checkbox) return;
@@ -63,7 +110,7 @@ import Fuse from 'fuse.js';
 				JSON.parse(s.options), // options (including keys)
 				Fuse.parseIndex(JSON.parse(s.index)) // index for better performance
 			);
-			let base = q('.sidebar .search-box', 0);
+			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);
 			let lastQuery = '';
 			input.addEventListener('keyup', ev => {
@@ -85,6 +132,51 @@ import Fuse from 'fuse.js';
 			});
 		})();
 
-	});
+		// scroll related features
+		(() => {
+			let scroll = window.scrollY;
+			let ticking = false;
+
+			window.addEventListener('scroll', ev => {
+				if (ticking) return;
+				if (window.scrollY == scroll) return;
+				scroll = window.scrollY;
+				ticking = true;
+				window.requestAnimationFrame(update);
+			});
+
+			let headings = q('article.doc h4.name[id]');
+			let currentH, prevH = null;
+			let currentA, prevA = null;
+			function update() {
+				// console.debug('SCROLL:', scroll);
+
+				// process headings from bottom to top
+				// (assuming the list is ordered by 'offsetTop')
+				for (let i = headings.length - 1; i >= 0; i--) {
+					let item = headings.item(i);
+					if ((item.offsetTop - 12) > scroll) continue;
+					if (i === currentH) break;
+
+					prevH = currentH;
+					currentH = i;
+					// console.debug('CURRENT H:', currentH, item);
+
+					// highlight the current anchor in TOC
+					prevA = currentA;
+					currentA = find(toc, `a[href="${currentPage + '#' + item.id}"]`, 0);
+					// console.debug('CURRENT A:', currentA);
+					if (currentA) currentA.classList.add('current');
+					if (prevA) prevA.classList.remove('current');
+					break;
+				}
+
+				ticking = false;
+			}
+
+			update();
+		})();
+
+	}); // DOM setup
 
 })(); // END

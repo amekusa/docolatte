@@ -79,7 +79,7 @@ import Fuse from 'fuse.js';
 		// console.debug('CURRENT PAGE:', currentPage);
 		const toc = q('.sidebar .toc', 0); // table of contents
 
-		// highlight the current anchors
+		// highlight the anchors pointing at the current page
 		find(toc, `a[href="${currentPage}"]`).forEach(a => {
 			a.classList.add('current');
 
@@ -147,7 +147,7 @@ import Fuse from 'fuse.js';
 
 			let headings = q('article.doc h4.name[id]');
 			let currentH, prevH = null;
-			let currentA, prevA = null;
+			let currentA = [], prevA = null;
 			function update() {
 				// console.debug('SCROLL:', scroll);
 
@@ -162,12 +162,12 @@ import Fuse from 'fuse.js';
 					currentH = i;
 					// console.debug('CURRENT H:', currentH, item);
 
-					// highlight the current anchor in TOC
+					// highlight all the '#' anchors pointing at the current header
 					prevA = currentA;
-					currentA = find(toc, `a[href="${currentPage + '#' + item.id}"]`, 0);
+					currentA = find(toc, `a[href="${currentPage + '#' + item.id}"]`);
 					// console.debug('CURRENT A:', currentA);
-					if (currentA) currentA.classList.add('current');
-					if (prevA) prevA.classList.remove('current');
+					prevA.forEach(a => { a.classList.remove('current') });
+					currentA.forEach(a => { a.classList.add('current') });
 					break;
 				}
 

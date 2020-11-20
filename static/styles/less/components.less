@@ -18,6 +18,35 @@
 	}
 }
 
+// wraps each '@example' code block
+.code-wrap {
+	.pos(relative);
+
+	&:hover {
+		.code-caption {
+			pointer-events: none; // click through
+			opacity: .25;
+		}
+	}
+	// @example <caption>...</caption>
+	.code-caption {
+		.block;
+		.pos-tr(0; 0; absolute);
+		.fs(@fs-m; 1.25);
+		.w-max(61.8%);
+		.pv(.45em); // .5em would slightly overlap the 2nd line of <PRE>
+		.ph(1em);
+		.round-tr(.5rem);
+		.round-bl(.5rem);
+		text-align: right;
+		@bg: #2d2d2d; // derived from: Tomorrow Night 80s
+		.bg(fade(darken(@bg, 10%), 61.8%));
+		color: white;
+		text-shadow: -.1em .1em .1em rgba(0, 0, 0, 1);
+		transition: opacity .25s ease-out;
+	}
+}
+
 // Google Code Prettify
 pre.prettyprint {
 	overflow: auto;
@@ -88,7 +117,6 @@ pre.prettyprint {
 		}
 	}
 }
-
 
 // icons
 .icon {

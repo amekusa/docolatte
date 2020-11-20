@@ -29,12 +29,6 @@ article img {
     color: #aaa;
 }
 
-.code-caption
-{
-    font-style: italic;
-    margin: 0;
-}
-
 .prettyprint.source {
     width: inherit;
 }

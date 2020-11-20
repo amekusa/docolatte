@@ -303,6 +303,31 @@
 	border-bottom: @-r;
 	border-left: @-r;
 }
+.round(@rad) { border-radius: @rad }
+.round-tl(@rad) { border-top-left-radius: @rad }
+.round-tr(@rad) { border-top-right-radius: @rad }
+.round-bl(@rad) { border-bottom-left-radius: @rad }
+.round-br(@rad) { border-bottom-right-radius: @rad }
+.round-t(@rad) { .round-t(@rad; @rad) }
+.round-t(@l; @r) {
+	border-top-left-radius: @l;
+	border-top-right-radius: @r;
+}
+.round-b(@rad) { .round-b(@rad; @rad) }
+.round-b(@l; @r) {
+	border-bottom-left-radius: @l;
+	border-bottom-right-radius: @r;
+}
+.round-l(@rad) { .round-l(@rad; @rad) }
+.round-l(@t; @b) {
+	border-top-left-radius: @t;
+	border-bottom-left-radius: @b;
+}
+.round-r(@rad) { .round-r(@rad; @rad) }
+.round-r(@t; @b) {
+	border-top-right-radius: @t;
+	border-bottom-right-radius: @b;
+}
 
 .bare() {
 	.m(0);

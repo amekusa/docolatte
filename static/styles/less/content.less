@@ -9,8 +9,10 @@ a code {
 table {
 	.bb(4px solid @c-latte; 1px solid @c-latte);
 }
-tr + tr {
-	.bt(1px solid @c-latte);
+tr {
+	+ tr > * {
+		.bt(1px solid @c-latte);
+	}
 }
 td + td,
 th + th,
@@ -26,9 +28,10 @@ thead > tr > td {
 }
 thead {
 	> tr {
-		> td,
-		> th {
-			.bg(@c-latte);
+		.stripe(-60deg; @c-latte; white; 1px; 3px);
+
+		> * + * {
+			.bl(none);
 		}
 	}
 }

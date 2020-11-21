@@ -39,8 +39,9 @@ thead {
 dl {
 	.dl-side-by-side(fit-content(6rem); @gutter/4 @gutter/2);
 	.mv(@gutter/2; 0);
-	.bl(1px solid @c-latte);
+	.bl(1px solid @c-gray-thin);
 	.pl(@gutter);
+	overflow: auto;
 
 	&.details {
 		.mt(@gutter);
@@ -51,7 +52,7 @@ dt {
 	.pv(.25em);
 	text-align: right;
 	white-space: nowrap;
-	color: @c-ink;
+	color: fade(@c-ink, 61.8%);
 }
 
 hr {

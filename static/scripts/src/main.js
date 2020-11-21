@@ -128,6 +128,8 @@ import Fuse from 'fuse.js';
 			let input = find(base, 'input[type=text]', 0);
 			let lastQuery = '';
 			input.addEventListener('keyup', ev => {
+				if (ev.code == 'Escape') return ev.target.blur(); // ESC to unfocus
+
 				let query = ev.target.value;
 				if (query == lastQuery) return;
 				lastQuery = query;

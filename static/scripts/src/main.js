@@ -144,6 +144,15 @@ import Fuse from 'fuse.js';
 					suggests.appendChild(li);
 				}
 			});
+
+			// type any "printable" key to start a search
+			document.addEventListener('keydown', ev => {
+				// console.debug('KEYDOWN:', ev);
+				if (ev.key.length != 1 || ev.code == 'Space') return;
+				if (ev.target.tagName == 'INPUT' || ev.target.tagName == 'TEXTAREA') return;
+				input.value = '';
+				input.focus();
+			});
 		})();
 
 		// scroll related features

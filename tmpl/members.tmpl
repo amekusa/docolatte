@@ -27,9 +27,7 @@ var self = this;
 
 <?js if (data.fires && fires.length) { ?>
     <h5>Fires:</h5>
-    <ul><?js fires.forEach(function(f) { ?>
-        <li><?js= self.linkto(f) ?></li>
-    <?js }); ?></ul>
+    <?js= this.list(fires, item => self.linkto(item)) ?>
 <?js } ?>
 
 <?js if (data.examples && examples.length) { ?>

@@ -33,6 +33,24 @@ thead {
 	}
 }
 
+dl {
+	.dl-side-by-side(fit-content(6rem); @gutter/4 @gutter/2);
+	.mv(@gutter/2; 0);
+	.bl(1px solid @c-latte);
+	.pl(@gutter);
+
+	&.details {
+		.mt(@gutter);
+	}
+}
+dt {
+	.fs(@fs-s; 1.25);
+	.pv(.25em);
+	text-align: right;
+	white-space: nowrap;
+	color: @c-ink;
+}
+
 hr {
 	.bt(1px dashed @c-gray; none);
 }
@@ -204,29 +222,5 @@ table {
 
 	.name {
 		font-family: @ff-code;
-	}
-}
-
-dl {
-	.mv(@gutter/2; 0);
-	// .bl(1px solid @c-ink-thin);
-	.bl(1px solid @c-latte);
-	.pl(@gutter/2);
-
-	&.details {
-		.mt(@gutter);
-	}
-}
-dt {
-	.fs(@fs-s);
-	font-weight: bold;
-	font-style: italic;
-	color: @c-ink;
-}
-dd {
-	.m(0);
-
-	&:not(:empty) + dt {
-		.mt(@gutter/2);
 	}
 }

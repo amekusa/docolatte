@@ -3,6 +3,10 @@
 .block() { display: block }
 .iblock() { display: inline-block }
 .flex() { display: flex }
+.grid(@grid: -) {
+	display: grid;
+	& when not(@grid = -) { grid: @grid }
+}
 
 // Positioning
 .pos(@pos; @z: -) {
@@ -382,4 +386,19 @@
 .a(dir;   @value) { animation-direction: @value }
 .a(@prop; @value) when (default()) {
 	animation-@{prop}: @value;
+}
+
+// columned definition list
+.dl-side-by-side(@dt-width; @gap) {
+	.grid;
+	grid-template-columns: @dt-width auto;
+	gap: @gap;
+
+	> dt {
+		grid-column: 1;
+	}
+	> dd {
+		grid-column: 2;
+		.m(0); // cancel the browser default style
+	}
 }

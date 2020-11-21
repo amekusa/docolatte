@@ -29,6 +29,22 @@ function merge(x, y) {
     return r;
 }
 
+/**
+ * Formats an array to a <UL> list.
+ * If the array has only 1 item, omits <UL> and <LI> tags
+ * @author amekusa
+ */
+function list(items, forEach = null) {
+    if (!items || !items.length) return '';
+    if (!forEach) forEach = item => item;
+    if (items.length = 1) return forEach(items[0]);
+    let r = '';
+    items.forEach(item => {
+        r += '<li>' + forEach(item) + '</li>';
+    });
+    return `<ul>${r}</ul>`;
+}
+
 function find(spec) {
     return helper.find(data, spec);
 }
@@ -669,6 +685,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.tutoriallink = tutoriallink;
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
+    view.list = list;
     view.theme = conf.docolatte;
     view.search = generateSearchList(data);
 

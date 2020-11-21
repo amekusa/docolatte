@@ -6,7 +6,8 @@ export default {
   output: {
     name: 'docolatte',
     dir: 'static/scripts',
-    format: 'iife'
+    format: 'iife',
+    sourcemap: true
   },
   plugins: [
     resolve(),

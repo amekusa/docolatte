@@ -19,6 +19,10 @@ let view;
 
 let outdir = path.normalize(env.opts.destination);
 
+/**
+ * Merges 2 objects recursively
+ * @author amekusa
+ */
 function merge(x, y) {
     if (typeof x != 'object' || typeof y != 'object') return y;
     var r = {};

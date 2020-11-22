@@ -128,7 +128,7 @@ import Fuse from 'fuse.js';
 			let input = find(base, 'input[type=text]', 0);
 			let lastQuery = '';
 			input.addEventListener('keyup', ev => {
-				if (ev.code == 'Escape') return ev.target.blur(); // ESC to unfocus
+				if (ev.key == 'Escape') return ev.target.blur(); // ESC to unfocus
 
 				let query = ev.target.value;
 				if (query == lastQuery) return;
@@ -150,7 +150,8 @@ import Fuse from 'fuse.js';
 			// type any "printable" key to start a search
 			document.addEventListener('keydown', ev => {
 				// console.debug('KEYDOWN:', ev);
-				if (ev.key.length != 1 || ev.code == 'Space') return;
+				if (ev.key.length != 1) return; // ignore non-printable keys
+				if (ev.key == ' ') return;      // ignore SPACE key
 				if (ev.target.tagName == 'INPUT' || ev.target.tagName == 'TEXTAREA') return;
 				input.value = '';
 				input.focus();

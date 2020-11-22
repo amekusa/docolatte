@@ -20,6 +20,7 @@ import Fuse from 'fuse.js';
  */
 
 (() => {
+
 	/**
 	* @param {string} query
 	* @param {int} index
@@ -126,23 +127,72 @@ import Fuse from 'fuse.js';
 			);
 			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);
+			let suggests = find(base, '.suggestions', 0);
 			let lastQuery = '';
+
+			// search as you type
 			input.addEventListener('keyup', ev => {
+				if (ev.key == 'Escape') return ev.target.blur(); // ESC to unfocus
+
 				let query = ev.target.value;
 				if (query == lastQuery) return;
 				lastQuery = query;
 
-				let suggests = find(base, '.suggestions', 0);
 				suggests.innerHTML = ''; // clear
+				suggests.setAttribute('data-select', 0); // reset the state
 
 				if (!query.length) return;
 				let results = fuse.search(query, { limit: 8 });
-				// if (results.length) console.debug('RESULTS:', results);
-				for (let result of results) {
-					let item = result.item;
+				if (!results.length) return;
+				// console.debug('RESULTS:', results);
+
+				for (let i = 0; i < results.length; i++) {
+					let item = results[i].item;
 					let li = elem('li', null, elem('a', { href: item.url }, item.longname));
+					if (i == 0) li.classList.add('selected'); // select the 1st item
 					suggests.appendChild(li);
 				}
+			});
+
+			// navigate through suggestions with key presses
+			input.addEventListener('keydown', ev => {
+				if (!suggests.children.length) return;
+
+				let select = Number.parseInt(suggests.getAttribute('data-select') || 0);
+				let selectNew = select;
+
+				// navigation
+				switch (ev.key) {
+				case 'ArrowDown':
+					selectNew++;
+					break;
+				case 'ArrowUp':
+					selectNew--;
+					break;
+				case 'Tab':
+					selectNew += (ev.shiftKey ? -1 : 1);
+					break;
+				case 'Enter':
+					find(suggests.children[select], 'a', 0).click();
+					break;
+				default:
+					return; // do nothing
+				}
+				if (selectNew < 0) selectNew = suggests.children.length - 1;   // jump to bottom from top
+				else if (selectNew >= suggests.children.length) selectNew = 0; // jump to top from bottom
+				suggests.children[select].classList.remove('selected'); // unselect the previous
+				suggests.children[selectNew].classList.add('selected'); // select the new
+				suggests.setAttribute('data-select', selectNew);
+			});
+
+			// type any "printable" key to start a search
+			document.addEventListener('keydown', ev => {
+				// console.debug('KEYDOWN:', ev);
+				if (ev.key.length != 1) return; // ignore non-printable keys
+				if (ev.key == ' ') return;      // ignore SPACE key
+				if (ev.target.tagName == 'INPUT' || ev.target.tagName == 'TEXTAREA') return;
+				input.value = '';
+				input.focus();
 			});
 		})();
 

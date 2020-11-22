@@ -269,16 +269,25 @@ main {
 				visibility: visible;
 			}
 			li {
+				&.selected > a {
+					.bg(@c-ink);
+					color: white;
+					opacity: 1;
+				}
 				> a {
 					.block;
 					.p(.5em .75em);
 					line-height: 1.25;
 					overflow-wrap: break-word;
-				}
-				+ li {
-					> a {
-						.bt(1px dashed @c-gray-thin);
+
+					&:hover {
+						.bg(@c-ink-thin);
+						color: white;
+						opacity: 1;
 					}
+				}
+				+ li > a {
+					.bt(1px dashed @c-gray-thin);
 				}
 			}
 		}

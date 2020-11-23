@@ -253,7 +253,7 @@ main {
 		ol.suggestions {
 			list-style: none;
 			.block;
-			.pos-l(0; absolute; @z-sidebar+1);
+			.pos-l(0; absolute; @z-sidebar+2);
 			.w-max(100%);
 			overflow: hidden;
 			.m(0);
@@ -289,6 +289,41 @@ main {
 				+ li > a {
 					.bt(1px dashed @c-gray-thin);
 				}
+			}
+		}
+		.hint {
+			@bg: black; // @c-black;
+			.fs(unit(@fs-s, em); 1.25);
+			.pos-l(0; absolute; @z-sidebar+1);
+			.mt(.5em);
+			.p(.5em .75em);
+			.round(.38em);
+			.bg(@bg);
+			color: white;
+			box-shadow: .1em .2em .4em rgba(0, 0, 0, .25);
+
+			&::before {
+				@w: 1em;
+				@h: .62em;
+				content: "";
+				.block;
+				.pos-tl(calc(-@h + 1px); 1.5em; absolute);
+				.dim(0; 0; content-box);
+				.bv(none; @h solid @bg);
+				.bh(@w/2 solid transparent);
+			}
+			&.hidden {
+				.none;
+			}
+			p {
+				.m(0);
+
+				+ p {
+					.mt(.5em);
+				}
+			}
+			strong {
+				color: @c-pink;
 			}
 		}
 	}
@@ -372,6 +407,10 @@ input#docolatte-shows-sidebar,
 		}
 		body {
 			overflow: auto;
+		}
+
+		.not-for-mobile {
+			.none;
 		}
 
 		@branding-h: @topbar-h*1.618;

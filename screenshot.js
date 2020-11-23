@@ -19,7 +19,7 @@ const puppeteer = require('puppeteer-core');
 	let pages = [
 		{
 			url: base + 'module-mixins_signalable-Signal.html',
-			viewport: [1024, 640],
+			viewport: [1024, 560],
 			scroll: [0, 0],
 			saveAs: 'class.png'
 		}, {
@@ -33,7 +33,7 @@ const puppeteer = require('puppeteer-core');
 			saveAs: 'footer.png'
 		}, {
 			url: base + 'documents_collector.js.html#line7',
-			viewport: [1024, 640],
+			viewport: [1024, 512],
 			saveAs: 'source.png'
 		}, {
 			url: base + 'base_chains.html',

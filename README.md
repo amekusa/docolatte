@@ -17,10 +17,12 @@
 - Focused on legibility
 - Colorful, but not distracting
 - Customizable options for branding your project
-- Search
-- Interactive navigation (New)
 
-![screenshot nav-demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/nav-demo.gif)
+### Keyboard-only Search & Navigation
+![screenshot search demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/search-demo.gif)
+
+### Interactive TOC (Table of Contents)
+![screenshot navigation demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/nav-demo.gif)
 
 
 ## Install
@@ -84,3 +86,6 @@ More options are planned to be implemented in the future.
 
 ## Thanks
 [Docdash](https://github.com/clenemt/docdash) &mdash; Lodash inspired JSDoc 3 template/theme
+
+## License
+**docolatte** is licensed under the [Apache License 2.0](https://github.com/amekusa/docolatte/blob/trunk/LICENSE).

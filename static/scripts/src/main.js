@@ -128,6 +128,7 @@ import Fuse from 'fuse.js';
 			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);
 			let suggests = find(base, '.suggestions', 0);
+			let hint = find(base, '.hint', 0);
 			let lastQuery = '';
 
 			// search as you type
@@ -146,6 +147,9 @@ import Fuse from 'fuse.js';
 				if (!results.length) return;
 				// console.debug('RESULTS:', results);
 
+				hint.classList.add('hidden'); // hide hint
+
+				// show the results
 				for (let i = 0; i < results.length; i++) {
 					let item = results[i].item;
 					let li = elem('li', null, elem('a', { href: item.url }, item.longname));
@@ -183,6 +187,15 @@ import Fuse from 'fuse.js';
 				suggests.children[select].classList.remove('selected'); // unselect the previous
 				suggests.children[selectNew].classList.add('selected'); // select the new
 				suggests.setAttribute('data-select', selectNew);
+			});
+
+			// hint
+			input.addEventListener('click', ev => {
+				if (ev.target.value) return;
+				hint.classList.remove('hidden');
+			});
+			input.addEventListener('blur', ev => {
+				hint.classList.add('hidden');
 			});
 
 			// type any "printable" key to start a search

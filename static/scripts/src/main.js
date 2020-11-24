@@ -204,6 +204,7 @@ import Fuse from 'fuse.js';
 				// console.debug('KEYDOWN:', ev);
 				if (ev.key.length != 1) return; // ignore non-printable keys
 				if (ev.key == ' ') return;      // ignore SPACE key
+				if (ev.metaKey || ev.ctrlKey || ev.altKey) return; // ignore keys with modifiers
 				if (ev.target.tagName == 'INPUT' || ev.target.tagName == 'TEXTAREA') return;
 				input.value = '';
 				input.focus();

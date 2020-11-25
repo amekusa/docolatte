@@ -47,6 +47,9 @@ dl {
 	.pl(@gutter);
 	overflow: auto;
 
+	&:empty {
+		.none;
+	}
 	&.details {
 		.mt(@gutter);
 	}

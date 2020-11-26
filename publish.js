@@ -550,6 +550,12 @@ exports.publish = (taffyData, opts, tutorials) => {
     // set up tutorials for helper
     helper.setTutorials(tutorials);
 
+    // cull the members of @ignore'd classes
+    data({ ignore: true, kind: 'class' }).each(item => {
+        if (!('name' in item)) return;
+        data({ memberof: item.name }).remove();
+    });
+
     data = helper.prune(data);
     data.sort('longname, version, since');
     helper.addEventListeners(data);

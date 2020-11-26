@@ -20,6 +20,57 @@ let view;
 let outdir = path.normalize(env.opts.destination);
 
 /**
+ * DB for search
+ * @author amekusa
+ */
+class SearchDB {
+    constructor(options) {
+        this.options = options;
+        this.records = [];
+    }
+    feed(record) {
+        if (Array.isArray(record)) {
+            for (let item of record) this.feed(item);
+            return;
+        }
+        if (this.has(record, '___id')) {
+            console.warn('[SearchDB]', 'duplicated feed:', record);
+            return;
+        }
+        this.records.push(record);
+    }
+    has(record, key) {
+        if (!(key in record)) return false;
+        for (let item of this.records) {
+            if (!(key in item)) continue;
+            if (record[key] === item[key]) return true;
+        }
+        return false;
+    }
+    serialize() {
+        console.log(`Serializing search DB...`);
+        let list = [];
+        for (let record of this.records) {
+            let item = { url: helper.createLink(record) };
+            for (let key of this.options.keys) {
+                if (!(key.name in record)) continue;
+                item[key.name] = record[key.name];
+            }
+            list.push(item);
+        }
+
+        let index = Fuse.createIndex(this.options.keys, list);
+        console.log(`${list.length} records have been found`);
+
+        return {
+            list: JSON.stringify(list),
+            index: JSON.stringify(index.toJSON()),
+            options: JSON.stringify(this.options)
+        };
+    }
+}
+
+/**
  * Merges 2 objects recursively
  * @author amekusa
  */
@@ -436,43 +487,6 @@ function buildNav(members) {
 }
 
 /**
- * Generates list and index for Fuse.js
- * @param {TAFFY} data
- */
-function generateSearchList(data) {
-    console.log('Generating search list...');
-
-    let options = {
-        keys: [
-            { name: 'name', weight: 10 },
-            { name: 'longname', weight: 9 },
-            { name: 'classdesc', weight: 6 }, // class description
-            { name: 'description', weight: 6 },
-            { name: 'examples', weight: 1 },
-        ]
-    };
-
-    let list = [];
-    data().each(doclet => {
-        let item = { url: helper.createLink(doclet) };
-        for (let key of options.keys) {
-            if (!(key.name in doclet)) continue;
-            item[key.name] = doclet[key.name];
-        }
-        list.push(item);
-    });
-
-    let index = Fuse.createIndex(options.keys, list);
-    console.log(`${list.length} records have been found`);
-
-    return {
-        list: JSON.stringify(list),
-        index: JSON.stringify(index.toJSON()),
-        options: JSON.stringify(options)
-    };
-}
-
-/**
     @param {TAFFY} taffyData See <http://taffydb.com/>.
     @param {object} opts
     @param {Tutorial} tutorials
@@ -691,7 +705,27 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.outputSourceFiles = outputSourceFiles;
     view.list = list;
     view.theme = conf.docolatte;
-    view.search = generateSearchList(data);
+
+    // DB for search
+    let searchDb = new SearchDB({
+        keys: [
+            { name: 'name', weight: 10 },
+            { name: 'longname', weight: 9 },
+            { name: 'classdesc', weight: 6 },
+            { name: 'description', weight: 6 },
+            { name: 'examples', weight: 1 },
+        ]
+    });
+
+    // feed records to the DB
+    for (let i in members) searchDb.feed(members[i]);
+    data({
+        kind: ['member', 'function', 'constant', 'typedef'],
+        memberof: { isUndefined: false } // not global
+    }).each(item => { searchDb.feed(item) });
+
+    // serialize the DB
+    view.search = searchDb.serialize();
 
     // once for all
     view.nav = buildNav(members);

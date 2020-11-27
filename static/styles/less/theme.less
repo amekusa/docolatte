@@ -269,6 +269,9 @@ main {
 				visibility: visible;
 			}
 			li {
+				font-family: @ff-code;
+				.fs(unit(@fs-s, em));
+
 				&.selected > a {
 					.bg(@c-ink);
 					color: white;
@@ -284,6 +287,11 @@ main {
 						.bg(@c-ink-thin);
 						color: white;
 						opacity: 1;
+					}
+					> i.symbol {
+						opacity: .38;
+						.mh(.25em);
+						font-style: normal;
 					}
 				}
 				+ li > a {

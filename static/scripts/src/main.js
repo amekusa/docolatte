@@ -152,7 +152,7 @@ import Fuse from 'fuse.js';
 				// show the results
 				for (let i = 0; i < results.length; i++) {
 					let item = results[i].item;
-					let label = item.longname.replaceAll(/(\W)/g, '$1<wbr>'); // insert <WBR> at every symbol chars
+					let label = item.longname.replaceAll(/(\W)/g, '<i class="symbol">$1</i><wbr>'); // insert <WBR> at every symbol chars
 					let li = elem('li', null, elem('a', { href: item.url }, label));
 					if (i == 0) li.classList.add('selected'); // select the 1st item
 					suggests.appendChild(li);

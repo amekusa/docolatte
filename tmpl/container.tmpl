@@ -165,6 +165,12 @@
         <?js= self.partial('method.tmpl', e) ?>
         <?js   } else { ?>
         <?js= self.partial('members.tmpl', e) ?>
+        <?js     if (e.type && e.type.names) { ?>
+        <dl>
+            <dt>Type:</dt>
+            <dd><?js= self.partial('type.tmpl', e.type.names) ?></dd>
+        </dl>
+        <?js     } ?>
         <?js   } ?>
         <?js }); ?>
     <?js } ?>

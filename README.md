@@ -77,6 +77,13 @@ Docolatte supports some configuration options to customize the end result.
   - `branding`
   	- `title` :  Title of the documentations. Used in the top left header
   	- `link` :  Link URL of the header
+  - `meta`
+  	- `lang` :  `lang` attribute of `<html>` (default: `"en"`)
+  	- `title` :  Content of `<title>` element (defaults to `branding.title`)
+  	- `description` :  `content` attribute of `<meta name="description">`
+  	- `keywords` :  `content` attribute of `<meta name="keywords">`
+  	- `author` :  `content` attribute of `<meta name="author">`
+  	- `favicon` :  Favicon image URL. Use array for multiple files
   - `footer`
   	- `copyright` :  Copyright text. Used in the footer
   	- `hide` :  Whether to hide the entire footer ( `true` | `false` )

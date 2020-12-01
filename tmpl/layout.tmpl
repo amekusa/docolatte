@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html<?js if (this.theme.meta.lang) { ?> lang="<?js= this.theme.meta.lang ?>"<?js } ?>>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>JSDoc: <?js= title ?></title>
-
+    <?js if (title == 'Home') { ?>
+    <title><?js= this.theme.meta.title ?></title>
+    <?js } else { ?>
+    <title><?js= title ?> | <?js= this.theme.meta.title ?></title>
+    <?js } if (this.theme.meta.description) { ?>
+    <meta name="description" content="<?js= this.theme.meta.description ?>">
+    <?js } if (this.theme.meta.keywords) { ?>
+    <meta name="keywords" content="<?js= this.theme.meta.keywords ?>">
+    <?js } if (this.theme.meta.author) { ?>
+    <meta name="author" content="<?js= this.theme.meta.author ?>">
+    <?js } ?>
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
     <script src="scripts/main.js"></script>
-
+    <?js if (this.theme.meta.favicon) { for (let favicon of this.theme.meta.favicon) { ?>
+    <link rel="icon" href="<?js= favicon ?>">
+    <?js }} ?>
     <!-- <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css"> -->
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow-night-eighties.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">

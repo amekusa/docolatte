@@ -76,6 +76,12 @@ class SearchDB {
  */
 function merge(x, y) {
     if (typeof x != 'object' || typeof y != 'object') return y;
+
+    if (Array.isArray(x)) {
+        if (Array.isArray(y)) return x.concat(y);
+        return y;
+    } else if (Array.isArray(y)) return y;
+
     var r = {};
     for (var i in x) r[i] = (i in y) ? merge(x[i], y[i]) : x[i];
     for (var i in y) {
@@ -519,7 +525,17 @@ exports.publish = (taffyData, opts, tutorials) => {
 
     conf = env.conf.templates || {};
     conf.default = conf.default || {};
+
+    // theme configs
     conf.docolatte = merge({
+        meta: {
+            lang: 'en',
+            title: null,
+            description: null,
+            keywords: null,
+            author: null,
+            favicon: []
+        },
         branding: {
             title: 'My Project',
             link: 'index.html'
@@ -529,6 +545,8 @@ exports.publish = (taffyData, opts, tutorials) => {
             hideCredits: false
         }
     }, conf['docolatte'] || {});
+    if (!conf.docolatte.meta.title) conf.docolatte.meta.title = conf.docolatte.branding.title;
+    if (typeof conf.docolatte.meta.favicon == 'string') conf.docolatte.meta.favicon = [conf.docolatte.meta.favicon];
 
     templatePath = path.normalize(opts.template);
     view = new template.Template( path.join(templatePath, 'tmpl') );

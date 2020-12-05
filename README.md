@@ -52,10 +52,9 @@ Or set the path to `opts.template` in your JSDoc configuration file:
 
 ## Customize
 
-Docolatte supports some configuration options to customize the end result.
+Docolatte supports some configuration options to customize the HTML output.
 
 ```json
-// Configuration Example
 {
   "templates": {
     "docolatte": {
@@ -63,31 +62,37 @@ Docolatte supports some configuration options to customize the end result.
         "title": "My Project",
         "link": "https://example.com/project/"
       },
+      "meta": {
+        "lang": "en",
+        "title": "My Project",
+        "description": "Welcome to my project.",
+        "keywords": "awesome, cool",
+        "author": "John Programmer",
+        "favicon": "icon.png"
+      },
       "footer": {
-        "copyright": "(c) 2020 John Doe"
+        "copyright": "(c) 2020 John Programmer"
       }
     }
   }
 }
 ```
 
-#### Available Options
-
 - `docolatte`
   - `branding`
-  	- `title` :  Title of the documentations. Used in the top left header
-  	- `link` :  Link URL of the header
+  	- **`title`** &mdash; Title of the documentations. Used in the top left header
+  	- **`link`** &mdash; Link URL of the header
   - `meta`
-  	- `lang` :  `lang` attribute of `<html>` (default: `"en"`)
-  	- `title` :  Content of `<title>` element (defaults to `branding.title`)
-  	- `description` :  `content` attribute of `<meta name="description">`
-  	- `keywords` :  `content` attribute of `<meta name="keywords">`
-  	- `author` :  `content` attribute of `<meta name="author">`
-  	- `favicon` :  Favicon image URL. Use array for multiple files
+  	- **`lang`** &mdash; `lang` attribute of `<html>` (default: `"en"`)
+  	- **`title`** &mdash; Content of `<title>` element (defaults to `branding.title`)
+  	- **`description`** &mdash; `content` attribute of `<meta name="description">`
+  	- **`keywords`** &mdash; `content` attribute of `<meta name="keywords">`
+  	- **`author`** &mdash; `content` attribute of `<meta name="author">`
+  	- **`favicon`** &mdash; Favicon image URL. Use array for multiple files
   - `footer`
-  	- `copyright` :  Copyright text. Used in the footer
-  	- `hide` :  Whether to hide the entire footer ( `true` | `false` )
-- `default` :  All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
+  	- **`copyright`** &mdash; Copyright text. Used in the footer
+  	- **`hide`** &mdash; Whether to hide the entire footer ( `true` | `false` )
+- **`default`** &mdash; All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
 
 More options are planned to be implemented in the future.
 

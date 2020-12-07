@@ -60,7 +60,15 @@ Docolatte supports some configuration options to customize the HTML output.
     "docolatte": {
       "branding": {
         "title": "My Project",
-        "link": "https://example.com/project/"
+        "link":  "https://example.com/project/",
+        "icon":  "home",
+        "font": {
+          "size":   "1.5em",
+          "family": "Helvetica, sans-serif"
+        }
+      },
+      "code": {
+        "theme": "tomorrow-night"
       },
       "meta": {
         "lang": "en",
@@ -80,18 +88,24 @@ Docolatte supports some configuration options to customize the HTML output.
 
 - `docolatte`
   - `branding`
-  	- **`title`** &mdash; Title of the documentations. Used in the top left header
-  	- **`link`** &mdash; Link URL of the header
+    - **`title`** &mdash; Title of the entire site. Used in the top left header
+    - **`link`** &mdash; Link URL in the header
+    - **`icon`** &mdash; Icon for the link in the header (default: `"home"`). See: [feathericons.com](https://feathericons.com/)
+    - `font`
+      - **`size`** &mdash; Font size of the title
+      - **`family`** &mdash; Font family of the title
+  - `code`
+    - **`theme`** &mdash; Theme for code blocks (default: `"tomorrow-night-eighties"`). See: [themes](https://github.com/jmblog/color-themes-for-google-code-prettify)
   - `meta`
-  	- **`lang`** &mdash; `lang` attribute of `<html>` (default: `"en"`)
-  	- **`title`** &mdash; Content of `<title>` element (defaults to `branding.title`)
-  	- **`description`** &mdash; `content` attribute of `<meta name="description">`
-  	- **`keywords`** &mdash; `content` attribute of `<meta name="keywords">`
-  	- **`author`** &mdash; `content` attribute of `<meta name="author">`
-  	- **`favicon`** &mdash; Favicon image URL. Use array for multiple files
+    - **`lang`** &mdash; `lang` attribute of `<html>` (default: `"en"`)
+    - **`title`** &mdash; Content of `<title>` element (defaults to `branding.title`)
+    - **`description`** &mdash; `content` attribute of `<meta name="description">`
+    - **`keywords`** &mdash; `content` attribute of `<meta name="keywords">`
+    - **`author`** &mdash; `content` attribute of `<meta name="author">`
+    - **`favicon`** &mdash; Favicon image URL. Use array for multiple files
   - `footer`
-  	- **`copyright`** &mdash; Copyright text. Used in the footer
-  	- **`hide`** &mdash; Whether to hide the entire footer ( `true` | `false` )
+    - **`copyright`** &mdash; Copyright text. Used in the footer
+    - **`hide`** &mdash; Whether to hide the entire footer ( `true` | `false` )
 - **`default`** &mdash; All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
 
 More options are planned to be implemented in the future.

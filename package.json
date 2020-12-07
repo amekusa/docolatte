@@ -17,7 +17,8 @@
     "build": "npm run build:css && npm run build:js",
     "build:css": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
     "build:js": "rollup -c",
-    "test": "jsdoc -c fixtures/fixtures.conf.json",
+    "test:gen": "jsdoc -c fixtures/fixtures.conf.json",
+    "test": "http-server ./fixtures-doc -c-1",
     "screenshot": "node screenshot.js",
     "watch": "npm-watch"
   },
@@ -30,7 +31,7 @@
       "patterns": "static/scripts/src",
       "extensions": "js"
     },
-    "test": {
+    "test:gen": {
       "patterns": [
         "publish.js",
         "tmpl",
@@ -63,6 +64,7 @@
   },
   "homepage": "https://github.com/amekusa/docolatte",
   "devDependencies": {
+    "http-server": "^0.12.3",
     "less": "^3.12.2",
     "puppeteer-core": "^5.4.1"
   },

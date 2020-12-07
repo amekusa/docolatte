@@ -71,6 +71,7 @@
     "code-prettify": "^0.1.0",
     "color-themes-for-google-code-prettify": "^2.0.4",
     "common-path-prefix": "^3.0.0",
+    "feather-icons": "^4.28.0",
     "fuse.js": "^6.4.3",
     "lodash": "^4.17.20",
     "open-sans-fonts": "^1.6.2"

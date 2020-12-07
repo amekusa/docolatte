@@ -29,7 +29,12 @@
 
     <header class="masthead">
         <div class="branding">
-            <a href="<?js= this.theme.branding.link ?>"><?js= this.theme.branding.title ?></a>
+            <?js if (this.theme.branding.link) { ?>
+            <a class="link" href="<?js= this.theme.branding.link ?>">
+                <svg class="icon feather"><use xlink:href="modules/feather-icons/dist/feather-sprite.svg#<?js= this.theme.branding.icon || 'home' ?>"/></svg>
+            </a>
+            <?js } ?>
+            <a class="title" href="index.html"><?js= this.theme.branding.title ?></a>
         </div>
         <div class="topbar">
             <h1 class="page-title">

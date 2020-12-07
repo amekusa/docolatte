@@ -453,7 +453,7 @@ function linktoExternal(longName, name) {
  */
 function buildNav(members) {
     let globalNav;
-    let nav = '<h2><a href="index.html">Home</a></h2>';
+    let nav = '';
 
     // search box
     nav += view.partial('search-box.tmpl');
@@ -538,7 +538,8 @@ exports.publish = (taffyData, opts, tutorials) => {
         },
         branding: {
             title: 'My Project',
-            link: 'index.html'
+            link: 'index.html',
+            icon: 'home'
         },
         footer: {
             hide: false,
@@ -631,6 +632,7 @@ exports.publish = (taffyData, opts, tutorials) => {
 
     // copy the node modules
     [
+        `feather-icons/dist/feather-sprite.svg`,
         `color-themes-for-google-code-prettify/dist/themes/${conf.docolatte.style.code}.min.css`
 
     ].forEach(file => {

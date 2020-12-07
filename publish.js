@@ -543,7 +543,11 @@ exports.publish = (taffyData, opts, tutorials) => {
         footer: {
             hide: false,
             hideCredits: false
+        },
+        style: {
+            code: 'tomorrow-night-eighties'
         }
+
     }, conf['docolatte'] || {});
     if (!conf.docolatte.meta.title) conf.docolatte.meta.title = conf.docolatte.branding.title;
     if (typeof conf.docolatte.meta.favicon == 'string') conf.docolatte.meta.favicon = [conf.docolatte.meta.favicon];
@@ -624,6 +628,17 @@ exports.publish = (taffyData, opts, tutorials) => {
         outdir = path.join( outdir, packageInfo.name, (packageInfo.version || '') );
     }
     fs.mkPath(outdir);
+
+    // copy the node modules
+    [
+        `color-themes-for-google-code-prettify/dist/themes/${conf.docolatte.style.code}.min.css`
+
+    ].forEach(file => {
+        let dest = path.dirname(path.join(outdir, 'modules', file));
+        let src = path.join(__dirname, 'node_modules', file);
+        fs.mkPath(dest);
+        fs.copyFileSync(src, dest);
+    });
 
     // copy the template's static files to outdir
     fromDir = path.join(templatePath, 'static');

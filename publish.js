@@ -527,7 +527,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     conf.default = conf.default || {};
 
     // theme configs
-    conf.docolatte = merge({
+    var x = merge({
         meta: {
             lang: 'en',
             title: null,
@@ -539,19 +539,33 @@ exports.publish = (taffyData, opts, tutorials) => {
         branding: {
             title: 'My Project',
             link: 'index.html',
-            icon: 'home'
+            icon: 'home',
+            font: {
+                size: null,
+                family: null
+            }
         },
         footer: {
             hide: false,
             hideCredits: false
         },
-        style: {
-            code: 'tomorrow-night-eighties'
+        code: {
+            theme: 'tomorrow-night-eighties'
         }
 
-    }, conf['docolatte'] || {});
-    if (!conf.docolatte.meta.title) conf.docolatte.meta.title = conf.docolatte.branding.title;
-    if (typeof conf.docolatte.meta.favicon == 'string') conf.docolatte.meta.favicon = [conf.docolatte.meta.favicon];
+    }, conf.docolatte || {});
+    if (!x.meta.title) x.meta.title = x.branding.title;
+    if (typeof x.meta.favicon == 'string') x.meta.favicon = [x.meta.favicon];
+
+    // custom style
+    x.style = '';
+    if (x.branding.font.size || x.branding.font.family) {
+        x.style += `.masthead .branding .title { `;
+        if (x.branding.font.size)   x.style += `font-size: ${x.branding.font.size}; `;
+        if (x.branding.font.family) x.style += `font-family: ${x.branding.font.family}; `;
+        x.style += `}`;
+    }
+    conf.docolatte = x;
 
     templatePath = path.normalize(opts.template);
     view = new template.Template( path.join(templatePath, 'tmpl') );
@@ -633,7 +647,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     // copy the node modules
     [
         `feather-icons/dist/feather-sprite.svg`,
-        `color-themes-for-google-code-prettify/dist/themes/${conf.docolatte.style.code}.min.css`
+        `color-themes-for-google-code-prettify/dist/themes/${conf.docolatte.code.theme}.min.css`
 
     ].forEach(file => {
         let dest = path.dirname(path.join(outdir, 'modules', file));

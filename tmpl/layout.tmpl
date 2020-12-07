@@ -20,9 +20,12 @@
     <?js if (this.theme.meta.favicon) { for (let favicon of this.theme.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
-    <link type="text/css" rel="stylesheet" href="modules/color-themes-for-google-code-prettify/dist/themes/<?js= this.theme.style.code ?>.min.css">
+    <link type="text/css" rel="stylesheet" href="modules/color-themes-for-google-code-prettify/dist/themes/<?js= this.theme.code.theme ?>.min.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
     <link type="text/css" rel="stylesheet" href="styles/theme.css">
+    <?js if (this.theme.style) { ?>
+    <style><?js= this.theme.style ?></style>
+    <?js } ?>
 </head>
 <body>
 <div class="page">

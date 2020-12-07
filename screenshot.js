@@ -15,7 +15,8 @@ const puppeteer = require('puppeteer-core');
 	console.log(`Taking screenshots using`, await browser.version(), '...');
 
 	// pages to go
-	let base = 'file://' + __dirname + '/fixtures-doc/';
+	// let base = 'file://' + __dirname + '/fixtures-doc/';
+	let base = 'http://127.0.0.1:8080/';
 	let pages = [
 		{
 			url: base + 'module-mixins_signalable-Signal.html',

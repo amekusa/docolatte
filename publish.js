@@ -651,7 +651,7 @@ exports.publish = (taffyData, opts, tutorials) => {
 
     ].forEach(file => {
         let dest = path.dirname(path.join(outdir, 'modules', file));
-        let src = path.join(__dirname, 'node_modules', file);
+        let src = require.resolve(file);
         fs.mkPath(dest);
         fs.copyFileSync(src, dest);
     });

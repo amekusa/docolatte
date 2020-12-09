@@ -418,15 +418,14 @@ input#docolatte-shows-sidebar,
 
 	// mobile mode
 	@media (max-width: 680px) {
+		.not-for-mobile {
+			.none !important;
+		}
 		:root {
 			font-size: 16px;
 		}
 		body {
 			overflow: auto;
-		}
-
-		.not-for-mobile {
-			.none !important;
 		}
 
 		@branding-h: @topbar-h*1.618;
@@ -467,9 +466,6 @@ input#docolatte-shows-sidebar,
 			.pt(@topbar-h + @branding-h + @gutter);
 			.pl(0);
 
-			> section {
-				.ph(@gutter / 2);
-			}
 			h1.page-title {
 				justify-content: center;
 				.ph(@gutter / 2);
@@ -546,6 +542,11 @@ input#docolatte-shows-sidebar,
 			}
 			.topbar {
 				.fs(@fs-m);
+			}
+		}
+		main {
+			> * {
+				.ph(@gutter / 2);
 			}
 		}
 	}

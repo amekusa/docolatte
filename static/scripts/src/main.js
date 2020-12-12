@@ -92,7 +92,9 @@ import Fuse from 'fuse.js';
 	document.addEventListener('DOMContentLoaded', () => {
 		const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
 		// console.debug('CURRENT PAGE:', currentPage);
+
 		const toc = q('.sidebar .toc', 0); // table of contents
+		const showsSidebar = q('input#docolatte-shows-sidebar', 0); // toggle switch for sidebar
 
 		// highlight the anchors pointing at the current page
 		find(toc, `a[href="${currentPage}"]`).forEach(a => {
@@ -107,23 +109,24 @@ import Fuse from 'fuse.js';
 			});
 		});
 
-		// close the sidebar menu
-		// when user clicked one of the menu items
+		// close sidebar when user clicked one of the menu items
 		find(toc, 'a').forEach(a => {
 			a.addEventListener('click', ev => {
-				let checkbox = q('input#docolatte-shows-sidebar', 0);
-				if (!checkbox) return;
-				if (checkbox.checked) checkbox.click();
+				showsSidebar.checked = false;
 			});
+		});
+
+		// close sidebar with Escape key
+		document.addEventListener('keydown', ev => {
+			if (ev.key == 'Escape') showsSidebar.checked = false;
 		});
 
 		// initialize search box
 		(() => {
-			let s = _SEARCH;
 			let fuse = new Fuse(
-				JSON.parse(s.list), // records to search
-				JSON.parse(s.options), // options (including keys)
-				Fuse.parseIndex(JSON.parse(s.index)) // index for better performance
+				JSON.parse(_SEARCH.list), // records to search
+				JSON.parse(_SEARCH.options), // options (including keys)
+				Fuse.parseIndex(JSON.parse(_SEARCH.index)) // index for better performance
 			);
 			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);
@@ -132,9 +135,7 @@ import Fuse from 'fuse.js';
 			let lastQuery = '';
 
 			// search as you type
-			input.addEventListener('keyup', ev => {
-				if (ev.key == 'Escape') return ev.target.blur(); // ESC to unfocus
-
+			input.addEventListener('input', ev => {
 				let query = ev.target.value;
 				if (query == lastQuery) return;
 				lastQuery = query;
@@ -161,6 +162,7 @@ import Fuse from 'fuse.js';
 
 			// navigate through suggestions with key presses
 			input.addEventListener('keydown', ev => {
+				if (ev.key == 'Escape') return ev.target.blur(); // ESC to unfocus
 				if (!suggests.children.length) return;
 
 				let select = Number.parseInt(suggests.getAttribute('data-select') || 0);
@@ -198,6 +200,11 @@ import Fuse from 'fuse.js';
 			});
 			input.addEventListener('blur', ev => {
 				hint.classList.add('hidden');
+			});
+
+			// force sidebar to show when searchbox gets focused
+			input.addEventListener('focus', ev => {
+				showsSidebar.checked = true;
 			});
 
 			// type any "printable" key to start a search

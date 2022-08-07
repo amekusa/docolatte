@@ -1,4 +1,5 @@
 import Fuse from 'fuse.js';
+import SimpleBar from 'simplebar';
 
 /*!
  * The main script for docolatte
@@ -94,6 +95,9 @@ import Fuse from 'fuse.js';
 		// console.debug('CURRENT PAGE:', currentPage);
 
 		const toc = q('.sidebar .toc', 0); // table of contents
+
+		new SimpleBar(toc); // apply simplebar (macOS-like scrollbar)
+
 		const showsSidebar = q('input#docolatte-shows-sidebar', 0); // toggle switch for sidebar
 
 		// highlight the anchors pointing at the current page

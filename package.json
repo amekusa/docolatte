@@ -17,6 +17,8 @@
     "build": "npm run build:css && npm run build:js",
     "build:css": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
     "build:js": "rollup -c",
+    "build:lib": "npm run build:lib:simplebar",
+    "build:lib:simplebar": "cp node_modules/simplebar/dist/simplebar.min.css static/styles/",
     "test:gen": "jsdoc -c fixtures/fixtures.conf.json",
     "test": "http-server ./fixtures-doc -c-1",
     "screenshot": "node screenshot.js",

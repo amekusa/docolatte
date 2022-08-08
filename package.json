@@ -48,6 +48,8 @@
         "json"
       ],
       "ignore": [
+        "static/scripts/src",
+        "static/scripts/src/*.js",
         "static/scripts/fuse-index.json"
       ]
     }

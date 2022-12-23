@@ -61,9 +61,12 @@
   },
   "homepage": "https://github.com/amekusa/docolatte",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "http-server": "^0.12.3",
     "less": "^3.12.2",
-    "puppeteer-core": "^5.4.1"
+    "puppeteer-core": "^5.4.1",
+    "rollup": "^3.8.0"
   },
   "dependencies": {
     "@jsdoc/util": "^0.2.2",
@@ -73,6 +76,7 @@
     "feather-icons": "^4.28.0",
     "fuse.js": "^6.4.3",
     "lodash": "^4.17.20",
-    "open-sans-fonts": "^1.6.2"
+    "open-sans-fonts": "^1.6.2",
+    "taffydb": "^2.7.3"
   }
 }

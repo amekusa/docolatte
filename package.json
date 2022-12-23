@@ -55,10 +55,7 @@
     "url": "https://github.com/amekusa/docolatte.git"
   },
   "author": "amekusa (https://amekusa.com)",
-  "license": {
-    "type": "Apache-2.0",
-    "url": "http://www.apache.org/licenses/LICENSE-2.0"
-  },
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/amekusa/docolatte/issues"
   },

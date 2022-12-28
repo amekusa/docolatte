@@ -14,7 +14,7 @@
     "tmpl"
   ],
   "scripts": {
-    "build": "npm run build:css && npm run build:js",
+    "build": "npm run build:lib && npm run build:css && npm run build:js",
     "build:css": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
     "build:js": "rollup -c",
     "build:lib": "npm run build:lib:simplebar",

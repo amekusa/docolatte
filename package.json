@@ -81,6 +81,7 @@
     "fuse.js": "^6.4.3",
     "lodash": "^4.17.20",
     "open-sans-fonts": "^1.6.2",
+    "simplebar": "^5.3.9",
     "taffydb": "^2.7.3"
   }
 }

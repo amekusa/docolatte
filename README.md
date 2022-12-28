@@ -2,9 +2,21 @@
 
 :chocolate_bar: Bittersweet theme for JSDoc 3
 
-![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/class.png)  
-![screenshot methods](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/methods.png)  
-![screenshot source](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/source.png)  
+## Notes for users
+
+### v2.11
+- Made the scrollbar in the sidebar looks nicer ([Simplebar](https://github.com/Grsmto/simplebar))
+- Fixed some build errors
+
+### JSDoc 4 Compatibility
+Indexing for search is not perfectly working with jsdoc@4.0.0.
+I recommend sticking with jsdoc 3.
+
+---
+
+![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/class.png)
+![screenshot methods](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/methods.png)
+![screenshot source](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/source.png)
 ![screenshot mobile](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile.png)![screenshot mobile menu](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile-menu.png)
 
 (The sample codes in the screenshots are derived from [docdash/fixtures](https://github.com/clenemt/docdash/tree/master/fixtures))

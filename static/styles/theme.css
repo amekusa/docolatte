@@ -1,0 +1,1166 @@
+@charset "utf-8";
+/*!
+ * Style for docolatte
+ * @author Satoshi Soma (amekusa.com)
+ *
+ * Copyright 2020 Satoshi Soma
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/OpenSans-Regular-webfont.eot');
+  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Regular-webfont.woff') format('woff'), url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: normal;
+  font-style: italic;
+  src: url('../fonts/OpenSans-Italic-webfont.eot');
+  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Italic-webfont.woff') format('woff'), url('../fonts/OpenSans-Italic-webfont.svg#open_sansregular') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../fonts/OpenSans-Bold-webfont.eot');
+  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Bold-webfont.woff') format('woff'), url('../fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-style: italic;
+  src: url('../fonts/OpenSans-BoldItalic-webfont.eot');
+  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-BoldItalic-webfont.woff') format('woff'), url('../fonts/OpenSans-BoldItalic-webfont.svg#open_sansregular') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans Light';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/OpenSans-Light-webfont.eot');
+  src: local('Open Sans Light'), local('OpenSans Light'), url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Light-webfont.woff') format('woff'), url('../fonts/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans Light';
+  font-weight: normal;
+  font-style: italic;
+  src: url('../fonts/OpenSans-LightItalic-webfont.eot');
+  src: local('Open Sans Light'), local('OpenSans Light'), url('../fonts/OpenSans-LightItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-LightItalic-webfont.woff') format('woff'), url('../fonts/OpenSans-LightItalic-webfont.svg#open_sanslight') format('svg');
+}
+:root,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+:root {
+  font-size: 18px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-family: "Open Sans", HelveticaNeue, Helvetica, sans-serif;
+  color: #4d4e53;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.25;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+h1 {
+  font-size: 1.5rem;
+}
+h2,
+h3 {
+  font-size: 1.25rem;
+}
+h4,
+h5,
+h6 {
+  font-size: 1rem;
+}
+a {
+  color: #0095dd;
+  text-decoration: none;
+}
+a:visited,
+a:active {
+  color: #0095dd;
+}
+a:hover {
+  text-decoration: underline;
+}
+p:first-child {
+  margin-top: 0;
+}
+p:last-child {
+  margin-bottom: 0;
+}
+small {
+  font-size: 0.85rem;
+}
+sub,
+sup {
+  font-size: 0.85rem;
+}
+tt,
+code,
+kbd,
+samp {
+  font-size: 0.85rem;
+  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+}
+pre {
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+hr {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+ul {
+  padding-left: 1.5em;
+  list-style-type: none;
+}
+ul li {
+  position: relative;
+}
+ul li::before {
+  content: "";
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  position: absolute;
+  top: 0.75em;
+  left: -1em;
+  border-top: 1px solid;
+  opacity: 0.5;
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+th,
+thead > tr > td {
+  font-weight: bold;
+}
+td,
+th {
+  padding: 0.5em 1em;
+  vertical-align: text-top;
+  text-align: left;
+}
+td:first-child,
+th:first-child {
+  text-align: right;
+}
+figure {
+  margin: 0;
+}
+.table-wrap {
+  position: relative;
+  max-height: 24em;
+  overflow: auto;
+}
+.table-wrap > table > thead {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+}
+.table-wrap > table .table-wrap {
+  max-height: initial;
+  overflow: initial;
+}
+.table-wrap > table table {
+  position: relative;
+  z-index: 0;
+}
+.code-wrap {
+  position: relative;
+}
+.code-wrap:hover .code-caption {
+  pointer-events: none;
+  opacity: 0.25;
+}
+.code-wrap .code-caption {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1rem;
+  line-height: 1.25;
+  max-width: 61.8%;
+  padding-top: 0.45em;
+  padding-bottom: 0.45em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  text-align: right;
+  background-color: rgba(20, 20, 20, 0.618);
+  color: white;
+  text-shadow: -0.1em 0.1em 0.1em #000000;
+  transition: opacity 0.25s ease-out;
+}
+pre.prettyprint {
+  overflow: auto;
+  padding: 0.5em 1em;
+  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  border-radius: 0.5rem;
+}
+pre.prettyprint.linenums {
+  padding: 0;
+}
+pre.prettyprint code {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  padding: 0;
+}
+pre.prettyprint ol.linenums {
+  counter-reset: linenum;
+  list-style: none;
+}
+pre.prettyprint ol.linenums > li {
+  counter-increment: linenum;
+  position: relative;
+  padding: 3rem 0 0 0;
+  margin-top: -3rem;
+}
+pre.prettyprint ol.linenums > li:first-child::before {
+  border-top-left-radius: 0.5rem;
+}
+pre.prettyprint ol.linenums > li:last-child::before {
+  border-bottom-left-radius: 0.5rem;
+}
+pre.prettyprint ol.linenums > li::before {
+  content: counter(linenum);
+  display: block;
+  position: sticky;
+  z-index: 2;
+  left: 0;
+  box-sizing: border-box;
+  width: 4rem;
+  height: 100%;
+  padding-right: 0.5rem;
+  background-color: rgba(96, 96, 96, 0.6);
+  color: #c6c6c6;
+  text-align: right;
+  text-shadow: 0.1em 0.1em 0.1em #000000;
+  font-style: italic;
+}
+pre.prettyprint ol.linenums > li.selected::before,
+pre.prettyprint ol.linenums > li:target::before {
+  color: white;
+  background-color: rgba(127, 127, 127, 0.6);
+}
+pre.prettyprint ol.linenums > li.selected > code,
+pre.prettyprint ol.linenums > li:target > code {
+  background-color: rgba(127, 127, 127, 0.35);
+}
+pre.prettyprint ol.linenums > li > code {
+  position: absolute;
+  z-index: 1;
+  top: 3rem;
+  left: 0;
+  min-width: 100%;
+  padding-left: 4.5rem;
+}
+pre.prettyprint ol.linenums > li > code::after {
+  content: " ";
+}
+.icon {
+  position: relative;
+  display: inline-block;
+}
+.icon.burger {
+  width: 26px;
+  height: 20px;
+}
+.icon.burger .top,
+.icon.burger .middle,
+.icon.burger .bottom {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 26px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: black;
+}
+.icon.burger .top {
+  top: 0;
+}
+.icon.burger .middle {
+  top: 8px;
+}
+.icon.burger .bottom {
+  top: 16px;
+}
+.icon.burger.animate {
+  animation-iteration-count: 1;
+}
+.icon.burger.animate .top,
+.icon.burger.animate .middle,
+.icon.burger.animate .bottom {
+  transform: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-duration: 0.35s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: inherit;
+  animation-fill-mode: forwards;
+}
+.icon.burger.animate .top {
+  animation-name: burger-top;
+}
+.icon.burger.animate .middle {
+  animation-name: burger-middle;
+}
+.icon.burger.animate .bottom {
+  animation-name: burger-bottom;
+}
+@keyframes burger-top {
+  45%,
+  66% {
+    transform: translateY(8px);
+  }
+  100% {
+    transform: translateY(8px) rotateZ(45deg);
+  }
+}
+@keyframes burger-middle {
+  45%,
+  66% {
+    transform: rotateZ(90deg);
+  }
+  100% {
+    transform: rotateZ(135deg);
+  }
+}
+@keyframes burger-bottom {
+  45% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+  66% {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-8px) rotateZ(45deg);
+  }
+}
+.icon.magnifier {
+  width: 1em;
+  height: 1em;
+}
+.icon.magnifier::before,
+.icon.magnifier::after {
+  content: "";
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+}
+.icon.magnifier::before {
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 80%;
+  border: 1px solid #5e5f91;
+  border-radius: 0.5em;
+}
+.icon.magnifier::after {
+  width: 1px;
+  height: 40%;
+  bottom: 0;
+  right: -0.5px;
+  transform-origin: bottom right;
+  transform: translate(-1px, -1px) rotateZ(-45deg);
+  background-color: #5e5f91;
+}
+.icon.feather {
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #5e5f91;
+}
+.page {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+}
+.masthead {
+  display: flex;
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 3rem;
+  color: white;
+}
+.masthead a {
+  color: inherit;
+  text-decoration: none;
+}
+.masthead .branding {
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 16rem;
+  height: 100%;
+  padding-left: 3rem;
+  padding-right: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 1.25rem;
+  line-height: 1;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.masthead .branding a {
+  transition: color 0.25s ease-out;
+}
+.masthead .branding a:hover {
+  color: lightseagreen;
+}
+.masthead .branding .link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 100%;
+}
+.masthead .branding .link svg.icon {
+  width: 1.25em;
+  height: 1.25em;
+}
+.masthead .topbar {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: auto;
+  height: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.masthead .topbar .page-title {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-weight: normal;
+  text-shadow: 0 0.05em 0.25em #000000;
+}
+main {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding-top: 4.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 16rem;
+  padding-right: 0;
+  background-color: white;
+}
+main.has-footer {
+  padding-bottom: 15rem;
+}
+main > * {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+main a {
+  overflow-wrap: break-word;
+}
+main code {
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  color: lightseagreen;
+}
+main a code {
+  color: inherit;
+}
+main table {
+  border-bottom: 4px solid #e8e2da;
+  border-top: 1px solid #e8e2da;
+  border-left: 1px solid #e8e2da;
+  border-right: 1px solid #e8e2da;
+}
+main tr + tr > * {
+  border-top: 1px solid #e8e2da;
+}
+main td + td,
+main th + th,
+main th + td {
+  border-left: 1px dashed #e8e2da;
+}
+main td + th {
+  border-left: 1px solid #e8e2da;
+}
+main thead > tr {
+  background-image: repeating-linear-gradient(-60deg, white 0, #e8e2da 1px, #e8e2da 1px, white 2px, white 4px);
+}
+main thead > tr > * + * {
+  border-left: none;
+}
+main dl {
+  display: grid;
+  grid-template-columns: fit-content(6rem) auto;
+  gap: 0.375rem 0.75rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+  border-left: 1px solid rgba(94, 95, 145, 0.25);
+  padding-left: 1.5rem;
+  overflow: auto;
+}
+main dl > dt {
+  grid-column: 1;
+}
+main dl > dd {
+  grid-column: 2;
+  margin: 0;
+}
+main dl:empty {
+  display: none;
+}
+main dl.details {
+  margin-top: 1.5rem;
+}
+main dt {
+  font-size: 0.85rem;
+  line-height: 1.25;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  text-align: right;
+  white-space: nowrap;
+  color: rgba(94, 95, 145, 0.618);
+}
+main hr {
+  border-top: 1px dashed rgba(94, 95, 145, 0.5);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+main > article {
+  box-sizing: border-box;
+  max-width: 1024px;
+}
+main > article.readme h1 {
+  font-size: 1.5rem;
+  color: #5e5f91;
+}
+main > article.readme h2,
+main > article.readme h3 {
+  font-size: 1.25rem;
+}
+main > article.readme h2 {
+  margin-top: 4.5rem;
+  border-left: 0.5em solid;
+  padding-left: 0.75em;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+main > article.readme h4,
+main > article.readme h5,
+main > article.readme h6 {
+  font-size: 1rem;
+}
+main > article.readme pre > code {
+  font-size: 0.85rem;
+}
+main > article.src {
+  max-width: none;
+}
+main > article.src > .prettyprint {
+  margin-top: 0;
+}
+main .container-overview h2 {
+  margin-top: 4.5rem;
+  border-left: 0.5em solid;
+  padding-left: 0.75em;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+main .signature {
+  margin-left: 0.5em;
+}
+main .signature .signature-attributes {
+  margin-left: 0.25em;
+}
+main h2.name .ancestors,
+main h2.name .attribs,
+main h2.name .ancestors a,
+main h2.name .attribs a {
+  color: rgba(94, 95, 145, 0.5);
+}
+main h4.name {
+  margin-top: 0rem;
+  padding-top: 4.5rem;
+  font-weight: normal;
+  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  color: hotpink;
+}
+main h4.name::before {
+  content: "";
+  display: block;
+  position: relative;
+  top: -1.5rem;
+  box-sizing: border-box;
+  height: 1px;
+  border-top: 1px dashed rgba(94, 95, 145, 0.5);
+}
+main h4.name .attributes {
+  vertical-align: 0.1em;
+}
+main h4.name .attributes > .attribute {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: white;
+  background-color: hotpink;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+}
+main h4.name .attributes > .attribute:last-child {
+  margin-right: 0.5rem;
+}
+main h4.name .signature {
+  color: lightpink;
+}
+main h4.name .signature .signature-attributes {
+  color: #ffdcb6;
+}
+main h4.name .type-signature {
+  color: rgba(94, 95, 145, 0.5);
+}
+main h4.name .type-signature .type::before,
+main h4.name .type-signature .type::after {
+  font-weight: normal;
+  color: rgba(94, 95, 145, 0.25);
+}
+main h4.name .type-signature .type::before {
+  content: "<";
+  padding-right: 0.25em;
+}
+main h4.name .type-signature .type::after {
+  content: ">";
+  padding-left: 0.25em;
+}
+main h4.name .type-signature .type .sep {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  border-left: 1px solid rgba(94, 95, 145, 0.25);
+}
+main h4.name:first-of-type,
+main .subsection-title + h4.name {
+  margin-top: -3rem;
+  padding-top: 4.5rem;
+}
+main h4.name:first-of-type::before,
+main .subsection-title + h4.name::before {
+  content: none;
+  display: none;
+}
+main .subsection-title {
+  margin-top: 4.5rem;
+  border-left: 0.5em solid;
+  padding-left: 0.75em;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+main table.params td.type,
+main table.props td.type {
+  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-size: 0.85rem;
+}
+main .params,
+main .props {
+  font-size: 1rem;
+}
+main .params .name,
+main .props .name {
+  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+}
+.colophon {
+  font-size: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  max-height: 12rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-left: 17.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1.5rem solid #e8e2da;
+  background-image: repeating-linear-gradient(-60deg, white 0, #e8e2da 1px, #e8e2da 1px, white 2px, white 5px);
+  background-attachment: fixed;
+  font-style: italic;
+}
+.colophon .copyright,
+.colophon .credits {
+  margin: 0;
+  color: #a69494;
+}
+.colophon .copyright {
+  font-weight: bold;
+}
+.colophon .credits {
+  font-size: 0.85rem;
+}
+.sidebar {
+  font-size: 1rem;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 16rem;
+  height: 100%;
+  overflow: hidden;
+  background-color: #e8e2da;
+  -webkit-overflow-scrolling: touch;
+}
+.sidebar,
+.sidebar a {
+  color: #5e5f91;
+}
+.sidebar a {
+  opacity: 0.618;
+}
+.sidebar a:hover,
+.sidebar a:focus {
+  opacity: 1;
+}
+.sidebar .toc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100% - 3rem);
+  padding: 1.5rem;
+  overflow: auto;
+}
+.sidebar .toc a.current {
+  opacity: 1;
+}
+.sidebar .toc h2,
+.sidebar .toc h3 {
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.sidebar .toc h3 {
+  padding-left: 0.75em;
+  border-left: 0.5em solid;
+  font-weight: normal;
+}
+.sidebar .toc nav ul {
+  padding-left: 0;
+  list-style: none;
+  font-weight: bold;
+}
+.sidebar .toc nav ul li::before {
+  content: none;
+}
+.sidebar .toc nav ul a {
+  margin-right: 1.5rem;
+}
+.sidebar .toc nav ul ul {
+  margin-top: 0.35em;
+  margin-bottom: 0.75em;
+  padding-left: 1.5em;
+  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-weight: normal;
+}
+.sidebar .toc nav ul ul a {
+  position: relative;
+  transition: padding-left 0.25s ease-out;
+}
+.sidebar .toc nav ul ul a.current {
+  font-weight: bold;
+  padding-left: 0.25em;
+  opacity: 1;
+}
+.sidebar .toc nav ul ul a.current::before {
+  content: "";
+  position: absolute;
+  top: 0.38em;
+  left: -1em;
+  display: block;
+  box-sizing: content-box;
+  width: 0;
+  height: 0;
+  border-left: 0.5em solid;
+  border-right: none;
+  border-top: 0.31em solid transparent;
+  border-bottom: 0.31em solid transparent;
+}
+.sidebar .search-box {
+  position: relative;
+}
+.sidebar .search-box input[type=text] {
+  position: relative;
+  display: block;
+  font-size: 1em;
+  box-sizing: border-box;
+  width: 100%;
+  height: 1.75em;
+  padding-left: 0.75em;
+  padding-right: 2em;
+  border: none;
+  border-radius: 0.875em;
+}
+.sidebar .search-box input[type=text]::placeholder {
+  color: rgba(94, 95, 145, 0.5);
+}
+.sidebar .search-box input[type=text]:focus ~ ol.suggestions {
+  visibility: visible;
+}
+.sidebar .search-box input[type=text] + .icon {
+  position: absolute;
+  top: 0.35em;
+  right: 0.5em;
+  opacity: 0.5;
+}
+.sidebar .search-box ol.suggestions {
+  list-style: none;
+  display: block;
+  position: absolute;
+  z-index: 12;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border-radius: 0.5em;
+  box-shadow: 0.1em 0.2em 0.4em rgba(0, 0, 0, 0.25);
+  visibility: hidden;
+  transition: visibility 0.25s;
+}
+.sidebar .search-box ol.suggestions:hover {
+  visibility: visible;
+}
+.sidebar .search-box ol.suggestions li {
+  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-size: 0.85em;
+}
+.sidebar .search-box ol.suggestions li.selected > a {
+  background-color: #5e5f91;
+  color: white;
+  opacity: 1;
+}
+.sidebar .search-box ol.suggestions li > a {
+  display: block;
+  padding: 0.5em 0.75em;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+.sidebar .search-box ol.suggestions li > a:hover {
+  background-color: rgba(94, 95, 145, 0.5);
+  color: white;
+  opacity: 1;
+}
+.sidebar .search-box ol.suggestions li > a > i.symbol {
+  opacity: 0.38;
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+  font-style: normal;
+}
+.sidebar .search-box ol.suggestions li + li > a {
+  border-top: 1px dashed rgba(94, 95, 145, 0.25);
+}
+.sidebar .search-box .hint {
+  font-size: 0.85em;
+  line-height: 1.25;
+  position: absolute;
+  z-index: 11;
+  left: 0;
+  margin-top: 0.5em;
+  padding: 0.5em 0.75em;
+  border-radius: 0.38em;
+  background-color: black;
+  color: white;
+  box-shadow: 0.1em 0.2em 0.4em rgba(0, 0, 0, 0.25);
+}
+.sidebar .search-box .hint::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(-0.62em + 1px);
+  left: 1.5em;
+  box-sizing: content-box;
+  width: 0;
+  height: 0;
+  border-top: none;
+  border-bottom: 0.62em solid black;
+  border-left: 0.5em solid transparent;
+  border-right: 0.5em solid transparent;
+}
+.sidebar .search-box .hint.hidden {
+  display: none;
+}
+.sidebar .search-box .hint p {
+  margin: 0;
+}
+.sidebar .search-box .hint p + p {
+  margin-top: 0.5em;
+}
+.sidebar .search-box .hint strong {
+  color: hotpink;
+}
+input#docolatte-shows-sidebar,
+.menu-button {
+  display: none;
+}
+.menu-button {
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+  position: fixed;
+  z-index: 30;
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+.menu-button > .shape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  background-color: #e8e2da;
+  box-shadow: -0.1rem 0.1rem 0.4rem rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease-out;
+}
+.menu-button > .shape .icon {
+  opacity: 0.5;
+}
+.menu-button:active > .shape {
+  transform: scale(0.8, 0.8);
+  transition: all 0.05s ease-out;
+}
+.overlay,
+.overlay::before {
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.overlay {
+  position: fixed;
+  z-index: -1;
+}
+.overlay::before {
+  content: "";
+  position: absolute;
+  z-index: auto;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+@media only screen and (max-width: 1280px) {
+  :root {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  :root {
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 828px) {
+  :root {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .not-for-mobile {
+    display: none !important;
+  }
+  :root {
+    font-size: 16px;
+  }
+  body {
+    overflow: auto;
+  }
+  .masthead {
+    display: block;
+    overflow: visible;
+    position: absolute;
+    height: auto;
+  }
+  .masthead .branding {
+    justify-content: flex-start;
+    width: auto;
+    height: 4.854rem;
+    padding-left: 1.5rem;
+    padding-right: 6.354rem;
+    font-size: 1.5rem;
+  }
+  .masthead .branding .link {
+    left: auto;
+    right: 0;
+    width: 4.854rem;
+  }
+  .masthead .branding .link::before {
+    content: "";
+    position: absolute;
+    top: 0.75rem;
+    left: -1px;
+    display: block;
+    width: 0;
+    height: 3.354rem;
+    border-left: 1px dashed white;
+    opacity: 0.38;
+  }
+  .masthead .topbar {
+    height: 3rem;
+  }
+  main {
+    min-width: 320px;
+    padding-top: 9.354rem;
+    padding-left: 0;
+  }
+  main h1.page-title {
+    justify-content: center;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .colophon {
+    padding-left: 1.5rem;
+  }
+  .sidebar {
+    z-index: 22;
+    left: -320px;
+    width: 320px;
+    transition: left 0.16s ease-out;
+  }
+  .sidebar .toc {
+    font-size: 1.5rem;
+    height: 100%;
+  }
+  .sidebar .toc > nav > ul > li + li {
+    margin-top: 0.25em;
+  }
+  input#docolatte-shows-sidebar:checked ~ .sidebar {
+    left: 0;
+    box-shadow: 0.5rem 0 0.5rem rgba(0, 0, 0, 0.25);
+  }
+  input#docolatte-shows-sidebar:checked ~ .overlay {
+    z-index: 21;
+  }
+  input#docolatte-shows-sidebar:checked ~ .overlay::before {
+    opacity: 0.618;
+  }
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape {
+    background-color: white;
+  }
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon {
+    opacity: 0.75;
+  }
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger {
+    animation-iteration-count: 1;
+  }
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .top,
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .middle,
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .bottom {
+    transform: none;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-duration: 0.35s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: inherit;
+    animation-fill-mode: forwards;
+  }
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .top {
+    animation-name: burger-top;
+  }
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .middle {
+    animation-name: burger-middle;
+  }
+  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .bottom {
+    animation-name: burger-bottom;
+  }
+  .menu-button {
+    display: block;
+  }
+}
+@media only screen and (max-width: 414px) {
+  :root {
+    font-size: 15px;
+  }
+  .masthead .branding {
+    font-size: 1.25rem;
+    padding-left: 0.75rem;
+    padding-right: 5.604rem;
+  }
+  .masthead .topbar {
+    font-size: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  main > * {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+/*# sourceMappingURL=theme.css.map */

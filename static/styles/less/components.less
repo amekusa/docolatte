@@ -108,7 +108,7 @@ pre.prettyprint {
 			> code {
 				.pos-tl(@offset; 0; absolute; 1);
 				.w-min(100%);
-				.pl(@linenums-w+.5rem);
+				.pl((@linenums-w + .5rem));
 
 				&::after {
 					content: " "; // preserve empty line's height
@@ -190,12 +190,12 @@ pre.prettyprint {
 			.pos-tl(0; 0);
 			.square(80%);
 			.b(@thickness solid @color);
-			border-radius: @size/2;
+			border-radius: (@size / 2);
 		}
 		// handle
 		&::after {
 			.dim(@thickness; 40%);
-			.pos-br(0; -@thickness/2);
+			.pos-br(0; (-@thickness / 2));
 			// transform-box: fill-box;
 			transform-origin: bottom right;
 			transform: translate(-@thickness, -@thickness) rotateZ(-45deg);

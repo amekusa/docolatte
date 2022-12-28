@@ -41,8 +41,8 @@ thead {
 }
 
 dl {
-	.dl-side-by-side(fit-content(6rem); @gutter/4 @gutter/2);
-	.mv(@gutter/2; 0);
+	.dl-side-by-side(fit-content(6rem); (@gutter / 4) (@gutter / 2));
+	.mv((@gutter / 2); 0);
 	.bl(1px solid @c-gray-thin);
 	.pl(@gutter);
 	overflow: auto;
@@ -131,8 +131,8 @@ h2.name {
 // member name
 h4.name {
 	@offset: @topbar-h; // anchor offset
-	.mt((@gutter*2) - @offset);
-	.pt(@gutter     + @offset);
+	.mt((@gutter * 2 - @offset));
+	.pt((@gutter     + @offset));
 	font-weight: normal;
 	font-family: @ff-code;
 	color: @c-pink;
@@ -199,9 +199,9 @@ h4.name {
 
 h4.name:first-of-type,
 .subsection-title + h4.name {
-	@offset: @topbar-h + @gutter; // anchor offset
-	.mt(@gutter - @offset);
-	.pt(0       + @offset);
+	@offset: (@topbar-h + @gutter); // anchor offset
+	.mt((@gutter - @offset));
+	.pt((0       + @offset));
 
 	// no border
 	&::before {
@@ -212,7 +212,7 @@ h4.name:first-of-type,
 
 // "Members", "Methods" headings
 .subsection-title {
-	.mt(@gutter*3);
+	.mt((@gutter * 3));
 	.bl(.5em solid);
 	.pl(.75em);
 	font-weight: normal;

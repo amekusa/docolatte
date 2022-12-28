@@ -103,12 +103,12 @@ main {
 	.pos(relative);
 	.w(100%; border-box);
 	.h-min(100%);
-	.pv(@topbar-h+@gutter; @gutter);
+	.pv((@topbar-h + @gutter); @gutter);
 	.ph(@sidebar-w; 0);
 	.bg(white);
 
 	&.has-footer {
-		.pb(@footer-h+@gutter*2);
+		.pb((@footer-h + @gutter * 2));
 	}
 	> * {
 		.ph(@gutter);
@@ -122,7 +122,7 @@ main {
 	.dim(100%; auto; border-box);
 	.h-max(@footer-h);
 	.pos-br(0; 0; absolute);
-	.pl(@sidebar-w+@gutter);
+	.pl((@sidebar-w + @gutter));
 	.pv(@gutter);
 	.bb(@gutter solid @c-latte);
 	.stripe(-60deg; @c-latte; white; 1px; 4px);
@@ -220,7 +220,7 @@ main {
 								.block;
 								.dim(0; 0; content-box);
 								.bh(@w solid; none);
-								.bv(@h/2 solid transparent);
+								.bv((@h / 2) solid transparent);
 							}
 						}
 					}
@@ -239,7 +239,7 @@ main {
 			.dim(100%; @h; border-box);
 			.ph(.75em; 2em);
 			.b(none);
-			border-radius: @h / 2;
+			border-radius: (@h / 2);
 
 			&::placeholder {
 				color: @c-gray;
@@ -255,7 +255,7 @@ main {
 		ol.suggestions {
 			list-style: none;
 			.block;
-			.pos-l(0; absolute; @z-sidebar+2);
+			.pos-l(0; absolute; (@z-sidebar + 2));
 			.w-max(100%);
 			overflow: hidden;
 			.m(0);
@@ -320,7 +320,7 @@ main {
 				.pos-tl(calc(-@h + 1px); 1.5em; absolute);
 				.dim(0; 0; content-box);
 				.bv(none; @h solid @bg);
-				.bh(@w/2 solid transparent);
+				.bh((@w / 2) solid transparent);
 			}
 			&.hidden {
 				.none;
@@ -353,7 +353,7 @@ input#docolatte-shows-sidebar,
 	> .shape {
 		.flex-center;
 		.spread;
-		border-radius: @size/2;
+		border-radius: (@size / 2);
 
 		.bg(@c-latte);
 		box-shadow: -.1rem .1rem .4rem rgba(0, 0, 0, .5);

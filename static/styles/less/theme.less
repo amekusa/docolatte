@@ -162,15 +162,9 @@ main {
 	.toc {
 		.pos-bl(0; 0; absolute);
 		.dim(100%; calc(100% - @topbar-h); border-box);
-		.ph(@gutter);
+		.p(@gutter);
 		overflow: auto;
 
-		> *:first-child {
-			.mt(@gutter);
-		}
-		> *:last-child {
-			.pb(@gutter*2);
-		}
 		a {
 			&.current {
 				opacity: 1;

@@ -73,6 +73,7 @@
     "rollup": "^3.9.0"
   },
   "dependencies": {
+    "@jsdoc/salty": "^0.2.2",
     "@jsdoc/util": "^0.2.7",
     "code-prettify": "^0.1.0",
     "color-themes-for-google-code-prettify": "^2.0.4",
@@ -81,7 +82,6 @@
     "fuse.js": "^6.6.2",
     "lodash": "^4.17.21",
     "open-sans-fonts": "^1.6.2",
-    "simplebar": "^5.3.9",
-    "taffydb": "^2.7.3"
+    "simplebar": "^5.3.9"
   }
 }

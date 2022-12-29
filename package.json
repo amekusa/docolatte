@@ -80,6 +80,7 @@
     "common-path-prefix": "^3.0.0",
     "feather-icons": "^4.29.0",
     "fuse.js": "^6.6.2",
+    "highlight.js": "^11.7.0",
     "jsdoc": "^3.6.11",
     "lodash": "^4.17.21",
     "open-sans-fonts": "^1.6.2",

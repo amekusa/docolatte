@@ -550,7 +550,7 @@ exports.publish = (taffyData, opts, tutorials) => {
             hideCredits: false
         },
         code: {
-            theme: 'tomorrow-night-eighties'
+            theme: 'atom-one-dark'
         }
 
     }, conf.docolatte || {});
@@ -644,10 +644,10 @@ exports.publish = (taffyData, opts, tutorials) => {
     }
     fs.mkPath(outdir);
 
-    // copy the node modules
+    // copy the assets from node_modules
     [
         `feather-icons/dist/feather-sprite.svg`,
-        `color-themes-for-google-code-prettify/dist/themes/${conf.docolatte.code.theme}.min.css`
+        `highlight.js/styles/${conf.docolatte.code.theme}.css`
 
     ].forEach(file => {
         let dest = path.dirname(path.join(outdir, 'modules', file));

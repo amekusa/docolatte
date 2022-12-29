@@ -1,6 +1,13 @@
 import Fuse from 'fuse.js';
 import SimpleBar from 'simplebar';
 
+import HLJS from 'highlight.js/lib/core';
+import LangJS from 'highlight.js/lib/languages/javascript'; HLJS.registerLanguage('javascript', LangJS);
+import LangJSON from 'highlight.js/lib/languages/json'; HLJS.registerLanguage('json', LangJSON);
+import LangCSS from 'highlight.js/lib/languages/css'; HLJS.registerLanguage('css', LangCSS);
+import LangTS from 'highlight.js/lib/languages/typescript'; HLJS.registerLanguage('typescript', LangTS);
+import LangSh from 'highlight.js/lib/languages/shell'; HLJS.registerLanguage('shell', LangSh);
+
 /*!
  * The main script for docolatte
  * @author Satoshi Soma (amekusa.com)
@@ -23,20 +30,20 @@ import SimpleBar from 'simplebar';
 (() => {
 
 	/**
-	* @param {string} query
-	* @param {int} index
-	* @return {NodeList|Element|null}
-	*/
+	 * @param {string} query
+	 * @param {int} index
+	 * @return {NodeList|Element|null}
+	 */
 	function q(query, index = null) {
 		return find(document, query, index);
 	}
 
 	/**
-	* @param {Element} elem
-	* @param {string} query
-	* @param {int} index
-	* @return {NodeList|Element|null}
-	*/
+	 * @param {Element} elem
+	 * @param {string} query
+	 * @param {int} index
+	 * @return {NodeList|Element|null}
+	 */
 	function find(elem, query, index = null) {
 		let items = elem.querySelectorAll(query);
 		if (index == null) return items;
@@ -267,6 +274,9 @@ import SimpleBar from 'simplebar';
 
 			update();
 		})();
+
+		// highlight codes
+		HLJS.highlightAll();
 
 	}); // DOM setup
 

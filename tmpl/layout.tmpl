@@ -14,13 +14,11 @@
     <?js } if (this.theme.meta.author) { ?>
     <meta name="author" content="<?js= this.theme.meta.author ?>">
     <?js } ?>
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
     <script src="scripts/main.js"></script>
     <?js if (this.theme.meta.favicon) { for (let favicon of this.theme.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
-    <link type="text/css" rel="stylesheet" href="modules/color-themes-for-google-code-prettify/dist/themes/<?js= this.theme.code.theme ?>.min.css">
+    <link type="text/css" rel="stylesheet" href="modules/highlight.js/styles/<?js= this.theme.code.theme ?>.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
     <link type="text/css" rel="stylesheet" href="styles/theme.css">
     <link type="text/css" rel="stylesheet" href="styles/simplebar.min.css">
@@ -86,9 +84,6 @@
         </div>
     </div>
 </div>
-
-<script>prettyPrint()</script>
-<script src="scripts/linenumber.js"></script>
 
 <!-- %DOCOLATTE::DATA_GOES_HERE% -->
 <script>

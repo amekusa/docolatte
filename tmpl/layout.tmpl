@@ -18,6 +18,7 @@
     <?js if (this.theme.meta.favicon) { for (let favicon of this.theme.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
+    <script src="scripts/highlight.js"></script>
     <link type="text/css" rel="stylesheet" href="modules/highlight.js/styles/<?js= this.theme.code.theme ?>.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
     <link type="text/css" rel="stylesheet" href="styles/theme.css">
@@ -84,6 +85,10 @@
         </div>
     </div>
 </div>
+
+<script>
+hljs.highlightAll()
+</script>
 
 <!-- %DOCOLATTE::DATA_GOES_HERE% -->
 <script>

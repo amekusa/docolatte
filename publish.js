@@ -644,16 +644,19 @@ exports.publish = (taffyData, opts, tutorials) => {
     }
     fs.mkPath(outdir);
 
-    // copy the assets from node_modules
+    // copy files from node_modules
     [
-        `feather-icons/dist/feather-sprite.svg`,
-        `highlight.js/styles/${conf.docolatte.code.theme}.css`
+        { dst: 'assets',  src: 'feather-icons/dist/feather-sprite.svg' },
+        { dst: 'scripts', src: 'highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js' },
+        { dst: 'styles',  src: 'simplebar/dist/simplebar.min.css' },
+        { dst: 'styles',  src: `highlight.js/styles/${conf.docolatte.code.theme}.css` }
 
     ].forEach(file => {
-        let dest = path.dirname(path.join(outdir, 'modules', file));
-        let src = require.resolve(file);
-        fs.mkPath(dest);
-        fs.copyFileSync(src, dest);
+        // let dst = path.dirname(path.join(outdir, 'modules', file));
+        let dst = path.join(outdir, file.dst);
+        let src = require.resolve(file.src);
+        fs.mkPath(dst);
+        fs.copyFileSync(src, dst);
     });
 
     // copy the template's static files to outdir

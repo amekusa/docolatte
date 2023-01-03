@@ -550,7 +550,8 @@ exports.publish = (taffyData, opts, tutorials) => {
             hideCredits: false
         },
         code: {
-            theme: 'atom-one-dark'
+            theme: 'base16/espresso'
+            // theme: 'atom-one-dark'
         }
 
     }, conf.docolatte || {});

@@ -292,7 +292,7 @@ import HLJS from 'highlight.js/lib/common';
 					let id = 'line' + i;
 
 					let btn = elem('a', { href: '#' + id }, i);
-					btn.style.paddingRight = charWidth + 'px';
+					btn.style.paddingRight = charWidth - 1 + 'px';
 					btn.addEventListener('click', onClick);
 
 					let linenum = elem('div', { id, class: 'linenum hljs' }, btn);
@@ -320,7 +320,7 @@ import HLJS from 'highlight.js/lib/common';
 				}
 			}
 
-			// q('.prettyprint code').forEach(HLJS.highlightElement);
+			q('.prettyprint code').forEach(HLJS.highlightElement);
 			q('.prettyprint.linenums').forEach(linenumify);
 
 			selectLine();

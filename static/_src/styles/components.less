@@ -76,12 +76,17 @@ pre.prettyprint {
 
 			a {
 				display: block;
+				.br(solid 1px);
 				text-align: right;
 				text-decoration: none;
-				opacity: .3;
+				opacity: .35;
 
 				&, &:visited, &:active, &:hover {
 					color: inherit;
+				}
+
+				&:hover {
+					opacity: .75;
 				}
 			}
 
@@ -89,7 +94,6 @@ pre.prettyprint {
 
 				a {
 					opacity: 1;
-					.br(solid 1px);
 				}
 			}
 		}

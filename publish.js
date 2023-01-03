@@ -607,9 +607,10 @@ exports.publish = (taffyData, opts, tutorials) => {
                 let caption;
                 let code;
 
-                if (example.match(/^\s*<caption>([\s\S]+?)<\/caption>(\s*[\n\r])([\s\S]+)$/i)) {
-                    caption = RegExp.$1;
-                    code = RegExp.$3;
+                let found = example.match(/^\s*<caption>([\s\S]+?)<\/caption>(\s*[\n\r])([\s\S]+)$/i);
+                if (found) {
+                    caption = found[1];
+                    code = found[3];
                 }
 
                 return {

@@ -110,7 +110,7 @@ const t = { // minor tasks
 
 	test_gen_watch() {
 		let watch = [
-			paths.src.test + '/fixtures.conf.json',
+			paths.src.test + '/**/*',
 			paths.scripts + '/*.js',
 			paths.styles + '/*.css',
 			paths.tmpl + '/*.tmpl',

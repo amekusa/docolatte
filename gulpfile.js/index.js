@@ -53,23 +53,6 @@ const t = { // minor tasks
 		return g.watch([paths.src.scripts + '/main.js'], t.js_main);
 	},
 
-	async js_hljs() {
-		let conf = {
-			input: paths.src.scripts + '/highlight.js',
-			output: {
-				dir: paths.scripts,
-				name: 'hljs',
-				format: 'iife'
-			},
-			plugins: [
-				nodeResolve(),
-				commonjs()
-			]
-		};
-		let bundle = await rollup(conf);
-		return bundle.write(conf.output);
-	},
-
 	js_minify() {
 		let dst = `${paths.scripts}/`;
 		let src = [`${paths.scripts}/*.js`, `!${paths.scripts}/*.min.js`];

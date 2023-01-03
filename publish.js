@@ -646,12 +646,17 @@ exports.publish = (taffyData, opts, tutorials) => {
     fs.mkPath(outdir);
 
     // copy files from node_modules
-    [
+    let moduleFiles = [
         { dst: 'assets', src: 'feather-icons/dist/feather-sprite.svg' },
-        { dst: 'styles', src: 'simplebar/dist/simplebar.min.css' },
-        { dst: 'styles/hljs', src: `highlight.js/styles/${conf.docolatte.code.theme}.css` }
-
-    ].forEach(file => {
+        { dst: 'styles', src: 'simplebar/dist/simplebar.min.css' }
+    ];
+    if (conf.docolatte.code.theme) {
+        moduleFiles.push({
+            dst: path.join('styles/hljs', path.dirname(conf.docolatte.code.theme)),
+            src: `highlight.js/styles/${conf.docolatte.code.theme}.css`
+        });
+    }
+    moduleFiles.forEach(file => {
         let dst = path.join(outdir, file.dst);
         let src = require.resolve(file.src);
         fs.mkPath(dst);

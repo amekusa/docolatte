@@ -228,70 +228,54 @@ figure {
   transition: opacity 0.25s ease-out;
 }
 pre.prettyprint {
-  overflow: auto;
+  position: relative;
+  font-size: 0.85rem;
+  line-height: 1.5;
   font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  width: auto;
+  overflow: auto;
   border-radius: 0.5rem;
 }
-pre.prettyprint.linenums {
-  padding: 0;
+pre.prettyprint ._char {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 pre.prettyprint code {
   display: block;
-  font-size: 0.85rem;
-  line-height: 1.75;
   padding: 0.5em 1em;
 }
-pre.prettyprint ol.linenums {
-  counter-reset: linenum;
-  list-style: none;
-}
-pre.prettyprint ol.linenums > li {
-  counter-increment: linenum;
-  position: relative;
-  padding: 3rem 0 0 0;
-  margin-top: -3rem;
-}
-pre.prettyprint ol.linenums > li:first-child::before {
-  border-top-left-radius: 0.5rem;
-}
-pre.prettyprint ol.linenums > li:last-child::before {
-  border-bottom-left-radius: 0.5rem;
-}
-pre.prettyprint ol.linenums > li::before {
-  content: counter(linenum);
-  display: block;
-  position: sticky;
-  z-index: 2;
-  left: 0;
-  box-sizing: border-box;
-  width: 4rem;
-  height: 100%;
-  padding-right: 0.5rem;
-  background-color: rgba(96, 96, 96, 0.6);
-  color: #c6c6c6;
-  text-align: right;
-  text-shadow: 0.1em 0.1em 0.1em #000000;
-  font-style: italic;
-}
-pre.prettyprint ol.linenums > li.selected::before,
-pre.prettyprint ol.linenums > li:target::before {
-  color: white;
-  background-color: rgba(127, 127, 127, 0.6);
-}
-pre.prettyprint ol.linenums > li.selected > code,
-pre.prettyprint ol.linenums > li:target > code {
-  background-color: rgba(127, 127, 127, 0.35);
-}
-pre.prettyprint ol.linenums > li > code {
+pre.prettyprint .linenums {
   position: absolute;
-  z-index: 1;
-  top: 3rem;
+  top: 0;
   left: 0;
-  min-width: 100%;
-  padding-left: 4.5rem;
 }
-pre.prettyprint ol.linenums > li > code::after {
-  content: " ";
+pre.prettyprint .linenums .linenum {
+  box-sizing: border-box;
+  opacity: 0.9;
+}
+pre.prettyprint .linenums .linenum:first-child {
+  padding-top: 0.5em;
+}
+pre.prettyprint .linenums .linenum:last-child {
+  padding-bottom: 0.5em;
+}
+pre.prettyprint .linenums .linenum a {
+  display: block;
+  text-align: right;
+  text-decoration: none;
+  opacity: 0.3;
+}
+pre.prettyprint .linenums .linenum a,
+pre.prettyprint .linenums .linenum a:visited,
+pre.prettyprint .linenums .linenum a:active,
+pre.prettyprint .linenums .linenum a:hover {
+  color: inherit;
+}
+pre.prettyprint .linenums .linenum[data-selected] a {
+  opacity: 1;
+  border-right: solid 1px;
 }
 .icon {
   position: relative;

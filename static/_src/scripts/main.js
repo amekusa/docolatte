@@ -1,12 +1,6 @@
 import Fuse from 'fuse.js';
 import SimpleBar from 'simplebar';
-
-import HLJS from 'highlight.js/lib/core';
-import LangJS from 'highlight.js/lib/languages/javascript'; HLJS.registerLanguage('javascript', LangJS);
-import LangJSON from 'highlight.js/lib/languages/json'; HLJS.registerLanguage('json', LangJSON);
-import LangCSS from 'highlight.js/lib/languages/css'; HLJS.registerLanguage('css', LangCSS);
-import LangTS from 'highlight.js/lib/languages/typescript'; HLJS.registerLanguage('typescript', LangTS);
-import LangSh from 'highlight.js/lib/languages/shell'; HLJS.registerLanguage('shell', LangSh);
+import HLJS from 'highlight.js/lib/common';
 
 /*!
  * The main script for docolatte
@@ -65,8 +59,14 @@ import LangSh from 'highlight.js/lib/languages/shell'; HLJS.registerLanguage('sh
 		if (child) {
 			if (!Array.isArray(child)) child = [child];
 			for (let item of child) {
-				if (typeof item == 'string') r.innerHTML += item;
-				else r.appendChild(item);
+				switch (typeof item) {
+				case 'string':
+				case 'number':
+					r.innerHTML += item;
+					break;
+				default:
+					r.appendChild(item);
+				}
 			}
 		}
 		return r;
@@ -275,8 +275,56 @@ import LangSh from 'highlight.js/lib/languages/shell'; HLJS.registerLanguage('sh
 			update();
 		})();
 
-		// highlight codes
-		HLJS.highlightAll();
+		// code highlight
+		(() => {
+			const linenums = [];
+
+			function linenumify(pre) {
+				let code = find(pre, 'code', 0);
+				let lines = (code.innerHTML.trimEnd().match(/\n/g) || '').length + 1;
+				let digits = lines.toString().length;
+				let charWidth = find(pre, '._char', 0).getBoundingClientRect().width;
+				let width = charWidth * (digits + 2); // px
+				code.style.paddingLeft = width + charWidth + 'px';
+
+				let r = elem('div', { class: 'linenums' });
+				for (let i = 1; i <= lines; i++) {
+					let id = 'line' + i;
+
+					let btn = elem('a', { href: '#' + id }, i);
+					btn.style.paddingRight = charWidth + 'px';
+					btn.addEventListener('click', onClick);
+
+					let linenum = elem('div', { id, class: 'linenum hljs' }, btn);
+					linenum.style.width = width + 'px';
+					linenums.push(linenum);
+					r.appendChild(linenum);
+				}
+				pre.appendChild(r);
+			}
+
+			function onClick(ev) {
+				ev.preventDefault();
+				document.location = this.href;
+				selectLine();
+			}
+
+			function selectLine() {
+				let hash = document.location.hash;
+				if (!hash) return;
+				console.log('hash:', hash);
+				for (let i = 0; i < linenums.length; i++) {
+					let linenum = linenums[i];
+					if (linenum.id == hash.substring(1)) linenum.setAttribute('data-selected', 1);
+					else linenum.removeAttribute('data-selected');
+				}
+			}
+
+			// q('.prettyprint code').forEach(HLJS.highlightElement);
+			q('.prettyprint.linenums').forEach(linenumify);
+
+			selectLine();
+		})();
 
 	}); // DOM setup
 

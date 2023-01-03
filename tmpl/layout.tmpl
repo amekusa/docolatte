@@ -18,8 +18,7 @@
     <?js if (this.theme.meta.favicon) { for (let favicon of this.theme.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
-    <link type="text/css" rel="stylesheet" href="modules/highlight.js/styles/<?js= this.theme.code.theme ?>.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/hljs/<?js= this.theme.code.theme ?>.css">
     <link type="text/css" rel="stylesheet" href="styles/theme.css">
     <link type="text/css" rel="stylesheet" href="styles/simplebar.min.css">
     <?js if (this.theme.style) { ?>
@@ -33,7 +32,7 @@
         <div class="branding">
             <?js if (this.theme.branding.link) { ?>
             <a class="link" href="<?js= this.theme.branding.link ?>">
-                <svg class="icon feather"><use xlink:href="modules/feather-icons/dist/feather-sprite.svg#<?js= this.theme.branding.icon || 'home' ?>"/></svg>
+                <svg class="icon feather"><use xlink:href="assets/feather-sprite.svg#<?js= this.theme.branding.icon || 'home' ?>"/></svg>
             </a>
             <?js } ?>
             <a class="title" href="index.html"><?js= this.theme.branding.title ?></a>

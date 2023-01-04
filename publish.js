@@ -337,9 +337,13 @@ function generateSourceFiles(sourceFiles, encoding = 'utf8') {
 
         helper.registerLink(sourceFiles[file].shortened, sourceOutfile);
 
+        let lang = path.extname(file);
+        lang = lang.length > 1 ? lang.substring(1) : '';
+
         try {
             source = {
                 kind: 'source',
+                lang: lang,
                 code: helper.htmlsafe( fs.readFileSync(sourceFiles[file].resolved, encoding) )
             };
         }

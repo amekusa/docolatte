@@ -72,6 +72,7 @@ class SearchDB {
 
 /**
  * Merges 2 objects recursively
+ * @return {object}
  * @author amekusa
  */
 function merge(x, y) {
@@ -93,6 +94,7 @@ function merge(x, y) {
 /**
  * Formats an array to a <UL> list.
  * If the array has only 1 item, omits <UL> and <LI> tags
+ * @return {string}
  * @author amekusa
  */
 function list(items, forEach = null) {

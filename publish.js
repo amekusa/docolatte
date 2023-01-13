@@ -108,6 +108,24 @@ function list(items, forEach = null) {
     return `<ul>${r}</ul>`;
 }
 
+/**
+ * Returns the language of the given file
+ * @return {string}
+ * @author amekusa
+ */
+function lang(file) {
+    let ext = path.extname(file);
+    return ext.length > 1 ? ext.substring(1) : '';
+}
+
+function append(str, to = ' ') {
+    return str ? (to + str) : '';
+}
+
+function prepend(str, to = ' ') {
+    return str ? (str + to) : '';
+}
+
 function find(spec) {
     return helper.find(data, spec);
 }
@@ -339,13 +357,10 @@ function generateSourceFiles(sourceFiles, encoding = 'utf8') {
 
         helper.registerLink(sourceFiles[file].shortened, sourceOutfile);
 
-        let lang = path.extname(file);
-        lang = lang.length > 1 ? lang.substring(1) : '';
-
         try {
             source = {
                 kind: 'source',
-                lang: lang,
+                lang: lang(file),
                 code: helper.htmlsafe( fs.readFileSync(sourceFiles[file].resolved, encoding) )
             };
         }
@@ -610,6 +625,9 @@ exports.publish = (taffyData, opts, tutorials) => {
         doclet.attribs = '';
 
         if (doclet.examples) {
+            let language = '';
+            if (doclet.meta && doclet.meta.filename) language = lang(doclet.meta.filename);
+
             doclet.examples = doclet.examples.map(example => {
                 let caption;
                 let code;
@@ -621,6 +639,7 @@ exports.publish = (taffyData, opts, tutorials) => {
                 }
 
                 return {
+                    lang: language,
                     caption: caption || '',
                     code: code || example
                 };
@@ -773,6 +792,8 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
     view.list = list;
+    view.append = append;
+    view.prepend = prepend;
     view.theme = conf.docolatte;
 
     // DB for search

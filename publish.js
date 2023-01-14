@@ -118,10 +118,20 @@ function lang(file) {
     return ext.length > 1 ? ext.substring(1) : '';
 }
 
+/**
+ * Append the 1st string to the 2nd string
+ * @return {string}
+ * @author amekusa
+ */
 function append(str, to = ' ') {
     return str ? (to + str) : '';
 }
 
+/**
+ * Prepend the 1st string to the 2nd string
+ * @return {string}
+ * @author amekusa
+ */
 function prepend(str, to = ' ') {
     return str ? (str + to) : '';
 }

@@ -159,7 +159,7 @@ main {
 		overflow: auto;
 
 		a {
-			&.current {
+			&[data-current] {
 				opacity: 1;
 			}
 		}
@@ -199,7 +199,7 @@ main {
 						.pos(relative);
 						transition: padding-left .25s ease-out;
 
-						&.current {
+						&[data-current] {
 							font-weight: bold;
 							.pl(.25em);
 							opacity: 1;

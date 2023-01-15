@@ -244,31 +244,19 @@ import HLJS from 'highlight.js/lib/common';
 			});
 
 			let headings = q('article.doc h4.name[id]');
-			let currentH, prevH = null;
-			let currentA = [], prevA = null;
+			let curr = { i: -1, a: null };
+
 			function update() {
-				// console.debug('SCROLL:', scroll);
-
-				// process headings from bottom to top
-				// (assuming the list is ordered by 'offsetTop')
-				for (let i = headings.length - 1; i >= 0; i--) {
-					let item = headings.item(i);
-					if ((item.offsetTop - 12) > scroll) continue;
-					if (i === currentH) break;
-
-					prevH = currentH;
-					currentH = i;
-					// console.debug('CURRENT H:', currentH, item);
-
-					// highlight all the '#' anchors pointing at the current header
-					prevA = currentA;
-					currentA = find(toc, `a[href="${currentPage + '#' + item.id}"]`);
-					// console.debug('CURRENT A:', currentA);
-					prevA.forEach(a => { a.classList.remove('current') });
-					currentA.forEach(a => { a.classList.add('current') });
+				for (let i = 0; i < headings.length; i++) {
+					if (headings.item(i).offsetTop < scroll) continue;
+					if (i == curr.i) break;
+					let flag = 'data-current';
+					if (curr.i >= 0) curr.a.forEach(a => { a.removeAttribute(flag) });
+					curr.i = i;
+					curr.a = find(toc, `a[href$="#${headings.item(i).id}"]`);
+					curr.a.forEach(a => { a.setAttribute(flag, 1) });
 					break;
 				}
-
 				ticking = false;
 			}
 

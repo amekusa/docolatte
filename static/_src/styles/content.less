@@ -130,21 +130,13 @@ h2.name {
 
 // member name
 h4.name {
-	@offset: @topbar-h; // anchor offset
-	.mt((@gutter * 2 - @offset));
-	.pt((@gutter     + @offset));
+	.mt((@gutter * 2));
+	.pt(@gutter);
+	.bt(1px dashed @c-gray);
 	font-weight: normal;
 	font-family: @ff-code;
 	color: @c-pink;
 
-	// top border
-	&::before {
-		content: "";
-		.block;
-		.pos-t(-@gutter; relative);
-		.h(1px; border-box);
-		.bt(1px dashed @c-gray);
-	}
 	// attributes ('static', 'abstract', etc.)
 	.attributes {
 		vertical-align: .1em;
@@ -199,15 +191,8 @@ h4.name {
 
 h4.name:first-of-type,
 .subsection-title + h4.name {
-	@offset: (@topbar-h + @gutter); // anchor offset
-	.mt((@gutter - @offset));
-	.pt((0       + @offset));
-
-	// no border
-	&::before {
-		content: none;
-		.none;
-	}
+	.mt(0);
+	.bt(none);
 }
 
 // "Members", "Methods" headings

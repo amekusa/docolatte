@@ -253,7 +253,7 @@ import HLJS from 'highlight.js/lib/common';
 					let flag = 'data-current';
 					if (curr.i >= 0) curr.a.forEach(a => { a.removeAttribute(flag) });
 					curr.i = i;
-					curr.a = find(toc, `a[href$="#${headings.item(i).id}"]`);
+					curr.a = find(toc, `a[href="${currentPage}#${headings.item(i).id}"]`);
 					curr.a.forEach(a => { a.setAttribute(flag, 1) });
 					break;
 				}

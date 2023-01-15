@@ -559,6 +559,7 @@ exports.publish = (taffyData, opts, tutorials) => {
 
     // theme configs
     var x = merge({
+        minify: true,
         meta: {
             lang: 'en',
             title: null,
@@ -586,6 +587,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         }
 
     }, conf.docolatte || {});
+
     if (!x.meta.title) x.meta.title = x.branding.title;
     if (typeof x.meta.favicon == 'string') x.meta.favicon = [x.meta.favicon];
 
@@ -682,9 +684,10 @@ exports.publish = (taffyData, opts, tutorials) => {
     fs.mkPath(outdir);
 
     // copy files from node_modules
+    let min = conf.docolatte.minify ? '.min' : '';
     let moduleFiles = [
         { dst: 'assets', src: 'feather-icons/dist/feather-sprite.svg' },
-        { dst: 'styles', src: 'simplebar/dist/simplebar.min.css' }
+        { dst: 'styles', src: `simplebar/dist/simplebar${min}.css` }
     ];
     if (conf.docolatte.code.theme) {
         moduleFiles.push({

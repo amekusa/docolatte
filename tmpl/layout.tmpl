@@ -1,3 +1,4 @@
+<?js var min = this.theme.minify ? '.min' : '' ?>
 <!DOCTYPE html>
 <html<?js if (this.theme.meta.lang) { ?> lang="<?js= this.theme.meta.lang ?>"<?js } ?>>
 <head>
@@ -14,13 +15,15 @@
     <?js } if (this.theme.meta.author) { ?>
     <meta name="author" content="<?js= this.theme.meta.author ?>">
     <?js } ?>
-    <script src="scripts/main.js"></script>
+    <script src="scripts/main<?js= min ?>.js"></script>
     <?js if (this.theme.meta.favicon) { for (let favicon of this.theme.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
+    <?js if (this.theme.code.theme) { ?>
     <link type="text/css" rel="stylesheet" href="styles/hljs/<?js= this.theme.code.theme ?>.css">
-    <link type="text/css" rel="stylesheet" href="styles/theme.css">
-    <link type="text/css" rel="stylesheet" href="styles/simplebar.min.css">
+    <?js } ?>
+    <link type="text/css" rel="stylesheet" href="styles/theme<?js= min ?>.css">
+    <link type="text/css" rel="stylesheet" href="styles/simplebar<?js= min ?>.css">
     <?js if (this.theme.style) { ?>
     <style><?js= this.theme.style ?></style>
     <?js } ?>

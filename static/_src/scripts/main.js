@@ -76,23 +76,23 @@ import HLJS from 'highlight.js/lib/common';
 	 * Gets the offset position of an element from the specific ascendent node
 	 * @param {Element} elem Node to get offset
 	 * @param {Element} from Offset parent
-	 * @param {number} depth Recursion limit
+	 * @param {number} recurse Recursion limit
 	 * @return {number} offset.top
 	 * @return {number} offset.left
 	 */
-	function getOffset(elem, from, depth = 8) {
+	function getOffset(elem, from, recurse = 8) {
 		let r = { top: 0, left: 0 };
 		let child = elem;
 		while (true) {
+			if ('offsetTop'  in child) r.top  += child.offsetTop;
+			if ('offsetLeft' in child) r.left += child.offsetLeft;
 			let parent = child.offsetParent;
 			if (!parent) return r;
 			if (parent.isSameNode(from)) break;
-			if (depth < 1) break;
-			depth--;
+			if (recurse < 1) break;
+			recurse--;
 			child = parent;
 		}
-		if ('offsetTop'  in child) r.top  = child.offsetTop;
-		if ('offsetLeft' in child) r.left = child.offsetLeft;
 		return r;
 	}
 
@@ -103,23 +103,28 @@ import HLJS from 'highlight.js/lib/common';
 
 		// table of contents
 		const toc = q('.sidebar .toc', 0);
-		new SimpleBar(toc); // apply simplebar (macOS-like scrollbar)
+		const tocScroll = new SimpleBar(toc).getScrollElement();
+
+		// restore TOC scroll position
+		tocScroll.scrollTo({
+			left: parseInt(sessionStorage.getItem('scrollX') || 0),
+			top:  parseInt(sessionStorage.getItem('scrollY') || 0),
+			behavior: 'auto' // 'smooth'
+		});
+		sessionStorage.removeItem('scrollX');
+		sessionStorage.removeItem('scrollY');
+
+		// save TOC scroll position
+		window.onbeforeunload = function () {
+			sessionStorage.setItem('scrollX', tocScroll.scrollLeft);
+			sessionStorage.setItem('scrollY', tocScroll.scrollTop);
+		};
+
+		// highlight the anchors pointing at the current page
+		find(toc, `a[href="${currentPage}"]`).forEach(a => { a.setAttribute('data-current', 1) });
 
 		// toggle switch for sidebar
 		const sidebarToggle = q('input#docolatte-sidebar-toggle', 0);
-
-		// highlight the anchors pointing at the current page
-		find(toc, `a[href="${currentPage}"]`).forEach(a => {
-			a.classList.add('current');
-
-			// scroll TOC to the anchor
-			let offset = getOffset(a, toc);
-			toc.scrollTo({
-				left: 0,
-				top: offset.top - 24,
-				behavior: 'auto' // 'smooth'
-			});
-		});
 
 		// close sidebar when user clicked one of the menu items
 		find(toc, 'a').forEach(a => {

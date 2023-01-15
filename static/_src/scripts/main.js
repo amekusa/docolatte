@@ -101,11 +101,12 @@ import HLJS from 'highlight.js/lib/common';
 		const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
 		// console.debug('CURRENT PAGE:', currentPage);
 
-		const toc = q('.sidebar .toc', 0); // table of contents
-
+		// table of contents
+		const toc = q('.sidebar .toc', 0);
 		new SimpleBar(toc); // apply simplebar (macOS-like scrollbar)
 
-		const showsSidebar = q('input#docolatte-shows-sidebar', 0); // toggle switch for sidebar
+		// toggle switch for sidebar
+		const sidebarToggle = q('input#docolatte-sidebar-toggle', 0);
 
 		// highlight the anchors pointing at the current page
 		find(toc, `a[href="${currentPage}"]`).forEach(a => {
@@ -123,13 +124,13 @@ import HLJS from 'highlight.js/lib/common';
 		// close sidebar when user clicked one of the menu items
 		find(toc, 'a').forEach(a => {
 			a.addEventListener('click', ev => {
-				showsSidebar.checked = false;
+				sidebarToggle.checked = false;
 			});
 		});
 
 		// close sidebar with Escape key
 		document.addEventListener('keydown', ev => {
-			if (ev.key == 'Escape') showsSidebar.checked = false;
+			if (ev.key == 'Escape') sidebarToggle.checked = false;
 		});
 
 		// initialize search box
@@ -215,7 +216,7 @@ import HLJS from 'highlight.js/lib/common';
 
 			// force sidebar to show when searchbox gets focused
 			input.addEventListener('focus', ev => {
-				showsSidebar.checked = true;
+				sidebarToggle.checked = true;
 			});
 
 			// type any "printable" key to start a search

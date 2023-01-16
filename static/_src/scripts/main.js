@@ -98,10 +98,12 @@ import HLJS from 'highlight.js/lib/common';
 
 	// DOM setup
 	document.addEventListener('DOMContentLoaded', () => {
-		document.documentElement.removeAttribute('data-noscript');
 
+		// current page path
 		const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
-		// console.debug('CURRENT PAGE:', currentPage);
+
+		// local storage
+		const storage = window.sessionStorage;
 
 		// table of contents
 		const toc = q('.sidebar .toc', 0);
@@ -109,17 +111,16 @@ import HLJS from 'highlight.js/lib/common';
 
 		// restore TOC scroll position
 		tocScroll.scrollTo({
-			left: parseInt(sessionStorage.getItem('scrollX') || 0),
-			top:  parseInt(sessionStorage.getItem('scrollY') || 0),
+			left: parseInt(storage.getItem('scrollX') || 0),
+			top:  parseInt(storage.getItem('scrollY') || 0),
 			behavior: 'auto' // 'smooth'
 		});
-		sessionStorage.removeItem('scrollX');
-		sessionStorage.removeItem('scrollY');
+		toc.setAttribute('data-ready', 1);
 
 		// save TOC scroll position
 		window.onbeforeunload = function () {
-			sessionStorage.setItem('scrollX', tocScroll.scrollLeft);
-			sessionStorage.setItem('scrollY', tocScroll.scrollTop);
+			storage.setItem('scrollX', tocScroll.scrollLeft);
+			storage.setItem('scrollY', tocScroll.scrollTop);
 		};
 
 		// highlight the anchors pointing at the current page

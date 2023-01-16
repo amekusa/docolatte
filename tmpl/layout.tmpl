@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html<?js if (this.theme.meta.lang) { ?> lang="<?js= this.theme.meta.lang ?>"<?js } ?> data-noscript>
+<html<?js if (this.theme.meta.lang) { ?> lang="<?js= this.theme.meta.lang ?>"<?js } ?>>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -24,6 +24,13 @@
     <?js } ?>
     <link type="text/css" rel="stylesheet" href="styles/theme<?js= min ?>.css">
     <link type="text/css" rel="stylesheet" href="styles/simplebar<?js= min ?>.css">
+    <noscript>
+        <style>
+            [data-ready] {
+                visibility: visible !important;
+            }
+        </style>
+    </noscript>
     <?js if (this.theme.style) { ?>
     <style><?js= this.theme.style ?></style>
     <?js } ?>
@@ -81,7 +88,7 @@
     </label>
 
     <div class="sidebar">
-        <div class="toc">
+        <div class="toc" data-ready="0">
             <?js= this.nav ?>
         </div>
     </div>

@@ -98,6 +98,8 @@ import HLJS from 'highlight.js/lib/common';
 
 	// DOM setup
 	document.addEventListener('DOMContentLoaded', () => {
+		document.documentElement.removeAttribute('data-noscript');
+
 		const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
 		// console.debug('CURRENT PAGE:', currentPage);
 

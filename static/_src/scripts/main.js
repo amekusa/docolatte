@@ -239,7 +239,7 @@ import HLJS from 'highlight.js/lib/common';
 			});
 		})();
 
-		// scroll related features
+		// mark a TOC item as "current" on scroll
 		(() => {
 			let scroll = window.scrollY;
 			let ticking = false;
@@ -257,12 +257,12 @@ import HLJS from 'highlight.js/lib/common';
 
 			function update() {
 				for (let i = 0; i < headings.length; i++) {
-					if (headings.item(i).offsetTop < scroll) continue;
+					if (headings[i].offsetTop < scroll) continue;
 					if (i == curr.i) break;
 					let flag = 'data-current';
 					if (curr.i >= 0) curr.a.forEach(a => { a.removeAttribute(flag) });
 					curr.i = i;
-					curr.a = find(toc, `a[href="${currentPage}#${headings.item(i).id}"]`);
+					curr.a = find(toc, `a[href="${currentPage}#${headings[i].id}"]`);
 					curr.a.forEach(a => { a.setAttribute(flag, 1) });
 					break;
 				}

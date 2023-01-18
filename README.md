@@ -15,7 +15,7 @@
 - Made the scrollbar in the sidebar looks nicer ([Simplebar](https://github.com/Grsmto/simplebar))
 - Fixed some build errors
 
-### JSDoc 4 Compatibility
+### About JSDoc v4 Compatibility
 Indexing for search is not perfectly working with jsdoc@4.0.0.
 I recommend sticking with jsdoc 3.
 
@@ -87,7 +87,7 @@ Docolatte supports some configuration options to customize the HTML output.
         }
       },
       "code": {
-        "theme": "tomorrow-night"
+        "theme": "nord"
       },
       "meta": {
         "lang": "en",
@@ -98,7 +98,7 @@ Docolatte supports some configuration options to customize the HTML output.
         "favicon": "icon.png"
       },
       "footer": {
-        "copyright": "(c) 2020 John Programmer"
+        "copyright": "(c) 2023 John Programmer"
       }
     }
   }

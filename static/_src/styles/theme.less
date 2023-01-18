@@ -393,6 +393,16 @@ input#docolatte-sidebar-toggle,
 		:root {
 			font-size: 15px;
 		}
+		main {
+			> article.src {
+				.ph(0);
+				.mt(-@gutter);
+
+				pre.prettyprint {
+					border-radius: 0;
+				}
+			}
+		}
 	}
 
 	@media (max-width: 828px) {

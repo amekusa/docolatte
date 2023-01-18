@@ -5,7 +5,7 @@
 ## Notes for users
 
 ### v3.0
-- Changed the code highlighter from Google Code Prettify to [highlight.js](https://highlightjs.org/).  
+- Migrated the code highlighter from Google Code Prettify to [highlight.js](https://highlightjs.org/).  
   You may need to change the `code.theme` option value to adapt for this change
 - New option: `minify`
 - Fixed the bugs around Simplebar
@@ -106,7 +106,7 @@ Docolatte supports some configuration options to customize the HTML output.
 ```
 
 - `docolatte`
-  - **`minify`** …… Whether to use minified JS and CSS
+  - **`minify`** …… Whether to use minified JS and CSS (default: `true`)
   - `branding`
     - **`title`** …… Title of the entire site. Used in the top left header
     - **`link`** …… Link URL in the header

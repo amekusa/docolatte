@@ -165,13 +165,11 @@ main {
 		}
 		h2, h3 {
 			.fs(unit(@fs-m, em));
-			text-transform: uppercase;
-			letter-spacing: .12em;
+			.heading;
 		}
-		h3 {
-			.pl(.75em);
-			.bl(.5em solid);
-			font-weight: normal;
+		h2 { // might not be necessary
+			.p(0);
+			.b(none);
 		}
 		nav {
 			ul {

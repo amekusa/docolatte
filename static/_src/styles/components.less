@@ -1,3 +1,15 @@
+// general heading style
+.heading() {
+	.bl(.35em solid);
+	.pt(.1em);
+	.pl(.75em);
+	.lh(1);
+	font-family: @ff-head;
+	font-weight: normal;
+	text-transform: uppercase;
+	letter-spacing: .12em;
+}
+
 // scrollable table wrapper
 .table-wrap {
 	.pos(relative);
@@ -62,7 +74,8 @@ pre.prettyprint {
 	}
 	code {
 		display: block;
-		.p(.5em 1em);
+		.pv(.5em) !important;
+		.ph(1em);
 	}
 	.linenums {
 		.pos-tl(0; 0; absolute);

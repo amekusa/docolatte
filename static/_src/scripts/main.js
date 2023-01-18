@@ -46,6 +46,21 @@ import HLJS from 'highlight.js/lib/common';
 	}
 
 	/**
+	 * @param {Element} elem
+	 * @param {string[]} queries
+	 * @return {Element}
+	 */
+	function closest(elem, queries) {
+		let r = elem;
+		for (let i = 0; i < queries.length; i++) {
+			let _r = r.closest(queries[i]);
+			if (!_r) return r;
+			r = _r;
+		}
+		return r;
+	}
+
+	/**
 	 * @param {string} tag
 	 * @param {object} attribs
 	 * @param {string|array|Element} child
@@ -96,6 +111,34 @@ import HLJS from 'highlight.js/lib/common';
 		return r;
 	}
 
+	/**
+	 * Returns the least amount of camera movement required for showing the given target boundary
+	 * @param {number} viewStart
+	 * @param {number} viewEnd
+	 * @param {number} targetStart
+	 * @param {number} targetEnd
+	 * @param {number} [align] 0: align to start, 1: align to end
+	 * @return {number}
+	 */
+	function pan(viewStart, viewEnd, targetStart, targetEnd, align = 0) {
+		// console.debug('  viewStart:', viewStart);
+		// console.debug('    viewEnd:', viewEnd);
+		// console.debug('targetStart:', targetStart);
+		// console.debug('  targetEnd:', targetEnd);
+		// console.debug('------------');
+		let viewLength = viewEnd - viewStart;
+		let targetLength = targetEnd - targetStart;
+		if (viewLength < targetLength) {
+			switch (align) {
+				case 1: return targetEnd - viewEnd;
+				default: return targetStart - viewStart;
+			}
+		}
+		if (viewStart > targetStart) return targetStart - viewStart;
+		if (viewEnd < targetEnd) return targetEnd - viewEnd;
+		return 0;
+	}
+
 	// DOM setup
 	document.addEventListener('DOMContentLoaded', () => {
 
@@ -113,7 +156,7 @@ import HLJS from 'highlight.js/lib/common';
 		tocScroll.scrollTo({
 			left: parseInt(storage.getItem('scrollX') || 0),
 			top:  parseInt(storage.getItem('scrollY') || 0),
-			behavior: 'auto' // 'smooth'
+			behavior: 'instant'
 		});
 		toc.setAttribute('data-ready', 1);
 
@@ -253,17 +296,38 @@ import HLJS from 'highlight.js/lib/common';
 			});
 
 			let headings = q('article.doc h4.name[id]');
-			let curr = { i: -1, a: null };
+			let curr = { i: -1, a: null, wrap: null };
 
 			function update() {
 				for (let i = 0; i < headings.length; i++) {
 					if (headings[i].offsetTop < scroll) continue;
 					if (i == curr.i) break;
 					let flag = 'data-current';
-					if (curr.i >= 0) curr.a.forEach(a => { a.removeAttribute(flag) });
+					if (curr.i >= 0 && curr.a.length) curr.a.forEach(a => { a.removeAttribute(flag) });
 					curr.i = i;
+
 					curr.a = find(toc, `a[href="${currentPage}#${headings[i].id}"]`);
+					if (!curr.a.length) break;
 					curr.a.forEach(a => { a.setAttribute(flag, 1) });
+
+					// scroll TOC if necessary
+					let a = curr.a[curr.a.length - 1];
+					if (!curr.wrap) curr.wrap = closest(a, ['ul', 'li']);
+					let view = tocScroll;
+					let panning = pan(
+						view.scrollTop,
+						view.scrollTop + view.offsetHeight,
+						getOffset(curr.wrap, toc).top,
+						getOffset(a, toc).top + a.getBoundingClientRect().height,
+						1
+					);
+					if (panning || view.scrollLeft) {
+						view.scrollBy({
+							left: -view.scrollLeft,
+							top: panning,
+							behavior: 'smooth'
+						});
+					}
 					break;
 				}
 				ticking = false;

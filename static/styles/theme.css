@@ -62,10 +62,10 @@
 :root,
 body {
   height: 100%;
-  scroll-behavior: smooth;
 }
 :root {
   font-size: 18px;
+  scroll-padding-top: 3rem;
 }
 body {
   margin: 0;
@@ -75,6 +75,13 @@ body {
   line-height: 1.5;
   font-family: "Open Sans", HelveticaNeue, Helvetica, sans-serif;
   color: #4d4e53;
+}
+* {
+  outline-style: none;
+}
+input:focus,
+button:focus {
+  outline-style: auto;
 }
 h1,
 h2,
@@ -182,6 +189,9 @@ th:first-child {
 figure {
   margin: 0;
 }
+*[data-ready="0"] {
+  visibility: hidden;
+}
 .table-wrap {
   position: relative;
   max-height: 24em;
@@ -228,71 +238,53 @@ figure {
   transition: opacity 0.25s ease-out;
 }
 pre.prettyprint {
-  overflow: auto;
-  padding: 0.5em 1em;
+  position: relative;
+  font-size: 0.85rem;
+  line-height: 1.5;
   font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  width: auto;
+  overflow: auto;
   border-radius: 0.5rem;
 }
-pre.prettyprint.linenums {
-  padding: 0;
+pre.prettyprint ._char {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 pre.prettyprint code {
   display: block;
-  font-size: 0.85rem;
-  line-height: 1.75;
-  padding: 0;
+  padding: 0.5em 1em;
 }
-pre.prettyprint ol.linenums {
-  counter-reset: linenum;
-  list-style: none;
-}
-pre.prettyprint ol.linenums > li {
-  counter-increment: linenum;
-  position: relative;
-  padding: 3rem 0 0 0;
-  margin-top: -3rem;
-}
-pre.prettyprint ol.linenums > li:first-child::before {
-  border-top-left-radius: 0.5rem;
-}
-pre.prettyprint ol.linenums > li:last-child::before {
-  border-bottom-left-radius: 0.5rem;
-}
-pre.prettyprint ol.linenums > li::before {
-  content: counter(linenum);
-  display: block;
-  position: sticky;
-  z-index: 2;
-  left: 0;
-  box-sizing: border-box;
-  width: 4rem;
-  height: 100%;
-  padding-right: 0.5rem;
-  background-color: rgba(96, 96, 96, 0.6);
-  color: #c6c6c6;
-  text-align: right;
-  text-shadow: 0.1em 0.1em 0.1em #000000;
-  font-style: italic;
-}
-pre.prettyprint ol.linenums > li.selected::before,
-pre.prettyprint ol.linenums > li:target::before {
-  color: white;
-  background-color: rgba(127, 127, 127, 0.6);
-}
-pre.prettyprint ol.linenums > li.selected > code,
-pre.prettyprint ol.linenums > li:target > code {
-  background-color: rgba(127, 127, 127, 0.35);
-}
-pre.prettyprint ol.linenums > li > code {
+pre.prettyprint .linenums {
   position: absolute;
-  z-index: 1;
-  top: 3rem;
+  top: 0;
   left: 0;
-  min-width: 100%;
-  padding-left: 4.5rem;
 }
-pre.prettyprint ol.linenums > li > code::after {
-  content: " ";
+pre.prettyprint .linenums .linenum {
+  box-sizing: border-box;
+  opacity: 0.9;
+}
+pre.prettyprint .linenums .linenum:first-child {
+  padding-top: 0.5em;
+}
+pre.prettyprint .linenums .linenum:last-child {
+  padding-bottom: 0.5em;
+}
+pre.prettyprint .linenums .linenum a {
+  display: block;
+  border-right: solid 1px;
+  text-align: right;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.35;
+}
+pre.prettyprint .linenums .linenum a:hover,
+pre.prettyprint .linenums .linenum a:focus {
+  opacity: 0.75;
+}
+pre.prettyprint .linenums .linenum[data-selected] a {
+  opacity: 1;
 }
 .icon {
   position: relative;
@@ -640,20 +632,12 @@ main h2.name .attribs a {
   color: rgba(94, 95, 145, 0.5);
 }
 main h4.name {
-  margin-top: 0rem;
-  padding-top: 4.5rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(94, 95, 145, 0.5);
   font-weight: normal;
   font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   color: hotpink;
-}
-main h4.name::before {
-  content: "";
-  display: block;
-  position: relative;
-  top: -1.5rem;
-  box-sizing: border-box;
-  height: 1px;
-  border-top: 1px dashed rgba(94, 95, 145, 0.5);
 }
 main h4.name .attributes {
   vertical-align: 0.1em;
@@ -700,13 +684,8 @@ main h4.name .type-signature .type .sep {
 }
 main h4.name:first-of-type,
 main .subsection-title + h4.name {
-  margin-top: -3rem;
-  padding-top: 4.5rem;
-}
-main h4.name:first-of-type::before,
-main .subsection-title + h4.name::before {
-  content: none;
-  display: none;
+  margin-top: 0;
+  border-top: none;
 }
 main .subsection-title {
   margin-top: 4.5rem;
@@ -791,7 +770,7 @@ main .props .name {
   padding: 1.5rem;
   overflow: auto;
 }
-.sidebar .toc a.current {
+.sidebar .toc a[data-current] {
   opacity: 1;
 }
 .sidebar .toc h2,
@@ -827,12 +806,12 @@ main .props .name {
   position: relative;
   transition: padding-left 0.25s ease-out;
 }
-.sidebar .toc nav ul ul a.current {
+.sidebar .toc nav ul ul a[data-current] {
   font-weight: bold;
   padding-left: 0.25em;
   opacity: 1;
 }
-.sidebar .toc nav ul ul a.current::before {
+.sidebar .toc nav ul ul a[data-current]::before {
   content: "";
   position: absolute;
   top: 0.38em;
@@ -960,7 +939,7 @@ main .props .name {
 .sidebar .search-box .hint strong {
   color: hotpink;
 }
-input#docolatte-shows-sidebar,
+input#docolatte-sidebar-toggle,
 .menu-button {
   display: none;
 }
@@ -1101,28 +1080,28 @@ input#docolatte-shows-sidebar,
   .sidebar .toc > nav > ul > li + li {
     margin-top: 0.25em;
   }
-  input#docolatte-shows-sidebar:checked ~ .sidebar {
+  input#docolatte-sidebar-toggle:checked ~ .sidebar {
     left: 0;
     box-shadow: 0.5rem 0 0.5rem rgba(0, 0, 0, 0.25);
   }
-  input#docolatte-shows-sidebar:checked ~ .overlay {
+  input#docolatte-sidebar-toggle:checked ~ .overlay {
     z-index: 21;
   }
-  input#docolatte-shows-sidebar:checked ~ .overlay::before {
+  input#docolatte-sidebar-toggle:checked ~ .overlay::before {
     opacity: 0.618;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape {
     background-color: white;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon {
     opacity: 0.75;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger {
     animation-iteration-count: 1;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .top,
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .middle,
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .bottom {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .top,
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .middle,
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .bottom {
     transform: none;
     transform-box: fill-box;
     transform-origin: center;
@@ -1131,13 +1110,13 @@ input#docolatte-shows-sidebar,
     animation-iteration-count: inherit;
     animation-fill-mode: forwards;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .top {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .top {
     animation-name: burger-top;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .middle {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .middle {
     animation-name: burger-middle;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .bottom {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .bottom {
     animation-name: burger-bottom;
   }
   .menu-button {

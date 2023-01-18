@@ -14,45 +14,9 @@
     "tmpl"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:css && npm run build:js",
-    "build:css": "lessc --source-map static/styles/less/theme.less static/styles/theme.css",
-    "build:js": "rollup -c",
-    "build:lib": "npm run build:lib:simplebar",
-    "build:lib:simplebar": "cp node_modules/simplebar/dist/simplebar.min.css static/styles/",
-    "test:gen": "jsdoc -c fixtures/fixtures.conf.json",
-    "test": "http-server ./fixtures-doc -c-1",
+    "build": "gulp",
     "screenshot": "node screenshot.js",
-    "watch": "npm-watch"
-  },
-  "watch": {
-    "build:css": {
-      "patterns": "static/styles/less",
-      "extensions": "less"
-    },
-    "build:js": {
-      "patterns": "static/scripts/src",
-      "extensions": "js"
-    },
-    "test:gen": {
-      "patterns": [
-        "publish.js",
-        "tmpl",
-        "static",
-        "fixtures"
-      ],
-      "extensions": [
-        "tmpl",
-        "js",
-        "css",
-        "svg",
-        "json"
-      ],
-      "ignore": [
-        "static/scripts/src",
-        "static/scripts/src/*.js",
-        "static/scripts/fuse-index.json"
-      ]
-    }
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
@@ -67,19 +31,23 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "clean-css": "^5.3.1",
+    "gulp": "^4.0.2",
+    "gulp-if": "^3.0.0",
+    "gulp-rename": "^2.0.0",
     "http-server": "^14.1.1",
     "less": "^4.1.3",
     "puppeteer-core": "^19.4.1",
-    "rollup": "^3.9.0"
+    "rollup": "^3.9.0",
+    "terser": "^5.16.1"
   },
   "dependencies": {
     "@jsdoc/salty": "^0.2.2",
     "@jsdoc/util": "^0.2.7",
-    "code-prettify": "^0.1.0",
-    "color-themes-for-google-code-prettify": "^2.0.4",
     "common-path-prefix": "^3.0.0",
     "feather-icons": "^4.29.0",
     "fuse.js": "^6.6.2",
+    "highlight.js": "^11.7.0",
     "jsdoc": "^3.6.11",
     "lodash": "^4.17.21",
     "open-sans-fonts": "^1.6.2",

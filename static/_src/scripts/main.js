@@ -1,5 +1,6 @@
 import Fuse from 'fuse.js';
 import SimpleBar from 'simplebar';
+import HLJS from 'highlight.js/lib/common';
 
 /*!
  * The main script for docolatte
@@ -23,25 +24,40 @@ import SimpleBar from 'simplebar';
 (() => {
 
 	/**
-	* @param {string} query
-	* @param {int} index
-	* @return {NodeList|Element|null}
-	*/
+	 * @param {string} query
+	 * @param {int} index
+	 * @return {NodeList|Element|null}
+	 */
 	function q(query, index = null) {
 		return find(document, query, index);
 	}
 
 	/**
-	* @param {Element} elem
-	* @param {string} query
-	* @param {int} index
-	* @return {NodeList|Element|null}
-	*/
+	 * @param {Element} elem
+	 * @param {string} query
+	 * @param {int} index
+	 * @return {NodeList|Element|null}
+	 */
 	function find(elem, query, index = null) {
 		let items = elem.querySelectorAll(query);
 		if (index == null) return items;
 		if ((index+1) > items.length) return null;
 		return items[index];
+	}
+
+	/**
+	 * @param {Element} elem
+	 * @param {string[]} queries
+	 * @return {Element}
+	 */
+	function closest(elem, queries) {
+		let r = elem;
+		for (let i = 0; i < queries.length; i++) {
+			let _r = r.closest(queries[i]);
+			if (!_r) return r;
+			r = _r;
+		}
+		return r;
 	}
 
 	/**
@@ -58,8 +74,14 @@ import SimpleBar from 'simplebar';
 		if (child) {
 			if (!Array.isArray(child)) child = [child];
 			for (let item of child) {
-				if (typeof item == 'string') r.innerHTML += item;
-				else r.appendChild(item);
+				switch (typeof item) {
+				case 'string':
+				case 'number':
+					r.innerHTML += item;
+					break;
+				default:
+					r.appendChild(item);
+				}
 			}
 		}
 		return r;
@@ -69,60 +91,97 @@ import SimpleBar from 'simplebar';
 	 * Gets the offset position of an element from the specific ascendent node
 	 * @param {Element} elem Node to get offset
 	 * @param {Element} from Offset parent
-	 * @param {number} depth Recursion limit
+	 * @param {number} recurse Recursion limit
 	 * @return {number} offset.top
 	 * @return {number} offset.left
 	 */
-	function getOffset(elem, from, depth = 8) {
+	function getOffset(elem, from, recurse = 8) {
 		let r = { top: 0, left: 0 };
 		let child = elem;
 		while (true) {
+			if ('offsetTop'  in child) r.top  += child.offsetTop;
+			if ('offsetLeft' in child) r.left += child.offsetLeft;
 			let parent = child.offsetParent;
 			if (!parent) return r;
 			if (parent.isSameNode(from)) break;
-			if (depth < 1) break;
-			depth--;
+			if (recurse < 1) break;
+			recurse--;
 			child = parent;
 		}
-		if ('offsetTop'  in child) r.top  = child.offsetTop;
-		if ('offsetLeft' in child) r.left = child.offsetLeft;
 		return r;
+	}
+
+	/**
+	 * Returns the least amount of camera movement required for showing the given target boundary
+	 * @param {number} viewStart
+	 * @param {number} viewEnd
+	 * @param {number} targetStart
+	 * @param {number} targetEnd
+	 * @param {number} [align] 0: align to start, 1: align to end
+	 * @return {number}
+	 */
+	function pan(viewStart, viewEnd, targetStart, targetEnd, align = 0) {
+		// console.debug('  viewStart:', viewStart);
+		// console.debug('    viewEnd:', viewEnd);
+		// console.debug('targetStart:', targetStart);
+		// console.debug('  targetEnd:', targetEnd);
+		// console.debug('------------');
+		let viewLength = viewEnd - viewStart;
+		let targetLength = targetEnd - targetStart;
+		if (viewLength < targetLength) {
+			switch (align) {
+				case 1: return targetEnd - viewEnd;
+				default: return targetStart - viewStart;
+			}
+		}
+		if (viewStart > targetStart) return targetStart - viewStart;
+		if (viewEnd < targetEnd) return targetEnd - viewEnd;
+		return 0;
 	}
 
 	// DOM setup
 	document.addEventListener('DOMContentLoaded', () => {
+
+		// current page path
 		const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
-		// console.debug('CURRENT PAGE:', currentPage);
 
-		const toc = q('.sidebar .toc', 0); // table of contents
+		// local storage
+		const storage = window.sessionStorage;
 
-		new SimpleBar(toc); // apply simplebar (macOS-like scrollbar)
+		// table of contents
+		const toc = q('.sidebar .toc', 0);
+		const tocScroll = new SimpleBar(toc).getScrollElement();
 
-		const showsSidebar = q('input#docolatte-shows-sidebar', 0); // toggle switch for sidebar
+		// restore TOC scroll position
+		tocScroll.scrollTo({
+			left: parseInt(storage.getItem('scrollX') || 0),
+			top:  parseInt(storage.getItem('scrollY') || 0),
+			behavior: 'instant'
+		});
+		toc.setAttribute('data-ready', 1);
+
+		// save TOC scroll position
+		window.onbeforeunload = function () {
+			storage.setItem('scrollX', tocScroll.scrollLeft);
+			storage.setItem('scrollY', tocScroll.scrollTop);
+		};
 
 		// highlight the anchors pointing at the current page
-		find(toc, `a[href="${currentPage}"]`).forEach(a => {
-			a.classList.add('current');
+		find(toc, `a[href="${currentPage}"]`).forEach(a => { a.setAttribute('data-current', 1) });
 
-			// scroll TOC to the anchor
-			let offset = getOffset(a, toc);
-			toc.scrollTo({
-				left: 0,
-				top: offset.top - 24,
-				behavior: 'auto' // 'smooth'
-			});
-		});
+		// toggle switch for sidebar
+		const sidebarToggle = q('input#docolatte-sidebar-toggle', 0);
 
 		// close sidebar when user clicked one of the menu items
 		find(toc, 'a').forEach(a => {
 			a.addEventListener('click', ev => {
-				showsSidebar.checked = false;
+				sidebarToggle.checked = false;
 			});
 		});
 
 		// close sidebar with Escape key
 		document.addEventListener('keydown', ev => {
-			if (ev.key == 'Escape') showsSidebar.checked = false;
+			if (ev.key == 'Escape') sidebarToggle.checked = false;
 		});
 
 		// initialize search box
@@ -208,7 +267,7 @@ import SimpleBar from 'simplebar';
 
 			// force sidebar to show when searchbox gets focused
 			input.addEventListener('focus', ev => {
-				showsSidebar.checked = true;
+				sidebarToggle.checked = true;
 			});
 
 			// type any "printable" key to start a search
@@ -223,7 +282,7 @@ import SimpleBar from 'simplebar';
 			});
 		})();
 
-		// scroll related features
+		// mark a TOC item as "current" on scroll
 		(() => {
 			let scroll = window.scrollY;
 			let ticking = false;
@@ -237,35 +296,95 @@ import SimpleBar from 'simplebar';
 			});
 
 			let headings = q('article.doc h4.name[id]');
-			let currentH, prevH = null;
-			let currentA = [], prevA = null;
+			let curr = { i: -1, a: null, wrap: null };
+
 			function update() {
-				// console.debug('SCROLL:', scroll);
+				for (let i = 0; i < headings.length; i++) {
+					if (headings[i].offsetTop < scroll) continue;
+					if (i == curr.i) break;
+					let flag = 'data-current';
+					if (curr.i >= 0 && curr.a.length) curr.a.forEach(a => { a.removeAttribute(flag) });
+					curr.i = i;
 
-				// process headings from bottom to top
-				// (assuming the list is ordered by 'offsetTop')
-				for (let i = headings.length - 1; i >= 0; i--) {
-					let item = headings.item(i);
-					if ((item.offsetTop - 12) > scroll) continue;
-					if (i === currentH) break;
+					curr.a = find(toc, `a[href="${currentPage}#${headings[i].id}"]`);
+					if (!curr.a.length) break;
+					curr.a.forEach(a => { a.setAttribute(flag, 1) });
 
-					prevH = currentH;
-					currentH = i;
-					// console.debug('CURRENT H:', currentH, item);
-
-					// highlight all the '#' anchors pointing at the current header
-					prevA = currentA;
-					currentA = find(toc, `a[href="${currentPage + '#' + item.id}"]`);
-					// console.debug('CURRENT A:', currentA);
-					prevA.forEach(a => { a.classList.remove('current') });
-					currentA.forEach(a => { a.classList.add('current') });
+					// scroll TOC if necessary
+					let a = curr.a[curr.a.length - 1];
+					if (!curr.wrap) curr.wrap = closest(a, ['ul', 'li']);
+					let view = tocScroll;
+					let panning = pan(
+						view.scrollTop,
+						view.scrollTop + view.offsetHeight,
+						getOffset(curr.wrap, toc).top,
+						getOffset(a, toc).top + a.getBoundingClientRect().height,
+						1
+					);
+					if (panning || view.scrollLeft) {
+						view.scrollBy({
+							left: -view.scrollLeft,
+							top: panning,
+							behavior: 'smooth'
+						});
+					}
 					break;
 				}
-
 				ticking = false;
 			}
 
 			update();
+		})();
+
+		// code highlight
+		(() => {
+			const linenums = [];
+
+			function linenumify(pre) {
+				let code = find(pre, 'code', 0);
+				let lines = (code.innerHTML.trimEnd().match(/\n/g) || '').length + 1;
+				let digits = lines.toString().length;
+				let charWidth = find(pre, '._char', 0).getBoundingClientRect().width;
+				let width = charWidth * (digits + 2); // px
+				code.style.paddingLeft = width + charWidth + 'px';
+
+				let r = elem('div', { class: 'linenums' });
+				for (let i = 1; i <= lines; i++) {
+					let id = 'line' + i;
+
+					let btn = elem('a', { href: '#' + id }, i);
+					btn.style.paddingRight = charWidth - 1 + 'px';
+					btn.addEventListener('click', onClick);
+
+					let linenum = elem('div', { id, class: 'linenum hljs' }, btn);
+					linenum.style.width = width + 'px';
+					linenums.push(linenum);
+					r.appendChild(linenum);
+				}
+				pre.appendChild(r);
+			}
+
+			function onClick(ev) {
+				ev.preventDefault();
+				document.location = this.href;
+				selectLine();
+			}
+
+			function selectLine() {
+				let hash = document.location.hash;
+				if (!hash) return;
+				console.log('hash:', hash);
+				for (let i = 0; i < linenums.length; i++) {
+					let linenum = linenums[i];
+					if (linenum.id == hash.substring(1)) linenum.setAttribute('data-selected', 1);
+					else linenum.removeAttribute('data-selected');
+				}
+			}
+
+			q('.prettyprint code').forEach(HLJS.highlightElement);
+			q('.prettyprint.linenums').forEach(linenumify);
+
+			selectLine();
 		})();
 
 	}); // DOM setup

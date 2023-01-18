@@ -14,16 +14,23 @@
     <?js } if (this.theme.meta.author) { ?>
     <meta name="author" content="<?js= this.theme.meta.author ?>">
     <?js } ?>
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <script src="scripts/main.js"></script>
+    <?js var min = this.theme.minify ? '.min' : '' ?>
+    <script src="scripts/main<?js= min ?>.js"></script>
     <?js if (this.theme.meta.favicon) { for (let favicon of this.theme.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
-    <link type="text/css" rel="stylesheet" href="modules/color-themes-for-google-code-prettify/dist/themes/<?js= this.theme.code.theme ?>.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-    <link type="text/css" rel="stylesheet" href="styles/theme.css">
-    <link type="text/css" rel="stylesheet" href="styles/simplebar.min.css">
+    <?js if (this.theme.code.theme) { ?>
+    <link type="text/css" rel="stylesheet" href="styles/hljs/<?js= this.theme.code.theme ?>.css">
+    <?js } ?>
+    <link type="text/css" rel="stylesheet" href="styles/theme<?js= min ?>.css">
+    <link type="text/css" rel="stylesheet" href="styles/simplebar<?js= min ?>.css">
+    <noscript>
+        <style>
+            [data-ready] {
+                visibility: visible !important;
+            }
+        </style>
+    </noscript>
     <?js if (this.theme.style) { ?>
     <style><?js= this.theme.style ?></style>
     <?js } ?>
@@ -35,7 +42,7 @@
         <div class="branding">
             <?js if (this.theme.branding.link) { ?>
             <a class="link" href="<?js= this.theme.branding.link ?>">
-                <svg class="icon feather"><use xlink:href="modules/feather-icons/dist/feather-sprite.svg#<?js= this.theme.branding.icon || 'home' ?>"/></svg>
+                <svg class="icon feather"><use xlink:href="assets/feather-sprite.svg#<?js= this.theme.branding.icon || 'home' ?>"/></svg>
             </a>
             <?js } ?>
             <a class="title" href="index.html"><?js= this.theme.branding.title ?></a>
@@ -68,9 +75,9 @@
         <?js } ?>
     </main>
 
-    <input id="docolatte-shows-sidebar" type="checkbox">
-    <label class="overlay" for="docolatte-shows-sidebar"></label>
-    <label class="menu-button" for="docolatte-shows-sidebar">
+    <input id="docolatte-sidebar-toggle" type="checkbox">
+    <label class="overlay" for="docolatte-sidebar-toggle"></label>
+    <label class="menu-button" for="docolatte-sidebar-toggle">
         <div class="shape">
             <i class="icon burger">
                 <span class="top"></span>
@@ -81,14 +88,11 @@
     </label>
 
     <div class="sidebar">
-        <div class="toc">
+        <div class="toc" data-ready="0">
             <?js= this.nav ?>
         </div>
     </div>
 </div>
-
-<script>prettyPrint()</script>
-<script src="scripts/linenumber.js"></script>
 
 <!-- %DOCOLATTE::DATA_GOES_HERE% -->
 <script>

@@ -72,6 +72,7 @@ class SearchDB {
 
 /**
  * Merges 2 objects recursively
+ * @return {object}
  * @author amekusa
  */
 function merge(x, y) {
@@ -93,6 +94,7 @@ function merge(x, y) {
 /**
  * Formats an array to a <UL> list.
  * If the array has only 1 item, omits <UL> and <LI> tags
+ * @return {string}
  * @author amekusa
  */
 function list(items, forEach = null) {
@@ -104,6 +106,34 @@ function list(items, forEach = null) {
         r += '<li>' + forEach(item) + '</li>';
     });
     return `<ul>${r}</ul>`;
+}
+
+/**
+ * Returns the language of the given file
+ * @return {string}
+ * @author amekusa
+ */
+function lang(file) {
+    let ext = path.extname(file);
+    return ext.length > 1 ? ext.substring(1) : '';
+}
+
+/**
+ * Append the 1st string to the 2nd string
+ * @return {string}
+ * @author amekusa
+ */
+function append(str, to = ' ') {
+    return str ? (to + str) : '';
+}
+
+/**
+ * Prepend the 1st string to the 2nd string
+ * @return {string}
+ * @author amekusa
+ */
+function prepend(str, to = ' ') {
+    return str ? (str + to) : '';
 }
 
 function find(spec) {
@@ -340,6 +370,7 @@ function generateSourceFiles(sourceFiles, encoding = 'utf8') {
         try {
             source = {
                 kind: 'source',
+                lang: lang(file),
                 code: helper.htmlsafe( fs.readFileSync(sourceFiles[file].resolved, encoding) )
             };
         }
@@ -528,6 +559,7 @@ exports.publish = (taffyData, opts, tutorials) => {
 
     // theme configs
     var x = merge({
+        minify: true,
         meta: {
             lang: 'en',
             title: null,
@@ -550,10 +582,12 @@ exports.publish = (taffyData, opts, tutorials) => {
             hideCredits: false
         },
         code: {
-            theme: 'tomorrow-night-eighties'
+            theme: 'base16/espresso'
+            // theme: 'atom-one-dark'
         }
 
     }, conf.docolatte || {});
+
     if (!x.meta.title) x.meta.title = x.branding.title;
     if (typeof x.meta.favicon == 'string') x.meta.favicon = [x.meta.favicon];
 
@@ -603,16 +637,21 @@ exports.publish = (taffyData, opts, tutorials) => {
         doclet.attribs = '';
 
         if (doclet.examples) {
+            let language = '';
+            if (doclet.meta && doclet.meta.filename) language = lang(doclet.meta.filename);
+
             doclet.examples = doclet.examples.map(example => {
                 let caption;
                 let code;
 
-                if (example.match(/^\s*<caption>([\s\S]+?)<\/caption>(\s*[\n\r])([\s\S]+)$/i)) {
-                    caption = RegExp.$1;
-                    code = RegExp.$3;
+                let found = example.match(/^\s*<caption>([\s\S]+?)<\/caption>(\s*[\n\r])([\s\S]+)$/i);
+                if (found) {
+                    caption = found[1];
+                    code = found[3];
                 }
 
                 return {
+                    lang: language,
                     caption: caption || '',
                     code: code || example
                 };
@@ -644,16 +683,23 @@ exports.publish = (taffyData, opts, tutorials) => {
     }
     fs.mkPath(outdir);
 
-    // copy the node modules
-    [
-        `feather-icons/dist/feather-sprite.svg`,
-        `color-themes-for-google-code-prettify/dist/themes/${conf.docolatte.code.theme}.min.css`
-
-    ].forEach(file => {
-        let dest = path.dirname(path.join(outdir, 'modules', file));
-        let src = require.resolve(file);
-        fs.mkPath(dest);
-        fs.copyFileSync(src, dest);
+    // copy files from node_modules
+    let min = conf.docolatte.minify ? '.min' : '';
+    let moduleFiles = [
+        { dst: 'assets', src: 'feather-icons/dist/feather-sprite.svg' },
+        { dst: 'styles', src: `simplebar/dist/simplebar${min}.css` }
+    ];
+    if (conf.docolatte.code.theme) {
+        moduleFiles.push({
+            dst: path.join('styles/hljs', path.dirname(conf.docolatte.code.theme)),
+            src: `highlight.js/styles/${conf.docolatte.code.theme}.css`
+        });
+    }
+    moduleFiles.forEach(file => {
+        let dst = path.join(outdir, file.dst);
+        let src = require.resolve(file.src);
+        fs.mkPath(dst);
+        fs.copyFileSync(src, dst);
     });
 
     // copy the template's static files to outdir
@@ -759,6 +805,8 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
     view.list = list;
+    view.append = append;
+    view.prepend = prepend;
     view.theme = conf.docolatte;
 
     // DB for search

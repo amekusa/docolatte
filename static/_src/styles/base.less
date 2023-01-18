@@ -1,10 +1,11 @@
 :root, body {
 	.h(100%);
-	scroll-behavior: smooth;
+	// scroll-behavior: smooth;
 }
 
 :root {
 	.fs(@fs-base);
+	scroll-padding-top: @topbar-h;
 }
 
 body {
@@ -12,6 +13,16 @@ body {
 	.fs(@fs-m; @lh-base);
 	font-family: @ff-body;
 	color: @c-black;
+}
+
+* {
+	outline-style: none;
+}
+
+input, button {
+	&:focus {
+		outline-style: auto;
+	}
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -120,4 +131,8 @@ td, th {
 
 figure {
 	.m(0); // cancel the browser style
+}
+
+*[data-ready="0"] {
+	visibility: hidden;
 }

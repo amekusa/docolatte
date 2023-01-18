@@ -1,6 +1,7 @@
 <?js
     var data = obj;
+    var self = this;
 ?>
 <article class="src">
-    <pre class="prettyprint source linenums"><code><?js= data.code ?></code></pre>
+    <pre class="prettyprint source linenums<?js= self.append(data.lang, ' lang-') ?>"><span class="_char">_</span><code><?js= data.code ?></code></pre>
 </article>

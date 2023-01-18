@@ -62,10 +62,10 @@
 :root,
 body {
   height: 100%;
-  scroll-behavior: smooth;
 }
 :root {
   font-size: 18px;
+  scroll-padding-top: 3rem;
 }
 body {
   margin: 0;
@@ -75,6 +75,13 @@ body {
   line-height: 1.5;
   font-family: "Open Sans", HelveticaNeue, Helvetica, sans-serif;
   color: #4d4e53;
+}
+* {
+  outline-style: none;
+}
+input:focus,
+button:focus {
+  outline-style: auto;
 }
 h1,
 h2,
@@ -182,6 +189,9 @@ th:first-child {
 figure {
   margin: 0;
 }
+*[data-ready="0"] {
+  visibility: hidden;
+}
 .table-wrap {
   position: relative;
   max-height: 24em;
@@ -263,19 +273,18 @@ pre.prettyprint .linenums .linenum:last-child {
 }
 pre.prettyprint .linenums .linenum a {
   display: block;
+  border-right: solid 1px;
   text-align: right;
   text-decoration: none;
-  opacity: 0.3;
-}
-pre.prettyprint .linenums .linenum a,
-pre.prettyprint .linenums .linenum a:visited,
-pre.prettyprint .linenums .linenum a:active,
-pre.prettyprint .linenums .linenum a:hover {
   color: inherit;
+  opacity: 0.35;
+}
+pre.prettyprint .linenums .linenum a:hover,
+pre.prettyprint .linenums .linenum a:focus {
+  opacity: 0.75;
 }
 pre.prettyprint .linenums .linenum[data-selected] a {
   opacity: 1;
-  border-right: solid 1px;
 }
 .icon {
   position: relative;
@@ -623,20 +632,12 @@ main h2.name .attribs a {
   color: rgba(94, 95, 145, 0.5);
 }
 main h4.name {
-  margin-top: 0rem;
-  padding-top: 4.5rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(94, 95, 145, 0.5);
   font-weight: normal;
   font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   color: hotpink;
-}
-main h4.name::before {
-  content: "";
-  display: block;
-  position: relative;
-  top: -1.5rem;
-  box-sizing: border-box;
-  height: 1px;
-  border-top: 1px dashed rgba(94, 95, 145, 0.5);
 }
 main h4.name .attributes {
   vertical-align: 0.1em;
@@ -683,13 +684,8 @@ main h4.name .type-signature .type .sep {
 }
 main h4.name:first-of-type,
 main .subsection-title + h4.name {
-  margin-top: -3rem;
-  padding-top: 4.5rem;
-}
-main h4.name:first-of-type::before,
-main .subsection-title + h4.name::before {
-  content: none;
-  display: none;
+  margin-top: 0;
+  border-top: none;
 }
 main .subsection-title {
   margin-top: 4.5rem;
@@ -774,7 +770,7 @@ main .props .name {
   padding: 1.5rem;
   overflow: auto;
 }
-.sidebar .toc a.current {
+.sidebar .toc a[data-current] {
   opacity: 1;
 }
 .sidebar .toc h2,
@@ -810,12 +806,12 @@ main .props .name {
   position: relative;
   transition: padding-left 0.25s ease-out;
 }
-.sidebar .toc nav ul ul a.current {
+.sidebar .toc nav ul ul a[data-current] {
   font-weight: bold;
   padding-left: 0.25em;
   opacity: 1;
 }
-.sidebar .toc nav ul ul a.current::before {
+.sidebar .toc nav ul ul a[data-current]::before {
   content: "";
   position: absolute;
   top: 0.38em;
@@ -943,7 +939,7 @@ main .props .name {
 .sidebar .search-box .hint strong {
   color: hotpink;
 }
-input#docolatte-shows-sidebar,
+input#docolatte-sidebar-toggle,
 .menu-button {
   display: none;
 }
@@ -1084,28 +1080,28 @@ input#docolatte-shows-sidebar,
   .sidebar .toc > nav > ul > li + li {
     margin-top: 0.25em;
   }
-  input#docolatte-shows-sidebar:checked ~ .sidebar {
+  input#docolatte-sidebar-toggle:checked ~ .sidebar {
     left: 0;
     box-shadow: 0.5rem 0 0.5rem rgba(0, 0, 0, 0.25);
   }
-  input#docolatte-shows-sidebar:checked ~ .overlay {
+  input#docolatte-sidebar-toggle:checked ~ .overlay {
     z-index: 21;
   }
-  input#docolatte-shows-sidebar:checked ~ .overlay::before {
+  input#docolatte-sidebar-toggle:checked ~ .overlay::before {
     opacity: 0.618;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape {
     background-color: white;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon {
     opacity: 0.75;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger {
     animation-iteration-count: 1;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .top,
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .middle,
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .bottom {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .top,
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .middle,
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .bottom {
     transform: none;
     transform-box: fill-box;
     transform-origin: center;
@@ -1114,13 +1110,13 @@ input#docolatte-shows-sidebar,
     animation-iteration-count: inherit;
     animation-fill-mode: forwards;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .top {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .top {
     animation-name: burger-top;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .middle {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .middle {
     animation-name: burger-middle;
   }
-  input#docolatte-shows-sidebar:checked ~ .menu-button > .shape .icon.burger .bottom {
+  input#docolatte-sidebar-toggle:checked ~ .menu-button > .shape .icon.burger .bottom {
     animation-name: burger-bottom;
   }
   .menu-button {

@@ -4,6 +4,13 @@
 
 ## Notes for users
 
+### v3.0
+- Changed the code highlighter from Google Code Prettify to [highlight.js](https://highlightjs.org/).  
+  You may need to change the `code.theme` option value to adapt for this change
+- New option: `minify`
+- Fixed the bugs around Simplebar
+- Improved sidebar's scroll behavior
+
 ### v2.11
 - Made the scrollbar in the sidebar looks nicer ([Simplebar](https://github.com/Grsmto/simplebar))
 - Fixed some build errors
@@ -99,31 +106,32 @@ Docolatte supports some configuration options to customize the HTML output.
 ```
 
 - `docolatte`
+  - **`minify`** …… Whether to use minified JS and CSS
   - `branding`
-    - **`title`** &mdash; Title of the entire site. Used in the top left header
-    - **`link`** &mdash; Link URL in the header
-    - **`icon`** &mdash; Icon for the link in the header (default: `"home"`). See: [feathericons.com](https://feathericons.com/)
+    - **`title`** …… Title of the entire site. Used in the top left header
+    - **`link`** …… Link URL in the header
+    - **`icon`** …… Icon for the link in the header (default: `"home"`). See: [feathericons.com](https://feathericons.com/)
     - `font`
-      - **`size`** &mdash; Font size of the title
-      - **`family`** &mdash; Font family of the title
+      - **`size`** …… Font size of the title
+      - **`family`** …… Font family of the title
   - `code`
-    - **`theme`** &mdash; Theme for code blocks (default: `"tomorrow-night-eighties"`). See: [themes](https://github.com/jmblog/color-themes-for-google-code-prettify)
+    - **`theme`** …… Theme for code blocks (default: `"base16/espresso"`). See: [themes](https://highlightjs.org/static/demo/)
   - `meta`
-    - **`lang`** &mdash; `lang` attribute of `<html>` (default: `"en"`)
-    - **`title`** &mdash; Content of `<title>` element (defaults to `branding.title`)
-    - **`description`** &mdash; `content` attribute of `<meta name="description">`
-    - **`keywords`** &mdash; `content` attribute of `<meta name="keywords">`
-    - **`author`** &mdash; `content` attribute of `<meta name="author">`
-    - **`favicon`** &mdash; Favicon image URL. Use array for multiple files
+    - **`lang`** …… `lang` attribute of `<html>` (default: `"en"`)
+    - **`title`** …… Content of `<title>` element (defaults to `branding.title`)
+    - **`description`** …… `content` attribute of `<meta name="description">`
+    - **`keywords`** …… `content` attribute of `<meta name="keywords">`
+    - **`author`** …… `content` attribute of `<meta name="author">`
+    - **`favicon`** …… Favicon image URL. Use array for multiple files
   - `footer`
-    - **`copyright`** &mdash; Copyright text. Used in the footer
-    - **`hide`** &mdash; Whether to hide the entire footer ( `true` | `false` )
-- **`default`** &mdash; All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
+    - **`copyright`** …… Copyright text. Used in the footer
+    - **`hide`** …… Whether to hide the entire footer ( `true` | `false` )
+- **`default`** …… All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
 
 More options are planned to be implemented in the future.
 
 ## Thanks
-[Docdash](https://github.com/clenemt/docdash) &mdash; Lodash inspired JSDoc 3 template/theme
+[Docdash](https://github.com/clenemt/docdash) …… Lodash inspired JSDoc 3 template/theme
 
 ## License
 **docolatte** is licensed under the [Apache License 2.0](https://github.com/amekusa/docolatte/blob/trunk/LICENSE).

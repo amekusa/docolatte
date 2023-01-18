@@ -50,7 +50,6 @@
     "highlight.js": "^11.7.0",
     "jsdoc": "^3.6.11",
     "lodash": "^4.17.21",
-    "open-sans-fonts": "^1.6.2",
     "simplebar": "^5.3.9"
   }
 }

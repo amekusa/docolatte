@@ -17,48 +17,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: normal;
-  font-style: normal;
-  src: url('../fonts/OpenSans-Regular-webfont.eot');
-  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Regular-webfont.woff') format('woff'), url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: normal;
-  font-style: italic;
-  src: url('../fonts/OpenSans-Italic-webfont.eot');
-  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Italic-webfont.woff') format('woff'), url('../fonts/OpenSans-Italic-webfont.svg#open_sansregular') format('svg');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: bold;
-  font-style: normal;
-  src: url('../fonts/OpenSans-Bold-webfont.eot');
-  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Bold-webfont.woff') format('woff'), url('../fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: bold;
-  font-style: italic;
-  src: url('../fonts/OpenSans-BoldItalic-webfont.eot');
-  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-BoldItalic-webfont.woff') format('woff'), url('../fonts/OpenSans-BoldItalic-webfont.svg#open_sansregular') format('svg');
-}
-@font-face {
-  font-family: 'Open Sans Light';
-  font-weight: normal;
-  font-style: normal;
-  src: url('../fonts/OpenSans-Light-webfont.eot');
-  src: local('Open Sans Light'), local('OpenSans Light'), url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Light-webfont.woff') format('woff'), url('../fonts/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
-}
-@font-face {
-  font-family: 'Open Sans Light';
-  font-weight: normal;
-  font-style: italic;
-  src: url('../fonts/OpenSans-LightItalic-webfont.eot');
-  src: local('Open Sans Light'), local('OpenSans Light'), url('../fonts/OpenSans-LightItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-LightItalic-webfont.woff') format('woff'), url('../fonts/OpenSans-LightItalic-webfont.svg#open_sanslight') format('svg');
-}
 :root,
 body {
   height: 100%;
@@ -73,7 +31,7 @@ body {
   border: 0;
   font-size: 1rem;
   line-height: 1.5;
-  font-family: "Open Sans", HelveticaNeue, Helvetica, sans-serif;
+  font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
   color: #4d4e53;
 }
 * {
@@ -140,7 +98,7 @@ code,
 kbd,
 samp {
   font-size: 0.85rem;
-  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
 }
 pre {
   -moz-tab-size: 4;
@@ -241,7 +199,7 @@ pre.prettyprint {
   position: relative;
   font-size: 0.85rem;
   line-height: 1.5;
-  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   width: auto;
   overflow: auto;
   border-radius: 0.5rem;
@@ -254,7 +212,10 @@ pre.prettyprint ._char {
 }
 pre.prettyprint code {
   display: block;
-  padding: 0.5em 1em;
+  padding-top: 0.5em !important;
+  padding-bottom: 0.5em !important;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 pre.prettyprint .linenums {
   position: absolute;
@@ -591,8 +552,11 @@ main > article.readme h3 {
 }
 main > article.readme h2 {
   margin-top: 4.5rem;
-  border-left: 0.5em solid;
+  border-left: 0.35em solid;
+  padding-top: 0.1em;
   padding-left: 0.75em;
+  line-height: 1;
+  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -613,8 +577,11 @@ main > article.src > .prettyprint {
 }
 main .container-overview h2 {
   margin-top: 4.5rem;
-  border-left: 0.5em solid;
+  border-left: 0.35em solid;
+  padding-top: 0.1em;
   padding-left: 0.75em;
+  line-height: 1;
+  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -636,7 +603,7 @@ main h4.name {
   padding-top: 1.5rem;
   border-top: 1px dashed rgba(94, 95, 145, 0.5);
   font-weight: normal;
-  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   color: hotpink;
 }
 main h4.name .attributes {
@@ -689,15 +656,18 @@ main .subsection-title + h4.name {
 }
 main .subsection-title {
   margin-top: 4.5rem;
-  border-left: 0.5em solid;
+  border-left: 0.35em solid;
+  padding-top: 0.1em;
   padding-left: 0.75em;
+  line-height: 1;
+  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
 main table.params td.type,
 main table.props td.type {
-  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   font-size: 0.85rem;
 }
 main .params,
@@ -706,7 +676,7 @@ main .props {
 }
 main .params .name,
 main .props .name {
-  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
 }
 .colophon {
   font-size: 1rem;
@@ -776,13 +746,18 @@ main .props .name {
 .sidebar .toc h2,
 .sidebar .toc h3 {
   font-size: 1em;
+  border-left: 0.35em solid;
+  padding-top: 0.1em;
+  padding-left: 0.75em;
+  line-height: 1;
+  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
-.sidebar .toc h3 {
-  padding-left: 0.75em;
-  border-left: 0.5em solid;
-  font-weight: normal;
+.sidebar .toc h2 {
+  padding: 0;
+  border: none;
 }
 .sidebar .toc nav ul {
   padding-left: 0;
@@ -799,7 +774,7 @@ main .props .name {
   margin-top: 0.35em;
   margin-bottom: 0.75em;
   padding-left: 1.5em;
-  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   font-weight: normal;
 }
 .sidebar .toc nav ul ul a {
@@ -872,7 +847,7 @@ main .props .name {
   visibility: visible;
 }
 .sidebar .search-box ol.suggestions li {
-  font-family: SFMono-Regular, Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   font-size: 0.85em;
 }
 .sidebar .search-box ol.suggestions li.selected > a {

@@ -88,7 +88,7 @@ var self = this;
 <?js }) } ?>
 
 <?js if (data.returns) { self.iterate(returns, (item, i, n) => { ?>
-<h5><?js= n ? `${i + 1}) ` : '') ?>Returns:</h5>
+<h5><?js= n ? `${i + 1}) ` : '' ?>Returns:</h5>
 <?js= self.partial('returns.tmpl', item) ?>
 <?js }) } ?>
 

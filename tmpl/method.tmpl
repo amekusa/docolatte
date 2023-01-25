@@ -77,53 +77,25 @@ var self = this;
 <?js }); ?></ul>
 <?js } ?>
 
-<?js if (data.modifies && modifies.length) {?>
-<h5>Modifies:</h5>
-<?js if (modifies.length > 1) { ?><ul><?js
-    modifies.forEach(function(m) { ?>
-        <li><?js= self.partial('modifies.tmpl', m) ?></li>
-    <?js });
-?></ul><?js } else {
-    modifies.forEach(function(m) { ?>
-        <?js= self.partial('modifies.tmpl', m) ?>
-    <?js });
-} } ?>
+<?js if (data.modifies) { self.iterate(modifies, (item, i, n) => { ?>
+<h5><?js= self._if(n, `${i + 1}) `) ?>Modifies:</h5>
+<?js= self.partial('modifies.tmpl', item) ?>
+<?js }) } ?>
 
-<?js if (data.exceptions && exceptions.length) { ?>
-<h5>Throws:</h5>
-<?js if (exceptions.length > 1) { ?><ul><?js
-    exceptions.forEach(function(r) { ?>
-        <li><?js= self.partial('exceptions.tmpl', r) ?></li>
-    <?js });
-?></ul><?js } else {
-    exceptions.forEach(function(r) { ?>
-        <?js= self.partial('exceptions.tmpl', r) ?>
-    <?js });
-} } ?>
+<?js if (data.exceptions) { self.iterate(exceptions, (item, i, n) => { ?>
+<h5><?js= self._if(n, `${i + 1}) `) ?>Throws:</h5>
+<?js= self.partial('exceptions.tmpl', item) ?>
+<?js }) } ?>
 
-<?js if (data.returns && returns.length) { ?>
-<h5>Returns:</h5>
-<?js if (returns.length > 1) { ?><ul><?js
-    returns.forEach(function(r) { ?>
-        <li><?js= self.partial('returns.tmpl', r) ?></li>
-    <?js });
-?></ul><?js } else {
-    returns.forEach(function(r) { ?>
-        <?js= self.partial('returns.tmpl', r) ?>
-    <?js });
-} } ?>
+<?js if (data.returns) { self.iterate(returns, (item, i, n) => { ?>
+<h5><?js= self._if(n, `${i + 1}) `) ?>Returns:</h5>
+<?js= self.partial('returns.tmpl', item) ?>
+<?js }) } ?>
 
-<?js if (data.yields && yields.length) { ?>
-<h5>Yields:</h5>
-<?js if (yields.length > 1) { ?><ul><?js
-    yields.forEach(function(r) { ?>
-        <li><?js= self.partial('returns.tmpl', r) ?></li>
-    <?js });
-?></ul><?js } else {
-    yields.forEach(function(r) { ?>
-        <?js= self.partial('returns.tmpl', r) ?>
-    <?js });
-} } ?>
+<?js if (data.yields) { self.iterate(yields, (item, i, n) => { ?>
+<h5><?js= self._if(n, `${i + 1}) `) ?>Yields:</h5>
+<?js= self.partial('returns.tmpl', item) ?>
+<?js }) } ?>
 
 <?js if (data.examples && examples.length) { ?>
     <h5>Example<?js= examples.length > 1? 's':'' ?></h5>

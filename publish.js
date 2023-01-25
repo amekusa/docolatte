@@ -601,7 +601,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         },
         footer: {
             hide: false,
-            hideCredits: false
+            hideGenerator: false
         },
         code: {
             theme: 'base16/espresso'

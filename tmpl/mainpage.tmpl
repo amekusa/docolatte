@@ -9,6 +9,6 @@ var self = this;
 
 <?js if (data.readme) { ?>
     <article class="readme">
-        <?js= data.readme ?>
+        <?js= self.theme.readme.truncate ? this.truncate(data.readme) : data.readme ?>
     </article>
 <?js } ?>

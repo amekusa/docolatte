@@ -136,6 +136,16 @@ function prepend(str, to = ' ') {
     return str ? (str + to) : '';
 }
 
+/**
+ * Truncates the parts between `<!--TRUNCATE:START-->` and `<!--TRUNCATE:END-->` in the given string
+ * @param {string} str
+ * @return {string}
+ * @author amekusa
+ */
+function truncate(str) {
+    return str.replaceAll(/<!--+\s*TRUNCATE:START\s*--+>.*?<!--+\s*TRUNCATE:END\s*--+>/gs, '<!-- TRUNCATED -->');
+}
+
 function find(spec) {
     return helper.find(data, spec);
 }
@@ -577,6 +587,9 @@ exports.publish = (taffyData, opts, tutorials) => {
                 family: null
             }
         },
+        readme: {
+            truncate: true
+        },
         footer: {
             hide: false,
             hideCredits: false
@@ -807,6 +820,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.list = list;
     view.append = append;
     view.prepend = prepend;
+    view.truncate = truncate;
     view.theme = conf.docolatte;
 
     // DB for search

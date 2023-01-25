@@ -114,6 +114,7 @@ const t = { // minor tasks
 			paths.scripts + '/*.js',
 			paths.styles + '/*.css',
 			paths.tmpl + '/*.tmpl',
+			base + '/README.md',
 			base + '/publish.js'
 		];
 		return g.watch(watch, t.test_gen);

@@ -5,7 +5,7 @@
 ## Notes for users
 
 ### v3.2
-- New option: `truncate`
+- New option: `readme.truncate`
 
 ### v3.0
 - Migrated the code highlighter from Google Code Prettify to [highlight.js](https://highlightjs.org/).  

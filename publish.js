@@ -119,7 +119,7 @@ function lang(file) {
 }
 
 /**
- * Append the 1st string to the 2nd string
+ * Appends the 1st string to the 2nd string
  * @return {string}
  * @author amekusa
  */
@@ -128,7 +128,7 @@ function append(str, to = ' ') {
 }
 
 /**
- * Prepend the 1st string to the 2nd string
+ * Prepends the 1st string to the 2nd string
  * @return {string}
  * @author amekusa
  */
@@ -144,6 +144,15 @@ function prepend(str, to = ' ') {
  */
 function truncate(str) {
     return str.replaceAll(/<!--+\s*TRUNCATE:START\s*--+>.*?<!--+\s*TRUNCATE:END\s*--+>/gs, '<!-- TRUNCATED -->');
+}
+
+/**
+ * Iterates over the given array
+ * @param {any[]} arr
+ * @param {function} fn
+ */
+function iterate(arr, fn) {
+    for (let i = 0; i < arr.length; i++) fn(arr[i], i, arr.length - 1);
 }
 
 function find(spec) {
@@ -821,6 +830,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.append = append;
     view.prepend = prepend;
     view.truncate = truncate;
+    view.iterate = iterate;
     view.theme = conf.docolatte;
 
     // DB for search

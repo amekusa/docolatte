@@ -120,19 +120,23 @@ main {
 	.bb(@gutter solid @c-latte);
 	.stripe(-60deg; @c-latte; white; 1px; 4px);
 	background-attachment: fixed;
-	font-style: italic;
+	color: @c-choco;
 
-	.copyright,
-	.credits {
+	p {
 		.m(0);
-		// text-align: right;
-		color: @c-choco;
+	}
+	.copyright,
+	.license {
+		.lh(1.25);
 	}
 	.copyright {
-		font-weight: bold;
+		.bold;
 	}
-	.credits {
-		.fs(@fs-s);
+	.generator {
+		.fs(@fs-xs);
+	}
+	.license + .generator {
+		.mt((@gutter * .5));
 	}
 }
 
@@ -335,7 +339,7 @@ input#docolatte-sidebar-toggle,
 	display: none;
 }
 .menu-button {
-	@size: 4rem;
+	@size: @menu-btn-size;
 	.square(@size);
 	cursor: pointer;
 

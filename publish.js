@@ -601,11 +601,12 @@ exports.publish = (taffyData, opts, tutorials) => {
         },
         footer: {
             hide: false,
+            copyright: null,
+            license: null,
             hideGenerator: false
         },
         code: {
             theme: 'base16/espresso'
-            // theme: 'atom-one-dark'
         }
 
     }, conf.docolatte || {});

@@ -370,7 +370,6 @@ import HLJS from 'highlight.js/lib/common';
 			const selectLine = () => {
 				let hash = document.location.hash;
 				if (!hash) return;
-				console.log('hash:', hash);
 				for (let i = 0; i < linenums.length; i++) {
 					let linenum = linenums[i];
 					if (linenum.id == hash.substring(1)) linenum.setAttribute('data-selected', 1);

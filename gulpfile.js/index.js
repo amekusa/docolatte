@@ -18,6 +18,7 @@ const commonjs = require('@rollup/plugin-commonjs');
 const u = require('./util');
 
 const base = dirname(__dirname);
+const pkg = require(base + '/package.json');
 const paths = {
 	src: {
 		scripts: base + '/static/_src/scripts',
@@ -26,13 +27,9 @@ const paths = {
 	},
 	scripts: base + '/static/scripts',
 	styles:  base + '/static/styles',
-	tmpl: base + '/tmpl',
-	test: base + '/fixtures-doc',
-	manifest: base + '/package.json'
+	test: base + `/fixtures-doc/${pkg.name}`,
+	tmpl: base + '/tmpl'
 };
-
-const pkg = require(paths.manifest);
-paths.test += '/' + pkg.name;
 
 const t = { // minor tasks
 	async js_main() {
@@ -114,11 +111,11 @@ const t = { // minor tasks
 
 	test_gen_watch() {
 		let watch = [
-			paths.manifest,
 			paths.src.test + '/**/*',
 			paths.scripts + '/*.js',
 			paths.styles + '/*.css',
 			paths.tmpl + '/*.tmpl',
+			base + '/package.json',
 			base + '/README.md',
 			base + '/publish.js'
 		];

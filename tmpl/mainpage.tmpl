@@ -4,11 +4,16 @@ var self = this;
 ?>
 
 <?js if (data.kind === 'package' && !this.theme.home.package.hide) { ?>
-    <h3><?js= data.name ?> <?js= data.version ?></h3>
+    <article class="package">
+        <h3 class="head">
+            <span class="package-name"><?js= data.name ?></span>
+            <span class="package-version"><?js= data.version ?></span>
+        </h3>
+    </article>
 <?js } ?>
 
 <?js if (data.readme) { ?>
     <article class="readme">
-        <?js= self.theme.readme.truncate ? this.truncate(data.readme) : data.readme ?>
+        <?js= this.theme.readme.truncate ? this.truncate(data.readme) : data.readme ?>
     </article>
 <?js } ?>

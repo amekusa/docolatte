@@ -116,6 +116,7 @@ const t = { // minor tasks
 			paths.styles + '/*.css',
 			paths.tmpl + '/*.tmpl',
 			base + '/package.json',
+			base + '/fixtures.json',
 			base + '/README.md',
 			base + '/publish.js'
 		];

@@ -1,0 +1,44 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": [
+      "./fixtures",
+      "./README.md",
+      "./package.json"
+    ]
+  },
+  "plugins": ["plugins/markdown"],
+  "opts": {
+    "encoding": "utf8",
+    "template": "./",
+    "destination": "./fixtures-doc/",
+    "recurse": true,
+    "verbose": true
+  },
+  "markdown": {
+    "parser": "gfm",
+    "hardwrap": true,
+    "idInHeadings": true
+  },
+  "templates": {
+    "docolatte": {
+      "minify": false,
+      "code": {
+        "theme": "base16/espresso"
+      },
+      "footer": {
+        "copyright": "Docolatte &copy; 2023 Satoshi Soma",
+        "license": "Licensed under the Apache License 2.0"
+      }
+    },
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true,
+      "includeDate": true,
+      "useLongnameInNav": true
+    }
+  }
+}

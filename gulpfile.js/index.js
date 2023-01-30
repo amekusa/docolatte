@@ -27,8 +27,12 @@ const paths = {
 	scripts: base + '/static/scripts',
 	styles:  base + '/static/styles',
 	tmpl: base + '/tmpl',
-	test: base + '/fixtures-doc'
+	manifest: base + '/package.json'
 };
+
+const pkg = require(paths.manifest);
+paths.test =  base + `/fixtures-doc/${pkg.name}/latest`;
+paths._test = base + `/fixtures-doc/${pkg.name}/${pkg.version}`;
 
 const t = { // minor tasks
 	async js_main() {
@@ -105,11 +109,12 @@ const t = { // minor tasks
 	},
 
 	test_gen() {
-		return u.exec(`jsdoc -c '${paths.src.test}/fixtures.conf.json'`);
+		return u.exec(`jsdoc -c '${base}/fixtures.json' && ln -sf '${paths._test}' '${paths.test}'`);
 	},
 
 	test_gen_watch() {
 		let watch = [
+			paths.manifest,
 			paths.src.test + '/**/*',
 			paths.scripts + '/*.js',
 			paths.styles + '/*.css',

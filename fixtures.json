@@ -28,6 +28,11 @@
       "code": {
         "theme": "base16/espresso"
       },
+      "home": {
+        "package": {
+          "hide": true
+        }
+      },
       "footer": {
         "copyright": "Docolatte &copy; 2023 Satoshi Soma",
         "license": "Licensed under the Apache License 2.0"

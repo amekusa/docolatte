@@ -596,6 +596,11 @@ exports.publish = (taffyData, opts, tutorials) => {
                 family: null
             }
         },
+        home: {
+          package: {
+            hide: false
+          }
+        },
         readme: {
             truncate: true
         },

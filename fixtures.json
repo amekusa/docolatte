@@ -3,6 +3,7 @@
     "allowUnknownTags": true
   },
   "source": {
+    "includePattern": ".+\\.(e|c)?js(doc|x)?$",
     "include": [
       "./fixtures",
       "./README.md",

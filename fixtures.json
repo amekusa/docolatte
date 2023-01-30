@@ -13,6 +13,7 @@
   "opts": {
     "encoding": "utf8",
     "template": "./",
+    "tutorials": "./fixtures/tutorials",
     "destination": "./fixtures-doc/",
     "recurse": true,
     "verbose": true

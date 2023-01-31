@@ -5,8 +5,10 @@
 - [ ] More customizability
   - [ ] Colors
   - [ ] Custom CSS
-- [ ] Support :emoji: in README
 - [ ] README in TOC
+- [ ] Improve README & tutorial pages
+  - [ ] Support :emoji:
+  - [ ] Support modal images
 
 ## Known issues to fix
 - [ ] Searching does not work in tutorial pages

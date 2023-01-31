@@ -16,7 +16,8 @@
   "scripts": {
     "build": "gulp",
     "screenshot": "node screenshot.js",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "bump": "ncu -u -t minor -x jsdoc,@jsdoc/salty,@jsdoc/util"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.3.0]
+
+### Changes
+- Move tutorials menu in sidebar to the top
+- Remove height limitation of tables
+
+### Added
+- New option: `home.package.hide`
+- New option: `footer.license`
+
+### Improvements
+- Improved HTML & CSS to be more legible and consistent over all
+
+---
+
 ## [3.2.0]
 
 ### Added
@@ -15,6 +30,8 @@
 
 ### Added
 - New option: `minify`
+
+### Improvements
 - Improved sidebar's scroll behavior
 
 ### Fixes

@@ -66,10 +66,7 @@ hr {
 	.bt(1px dashed @c-gray; none);
 }
 
-> article {
-	box-sizing: border-box;
-	.w-max(1024px);
-
+article {
 	&.readme {
 		h1, h2, h3, h4, h5, h6 {
 		}
@@ -91,10 +88,8 @@ hr {
 		}
 	}
 	&.src {
-		.w-max(none);
-
-		> .prettyprint {
-			.mt(0);
+		.prettyprint {
+			.m(0);
 		}
 	}
 	&.tutorial {

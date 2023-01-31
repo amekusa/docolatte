@@ -8,7 +8,6 @@ const { dirname } = require('node:path');
 const g = require('gulp');
 const s = g.series;
 const p = g.parallel;
-const _if = require('gulp-if');
 const _rename = require('gulp-rename');
 
 const { rollup } = require('rollup');

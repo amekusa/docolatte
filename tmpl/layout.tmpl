@@ -54,9 +54,10 @@
         </div>
     </header>
 
-    <main<?js if (!this.theme.footer.hide) { ?> class="has-footer"<?js } ?>>
-        <?js= content ?>
-
+    <div class="primary<?js= this.theme.footer.hide ? '' : ' has-footer' ?>">
+        <main>
+            <?js= content ?>
+        </main>
         <?js if (!this.theme.footer.hide) { ?>
         <footer class="colophon">
             <?js if (this.theme.footer.copyright) { ?>
@@ -76,7 +77,7 @@
             <?js } ?>
         </footer>
         <?js } ?>
-    </main>
+    </div>
 
     <input id="docolatte-sidebar-toggle" type="checkbox">
     <label class="overlay" for="docolatte-sidebar-toggle"></label>

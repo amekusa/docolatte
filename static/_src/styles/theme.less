@@ -92,19 +92,25 @@ h2, h3, h4, h5, h6 {
 	}
 }
 
-main {
+.primary {
 	.pos(relative);
 	.w(100%; border-box);
 	.h-min(100%);
-	.pv((@topbar-h + @gutter); @gutter);
+	.pv(@topbar-h; (@gutter * 2));
 	.ph(@sidebar-w; 0);
 	.bg(white);
 
 	&.has-footer {
 		.pb((@footer-h + @gutter * 2));
 	}
-	> * {
-		.ph(@gutter);
+}
+
+main {
+	.m(@gutter);
+	.w-max(1024px);
+
+	img, video, iframe {
+		.w-max(100%);
 	}
 
 	@import "content";

@@ -42,9 +42,9 @@
 			.h(@topbar-h);
 		}
 	}
-	main {
+	.primary {
 		.w-min(320px);
-		.pt((@topbar-h + @branding-h + @gutter));
+		.pt((@topbar-h + @branding-h));
 		.pl(0);
 
 		h1.page-title {
@@ -130,8 +130,6 @@
 		}
 	}
 	main {
-		> * {
-			.ph(@_gutter);
-		}
+		.mh(@_gutter);
 	}
 }

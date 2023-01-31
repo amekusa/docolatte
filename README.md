@@ -87,15 +87,13 @@ You can customize docolatte by setting options in JSDoc configuration file like 
         "theme": "nord"
       },
       "meta": {
-        "lang": "en",
-        "title": "My Project",
+        "title":       "My Project",
         "description": "Welcome to my project.",
-        "keywords": "awesome, cool",
-        "author": "John Programmer",
-        "favicon": "icon.png"
+        "keywords":    "awesome, cool",
       },
       "footer": {
-        "copyright": "(c) 2023 John Programmer"
+        "copyright": "&copy; 2023 John Programmer",
+        "license":   "Licensed under the Apache License 2.0"
       }
     }
   }
@@ -103,31 +101,50 @@ You can customize docolatte by setting options in JSDoc configuration file like 
 ```
 
 ### Available Options
-- **`templates.default`** …… All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
-- **`templates.docolatte`**
-  - `minify` …… Whether to use minified JS and CSS (default: `true`)
-  - **`branding`** …… Settings for the header on the top left
-    - `title` …… Title text
-    - `link` …… Link URL of the title
-    - `icon` …… Icon on the left (default: `"home"`). See: [feathericons.com](https://feathericons.com/)
-    - **`font`**
-      - `size` …… Font size of the title
-      - `family` …… Font family of the title
-  - **`code`** …… Settings for code blocks
-    - `theme` …… Theme (default: `"base16/espresso"`). See: [themes](https://highlightjs.org/static/demo/)
-  - **`readme`** …… Settings for README
-    - `truncate` …… Whether to enable *truncation tags* (default: `true` )
-    This removes the content between `<!--TRUNCATE:START-->` and `<!--TRUNCATE:END-->`
-  - **`meta`** …… Settings for meta tags
-    - `lang` …… `lang` attribute of `<html>` (default: `"en"`)
-    - `title` …… Content of `<title>` element (defaults to `branding.title`)
-    - `description` …… `content` attribute of `<meta name="description">`
-    - `keywords` …… `content` attribute of `<meta name="keywords">`
-    - `author` …… `content` attribute of `<meta name="author">`
-    - `favicon` …… Favicon image URL. Use array for multiple files
-  - **`footer`** …… Settings for the footer
-    - `copyright` …… Copyright text
-    - `hide` …… Whether to hide the entire footer ( `true` | `false` )
+The following list is written in YAML format only for the sake of readability.
+You need to write the actual config in JSON format just like the above example.
+
+```yml
+# Docolatte specific options
+templates.docolatte: 
+  minify: Whether to use minified JS and CSS [default: true]
+
+  branding: # Settings for the header on the top left
+    title: Title text
+    link:  Link URL of the title
+    icon:  Icon on the left [default: "home"] # See https://feathericons.com/
+
+    font:  # Font settings for the title
+      size:   Font size
+      family: Font family
+
+  code: # Settings for code blocks
+    theme: highlight.js theme [default: "base16/espresso"] # See https://highlightjs.org/static/demo/
+
+  home: # Settings for the home page (index.html)
+    package: # Settings for package.json info
+      hide: Whether to hide the info [default: false]
+
+  readme: # Settings for README
+    truncate: Whether to enable the truncation tags [default: true]
+              # This removes the content between <!--TRUNCATE:START--> and <!--TRUNCATE:END--> in README.md
+
+  meta: # Settings for meta tags
+    lang:        `lang` attribute of <html> [default: "en"]
+    title:       Content of <title> element [defaults to `branding.title`]
+    description: `content` attribute of <meta name="description">
+    keywords:    `content` attribute of <meta name="keywords">
+    author:      `content` attribute of <meta name="author">
+    favicon:     Favicon image URL(s). Use array for multiple entries
+
+  footer: # Settings for the footer
+    copyright: Copyright text
+    license:   License text
+    hide:      Whether to hide the footer [true | false]
+
+# All the options for the JSDoc's default theme are also compatible with Docolatte
+templates.default: { ... } # See https://jsdoc.app/about-configuring-default-template.html
+```
 
 
 ## Thanks

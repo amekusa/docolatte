@@ -1,12 +1,9 @@
-# Docolatte
-A JSDoc 3 theme/template
-
-### ToDo
+# ToDo
 - [ ] Try [monorepo](https://monorepo.tools/#what-is-a-monorepo)
 - [ ] Implement dark theme
 - [ ] More customizability
   - [ ] Colors
   - [ ] Custom CSS
 
-### Known issues to fix
+## Known issues to fix
 - [ ] Searching does not work in tutorial pages

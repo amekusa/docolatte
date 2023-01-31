@@ -1,24 +1,15 @@
-# docolatte [![npm package](https://img.shields.io/badge/dynamic/json?label=npm%0Apackage&query=%24%5B%27dist-tags%27%5D%5B%27latest%27%5D&url=https%3A%2F%2Fregistry.npmjs.org%2Fdocolatte%2F)](https://www.npmjs.com/package/docolatte)
-
+# Docolatte
 :chocolate_bar: Bittersweet theme for JSDoc 3
+
+[![npm package](https://img.shields.io/badge/dynamic/json?label=npm%0Apackage&query=%24%5B%27dist-tags%27%5D%5B%27latest%27%5D&url=https%3A%2F%2Fregistry.npmjs.org%2Fdocolatte%2F)](https://www.npmjs.com/package/docolatte)
+
 
 ## Notes for users
 
-### v3.2
-- New option: `readme.truncate`
+### Changelog
+See: [CHANGELOG.md](CHANGELOG.md)
 
-### v3.0
-- Migrated the code highlighter from Google Code Prettify to [highlight.js](https://highlightjs.org/).  
-  You may need to change the `code.theme` option value to adapt for this change
-- New option: `minify`
-- Fixed the bugs around Simplebar
-- Improved sidebar's scroll behavior
-
-### v2.11
-- Made the scrollbar in the sidebar looks nicer ([Simplebar](https://github.com/Grsmto/simplebar))
-- Fixed some build errors
-
-### About JSDoc v4 Compatibility
+### About JSDoc 4 Compatibility
 Indexing for search is not perfectly working with jsdoc@4.0.0.
 I recommend sticking with jsdoc 3.
 

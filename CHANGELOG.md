@@ -9,23 +9,23 @@
 
 ## [3.0.0]
 
-### Changed
+### Changes
 - Migrated the code highlighter from Google Code Prettify to **[highlight.js](https://highlightjs.org/)**.  
   You may need to change the `code.theme` option value to adapt for this migration
-- Improved sidebar's scroll behavior
 
 ### Added
 - New option: `minify`
+- Improved sidebar's scroll behavior
 
-### Fixed
+### Fixes
 - Fixed the bugs caused by Simplebar
 
 ---
 
 ## [2.11.0]
 
-### Changed
+### Changes
 - Made the scrollbar in the sidebar looks nicer with [Simplebar](https://github.com/Grsmto/simplebar)
 
-### Fixed
+### Fixes
 - Fixed build errors

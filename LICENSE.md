@@ -1,6 +1,6 @@
 # License
 
-docolatte is free software, licensed under the Apache License, Version 2.0 (the
+Docolatte is free software, licensed under the Apache License, Version 2.0 (the
 "License"). Commercial and non-commercial use are permitted in compliance with
 the License.
 

@@ -142,4 +142,4 @@ More options are planned to be implemented in the future.
 [Docdash](https://github.com/clenemt/docdash) …… Lodash inspired JSDoc 3 template/theme
 
 ## License
-**docolatte** is licensed under the [Apache License 2.0](https://github.com/amekusa/docolatte/blob/trunk/LICENSE).
+Docolatte is licensed under the [Apache License 2.0](https://github.com/amekusa/docolatte/blob/trunk/LICENSE.md).

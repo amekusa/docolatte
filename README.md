@@ -7,7 +7,7 @@
 ## Notes for users
 
 ### Changelog
-See: [CHANGELOG.md](CHANGELOG.md)
+See: [CHANGELOG.md](https://github.com/amekusa/docolatte/blob/trunk/CHANGELOG.md)
 
 ### About JSDoc 4 Compatibility
 Indexing for search is not perfectly working with jsdoc@4.0.0.

@@ -23485,7 +23485,7 @@
   		toc.setAttribute('data-ready', 1);
 
   		// save TOC scroll position
-  		window.onbeforeunload = function () {
+  		window.onbeforeunload = () => {
   			storage.setItem('scrollX', tocScroll.scrollLeft);
   			storage.setItem('scrollY', tocScroll.scrollTop);
   		};
@@ -23508,8 +23508,7 @@
   			if (ev.key == 'Escape') sidebarToggle.checked = false;
   		});
 
-  		// initialize search box
-  		(() => {
+  		{ // initialize search box
   			let fuse = new Fuse(
   				JSON.parse(_SEARCH.list), // records to search
   				JSON.parse(_SEARCH.options), // options (including keys)
@@ -23604,10 +23603,9 @@
   				input.value = '';
   				input.focus();
   			});
-  		})();
+  		}
 
-  		// mark a TOC item as "current" on scroll
-  		(() => {
+  		{ // mark a TOC item as "current" on scroll
   			let scroll = window.scrollY;
   			let ticking = false;
 
@@ -23622,7 +23620,7 @@
   			let headings = q('article.doc h4.name[id]');
   			let curr = { i: -1, a: null, wrap: null };
 
-  			function update() {
+  			const update = () => {
   				for (let i = 0; i < headings.length; i++) {
   					if (headings[i].offsetTop < scroll) continue;
   					if (i == curr.i) break;
@@ -23655,16 +23653,15 @@
   					break;
   				}
   				ticking = false;
-  			}
+  			};
 
   			update();
-  		})();
+  		}
 
-  		// code highlight
-  		(() => {
+  		{ // code highlight
   			const linenums = [];
 
-  			function linenumify(pre) {
+  			const linenumify = (pre) => {
   				let code = find(pre, 'code', 0);
   				let lines = (code.innerHTML.trimEnd().match(/\n/g) || '').length + 1;
   				let digits = lines.toString().length;
@@ -23686,30 +23683,29 @@
   					r.appendChild(linenum);
   				}
   				pre.appendChild(r);
-  			}
+  			};
 
-  			function onClick(ev) {
+  			const onClick = function (ev) {
   				ev.preventDefault();
   				document.location = this.href;
   				selectLine();
-  			}
+  			};
 
-  			function selectLine() {
+  			const selectLine = () => {
   				let hash = document.location.hash;
   				if (!hash) return;
-  				console.log('hash:', hash);
   				for (let i = 0; i < linenums.length; i++) {
   					let linenum = linenums[i];
   					if (linenum.id == hash.substring(1)) linenum.setAttribute('data-selected', 1);
   					else linenum.removeAttribute('data-selected');
   				}
-  			}
+  			};
 
   			q('.prettyprint code').forEach(HighlightJS.highlightElement);
   			q('.prettyprint.linenums').forEach(linenumify);
 
   			selectLine();
-  		})();
+  		}
 
   	}); // DOM setup
 

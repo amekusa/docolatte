@@ -33,6 +33,7 @@ body {
   line-height: 1.5;
   font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
   color: #4d4e53;
+  background-color: #e8e2da;
 }
 * {
   outline-style: none;
@@ -130,6 +131,15 @@ table {
   border-spacing: 0;
   border-collapse: collapse;
 }
+table h3,
+table h4,
+table h5,
+table h6 {
+  margin-top: 1em;
+}
+table table {
+  margin-bottom: 0.5em;
+}
 th,
 thead > tr > td {
   font-weight: bold;
@@ -151,22 +161,10 @@ figure {
   visibility: hidden;
 }
 .table-wrap {
-  position: relative;
-  max-height: 24em;
   overflow: auto;
 }
-.table-wrap > table > thead {
-  position: sticky;
-  z-index: 1;
-  top: 0;
-}
 .table-wrap > table .table-wrap {
-  max-height: initial;
   overflow: initial;
-}
-.table-wrap > table table {
-  position: relative;
-  z-index: 0;
 }
 .code-wrap {
   position: relative;
@@ -195,7 +193,7 @@ figure {
   text-shadow: -0.1em 0.1em 0.1em #000000;
   transition: opacity 0.25s ease-out;
 }
-pre.prettyprint {
+.prettyprint {
   position: relative;
   font-size: 0.85rem;
   line-height: 1.5;
@@ -204,35 +202,35 @@ pre.prettyprint {
   overflow: auto;
   border-radius: 0.5rem;
 }
-pre.prettyprint ._char {
+.prettyprint ._char {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
-pre.prettyprint code {
+.prettyprint code {
   display: block;
   padding-top: 0.5em !important;
   padding-bottom: 0.5em !important;
   padding-left: 1em;
   padding-right: 1em;
 }
-pre.prettyprint .linenums {
+.prettyprint .linenums {
   position: absolute;
   top: 0;
   left: 0;
 }
-pre.prettyprint .linenums .linenum {
+.prettyprint .linenums .linenum {
   box-sizing: border-box;
   opacity: 0.9;
 }
-pre.prettyprint .linenums .linenum:first-child {
+.prettyprint .linenums .linenum:first-child {
   padding-top: 0.5em;
 }
-pre.prettyprint .linenums .linenum:last-child {
+.prettyprint .linenums .linenum:last-child {
   padding-bottom: 0.5em;
 }
-pre.prettyprint .linenums .linenum a {
+.prettyprint .linenums .linenum a {
   display: block;
   border-right: solid 1px;
   text-align: right;
@@ -240,11 +238,11 @@ pre.prettyprint .linenums .linenum a {
   color: inherit;
   opacity: 0.35;
 }
-pre.prettyprint .linenums .linenum a:hover,
-pre.prettyprint .linenums .linenum a:focus {
+.prettyprint .linenums .linenum a:hover,
+.prettyprint .linenums .linenum a:focus {
   opacity: 0.75;
 }
-pre.prettyprint .linenums .linenum[data-selected] a {
+.prettyprint .linenums .linenum[data-selected] a {
   opacity: 1;
 }
 .icon {
@@ -448,28 +446,32 @@ h6 {
   font-weight: normal;
   text-shadow: 0 0.05em 0.25em #000000;
 }
-main {
+.primary {
   position: relative;
   box-sizing: border-box;
   width: 100%;
   min-height: 100%;
-  padding-top: 4.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   padding-left: 16rem;
   padding-right: 0;
   background-color: white;
 }
-main.has-footer {
+.primary.has-footer {
   padding-bottom: 15rem;
 }
-main > * {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+main {
+  margin: 1.5rem;
+}
+main img,
+main video,
+main iframe {
+  max-width: 100%;
 }
 main a {
   overflow-wrap: break-word;
 }
-main code {
+main code:not(.hljs) {
   padding-left: 0.25em;
   padding-right: 0.25em;
   color: lightseagreen;
@@ -538,19 +540,21 @@ main hr {
   border-left: none;
   border-right: none;
 }
-main > article {
-  box-sizing: border-box;
-  max-width: 1024px;
+main article {
+  max-width: 960px;
 }
-main > article.readme h1 {
+main article.readme:first-child {
+  margin-top: 3rem;
+}
+main article.readme h1 {
   font-size: 1.5rem;
   color: #5e5f91;
 }
-main > article.readme h2,
-main > article.readme h3 {
+main article.readme h2,
+main article.readme h3 {
   font-size: 1.25rem;
 }
-main > article.readme h2 {
+main article.readme h2 {
   margin-top: 4.5rem;
   border-left: 0.35em solid;
   padding-top: 0.1em;
@@ -561,19 +565,19 @@ main > article.readme h2 {
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
-main > article.readme h4,
-main > article.readme h5,
-main > article.readme h6 {
+main article.readme h4,
+main article.readme h5,
+main article.readme h6 {
   font-size: 1rem;
 }
-main > article.readme pre > code {
+main article.readme pre > code {
   font-size: 0.85rem;
 }
-main > article.src {
-  max-width: none;
+main article.src {
+  max-width: 1280px;
 }
-main > article.src > .prettyprint {
-  margin-top: 0;
+main article.src .prettyprint {
+  margin: 0;
 }
 main .container-overview h2 {
   margin-top: 4.5rem;
@@ -693,18 +697,23 @@ main .props .name {
   border-bottom: 1.5rem solid #e8e2da;
   background-image: repeating-linear-gradient(-60deg, white 0, #e8e2da 1px, #e8e2da 1px, white 2px, white 5px);
   background-attachment: fixed;
-  font-style: italic;
+  color: #a69494;
+}
+.colophon p {
+  margin: 0;
 }
 .colophon .copyright,
-.colophon .credits {
-  margin: 0;
-  color: #a69494;
+.colophon .license {
+  line-height: 1.25;
 }
 .colophon .copyright {
   font-weight: bold;
 }
-.colophon .credits {
-  font-size: 0.85rem;
+.colophon .generator {
+  font-size: 0.7rem;
+}
+.colophon .license + .generator {
+  margin-top: 0.75rem;
 }
 .sidebar {
   font-size: 1rem;
@@ -978,12 +987,10 @@ input#docolatte-sidebar-toggle,
   :root {
     font-size: 15px;
   }
-  main > article.src {
-    padding-left: 0;
-    padding-right: 0;
-    margin-top: -1.5rem;
+  main article.src {
+    margin: -1.5rem;
   }
-  main > article.src pre.prettyprint {
+  main article.src .prettyprint {
     border-radius: 0;
   }
 }
@@ -1035,20 +1042,14 @@ input#docolatte-sidebar-toggle,
   .masthead .topbar {
     height: 3rem;
   }
-  main {
+  .primary {
     min-width: 320px;
-    padding-top: 9.354rem;
+    padding-top: 7.854rem;
     padding-left: 0;
-  }
-  main h1.page-title {
-    justify-content: center;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    margin-top: 0;
-    margin-bottom: 0;
   }
   .colophon {
     padding-left: 1.5rem;
+    padding-right: 6.25rem;
   }
   .sidebar {
     z-index: 22;
@@ -1106,23 +1107,29 @@ input#docolatte-sidebar-toggle,
     display: block;
   }
 }
+@media only screen and (max-width: 512px) {
+  .masthead .branding {
+    padding-left: 0.75rem;
+    padding-right: 5.604rem;
+  }
+  .masthead .topbar {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  main {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+}
 @media only screen and (max-width: 414px) {
   :root {
     font-size: 15px;
   }
   .masthead .branding {
     font-size: 1.25rem;
-    padding-left: 0.75rem;
-    padding-right: 5.604rem;
   }
   .masthead .topbar {
     font-size: 1rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-  main > * {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
   }
 }
 /*# sourceMappingURL=theme.css.map */

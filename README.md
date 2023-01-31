@@ -13,8 +13,8 @@ See: [CHANGELOG.md](https://github.com/amekusa/docolatte/blob/trunk/CHANGELOG.md
 Indexing for search is not perfectly working with jsdoc@4.0.0.
 I recommend sticking with jsdoc 3.
 
----
 
+## Screenshots
 ![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/class.png)
 ![screenshot methods](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/methods.png)
 ![screenshot source](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/source.png)
@@ -24,12 +24,16 @@ I recommend sticking with jsdoc 3.
 
 [All screenshots](https://github.com/amekusa/docolatte/tree/trunk/gallery)
 
-## Features
 
+## Features
 - Responsive
-- Focused on legibility
 - Colorful, but not distracting
-- Customizable options for branding your project
+- Quick, indexed search
+- Code highlighting with [highlight.js](https://highlightjs.org/)
+- Customizability
+  - All the highlight.js themes are supported
+  - Header text, URL, and icon
+  - Copyright & license text on the footer
 
 ### Keyboard-only Search & Navigation
 ![screenshot search demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/search-demo.gif)
@@ -37,16 +41,16 @@ I recommend sticking with jsdoc 3.
 ### Interactive TOC (Table of Contents)
 ![screenshot navigation demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/nav-demo.gif)
 
+More features are planned: [TODO.md](https://github.com/amekusa/docolatte/tree/trunk/TODO.md)
+
 
 ## Install
-
 ```sh
 $ npm i --save-dev docolatte
 ```
 
 
 ## Usage
-
 Specify the path to docolatte ( normally: `node_modules/docolatte` ) as the JSDoc template with `-t` option of `jsdoc` command:
 
 ```sh
@@ -64,8 +68,7 @@ Or set the path to `opts.template` in your JSDoc configuration file:
 ```
 
 ## Customize
-
-Docolatte supports some configuration options to customize the HTML output.
+You can customize docolatte by setting options in JSDoc configuration file like this:
 
 ```json
 {
@@ -100,7 +103,6 @@ Docolatte supports some configuration options to customize the HTML output.
 ```
 
 ### Available Options
-
 - **`templates.default`** …… All the [options](https://jsdoc.app/about-configuring-default-template.html) for the JSDoc's default theme are also compatible with docolatte
 - **`templates.docolatte`**
   - `minify` …… Whether to use minified JS and CSS (default: `true`)
@@ -127,10 +129,10 @@ Docolatte supports some configuration options to customize the HTML output.
     - `copyright` …… Copyright text
     - `hide` …… Whether to hide the entire footer ( `true` | `false` )
 
-More options are planned to be implemented in the future.
 
 ## Thanks
 [Docdash](https://github.com/clenemt/docdash) …… Lodash inspired JSDoc 3 template/theme
+
 
 ## License
 Docolatte is licensed under the [Apache License 2.0](https://github.com/amekusa/docolatte/blob/trunk/LICENSE.md).

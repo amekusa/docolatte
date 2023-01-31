@@ -107,23 +107,32 @@
 	}
 }
 
-@media (max-width: 414px) {
+@media (max-width: 512px) {
 	@_gutter: (@gutter / 2);
 
+	.masthead {
+		.branding {
+			.ph(@_gutter; (@branding-h + @_gutter));
+		}
+		.topbar {
+			.ph(@_gutter);
+		}
+	}
+	main {
+		.mh(@_gutter);
+	}
+}
+
+@media (max-width: 414px) {
 	:root {
 		font-size: 15px;
 	}
 	.masthead {
 		.branding {
 			.fs(@fs-l);
-			.ph(@_gutter; (@branding-h + @_gutter));
 		}
 		.topbar {
 			.fs(@fs-m);
-			.ph(@_gutter);
 		}
-	}
-	main {
-		.mh(@_gutter);
 	}
 }

@@ -71,6 +71,65 @@ class SearchDB {
 }
 
 /**
+ * Configures the theme
+ * @param {object} conf
+ * @return {object}
+ */
+function configure(conf) {
+    let r = merge({
+        minify: true,
+        meta: {
+            lang: 'en',
+            title: null,
+            description: null,
+            keywords: null,
+            author: null,
+            favicon: []
+        },
+        branding: {
+            title: 'My Project',
+            link: 'index.html',
+            icon: 'home',
+            font: {
+                size: null,
+                family: null
+            }
+        },
+        home: {
+          package: {
+            hide: false
+          }
+        },
+        readme: {
+            truncate: true
+        },
+        footer: {
+            hide: false,
+            copyright: null,
+            license: null,
+            hideGenerator: false
+        },
+        code: {
+            theme: 'base16/espresso'
+        }
+
+    }, conf || {});
+
+    if (!r.meta.title) r.meta.title = r.branding.title;
+    if (typeof r.meta.favicon == 'string') r.meta.favicon = [r.meta.favicon];
+
+    r.style = '';
+    if (r.branding.font.size || r.branding.font.family) {
+        r.style += `.masthead .branding .title { `;
+        if (r.branding.font.size)   r.style += `font-size: ${r.branding.font.size}; `;
+        if (r.branding.font.family) r.style += `font-family: ${r.branding.font.family}; `;
+        r.style += `}`;
+    }
+
+    return r;
+}
+
+/**
  * Merges 2 objects recursively
  * @return {object}
  * @author amekusa
@@ -576,58 +635,8 @@ exports.publish = (taffyData, opts, tutorials) => {
     conf = env.conf.templates || {};
     conf.default = conf.default || {};
 
-    // theme configs
-    var x = merge({
-        minify: true,
-        meta: {
-            lang: 'en',
-            title: null,
-            description: null,
-            keywords: null,
-            author: null,
-            favicon: []
-        },
-        branding: {
-            title: 'My Project',
-            link: 'index.html',
-            icon: 'home',
-            font: {
-                size: null,
-                family: null
-            }
-        },
-        home: {
-          package: {
-            hide: false
-          }
-        },
-        readme: {
-            truncate: true
-        },
-        footer: {
-            hide: false,
-            copyright: null,
-            license: null,
-            hideGenerator: false
-        },
-        code: {
-            theme: 'base16/espresso'
-        }
-
-    }, conf.docolatte || {});
-
-    if (!x.meta.title) x.meta.title = x.branding.title;
-    if (typeof x.meta.favicon == 'string') x.meta.favicon = [x.meta.favicon];
-
-    // custom style
-    x.style = '';
-    if (x.branding.font.size || x.branding.font.family) {
-        x.style += `.masthead .branding .title { `;
-        if (x.branding.font.size)   x.style += `font-size: ${x.branding.font.size}; `;
-        if (x.branding.font.family) x.style += `font-family: ${x.branding.font.family}; `;
-        x.style += `}`;
-    }
-    conf.docolatte = x;
+    // configure the theme
+    conf.docolatte = configure(conf.docolatte);
 
     templatePath = path.normalize(opts.template);
     view = new template.Template( path.join(templatePath, 'tmpl') );

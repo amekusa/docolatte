@@ -137,10 +137,8 @@ function configure(conf) {
 function merge(x, y) {
     if (typeof x != 'object' || typeof y != 'object') return y;
 
-    if (Array.isArray(x)) {
-        if (Array.isArray(y)) return x.concat(y);
-        return y;
-    } else if (Array.isArray(y)) return y;
+    if (Array.isArray(x)) return Array.isArray(y) ? x.concat(y) : y;
+    if (Array.isArray(y)) return y;
 
     var r = {};
     for (var i in x) r[i] = (i in y) ? merge(x[i], y[i]) : x[i];

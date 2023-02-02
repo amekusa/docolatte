@@ -130,6 +130,19 @@ function configure(conf) {
 }
 
 /**
+ * @param {string} html
+ * @return {string}
+ */
+function filterHTML(html) {
+    let r = html;
+
+    // insert search data JSONs
+    r = r.replace('<!-- %DOCOLATTE::DATA_GOES_HERE% -->', view.partial('data.tmpl'));
+
+    return r;
+}
+
+/**
  * Merges 2 objects recursively
  * @return {object}
  * @author amekusa
@@ -429,8 +442,8 @@ function generate(title, docs, filename, resolveLinks) {
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
     }
 
-    // insert data
-    html = html.replace('<!-- %DOCOLATTE::DATA_GOES_HERE% -->', view.partial('data.tmpl'));
+    // apply HTML filter
+    html = filterHTML(html);
 
     fs.writeFileSync(outpath, html, 'utf8');
 }
@@ -945,6 +958,9 @@ exports.publish = (taffyData, opts, tutorials) => {
 
         // yes, you can use {@link} in tutorials too!
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
+
+        // apply HTML filter
+        html = filterHTML(html);
 
         fs.writeFileSync(tutorialPath, html, 'utf8');
     }

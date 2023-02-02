@@ -66,8 +66,16 @@ hr {
 	.bt(1px dashed @c-gray; none);
 }
 
+img,
+video,
+iframe {
+	.w-max(100%);
+}
+
 article {
+	.m(@gutter);
 	.w-max(960px);
+	overflow: hidden;
 
 	&.readme {
 		&:first-child {

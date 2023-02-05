@@ -3,7 +3,7 @@ var data = obj;
 var self = this;
 ?>
 
-<?js if (data.kind === 'package' && !this.theme.home.package.hide) { ?>
+<?js if (data.kind === 'package' && !this.theme.config.home.package.hide) { ?>
     <article class="package">
         <h3 class="head">
             <span class="package-name"><?js= data.name ?></span>
@@ -14,6 +14,6 @@ var self = this;
 
 <?js if (data.readme) { ?>
     <article class="readme">
-        <?js= this.theme.readme.truncate ? this.truncate(data.readme) : data.readme ?>
+        <?js= data.readme ?>
     </article>
 <?js } ?>

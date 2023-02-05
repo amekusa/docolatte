@@ -7,7 +7,8 @@ const path = require('jsdoc/path');
 const { taffy } = require('@jsdoc/salty');
 const template = require('jsdoc/template');
 const util = require('util');
-const Fuse = require('fuse.js');
+
+const theme = require('./lib/Docolatte').create();
 
 const htmlsafe = helper.htmlsafe;
 const linkto = helper.linkto;
@@ -20,165 +21,6 @@ let view;
 let outdir = path.normalize(env.opts.destination);
 
 /**
- * DB for search
- * @author amekusa
- */
-class SearchDB {
-    constructor(options) {
-        this.options = options;
-        this.records = [];
-    }
-    feed(record) {
-        if (Array.isArray(record)) {
-            for (let item of record) this.feed(item);
-            return;
-        }
-        if (this.has(record, '___id')) {
-            console.warn('[SearchDB]', 'duplicated feed:', record);
-            return;
-        }
-        this.records.push(record);
-    }
-    has(record, key) {
-        if (!(key in record)) return false;
-        for (let item of this.records) {
-            if (!(key in item)) continue;
-            if (record[key] === item[key]) return true;
-        }
-        return false;
-    }
-    serialize() {
-        console.log(`Serializing search DB...`);
-        let list = [];
-        for (let record of this.records) {
-            let item = { url: helper.createLink(record) };
-            for (let key of this.options.keys) {
-                if (!(key.name in record)) continue;
-                item[key.name] = record[key.name];
-            }
-            list.push(item);
-        }
-
-        let index = Fuse.createIndex(this.options.keys, list);
-        console.log(`${list.length} records have been found`);
-
-        return {
-            list: JSON.stringify(list),
-            index: JSON.stringify(index.toJSON()),
-            options: JSON.stringify(this.options)
-        };
-    }
-}
-
-/**
- * Configures the theme
- * @param {object} conf
- * @return {object}
- */
-function configure(conf) {
-    let r = merge({
-        minify: true,
-        meta: {
-            lang: 'en',
-            title: null,
-            description: null,
-            keywords: null,
-            author: null,
-            favicon: []
-        },
-        branding: {
-            title: 'My Project',
-            link: 'index.html',
-            icon: 'home',
-            font: {
-                size: null,
-                family: null
-            }
-        },
-        home: {
-          package: {
-            hide: false
-          }
-        },
-        readme: {
-            truncate: true
-        },
-        footer: {
-            hide: false,
-            copyright: null,
-            license: null,
-            hideGenerator: false
-        },
-        code: {
-            theme: 'base16/espresso'
-        }
-
-    }, conf || {});
-
-    if (!r.meta.title) r.meta.title = r.branding.title;
-    if (typeof r.meta.favicon == 'string') r.meta.favicon = [r.meta.favicon];
-
-    r.style = '';
-    if (r.branding.font.size || r.branding.font.family) {
-        r.style += `.masthead .branding .title { `;
-        if (r.branding.font.size)   r.style += `font-size: ${r.branding.font.size}; `;
-        if (r.branding.font.family) r.style += `font-family: ${r.branding.font.family}; `;
-        r.style += `}`;
-    }
-
-    return r;
-}
-
-/**
- * @param {string} html
- * @return {string}
- */
-function filterHTML(html) {
-    let r = html;
-
-    // insert search data JSONs
-    r = r.replace('<!-- %DOCOLATTE::DATA_GOES_HERE% -->', view.partial('data.tmpl'));
-
-    return r;
-}
-
-/**
- * Merges 2 objects recursively
- * @return {object}
- * @author amekusa
- */
-function merge(x, y) {
-    if (typeof x != 'object' || typeof y != 'object') return y;
-
-    if (Array.isArray(x)) return Array.isArray(y) ? x.concat(y) : y;
-    if (Array.isArray(y)) return y;
-
-    var r = {};
-    for (var i in x) r[i] = (i in y) ? merge(x[i], y[i]) : x[i];
-    for (var i in y) {
-        if (!(i in x)) r[i] = y[i];
-    }
-    return r;
-}
-
-/**
- * Formats an array to a <UL> list.
- * If the array has only 1 item, omits <UL> and <LI> tags
- * @return {string}
- * @author amekusa
- */
-function list(items, forEach = null) {
-    if (!items || !items.length) return '';
-    if (!forEach) forEach = item => item;
-    if (items.length = 1) return forEach(items[0]);
-    let r = '';
-    items.forEach(item => {
-        r += '<li>' + forEach(item) + '</li>';
-    });
-    return `<ul>${r}</ul>`;
-}
-
-/**
  * Returns the language of the given file
  * @return {string}
  * @author amekusa
@@ -186,43 +28,6 @@ function list(items, forEach = null) {
 function lang(file) {
     let ext = path.extname(file);
     return ext.length > 1 ? ext.substring(1) : '';
-}
-
-/**
- * Appends the 1st string to the 2nd string
- * @return {string}
- * @author amekusa
- */
-function append(str, to = ' ') {
-    return str ? (to + str) : '';
-}
-
-/**
- * Prepends the 1st string to the 2nd string
- * @return {string}
- * @author amekusa
- */
-function prepend(str, to = ' ') {
-    return str ? (str + to) : '';
-}
-
-/**
- * Truncates the parts between `<!--TRUNCATE:START-->` and `<!--TRUNCATE:END-->` in the given string
- * @param {string} str
- * @return {string}
- * @author amekusa
- */
-function truncate(str) {
-    return str.replaceAll(/<!--+\s*TRUNCATE:START\s*--+>.*?<!--+\s*TRUNCATE:END\s*--+>/gs, '<!-- TRUNCATED -->');
-}
-
-/**
- * Iterates over the given array
- * @param {any[]} arr
- * @param {function} fn
- */
-function iterate(arr, fn) {
-    for (let i = 0; i < arr.length; i++) fn(arr[i], i, arr.length - 1);
 }
 
 function find(spec) {
@@ -443,7 +248,7 @@ function generate(title, docs, filename, resolveLinks) {
     }
 
     // apply HTML filter
-    html = filterHTML(html);
+    html = theme.filter('FINAL', html);
 
     fs.writeFileSync(outpath, html, 'utf8');
 }
@@ -646,8 +451,8 @@ exports.publish = (taffyData, opts, tutorials) => {
     conf = env.conf.templates || {};
     conf.default = conf.default || {};
 
-    // configure the theme
-    conf.docolatte = configure(conf.docolatte);
+    // HOOK:
+    theme.action('CONFIG_READY', conf);
 
     templatePath = path.normalize(opts.template);
     view = new template.Template( path.join(templatePath, 'tmpl') );
@@ -731,24 +536,8 @@ exports.publish = (taffyData, opts, tutorials) => {
     }
     fs.mkPath(outdir);
 
-    // copy files from node_modules
-    let min = conf.docolatte.minify ? '.min' : '';
-    let moduleFiles = [
-        { dst: 'assets', src: 'feather-icons/dist/feather-sprite.svg' },
-        { dst: 'styles', src: `simplebar/dist/simplebar${min}.css` }
-    ];
-    if (conf.docolatte.code.theme) {
-        moduleFiles.push({
-            dst: path.join('styles/hljs', path.dirname(conf.docolatte.code.theme)),
-            src: `highlight.js/styles/${conf.docolatte.code.theme}.css`
-        });
-    }
-    moduleFiles.forEach(file => {
-        let dst = path.join(outdir, file.dst);
-        let src = require.resolve(file.src);
-        fs.mkPath(dst);
-        fs.copyFileSync(src, dst);
-    });
+    // HOOK:
+    theme.action('OUTDIR_READY', outdir);
 
     // copy the template's static files to outdir
     fromDir = path.join(templatePath, 'static');
@@ -842,6 +631,9 @@ exports.publish = (taffyData, opts, tutorials) => {
     members = helper.getMembers(data);
     members.tutorials = tutorials.children;
 
+    // HOOK:
+    theme.action('DATA_READY', data, { members });
+
     // output pretty-printed source files by default
     outputSourceFiles = conf.default && conf.default.outputSourceFiles !== false;
 
@@ -852,33 +644,9 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.tutoriallink = tutoriallink;
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
-    view.list = list;
-    view.append = append;
-    view.prepend = prepend;
-    view.truncate = truncate;
-    view.iterate = iterate;
-    view.theme = conf.docolatte;
 
-    // DB for search
-    let searchDb = new SearchDB({
-        keys: [
-            { name: 'name', weight: 10 },
-            { name: 'longname', weight: 9 },
-            { name: 'classdesc', weight: 6 },
-            { name: 'description', weight: 6 },
-            { name: 'examples', weight: 1 },
-        ]
-    });
-
-    // feed records to the DB
-    for (let i in members) searchDb.feed(members[i]);
-    data({
-        kind: ['member', 'function', 'constant', 'typedef'],
-        memberof: { isUndefined: false } // not global
-    }).each(item => { searchDb.feed(item) });
-
-    // serialize the DB
-    view.search = searchDb.serialize();
+    // HOOK:
+    theme.action('TEMPLATES_READY', view);
 
     // once for all
     view.nav = buildNav(members);
@@ -899,7 +667,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         packages.concat(
             [{
                 kind: 'mainpage',
-                readme: opts.readme,
+                readme: theme.filter(['USER_HTML', 'README'], opts.readme),
                 longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'
             }]
         ).concat(files), indexUrl);
@@ -950,7 +718,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         const tutorialData = {
             title: title,
             header: tutorial.title,
-            content: tutorial.parse(),
+            content: theme.filter('USER_HTML', tutorial.parse()),
             children: tutorial.children
         };
         const tutorialPath = path.join(outdir, filename);
@@ -960,7 +728,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
 
         // apply HTML filter
-        html = filterHTML(html);
+        html = theme.filter('FINAL', html);
 
         fs.writeFileSync(tutorialPath, html, 'utf8');
     }

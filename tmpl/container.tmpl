@@ -74,7 +74,7 @@
     <?js if (doc.requires && doc.requires.length) { ?>
         <h3 class="subsection-title">Requires</h3>
 
-        <?js= self.list(doc.requires, item => self.linkto(item, item)) ?>
+        <?js= self.u.list(doc.requires, item => self.linkto(item, item)) ?>
     <?js } ?>
 
     <?js

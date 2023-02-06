@@ -655,7 +655,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         packages.concat(
             [{
                 kind: 'mainpage',
-                readme: theme.filter(['USER_HTML', 'README_HTML'], opts.readme), // @HOOK
+                readme: theme.filter('README_HTML', opts.readme), // @HOOK
                 longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'
             }]
         ).concat(files), indexUrl);
@@ -706,7 +706,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         const tutorialData = {
             title: title,
             header: tutorial.title,
-            content: theme.filter('USER_HTML', tutorial.parse()), // @HOOK
+            content: theme.filter('README_HTML', tutorial.parse()), // @HOOK
             children: tutorial.children
         };
         const tutorialPath = path.join(outdir, filename);

@@ -6,11 +6,14 @@
 
 ## Notes for users
 
-### Changelog
+### What's new in the latest update
 See: [CHANGELOG.md](https://github.com/amekusa/docolatte/blob/trunk/CHANGELOG.md)
 
-### About JSDoc 4 Compatibility
-Indexing for search is not perfectly working with jsdoc@4.0.0.
+### What's coming out in the next update
+See: [TODO.md](https://github.com/amekusa/docolatte/tree/trunk/TODO.md)
+
+### About JSDoc 4 compatibility
+Search indexing partially breaks with jsdoc@4.0.0.
 I recommend sticking with jsdoc 3.
 
 
@@ -40,8 +43,6 @@ I recommend sticking with jsdoc 3.
 
 ### Interactive TOC (Table of Contents)
 ![screenshot navigation demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/nav-demo.gif)
-
-More features are planned: [TODO.md](https://github.com/amekusa/docolatte/tree/trunk/TODO.md)
 
 
 ## Install

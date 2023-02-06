@@ -125,9 +125,21 @@ templates.docolatte:
     package: # Settings for package.json info
       hide: Whether to hide the info [default: false]
 
-  readme: # Settings for README
+  readme: # Settings for README & tutorials
     truncate: Whether to enable the truncation tags [default: true]
-              # This removes the content between <!--TRUNCATE:START--> and <!--TRUNCATE:END--> in README.md
+              # This removes the content between <!--TRUNCATE:START--> and <!--TRUNCATE:END-->
+
+    emoji: # Settings for emoji conversion
+      replace: Type(s) of emoji to be replaced [default: 'colons']
+        # Available types:
+        - 'colons'
+        - 'unified'
+        - 'emoticons'
+        - 'emoticons_with_colons'
+        
+      options: # Options for js-emoji  # See https://github.com/iamcal/js-emoji
+        replace_mode: [default: 'unified'],
+        allow_native: [default: true]
 
   meta: # Settings for meta tags
     lang:        `lang` attribute of <html> [default: "en"]

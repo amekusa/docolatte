@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.4.0]
+
+### Changes
+- `readme.*` options now also apply to tutorial pages
+
+### Added
+- Support emoji conversion in README and tutorial pages
+  - New option: `readme.emoji.replace`, `readme.emoji.options`
+- Support `{@lang ...}` tags for `@example`
+
+### Fixes
+- Fixed the issue that you couldn't search in tutorial pages
+
+---
+
 ## [3.3.0]
 
 ### Changes

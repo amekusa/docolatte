@@ -237,8 +237,8 @@ function generate(title, docs, filename, resolveLinks) {
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
     }
 
-    // apply HTML filter
-    html = theme.filter('FINAL', html);
+    // @HOOK
+    html = theme.filter('FINAL_HTML', html);
 
     fs.writeFileSync(outpath, html, 'utf8');
 }
@@ -261,7 +261,7 @@ function generateSourceFiles(sourceFiles, encoding = 'utf8') {
             logger.error('Error while generating source file %s: %s', file, e.message);
         }
 
-        // HOOK:
+        // @HOOK
         source = theme.filter('SOURCE_DOCLET', source, { file, encoding });
 
         generate(`Source: ${sourceFiles[file].shortened}`, [source], sourceOutfile,
@@ -443,7 +443,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     conf = env.conf.templates || {};
     conf.default = conf.default || {};
 
-    // HOOK:
+    // @HOOK
     theme.action('CONFIG_READY', conf);
 
     templatePath = path.normalize(opts.template);
@@ -524,7 +524,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     }
     fs.mkPath(outdir);
 
-    // HOOK:
+    // @HOOK
     theme.action('OUTDIR_READY', outdir);
 
     // copy the template's static files to outdir
@@ -619,7 +619,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     members = helper.getMembers(data);
     members.tutorials = tutorials.children;
 
-    // HOOK:
+    // @HOOK
     theme.action('DATA_READY', data, { members });
 
     // output pretty-printed source files by default
@@ -633,7 +633,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
 
-    // HOOK:
+    // @HOOK
     theme.action('TEMPLATES_READY', view);
 
     // once for all
@@ -655,7 +655,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         packages.concat(
             [{
                 kind: 'mainpage',
-                readme: theme.filter(['USER_HTML', 'README'], opts.readme),
+                readme: theme.filter(['USER_HTML', 'README_HTML'], opts.readme), // @HOOK
                 longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'
             }]
         ).concat(files), indexUrl);
@@ -706,7 +706,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         const tutorialData = {
             title: title,
             header: tutorial.title,
-            content: theme.filter('USER_HTML', tutorial.parse()),
+            content: theme.filter('USER_HTML', tutorial.parse()), // @HOOK
             children: tutorial.children
         };
         const tutorialPath = path.join(outdir, filename);
@@ -715,8 +715,8 @@ exports.publish = (taffyData, opts, tutorials) => {
         // yes, you can use {@link} in tutorials too!
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
 
-        // apply HTML filter
-        html = theme.filter('FINAL', html);
+        // @HOOK
+        html = theme.filter('FINAL_HTML', html);
 
         fs.writeFileSync(tutorialPath, html, 'utf8');
     }

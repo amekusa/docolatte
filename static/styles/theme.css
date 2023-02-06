@@ -460,14 +460,6 @@ h6 {
 .primary.has-footer {
   padding-bottom: 15rem;
 }
-main {
-  margin: 1.5rem;
-}
-main img,
-main video,
-main iframe {
-  max-width: 100%;
-}
 main a {
   overflow-wrap: break-word;
 }
@@ -540,8 +532,15 @@ main hr {
   border-left: none;
   border-right: none;
 }
+main img,
+main video,
+main iframe {
+  max-width: 100%;
+}
 main article {
+  margin: 1.5rem;
   max-width: 960px;
+  overflow: hidden;
 }
 main article.readme:first-child {
   margin-top: 3rem;
@@ -978,6 +977,11 @@ input#docolatte-sidebar-toggle,
   opacity: 0;
   transition: opacity 0.25s ease-out;
 }
+@media only screen and (max-width: 1440px) {
+  main article.src {
+    margin: 0.75rem;
+  }
+}
 @media only screen and (max-width: 1280px) {
   :root {
     font-size: 16px;
@@ -988,7 +992,7 @@ input#docolatte-sidebar-toggle,
     font-size: 15px;
   }
   main article.src {
-    margin: -1.5rem;
+    margin: 0;
   }
   main article.src .prettyprint {
     border-radius: 0;
@@ -1116,7 +1120,7 @@ input#docolatte-sidebar-toggle,
     padding-left: 0.75rem;
     padding-right: 0.75rem;
   }
-  main {
+  main article {
     margin-left: 0.75rem;
     margin-right: 0.75rem;
   }

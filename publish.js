@@ -8,7 +8,7 @@ const { taffy } = require('@jsdoc/salty');
 const template = require('jsdoc/template');
 const util = require('util');
 
-const theme = require('./lib/Docolatte').create();
+const theme = require('./lib/Docolatte').new();
 
 const htmlsafe = helper.htmlsafe;
 const linkto = helper.linkto;
@@ -444,7 +444,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     conf.default = conf.default || {};
 
     // @HOOK
-    theme.action('CONFIG_READY', conf);
+    theme.action('INIT', env, { config: conf });
 
     templatePath = path.normalize(opts.template);
     view = new template.Template( path.join(templatePath, 'tmpl') );

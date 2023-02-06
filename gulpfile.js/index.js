@@ -117,7 +117,8 @@ const t = { // minor tasks
 			base + '/package.json',
 			base + '/fixtures.json',
 			base + '/README.md',
-			base + '/publish.js'
+			base + '/publish.js',
+			base + '/lib/*.js'
 		];
 		return g.watch(watch, t.test_gen);
 	},

@@ -11,7 +11,8 @@
   "main": "publish.js",
   "files": [
     "static",
-    "tmpl"
+    "tmpl",
+    "lib"
   ],
   "scripts": {
     "build": "gulp",

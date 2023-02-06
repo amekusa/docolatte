@@ -20,16 +20,6 @@ let view;
 
 let outdir = path.normalize(env.opts.destination);
 
-/**
- * Returns the language of the given file
- * @return {string}
- * @author amekusa
- */
-function lang(file) {
-    let ext = path.extname(file);
-    return ext.length > 1 ? ext.substring(1) : '';
-}
-
 function find(spec) {
     return helper.find(data, spec);
 }
@@ -264,13 +254,15 @@ function generateSourceFiles(sourceFiles, encoding = 'utf8') {
         try {
             source = {
                 kind: 'source',
-                lang: lang(file),
                 code: helper.htmlsafe( fs.readFileSync(sourceFiles[file].resolved, encoding) )
             };
         }
         catch (e) {
             logger.error('Error while generating source file %s: %s', file, e.message);
         }
+
+        // HOOK:
+        source = theme.filter('SOURCE_DOCLET', source, { file, encoding });
 
         generate(`Source: ${sourceFiles[file].shortened}`, [source], sourceOutfile,
             false);
@@ -490,9 +482,6 @@ exports.publish = (taffyData, opts, tutorials) => {
         doclet.attribs = '';
 
         if (doclet.examples) {
-            let language = '';
-            if (doclet.meta && doclet.meta.filename) language = lang(doclet.meta.filename);
-
             doclet.examples = doclet.examples.map(example => {
                 let caption;
                 let code;
@@ -504,7 +493,6 @@ exports.publish = (taffyData, opts, tutorials) => {
                 }
 
                 return {
-                    lang: language,
                     caption: caption || '',
                     code: code || example
                 };

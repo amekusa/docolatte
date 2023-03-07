@@ -69,12 +69,13 @@ Or set the path to `opts.template` in your JSDoc configuration file:
 ```
 
 ## Customize
-You can customize docolatte by setting options in JSDoc configuration file like this:
+You can customize docolatte by setting options in JSDoc configuration file like this example:
 
 ```json
 {
   "templates": {
     "docolatte": {
+      "imports": [ ... ],
       "branding": {
         "title": "My Project",
         "link":  "https://example.com/project/",
@@ -107,8 +108,10 @@ You need to write the actual config in JSON format just like the above example.
 
 ```yml
 # Docolatte specific options
-templates.docolatte: 
+templates.docolatte:
   minify: Whether to use minified JS and CSS [default: true]
+
+  imports: Custom asset files to import (Explained later)
 
   branding: # Settings for the header on the top left
     title: Title text
@@ -137,7 +140,7 @@ templates.docolatte:
         - 'unified'
         - 'emoticons'
         - 'emoticons_with_colons'
-        
+
       options: # Options for js-emoji  # See https://github.com/iamcal/js-emoji
         replace_mode: [default: 'unified'],
         allow_native: [default: true]
@@ -157,6 +160,84 @@ templates.docolatte:
 
 # All the options for the JSDoc's default theme are also compatible with Docolatte
 templates.default: { ... } # See https://jsdoc.app/about-configuring-default-template.html
+```
+
+## Custom Assets (v4.0)
+With **`imports`** option, Docolatte supports importing **user-specific asset** files like CSS, JavaScript, or images, etc. to completely customize the look & feel of your documentation site.
+
+```json
+"imports": [
+  "my_scripts/alfa.js",
+  "my_styles/bravo.css",
+  "my_fonts/charlie.woff",
+],
+```
+
+This config results copying the files in the array into the directories under the docs respective to each file type as following:
+
+| Extension | Type   | Directory   |
+|----------:|:-------|:------------|
+| `.js`     | script | `scripts/`  |
+| `.css`    | style  | `styles/`   |
+| others    | asset  | `assets/`   |
+
+And then, Docolatte writes the proper `<script>` and `<link>` tags for the imported scripts and styles in `<head>` like this:
+
+```html
+<head>
+  ...
+  <script src="scripts/alfa.js"></script>
+  <link rel="stylesheet" href="styles/bravo.css">
+  ...
+</head>
+```
+
+### More complex options
+Instead of just a file path string, you can use an **object** to specify more complex rules for each file import.
+
+```json
+"imports": [
+  { "src": "my_scripts/alfa.js",  "dst": "foo/bar" },
+  { "src": "my_scripts/bravo.js", "dst": "foo/bar", "as": "delta.js" },
+],
+```
+
+- **`dst`** property specifies the destination directory of import.
+- **`as`** property specifies new filename for the imported file.
+
+#### Loading remote CSS & JS
+With **`resolve`** property, you can change how the file will be treated by Docolatte.
+If you set `false`, Docolatte won't check the file existence and attempt to import, only write `<script>` (or `<link>` for `*.css`) for the `src`.
+
+```json
+"imports": [
+  { "resolve": false, "src": "https://example.com/hello.js" },
+],
+```
+
+#### Importing Node modules
+You can import files from Node modules that you installed via `package.json` of your current project.
+
+```json
+"imports": [
+  { "resolve": "module", "src": "p5/lib/p5.js" },
+],
+```
+
+#### Private import
+If you set **`private`** property to `true`, Docolatte will copy the file into the docs normally, but won't write `<script>` (or `<link>` for `*.css`) in `<head>`.
+
+This is useful if you want to `@import` a CSS file from other one which is not `private`.
+
+```json
+"imports": [
+  { "src": "my_styles/style.css" },
+  { "src": "my_styles/variables.css", "private": true },
+],
+```
+```css
+/* style.css */
+@import "variables.css";
 ```
 
 

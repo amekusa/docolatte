@@ -14,16 +14,15 @@
     <?js } if (this.theme.config.meta.author) { ?>
     <meta name="author" content="<?js= this.theme.config.meta.author ?>">
     <?js } ?>
-    <?js var min = this.theme.config.minify ? '.min' : '' ?>
-    <script src="scripts/main<?js= min ?>.js"></script>
     <?js if (this.theme.config.meta.favicon) { for (let favicon of this.theme.config.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
-    <?js if (this.theme.config.code.theme) { ?>
-    <link type="text/css" rel="stylesheet" href="styles/hljs/<?js= this.theme.config.code.theme ?>.css">
-    <?js } ?>
-    <link type="text/css" rel="stylesheet" href="styles/theme<?js= min ?>.css">
-    <link type="text/css" rel="stylesheet" href="styles/simplebar<?js= min ?>.css">
+    <?js this.u.iterate(this.theme.files.script, file => { ?>
+    <script src="<?js= file.url ?>"></script>
+    <?js }) ?>
+    <?js this.u.iterate(this.theme.files.style, file => { ?>
+    <link type="text/css" rel="stylesheet" href="<?js= file.url ?>">
+    <?js }) ?>
     <noscript>
         <style>
             [data-ready] {

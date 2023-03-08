@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.5.0]
+
+### Added
+- Support importing custom assets with `imports` option
+
+### Fixed
+- The wrong operator in `TmplUtil::list()`
+  - https://github.com/amekusa/docolatte/issues/2
+
+---
+
 ## [3.4.0]
 
 ### Changes
@@ -40,7 +51,7 @@
 ## [3.0.0]
 
 ### Changes
-- Migrated the code highlighter from Google Code Prettify to **[highlight.js](https://highlightjs.org/)**.  
+- Migrated the code highlighter from Google Code Prettify to **[highlight.js](https://highlightjs.org/)**.
   You may need to change the `code.theme` option value to adapt for this migration
 
 ### Added

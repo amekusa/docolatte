@@ -4,7 +4,7 @@
 - [ ] Dark theme
 - [ ] More customizability
   - [ ] Colors
-  - [ ] Custom CSS
+  - [x] Custom CSS
 - [ ] README in TOC
 - [ ] Improve README & tutorial pages
   - [x] Support :emoji:

@@ -35,7 +35,7 @@ const t = { // minor tasks
 		let conf = {
 			input: paths.src.scripts + '/main.js',
 			output: {
-				dir: paths.scripts,
+				file: paths.scripts + '/docolatte.js',
 				name: 'docolatte',
 				format: 'iife',
 				sourcemap: true
@@ -73,7 +73,7 @@ const t = { // minor tasks
 	},
 
 	css_main() {
-		let dst = `${paths.styles}/theme.css`;
+		let dst = `${paths.styles}/docolatte.css`;
 		let src = `${paths.src.styles}/theme.less`;
 		return u.exec(`lessc --source-map '${src}' '${dst}'`);
 	},
@@ -84,7 +84,7 @@ const t = { // minor tasks
 
 	css_minify() {
 		let dst = `${paths.styles}/`;
-		let src = [`${paths.styles}/theme.css`];
+		let src = [`${paths.styles}/docolatte.css`];
 		let opts = {
 			inline: ['all'],
 			level: 1

@@ -103,6 +103,14 @@ h2, h3, h4, h5, h6 {
 	&.has-footer {
 		.pb((@footer-h + @gutter * 2));
 	}
+
+	a {
+		.c(@c-link);
+
+		&:hover, &:focus {
+			text-decoration: underline;
+		}
+	}
 }
 
 main {

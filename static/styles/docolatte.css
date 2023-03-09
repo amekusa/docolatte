@@ -71,15 +71,13 @@ h6 {
   font-size: 1rem;
 }
 a {
-  color: #0095dd;
   text-decoration: none;
 }
+a,
+a:link,
 a:visited,
 a:active {
-  color: #0095dd;
-}
-a:hover {
-  text-decoration: underline;
+  color: inherit;
 }
 p:first-child {
   margin-top: 0;
@@ -460,6 +458,13 @@ h6 {
 .primary.has-footer {
   padding-bottom: 15rem;
 }
+.primary a {
+  color: #0095dd;
+}
+.primary a:hover,
+.primary a:focus {
+  text-decoration: underline;
+}
 main a {
   overflow-wrap: break-word;
 }
@@ -596,9 +601,7 @@ main .signature .signature-attributes {
   margin-left: 0.25em;
 }
 main h2.name .ancestors,
-main h2.name .attribs,
-main h2.name .ancestors a,
-main h2.name .attribs a {
+main h2.name .attribs {
   color: rgba(94, 95, 145, 0.5);
 }
 main h4.name {
@@ -725,11 +728,8 @@ main .props .name {
   height: 100%;
   overflow: hidden;
   background-color: #e8e2da;
-  -webkit-overflow-scrolling: touch;
-}
-.sidebar,
-.sidebar a {
   color: #5e5f91;
+  -webkit-overflow-scrolling: touch;
 }
 .sidebar a {
   opacity: 0.618;

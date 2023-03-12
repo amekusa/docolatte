@@ -360,13 +360,6 @@ figure {
   stroke-linejoin: round;
   fill: none;
 }
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #5e5f91;
-}
 .page {
   position: relative;
   z-index: 0;
@@ -384,10 +377,6 @@ h6 {
   width: 100%;
   height: 3rem;
   color: white;
-}
-.masthead a {
-  color: inherit;
-  text-decoration: none;
 }
 .masthead .branding {
   flex-shrink: 0;
@@ -409,7 +398,8 @@ h6 {
 .masthead .branding a {
   transition: color 0.25s ease-out;
 }
-.masthead .branding a:hover {
+.masthead .branding a:hover,
+.masthead .branding a:focus {
   color: lightseagreen;
 }
 .masthead .branding .link {
@@ -460,13 +450,19 @@ h6 {
 }
 .primary a {
   color: #0095dd;
+  overflow-wrap: break-word;
 }
 .primary a:hover,
 .primary a:focus {
   text-decoration: underline;
 }
-main a {
-  overflow-wrap: break-word;
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+  color: #5e5f91;
 }
 main code:not(.hljs) {
   padding-left: 0.25em;
@@ -552,7 +548,6 @@ main article.readme:first-child {
 }
 main article.readme h1 {
   font-size: 1.5rem;
-  color: #5e5f91;
 }
 main article.readme h2,
 main article.readme h3 {
@@ -602,7 +597,11 @@ main .signature .signature-attributes {
 }
 main h2.name .ancestors,
 main h2.name .attribs {
-  color: rgba(94, 95, 145, 0.5);
+  opacity: 0.5;
+}
+main h2.name .ancestors a,
+main h2.name .attribs a {
+  color: inherit;
 }
 main h4.name {
   margin-top: 3rem;

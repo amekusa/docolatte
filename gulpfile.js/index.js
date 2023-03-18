@@ -124,7 +124,7 @@ const t = { // minor tasks
 	},
 
 	test_run() {
-		return u.exec(`http-server '${paths.test}/latest' -c-1`);
+		return u.exec(`http-server '${paths.test}/latest' -c-1 -o`);
 	},
 
 	test_clean() {

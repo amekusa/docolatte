@@ -1,3 +1,21 @@
+// Simple shortcuts
+.c(@c) { color: @c }
+.op(@op) { opacity: @op }
+.bg(@c) { background-color: @c }
+.img(@src) { background-image: @src }
+
+// Font
+.fs(@size; @lh: -) {
+	font-size: @size;
+	& when not(@lh = -) { line-height: @lh }
+}
+.ff(@ff) { font-family: @ff }
+.fw(@fw) { font-weight: @fw }
+.lh(@lh) { line-height: @lh }
+.bold() { font-weight: bold }
+.italic() { font-style: italic }
+.oblique() { font-style: oblique }
+
 // Display
 .none() { display: none }
 .inline() { display: inline }
@@ -340,34 +358,6 @@
 	.b(0);
 }
 
-.c(@c) {
-	color: @c;
-}
-
-// Background
-.bg(@c) {
-	background-color: @c;
-}
-.img(@src) {
-	background-image: @src;
-}
-
-// Font
-.fs(@size; @lh: -) {
-	font-size: @size;
-	& when not(@lh = -) { line-height: @lh }
-}
-.ff(@ff) {
-	font-family: @ff;
-}
-.lh(@lh) {
-	line-height: @lh;
-}
-.bold() { font-weight: bold }
-.italic() { font-style: italic }
-.oblique() { font-style: oblique }
-
-// Clearfix
 .clearfix() {
 	&::after {
 		display: table;

@@ -1,28 +1,69 @@
-// Simple shortcuts
-.c(@c) { color: @c }
-.op(@op) { opacity: @op }
-.bg(@c) { background-color: @c }
-.img(@src) { background-image: @src }
+// ---- Misc. ----
 
-// Font
-.fs(@size; @lh: -) {
-	font-size: @size;
+.c(@color) { color: @color }
+.op(@opacity) { opacity: @opacity }
+
+
+// ---- Background ----
+
+.bg(@background) { background: @background }
+.bg-c(@background-color) { background-color: @background-color }
+.bg-img(@background-image) { background-image: @background-image }
+
+
+// ---- Font ----
+
+// font-family
+.ff(@font-family) { font-family: @font-family }
+
+// font-size + line-height
+.fs(@font-size; @lh: -) {
+	font-size: @font-size;
 	& when not(@lh = -) { line-height: @lh }
 }
-.ff(@ff) { font-family: @ff }
-.fw(@fw) { font-weight: @fw }
-.lh(@lh) { line-height: @lh }
-.bold() { font-weight: bold }
-.italic() { font-style: italic }
+
+// line-height
+.lh(@line-height) { line-height: @line-height }
+
+// font-weight
+.fw(@font-weight) { font-weight: @font-weight }
+.thin()     { font-weight: 100 }
+.xlight()   { font-weight: 200 }
+.ex-light() { .xlight }
+.light()    { font-weight: 300 }
+.regular()  { font-weight: normal } // 400
+.bold()     { font-weight: bold }   // 700
+.xbold()    { font-weight: 800 }
+.ex-bold()  { .xbold }
+.black()    { font-weight: 900 }
+.xblack()   { font-weight: 950 }
+.ex-black() { .xblack }
+.lighter()  { font-weight: lighter }
+.bolder()   { font-weight: bolder }
+
+// font-style
+.roman()   { font-style: normal }
+.italic()  { font-style: italic }
 .oblique() { font-style: oblique }
 
-// Display
-.none() { display: none }
-.inline() { display: inline }
-.block() { display: block }
-.iblock() { display: inline-block }
+// capitalization style
+.caps(@font-variant-caps) { font-variant-caps: @font-variant-caps }
+.smallcaps() { font-variant-caps: small-caps }
+.capitalize() { text-transform: capitalize }
+.uppercase()  { text-transform: uppercase }
+.lowercase()  { text-transform: lowercase }
 
-.flex() { display: flex }
+
+// ---- Display ----
+
+.nodisp()  { display: none }
+.no-disp() { .nodisp }
+.inline()  { display: inline }
+.block()   { display: block }
+.iblock()  { display: inline-block }
+.inline-block() { .iblock }
+.flex()    { display: flex }
+
 .flex-center() {
 	display: flex;
 	align-items: center;

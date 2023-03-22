@@ -43,7 +43,7 @@
 		.round-bl(.5rem);
 		text-align: right;
 		@bg: #2d2d2d; // derived from: Tomorrow Night 80s
-		.bg(fade(darken(@bg, 10%), 61.8%));
+		.bg-c(fade(darken(@bg, 10%), 61.8%));
 		color: white;
 		text-shadow: -.1em .1em .1em rgba(0, 0, 0, 1);
 		transition: opacity .25s ease-out;
@@ -113,7 +113,7 @@
 			.pos-l(0; absolute);
 			.dim(26px; 4px);
 			border-radius: 2px;
-			.bg(black);
+			.bg-c(black);
 		}
 		.top { top: 0 }
 		.middle { top: 8px }
@@ -178,7 +178,7 @@
 			// transform-box: fill-box;
 			transform-origin: bottom right;
 			transform: translate(-@thickness, -@thickness) rotateZ(-45deg);
-			.bg(@color);
+			.bg-c(@color);
 		}
 	}
 	// feather icons (github.com/feathericons/feather)

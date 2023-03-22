@@ -41,8 +41,8 @@ thead {
 }
 
 dl {
-	.dl-side-by-side(fit-content(6rem); (@gutter / 4) (@gutter / 2));
-	.mv((@gutter / 2); 0);
+	.dl-side-by-side(fit-content(6rem); (@gutter * .25) (@gutter * .5));
+	.mv((@gutter * .5); 0);
 	.bl(1px solid @c-gray-thin);
 	.pl(@gutter);
 	overflow: auto;
@@ -59,7 +59,7 @@ dt {
 	.pv(.25em);
 	text-align: right;
 	white-space: nowrap;
-	color: fade(@c-ink, 61.8%);
+	.c(@c-gray);
 }
 
 hr {
@@ -127,10 +127,12 @@ article {
 // method parameters
 .signature {
 	.ml(.5em);
-	// font-family: @ff-code;
+	.ff(@ff-code);
+	.fs(@fs-m);
 
 	.signature-attributes {
 		.ml(.25em);
+		.fw(normal);
 	}
 }
 
@@ -182,13 +184,12 @@ h4.name {
 	}
 	// type
 	.type-signature {
-		color: @c-gray;
+		.c(@c-gray);
 
 		.type {
 			&::before,
 			&::after {
-				font-weight: normal;
-				color: @c-gray-thin;
+				.op(.5);
 			}
 			&::before {
 				content: "<";
@@ -199,9 +200,14 @@ h4.name {
 				.pl(.25em);
 			}
 			.sep {
+				.op(.5);
 				.mh(.5em);
-				.bl(1px solid @c-gray-thin);
+				.bl(1px solid);
 			}
+		}
+
+		a {
+			.op(.5);
 		}
 	}
 }

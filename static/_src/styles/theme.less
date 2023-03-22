@@ -146,7 +146,7 @@ main {
 	overflow: hidden;
 	.bg(@c-latte);
 	.c(@c-ink);
-	-webkit-overflow-scrolling: touch;
+	-webkit-overflow-scrolling: touch; // momentum scrolling for mobile
 
 	a {
 		opacity: .618;
@@ -247,6 +247,7 @@ main {
 			}
 		}
 		ol.suggestions {
+			@bg: white;
 			list-style: none;
 			.block;
 			.pos-l(0; absolute; (@z-sidebar + 2));
@@ -254,7 +255,7 @@ main {
 			overflow: hidden;
 			.m(0);
 			.p(0);
-			.bg(white);
+			.bg(@bg);
 			border-radius: .5em;
 			box-shadow: .1em .2em .4em rgba(0, 0, 0, .25);
 
@@ -266,32 +267,31 @@ main {
 			}
 			li {
 				font-family: @ff-code;
-				.fs(unit(@fs-s, em));
+				.fs(unit(@fs-s, em); 1.5);
 
-				&.selected > a {
-					.bg(@c-ink);
-					color: white;
-					opacity: 1;
-				}
 				> a {
 					.block;
 					.p(.5em .75em);
-					line-height: 1.25;
+					.op(.618);
 					overflow-wrap: break-word;
 
-					&:hover {
-						.bg(@c-ink-thin);
-						color: white;
-						opacity: 1;
-					}
 					> i.symbol {
-						opacity: .38;
+						.op(.382);
 						.mh(.25em);
 						font-style: normal;
 					}
 				}
+				&.selected > a,
+				> a:hover,
+				> a:focus {
+					.bg(@c-ink);
+					.c(@bg);
+				}
+				&.selected > a {
+					.op(1);
+				}
 				+ li > a {
-					.bt(1px dashed @c-gray-thin);
+					.bt(1px dashed @c-gray);
 				}
 			}
 		}

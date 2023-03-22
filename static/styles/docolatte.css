@@ -38,10 +38,6 @@ body {
 * {
   outline-style: none;
 }
-input:focus,
-button:focus {
-  outline-style: auto;
-}
 h1,
 h2,
 h3,
@@ -525,7 +521,7 @@ main dt {
   padding-bottom: 0.25em;
   text-align: right;
   white-space: nowrap;
-  color: rgba(94, 95, 145, 0.618);
+  color: rgba(94, 95, 145, 0.5);
 }
 main hr {
   border-top: 1px dashed rgba(94, 95, 145, 0.5);
@@ -537,6 +533,11 @@ main img,
 main video,
 main iframe {
   max-width: 100%;
+}
+main blockquote {
+  margin-left: 0;
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(94, 95, 145, 0.25);
 }
 main article {
   margin: 1.5rem;
@@ -591,9 +592,12 @@ main .container-overview h2 {
 }
 main .signature {
   margin-left: 0.5em;
+  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-size: 1rem;
 }
 main .signature .signature-attributes {
   margin-left: 0.25em;
+  font-weight: normal;
 }
 main h2.name .ancestors,
 main h2.name .attribs {
@@ -638,8 +642,7 @@ main h4.name .type-signature {
 }
 main h4.name .type-signature .type::before,
 main h4.name .type-signature .type::after {
-  font-weight: normal;
-  color: rgba(94, 95, 145, 0.25);
+  opacity: 0.5;
 }
 main h4.name .type-signature .type::before {
   content: "<";
@@ -650,9 +653,13 @@ main h4.name .type-signature .type::after {
   padding-left: 0.25em;
 }
 main h4.name .type-signature .type .sep {
+  opacity: 0.5;
   margin-left: 0.5em;
   margin-right: 0.5em;
-  border-left: 1px solid rgba(94, 95, 145, 0.25);
+  border-left: 1px solid;
+}
+main h4.name .type-signature a {
+  opacity: 0.5;
 }
 main h4.name:first-of-type,
 main .subsection-title + h4.name {
@@ -856,31 +863,31 @@ main .props .name {
 .sidebar .search-box ol.suggestions li {
   font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   font-size: 0.85em;
-}
-.sidebar .search-box ol.suggestions li.selected > a {
-  background-color: #5e5f91;
-  color: white;
-  opacity: 1;
+  line-height: 1.5;
 }
 .sidebar .search-box ol.suggestions li > a {
   display: block;
   padding: 0.5em 0.75em;
-  line-height: 1.25;
+  opacity: 0.618;
   overflow-wrap: break-word;
 }
-.sidebar .search-box ol.suggestions li > a:hover {
-  background-color: rgba(94, 95, 145, 0.5);
-  color: white;
-  opacity: 1;
-}
 .sidebar .search-box ol.suggestions li > a > i.symbol {
-  opacity: 0.38;
+  opacity: 0.382;
   margin-left: 0.25em;
   margin-right: 0.25em;
   font-style: normal;
 }
+.sidebar .search-box ol.suggestions li.selected > a,
+.sidebar .search-box ol.suggestions li > a:hover,
+.sidebar .search-box ol.suggestions li > a:focus {
+  background-color: #5e5f91;
+  color: white;
+}
+.sidebar .search-box ol.suggestions li.selected > a {
+  opacity: 1;
+}
 .sidebar .search-box ol.suggestions li + li > a {
-  border-top: 1px dashed rgba(94, 95, 145, 0.25);
+  border-top: 1px dashed rgba(94, 95, 145, 0.5);
 }
 .sidebar .search-box .hint {
   font-size: 0.85em;

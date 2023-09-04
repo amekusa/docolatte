@@ -27,6 +27,9 @@
   "templates": {
     "docolatte": {
       "minify": false,
+      "branding": {
+        "title": "Docolatte"
+      },
       "code": {
         "theme": "base16/espresso"
       },

@@ -14,7 +14,9 @@
     <?js } if (this.theme.config.meta.author) { ?>
     <meta name="author" content="<?js= this.theme.config.meta.author ?>">
     <?js } ?>
-    <?js if (this.theme.config.meta.favicon) { for (let favicon of this.theme.config.meta.favicon) { ?>
+    <?js if (!this.theme.config.meta.favicon.length) { ?>
+    <link rel="icon" title="dummy" href="data:image/x-icon;base64,AA">
+    <?js } else { for (let favicon of this.theme.config.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
     <?js this.u.iterate(this.theme.files.script, file => { ?>

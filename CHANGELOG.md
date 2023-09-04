@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.5.1]
+
+### Fixed
+- Removed jsdoc from dependencies in package.json. This at least suppresses NPM's warning for TaffyDB, which is a false-positive to begin with.
+  - https://github.com/amekusa/docolatte/issues/3
+- Use a dummy favicon if it is not provided by user, in order to avoid 404 error in browser.
+
+---
+
 ## [3.5.0]
 
 ### Added

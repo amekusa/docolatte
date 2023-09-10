@@ -1,0 +1,58 @@
+{
+  "templates": {
+    "docolatte": {
+      "imports": [],
+      "minify": true,
+      "meta": {
+        "lang": "en",
+        "title": null,
+        "description": null,
+        "keywords": null,
+        "author": null,
+        "favicon": []
+      },
+      "branding": {
+        "title": "My Project",
+        "link": "index.html",
+        "icon": "home",
+        "font": {
+          "size": null,
+          "family": null
+        }
+      },
+      "home": {
+        "package": {
+          "hide": false
+        }
+      },
+      "readme": {
+        "truncate": true,
+        "emoji": {
+          "replace": "colons",
+          "options": {
+            "replace_mode": "unified",
+            "allow_native": true
+          }
+        }
+      },
+      "footer": {
+        "hide": false,
+        "copyright": null,
+        "license": null,
+        "hideGenerator": false
+      },
+      "code": {
+        "theme": "base16/espresso"
+      },
+      "search": {
+        "hint": {
+          "hide": false,
+          "body": [
+            "<p><b>Hint:</b> You don't need to click on the search box to input.</p>",
+            "<p class=\"more\">Just start typing your words at <strong>any time</strong> to search for it.</p>"
+          ]
+        }
+      }
+    }
+  }
+}

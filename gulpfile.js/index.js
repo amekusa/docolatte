@@ -118,7 +118,8 @@ const t = { // minor tasks
 			base + '/fixtures.json',
 			base + '/README.md',
 			base + '/publish.js',
-			base + '/lib/*.js'
+			base + '/lib/*.js',
+			base + '/lib/*.json'
 		];
 		return g.watch(watch, t.test_gen);
 	},

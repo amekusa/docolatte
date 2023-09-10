@@ -49,6 +49,7 @@
         "theme": "base16/espresso"
       },
       "search": {
+        "placeholder": "type to search…",
         "hint": {
           "hide": false,
           "body": [

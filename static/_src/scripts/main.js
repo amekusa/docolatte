@@ -193,7 +193,7 @@ import HLJS from 'highlight.js/lib/common';
 			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);
 			let suggests = find(base, '.suggestions', 0);
-			let hint = find(base, '.hint', 0);
+			let hint = find(base, '.hint', 0); // can be not present
 			let lastQuery = '';
 
 			// search as you type
@@ -210,7 +210,7 @@ import HLJS from 'highlight.js/lib/common';
 				if (!results.length) return;
 				// console.debug('RESULTS:', results);
 
-				hint.classList.add('hidden'); // hide hint
+				if (hint) hint.classList.add('hidden'); // hide hint
 
 				// show the results
 				for (let i = 0; i < results.length; i++) {
@@ -256,13 +256,15 @@ import HLJS from 'highlight.js/lib/common';
 			});
 
 			// hint
-			input.addEventListener('click', ev => {
-				if (ev.target.value) return;
-				hint.classList.remove('hidden');
-			});
-			input.addEventListener('blur', ev => {
-				hint.classList.add('hidden');
-			});
+			if (hint) {
+				input.addEventListener('click', ev => {
+					if (ev.target.value) return;
+					hint.classList.remove('hidden');
+				});
+				input.addEventListener('blur', ev => {
+					hint.classList.add('hidden');
+				});
+			}
 
 			// force sidebar to show when searchbox gets focused
 			input.addEventListener('focus', ev => {

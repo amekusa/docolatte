@@ -121,7 +121,8 @@ const T = {
 	css_build() {
 		let dst = `${paths.styles}/docolatte.css`;
 		let src = `${paths.src.styles}/theme.less`;
-		return sh.exec(`lessc --source-map '${src}' '${dst}'`);
+		let opts = sh.prod() ? '' : '--source-map';
+		return sh.exec(`lessc ${opts} '${src}' '${dst}'`);
 	},
 
 	css_minify() {

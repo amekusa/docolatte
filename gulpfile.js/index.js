@@ -4,7 +4,7 @@
  */
 
 const // node
-	{ chdir, env } = require('node:process'),
+	{ chdir } = require('node:process'),
 	{ dirname, basename } = require('node:path');
 
 const // gulp
@@ -20,7 +20,6 @@ const // rollup
 
 const // misc
 	{ io, sh } = require('@amekusa/nodeutil'),
-	less = require('less'),
 	bs = require('browser-sync').create();
 
 const // lib

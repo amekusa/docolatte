@@ -21,6 +21,7 @@
 
 @import "util";
 @import "vars";
+@import "props";
 @import "fonts";
 @import "base";
 @import "mixins";
@@ -96,7 +97,7 @@
 	}
 
 	a {
-		.c(@c-link);
+		.c(var(--c-link));
 		overflow-wrap: break-word;
 
 		&:hover, &:focus {
@@ -116,10 +117,10 @@ main {
 	.pos-br(0; 0; absolute);
 	.pl((@sidebar-w + @gutter));
 	.pv(@gutter);
-	.bb(@gutter solid @c-latte);
-	.stripe(-60deg; @c-latte; white; 1px; 4px);
+	.bb(@gutter solid var(--c-latte));
+	.stripe(-60deg; var(--c-latte); white; 1px; 4px);
 	background-attachment: fixed;
-	color: @c-choco;
+	color: var(--c-choco);
 
 	p {
 		.m(0);
@@ -144,8 +145,8 @@ main {
 	.pos-tl(0; 0; fixed; @z-sidebar);
 	.dim(@sidebar-w; 100%; border-box);
 	overflow: hidden;
-	.bg-c(@c-latte);
-	.c(@c-ink);
+	.bg-c(var(--c-latte));
+	.c(var(--c-ink));
 	-webkit-overflow-scrolling: touch; // momentum scrolling for mobile
 
 	a {
@@ -236,7 +237,7 @@ main {
 			border-radius: (@h / 2);
 
 			&::placeholder {
-				color: @c-gray;
+				color: var(--c-gray);
 			}
 			&:focus ~ ol.suggestions {
 				visibility: visible;
@@ -284,19 +285,19 @@ main {
 				&.selected > a,
 				> a:hover,
 				> a:focus {
-					.bg-c(@c-ink);
+					.bg-c(var(--c-ink));
 					.c(@bg);
 				}
 				&.selected > a {
 					.op(1);
 				}
 				+ li > a {
-					.bt(1px dashed @c-gray);
+					.bt(1px dashed var(--c-gray));
 				}
 			}
 		}
 		.hint {
-			@bg: black; // @c-black;
+			@bg: black; // var(--c-black);
 			.fs(unit(@fs-s, em); 1.25);
 			.pos-l(0; absolute; @z-sidebar+1);
 			.mt(.5em);
@@ -327,7 +328,7 @@ main {
 				}
 			}
 			strong {
-				color: @c-pink;
+				color: var(--c-pink);
 			}
 		}
 	}
@@ -349,7 +350,7 @@ input#docolatte-sidebar-toggle,
 		.spread;
 		border-radius: (@size / 2);
 
-		.bg-c(@c-latte);
+		.bg-c(var(--c-latte));
 		box-shadow: -.1rem .1rem .4rem rgba(0, 0, 0, .5);
 		transition: all .25s ease-out;
 

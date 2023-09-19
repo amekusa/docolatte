@@ -1,5 +1,5 @@
 h1, h2, h3, h4, h5, h6 {
-	color: @c-ink;
+	color: var(--c-ink);
 }
 
 code:not(.hljs) {
@@ -11,28 +11,28 @@ a code {
 }
 
 table {
-	.bb(4px solid @c-latte; 1px solid @c-latte);
+	.bb(4px solid var(--c-latte); 1px solid var(--c-latte));
 }
 tr {
 	+ tr > * {
-		.bt(1px solid @c-latte);
+		.bt(1px solid var(--c-latte));
 	}
 }
 td + td,
 th + th,
 th + td {
-	.bl(1px dashed @c-latte);
+	.bl(1px dashed var(--c-latte));
 }
 td + th {
-	.bl(1px solid @c-latte);
+	.bl(1px solid var(--c-latte));
 }
 th,
 thead > tr > td {
-	// color: @c-ink;
+	// color: var(--c-ink);
 }
 thead {
 	> tr {
-		.stripe(-60deg; @c-latte; white; 1px; 3px);
+		.stripe(-60deg; var(--c-latte); white; 1px; 3px);
 
 		> * + * {
 			.bl(none);
@@ -43,7 +43,7 @@ thead {
 dl {
 	.dl-side-by-side(fit-content(6rem); (@gutter * .25) (@gutter * .5));
 	.mv((@gutter * .5); 0);
-	.bl(1px solid @c-gray-thin);
+	.bl(1px solid var(--c-gray-thin));
 	.pl(@gutter);
 	overflow: auto;
 
@@ -59,11 +59,11 @@ dt {
 	.pv(.25em);
 	text-align: right;
 	white-space: nowrap;
-	.c(@c-gray);
+	.c(var(--c-gray));
 }
 
 hr {
-	.bt(1px dashed @c-gray; none);
+	.bt(1px dashed var(--c-gray); none);
 }
 
 img,
@@ -75,7 +75,7 @@ iframe {
 blockquote {
 	.ml(0);
 	.pl(@gutter);
-	.bl(1px solid @c-gray-thin);
+	.bl(1px solid var(--c-gray-thin));
 }
 
 article {
@@ -151,10 +151,10 @@ h2.name {
 h4.name {
 	.mt((@gutter * 2));
 	.pt(@gutter);
-	.bt(1px dashed @c-gray);
+	.bt(1px dashed var(--c-gray));
 	font-weight: normal;
 	font-family: @ff-code;
-	color: @c-pink;
+	color: var(--c-pink);
 
 	// attributes ('static', 'abstract', etc.)
 	.attributes {
@@ -164,7 +164,7 @@ h4.name {
 			display: inline-block;
 			font-size: @fs-xs;
 			color: white;
-			.bg-c(@c-pink);
+			.bg-c(var(--c-pink));
 			.ph(.5em);
 			border-radius: .25em;
 			.mr(.5em);
@@ -176,15 +176,15 @@ h4.name {
 	}
 	// parameters
 	.signature {
-		color: @c-pink-thin;
+		color: var(--c-pink-thin);
 
 		.signature-attributes {
-			color: spin(@c-pink-thin, 40);
+			color: var(--c-pink-spin);
 		}
 	}
 	// type
 	.type-signature {
-		.c(@c-gray);
+		.c(var(--c-gray));
 
 		.type {
 			&::before,

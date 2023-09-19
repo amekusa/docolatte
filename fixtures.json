@@ -6,8 +6,7 @@
     "includePattern": ".+\\.(e|c)?js(doc|x)?$",
     "include": [
       "./fixtures",
-      "./README.md",
-      "./package.json"
+      "./README.md"
     ]
   },
   "plugins": ["plugins/markdown"],

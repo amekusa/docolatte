@@ -73,7 +73,7 @@ const T = {
 				name: 'docolatte',
 				format: 'iife',
 				sourcemap: !sh.prod(),
-				indent: true,
+				indent: false,
 			},
 			plugins: [
 				rNode({

@@ -1,163 +1,268 @@
 /*!
- * gulp tasks for docolatte
+ * Gulp tasks for Docolatte
  * @author amekusa
  */
 
-const { dirname } = require('node:path');
+const // node
+	{ chdir, env } = require('node:process'),
+	{ dirname, basename } = require('node:path');
 
-const g = require('gulp');
-const s = g.series;
-const p = g.parallel;
-const _rename = require('gulp-rename');
+const // gulp
+	$ = require('gulp'),
+	$rename = require('gulp-rename'),
+	$S = $.series,
+	$P = $.parallel;
 
-const { rollup } = require('rollup');
-const nodeResolve = require('@rollup/plugin-node-resolve');
-const commonjs = require('@rollup/plugin-commonjs');
+const // rollup
+	{ rollup } = require('rollup'),
+	rNode = require('@rollup/plugin-node-resolve'),
+	rCJS = require('@rollup/plugin-commonjs');
 
-const u = require('./util');
+const // misc
+	{ io, sh } = require('@amekusa/nodeutil'),
+	less = require('less'),
+	bs = require('browser-sync').create();
 
-const base = dirname(__dirname);
-const pkg = require(base + '/package.json');
+const // lib
+	U = require('./util');
+
+const // shortcuts
+	{ log, debug, warn, error } = console;
+
+// project root
+const home = dirname(__dirname); chdir(home);
+
+// package info
+const pkg = require(`${home}/package.json`);
+
 const paths = {
 	src: {
-		scripts: base + '/static/_src/scripts',
-		styles:  base + '/static/_src/styles',
-		test: base + '/fixtures'
+		scripts:  'static/_src/scripts',
+		styles:   'static/_src/styles',
+		fixtures: 'fixtures'
 	},
-	scripts: base + '/static/scripts',
-	styles:  base + '/static/styles',
-	test: base + `/fixtures-doc/${pkg.name}`,
-	tmpl: base + '/tmpl'
+	scripts:  'static/scripts',
+	styles:   'static/styles',
+	fixtures: 'fixtures-doc',
+	tmpl:     'tmpl'
 };
 
-const t = { // minor tasks
-	async js_main() {
-		let conf = {
-			input: paths.src.scripts + '/main.js',
-			output: {
-				file: paths.scripts + '/docolatte.js',
-				name: 'docolatte',
-				format: 'iife',
-				sourcemap: true
-			},
-			plugins: [
-				nodeResolve(),
-				commonjs()
-			]
-		};
-		let bundle = await rollup(conf);
-		return bundle.write(conf.output);
+const ctx = {
+	rConf: null, // rollup config
+};
+
+/**
+ * Tasks
+ */
+const T = {
+
+	default(done) {
+		log(' :: Gulp - Available Tasks:');
+		for (let key in $.registry().tasks()) log(key);
+		done();
 	},
 
-	js_main_watch() {
-		return g.watch([paths.src.scripts + '/main.js'], t.js_main);
+	js_build() {
+		let conf = ctx.rConf;
+		if (conf) {
+			if (typeof conf.cache == 'object') log(' :: Rollup - Cache Used');
+
+		} else conf = {
+			input: `${paths.src.scripts}/main.js`,
+			output: {
+				file: `${paths.scripts}/docolatte.js`,
+				name: 'docolatte',
+				format: 'iife',
+				sourcemap: !sh.prod(),
+				indent: false,
+			},
+			plugins: [
+				rNode({
+					browser: true,
+				}),
+				rCJS(),
+			],
+			treeshake: sh.prod(),
+			cache: true,
+		};
+
+		return rollup(conf).then(bundle => {
+			if (bundle.cache) {
+				conf.cache = bundle.cache;
+				log(' :: Rollup - Cache Stored');
+			}
+			ctx.rConf = conf;
+			return bundle.write(conf.output);
+		}).then(bs.reload);
 	},
 
 	js_minify() {
 		let dst = `${paths.scripts}/`;
-		let src = [`${paths.scripts}/*.js`, `!${paths.scripts}/*.min.js`];
+		let src = [
+			`${paths.scripts}/*.js`,
+			`!${paths.scripts}/*.min.js`,
+		];
 		let opts = {};
-		return g.src(src)
-			.pipe(u.modify((data, enc) => {
-				return u.minifyJS(data, enc, opts).then(r => {
-					console.log('stats:', r.stats.summary);
+		return $.src(src)
+			.pipe(io.stream.modify((data, enc) => {
+				return U.minifyJS(data, enc, opts).then(r => {
+					log(' :: Minify - Stats:', r.stats.summary);
 					return r.data;
 				});
 			}))
-			.pipe(_rename({ extname: '.min.js' }))
-			.pipe(g.dest(dst));
+			.pipe($rename({ extname: '.min.js' }))
+			.pipe($.dest(dst));
 	},
 
 	js_clean() {
-		return u.clean(`${paths.scripts}`);
+		return io.rm(paths.scripts);
 	},
 
-	css_main() {
+	css_build() {
 		let dst = `${paths.styles}/docolatte.css`;
 		let src = `${paths.src.styles}/theme.less`;
-		return u.exec(`lessc --source-map '${src}' '${dst}'`);
-	},
-
-	css_main_watch() {
-		return g.watch([paths.src.styles + '/*.less'], t.css_main);
+		return sh.exec(`lessc --source-map '${src}' '${dst}'`);
 	},
 
 	css_minify() {
-		let dst = `${paths.styles}/`;
-		let src = [`${paths.styles}/docolatte.css`];
+		let dst = paths.styles;
+		let src = `${paths.styles}/docolatte.css`;
 		let opts = {
 			inline: ['all'],
-			level: 1
+			level: 1,
 		};
-		return g.src(src)
-			.pipe(u.modify((data, enc) => {
-				return u.minifyCSS(data, enc, opts).then(r => {
-					console.log('stats:', r.stats.summary);
+		return $.src(src)
+			.pipe(io.stream.modify((data, enc) => {
+				return U.minifyCSS(data, enc, opts).then(r => {
+					log(' :: Minify - Stats:', r.stats.summary);
 					return r.data;
 				});
 			}))
-			.pipe(_rename({ extname: '.min.css' }))
-			.pipe(g.dest(dst));
+			.pipe($rename({ extname: '.min.css' }))
+			.pipe($.dest(dst));
 	},
 
 	css_clean() {
-		return u.clean(`${paths.styles}`);
+		return io.rm(paths.styles);
 	},
 
-	test_gen() {
-		return u.exec(`jsdoc -c '${base}/fixtures.json' && cd '${paths.test}' && ln -sfn '${pkg.version}' latest`);
+	fixtures_build() {
+		return sh.exec('jsdoc -c fixtures.json').then(bs.reload);
 	},
 
-	test_gen_watch() {
-		let watch = [
-			paths.src.test + '/**/*',
-			paths.scripts + '/*.js',
-			paths.styles + '/*.css',
-			paths.tmpl + '/*.tmpl',
-			base + '/package.json',
-			base + '/fixtures.json',
-			base + '/README.md',
-			base + '/publish.js',
-			base + '/lib/*.js',
-			base + '/lib/*.json'
-		];
-		return g.watch(watch, t.test_gen);
+	fixtures_clean() {
+		return io.rm(paths.fixtures);
 	},
 
-	test_run() {
-		return u.exec(`http-server '${paths.test}/latest' -c-1 -o`);
+	fixtures_serve(done) {
+		return bs.active ? done() : bs.init({
+			open: false,
+			server: {
+				baseDir: paths.fixtures,
+				index: 'index.html'
+			}
+		}, done);
 	},
 
-	test_clean() {
-		return u.exec(`[ ! -d '${paths.test}' ] || rm -rf '${paths.test}'`);
+	watch() {
+		// auto-build js
+		$.watch([
+			`${paths.src.scripts}/main.js`
+		], T.js_build);
+
+		// auto-build css
+		$.watch([
+			`${paths.src.styles}/*.less`
+		], T.css_build);
+
+		// auto-build fixtures
+		$.watch([
+			`${paths.src.fixtures}/**/*`,
+			`${paths.tmpl}/*.tmpl`,
+			'package.json',
+			'fixtures.json',
+			'README.md',
+			'publish.js',
+			'lib/*.{js,json}',
+		], T.fixtures_build);
+
+		// copy scripts/styles to fixtures on change
+		$.watch([
+			`${paths.src.scripts}/**/*`,
+			`${paths.src.styles}/**/*`,
+			`${paths.scripts}/**/*`,
+			`${paths.styles}/**/*`,
+		]).on('change', src => {
+			let dst = src.replace(/^static\//, `${paths.fixtures}/`);
+			sh.exec(`cp '${src}' '${dst}'`).then(() => {
+				log(' :: File - Copied:');
+				log('  src:', src);
+				log('  dst:', dst);
+				if (!dst.match(/\/_src\//) && dst.match(/\.(js|css)$/)) {
+					log(' :: Browsersync - Reload:', dst);
+					bs.reload(basename(dst));
+				}
+			});
+		});
 	},
 };
 
-// major tasks
-const x = {};
-x.js = t.js_main;
-x.css = t.css_main;
-x.build = p(x.js, x.css);
-x.test = s(t.test_gen, t.test_run);
-x.clean = p(t.js_clean, t.css_clean, t.test_clean);
+/**
+ * Private Tasks
+ */
+const t = {
+	env_prod(done) {
+		sh.prod(true);
+		log(' :: Env. > Production');
+		done();
+	},
+	env_dev(done) {
+		sh.dev(true);
+		log(' :: Env. > Development');
+		done();
+	},
+};
 
-x.default = s(
-	p(
-		s(t.js_clean, x.js, t.js_minify),
-		s(t.css_clean, x.css, t.css_minify)
+/**
+ * Composite Tasks
+ */
+T.js = $S(
+	T.js_clean,
+	T.js_build,
+	T.js_minify
+);
+T.css = $S(
+	T.css_clean,
+	T.css_build,
+	T.css_minify
+);
+T.fixtures = $S(
+	T.fixtures_clean,
+	T.fixtures_build,
+	T.fixtures_serve
+);
+T.clean = $P(
+	T.js_clean,
+	T.css_clean,
+	T.fixtures_clean
+);
+T.build = $S(
+	$P(
+		T.js,
+		T.css
 	),
-	s(t.test_clean, t.test_gen)
+	T.fixtures_clean,
+	T.fixtures_build
+);
+T.dev = $S(
+	t.env_dev,
+	T.build,
+	T.fixtures_serve,
+	T.watch
+);
+T.dist = $S(
+	t.env_prod,
+	T.build
 );
 
-x.watch = s(
-	x.build,
-	t.test_gen,
-	p(
-		t.test_run,
-		t.js_main_watch,
-		t.css_main_watch,
-		t.test_gen_watch
-	)
-);
-
-module.exports = x;
+module.exports = T;

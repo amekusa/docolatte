@@ -154,7 +154,6 @@
 	&.magnifier {
 		@size: 1em;
 		@thickness: 1px;
-		@color: var(--c-ink);
 		.square(@size);
 
 		&::before,
@@ -168,7 +167,7 @@
 		&::before {
 			.pos-tl(0; 0);
 			.square(80%);
-			.b(@thickness solid @color);
+			.b(@thickness solid var(--c-ink));
 			border-radius: (@size / 2);
 		}
 		// handle
@@ -178,7 +177,7 @@
 			// transform-box: fill-box;
 			transform-origin: bottom right;
 			transform: translate(-@thickness, -@thickness) rotateZ(-45deg);
-			.bg-c(@color);
+			.bg-c(var(--c-ink));
 		}
 	}
 	// feather icons (github.com/feathericons/feather)

@@ -911,7 +911,7 @@ main .props .name {
   margin-top: 0.5em;
   padding: 0.5em 0.75em;
   border-radius: 0.38em;
-  background-color: black;
+  background-color: var(--c-black);
   color: white;
   box-shadow: 0.1em 0.2em 0.4em rgba(0, 0, 0, 0.25);
 }
@@ -925,7 +925,7 @@ main .props .name {
   width: 0;
   height: 0;
   border-top: none;
-  border-bottom: 0.62em solid black;
+  border-bottom: 0.62em solid var(--c-black);
   border-left: 0.5em solid transparent;
   border-right: 0.5em solid transparent;
 }

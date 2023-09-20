@@ -1,5 +1,5 @@
 h1, h2, h3, h4, h5, h6 {
-	color: var(--c-ink);
+	color: var(--c-heading);
 }
 
 code:not(.hljs) {
@@ -11,28 +11,28 @@ a code {
 }
 
 table {
-	.bb(4px solid var(--c-latte); 1px solid var(--c-latte));
+	.bb(4px solid var(--c-theme); 1px solid var(--c-theme));
 }
 tr {
 	+ tr > * {
-		.bt(1px solid var(--c-latte));
+		.bt(1px solid var(--c-theme));
 	}
 }
 td + td,
 th + th,
 th + td {
-	.bl(1px dashed var(--c-latte));
+	.bl(1px dashed var(--c-theme));
 }
 td + th {
-	.bl(1px solid var(--c-latte));
+	.bl(1px solid var(--c-theme));
 }
 th,
 thead > tr > td {
-	// color: var(--c-ink);
+	// color: var(--c-heading);
 }
 thead {
 	> tr {
-		.stripe(-60deg; var(--c-latte); white; 1px; 3px);
+		.stripe(-60deg; var(--c-theme); white; 1px; 3px);
 
 		> * + * {
 			.bl(none);
@@ -43,7 +43,7 @@ thead {
 dl {
 	.dl-side-by-side(fit-content(6rem); (@gutter * .25) (@gutter * .5));
 	.mv((@gutter * .5); 0);
-	.bl(1px solid var(--c-gray-thin));
+	.bl(1px solid var(--c-border-thin));
 	.pl(@gutter);
 	overflow: auto;
 
@@ -59,11 +59,11 @@ dt {
 	.pv(.25em);
 	text-align: right;
 	white-space: nowrap;
-	.c(var(--c-gray));
+	.c(var(--c-text-thin));
 }
 
 hr {
-	.bt(1px dashed var(--c-gray); none);
+	.bt(1px dashed var(--c-border); none);
 }
 
 img,
@@ -75,7 +75,7 @@ iframe {
 blockquote {
 	.ml(0);
 	.pl(@gutter);
-	.bl(1px solid var(--c-gray-thin));
+	.bl(1px solid var(--c-border-thin));
 }
 
 article {
@@ -151,10 +151,10 @@ h2.name {
 h4.name {
 	.mt((@gutter * 2));
 	.pt(@gutter);
-	.bt(1px dashed var(--c-gray));
+	.bt(1px dashed var(--c-border));
 	font-weight: normal;
 	font-family: @ff-code;
-	color: var(--c-pink);
+	color: var(--c-member);
 
 	// attributes ('static', 'abstract', etc.)
 	.attributes {
@@ -164,7 +164,7 @@ h4.name {
 			display: inline-block;
 			font-size: @fs-xs;
 			color: white;
-			.bg-c(var(--c-pink));
+			.bg-c(var(--c-member));
 			.ph(.5em);
 			border-radius: .25em;
 			.mr(.5em);
@@ -176,15 +176,15 @@ h4.name {
 	}
 	// parameters
 	.signature {
-		color: var(--c-pink-thin);
+		color: var(--c-params);
 
 		.signature-attributes {
-			color: var(--c-pink-spin);
+			color: var(--c-params-attr);
 		}
 	}
 	// type
 	.type-signature {
-		.c(var(--c-gray));
+		.c(var(--c-text-thin));
 
 		.type {
 			&::before,

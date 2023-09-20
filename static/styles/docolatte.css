@@ -17,18 +17,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-:root {
-  --c-black: #4d4e53;
-  --c-ink: #5e5f91;
-  --c-ink-thin: #5e5f9180;
-  --c-gray: var(--c-ink-thin);
-  --c-gray-thin: #5e5f9140;
+body {
+  --c-text: #4d4e53;
+  --c-text-thin: #5e5f9180;
+  --c-heading: #5e5f91;
+  --c-heading-thin: #5e5f9180;
+  --c-border: #5e5f9180;
+  --c-border-thin: #5e5f9140;
   --c-link: #0095dd;
-  --c-latte: #e8e2da;
-  --c-choco: #a69494;
-  --c-pink: hotpink;
-  --c-pink-thin: lightpink;
-  --c-pink-spin: #ffdcb6;
+  --c-theme: #e8e2da;
+  --c-footer: #a69494;
+  --c-member: hotpink;
+  --c-params: lightpink;
+  --c-params-attr: #ffdcb6;
 }
 :root,
 body {
@@ -45,8 +46,8 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
-  color: var(--c-black);
-  background-color: var(--c-latte);
+  color: var(--c-text);
+  background-color: var(--c-theme);
 }
 * {
   outline-style: none;
@@ -350,7 +351,7 @@ figure {
   left: 0;
   width: 80%;
   height: 80%;
-  border: 1px solid var(--c-ink);
+  border: 1px solid var(--c-heading);
   border-radius: 0.5em;
 }
 .icon.magnifier::after {
@@ -360,7 +361,7 @@ figure {
   right: -0.5px;
   transform-origin: bottom right;
   transform: translate(-1px, -1px) rotateZ(-45deg);
-  background-color: var(--c-ink);
+  background-color: var(--c-heading);
 }
 .icon.feather {
   stroke: currentColor;
@@ -471,7 +472,7 @@ main h3,
 main h4,
 main h5,
 main h6 {
-  color: var(--c-ink);
+  color: var(--c-heading);
 }
 main code:not(.hljs) {
   padding-left: 0.25em;
@@ -482,24 +483,24 @@ main a code {
   color: inherit;
 }
 main table {
-  border-bottom: 4px solid var(--c-latte);
-  border-top: 1px solid var(--c-latte);
-  border-left: 1px solid var(--c-latte);
-  border-right: 1px solid var(--c-latte);
+  border-bottom: 4px solid var(--c-theme);
+  border-top: 1px solid var(--c-theme);
+  border-left: 1px solid var(--c-theme);
+  border-right: 1px solid var(--c-theme);
 }
 main tr + tr > * {
-  border-top: 1px solid var(--c-latte);
+  border-top: 1px solid var(--c-theme);
 }
 main td + td,
 main th + th,
 main th + td {
-  border-left: 1px dashed var(--c-latte);
+  border-left: 1px dashed var(--c-theme);
 }
 main td + th {
-  border-left: 1px solid var(--c-latte);
+  border-left: 1px solid var(--c-theme);
 }
 main thead > tr {
-  background-image: repeating-linear-gradient(-60deg, white 0, var(--c-latte) 1px, var(--c-latte) 1px, white 2px, white 4px);
+  background-image: repeating-linear-gradient(-60deg, white 0, var(--c-theme) 1px, var(--c-theme) 1px, white 2px, white 4px);
 }
 main thead > tr > * + * {
   border-left: none;
@@ -510,7 +511,7 @@ main dl {
   gap: 0.375rem 0.75rem;
   margin-top: 0.75rem;
   margin-bottom: 0;
-  border-left: 1px solid var(--c-gray-thin);
+  border-left: 1px solid var(--c-border-thin);
   padding-left: 1.5rem;
   overflow: auto;
 }
@@ -534,10 +535,10 @@ main dt {
   padding-bottom: 0.25em;
   text-align: right;
   white-space: nowrap;
-  color: var(--c-gray);
+  color: var(--c-text-thin);
 }
 main hr {
-  border-top: 1px dashed var(--c-gray);
+  border-top: 1px dashed var(--c-border);
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -550,7 +551,7 @@ main iframe {
 main blockquote {
   margin-left: 0;
   padding-left: 1.5rem;
-  border-left: 1px solid var(--c-gray-thin);
+  border-left: 1px solid var(--c-border-thin);
 }
 main article {
   margin: 1.5rem;
@@ -623,10 +624,10 @@ main h2.name .attribs a {
 main h4.name {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed var(--c-gray);
+  border-top: 1px dashed var(--c-border);
   font-weight: normal;
   font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
-  color: var(--c-pink);
+  color: var(--c-member);
 }
 main h4.name .attributes {
   vertical-align: 0.1em;
@@ -635,7 +636,7 @@ main h4.name .attributes > .attribute {
   display: inline-block;
   font-size: 0.7rem;
   color: white;
-  background-color: var(--c-pink);
+  background-color: var(--c-member);
   padding-left: 0.5em;
   padding-right: 0.5em;
   border-radius: 0.25em;
@@ -645,13 +646,13 @@ main h4.name .attributes > .attribute:last-child {
   margin-right: 0.5rem;
 }
 main h4.name .signature {
-  color: var(--c-pink-thin);
+  color: var(--c-params);
 }
 main h4.name .signature .signature-attributes {
-  color: var(--c-pink-spin);
+  color: var(--c-params-attr);
 }
 main h4.name .type-signature {
-  color: var(--c-gray);
+  color: var(--c-text-thin);
 }
 main h4.name .type-signature .type::before,
 main h4.name .type-signature .type::after {
@@ -715,10 +716,10 @@ main .props .name {
   padding-left: 17.5rem;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1.5rem solid var(--c-latte);
-  background-image: repeating-linear-gradient(-60deg, white 0, var(--c-latte) 1px, var(--c-latte) 1px, white 2px, white 5px);
+  border-bottom: 1.5rem solid var(--c-theme);
+  background-image: repeating-linear-gradient(-60deg, white 0, var(--c-theme) 1px, var(--c-theme) 1px, white 2px, white 5px);
   background-attachment: fixed;
-  color: var(--c-choco);
+  color: var(--c-footer);
 }
 .colophon p {
   margin: 0;
@@ -746,8 +747,8 @@ main .props .name {
   width: 16rem;
   height: 100%;
   overflow: hidden;
-  background-color: var(--c-latte);
-  color: var(--c-ink);
+  background-color: var(--c-theme);
+  color: var(--c-heading);
   -webkit-overflow-scrolling: touch;
 }
 .sidebar a {
@@ -843,7 +844,7 @@ main .props .name {
   border-radius: 0.875em;
 }
 .sidebar .search-box input[type=text]::placeholder {
-  color: var(--c-gray);
+  color: var(--c-text-thin);
 }
 .sidebar .search-box input[type=text]:focus ~ ol.suggestions {
   visibility: visible;
@@ -893,14 +894,14 @@ main .props .name {
 .sidebar .search-box ol.suggestions li.selected > a,
 .sidebar .search-box ol.suggestions li > a:hover,
 .sidebar .search-box ol.suggestions li > a:focus {
-  background-color: var(--c-ink);
+  background-color: var(--c-heading);
   color: white;
 }
 .sidebar .search-box ol.suggestions li.selected > a {
   opacity: 1;
 }
 .sidebar .search-box ol.suggestions li + li > a {
-  border-top: 1px dashed var(--c-gray);
+  border-top: 1px dashed var(--c-border);
 }
 .sidebar .search-box .hint {
   font-size: 0.85em;
@@ -911,7 +912,7 @@ main .props .name {
   margin-top: 0.5em;
   padding: 0.5em 0.75em;
   border-radius: 0.38em;
-  background-color: var(--c-black);
+  background-color: var(--c-text);
   color: white;
   box-shadow: 0.1em 0.2em 0.4em rgba(0, 0, 0, 0.25);
 }
@@ -925,7 +926,7 @@ main .props .name {
   width: 0;
   height: 0;
   border-top: none;
-  border-bottom: 0.62em solid var(--c-black);
+  border-bottom: 0.62em solid var(--c-text);
   border-left: 0.5em solid transparent;
   border-right: 0.5em solid transparent;
 }
@@ -939,7 +940,7 @@ main .props .name {
   margin-top: 0.5em;
 }
 .sidebar .search-box .hint strong {
-  color: var(--c-pink);
+  color: var(--c-member);
 }
 input#docolatte-sidebar-toggle,
 .menu-button {
@@ -965,7 +966,7 @@ input#docolatte-sidebar-toggle,
   width: 100%;
   height: 100%;
   border-radius: 2rem;
-  background-color: var(--c-latte);
+  background-color: var(--c-theme);
   box-shadow: -0.1rem 0.1rem 0.4rem rgba(0, 0, 0, 0.5);
   transition: all 0.25s ease-out;
 }

@@ -90,7 +90,7 @@
 	.h-min(100%);
 	.pv(@topbar-h; (@gutter * 2));
 	.ph(@sidebar-w; 0);
-	.bg-c(white);
+	.bg-c(var(--c-main));
 
 	&.has-footer {
 		.pb((@footer-h + @gutter * 2));
@@ -118,7 +118,7 @@ main {
 	.pl((@sidebar-w + @gutter));
 	.pv(@gutter);
 	.bb(@gutter solid var(--c-theme));
-	.stripe(-60deg; var(--c-theme); white; 1px; 4px);
+	.stripe(-60deg; var(--c-theme); var(--c-main); 1px; 4px);
 	background-attachment: fixed;
 	color: var(--c-footer-text);
 
@@ -302,8 +302,8 @@ main {
 			.mt(.5em);
 			.p(.5em .75em);
 			.round(.38em);
-			.bg-c(var(--c-text));
-			color: white;
+			.bg-c(var(--c-hint));
+			color: var(--c-hint-text);
 			box-shadow: .1em .2em .4em rgba(0, 0, 0, .25);
 
 			&::before {
@@ -313,7 +313,7 @@ main {
 				.block;
 				.pos-tl(calc(-@h + 1px); 1.5em; absolute);
 				.dim(0; 0; content-box);
-				.bv(none; @h solid var(--c-text));
+				.bv(none; @h solid var(--c-hint));
 				.bh((@w / 2) solid transparent);
 			}
 			&.hidden {

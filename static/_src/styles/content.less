@@ -32,7 +32,7 @@ thead > tr > td {
 }
 thead {
 	> tr {
-		.stripe(-60deg; var(--c-theme); white; 1px; 3px);
+		.stripe(-60deg; var(--c-theme); var(--c-main); 1px; 3px);
 
 		> * + * {
 			.bl(none);
@@ -163,7 +163,7 @@ h4.name {
 		> .attribute {
 			display: inline-block;
 			font-size: @fs-xs;
-			color: white;
+			color: var(--c-member-attr);
 			.bg-c(var(--c-member));
 			.ph(.5em);
 			border-radius: .25em;

@@ -62,6 +62,8 @@ const T = {
 	},
 
 	js_build() {
+		bs.notify(`Building JS...`);
+
 		let conf = ctx.rConf;
 		if (conf) {
 			if (typeof conf.cache == 'object') log(' :: Rollup - Cache Used');
@@ -92,7 +94,11 @@ const T = {
 			}
 			ctx.rConf = conf;
 			return bundle.write(conf.output);
-		}).then(bs.reload);
+
+		}).catch(err => {
+			bs.notify(`<b style="color:hotpink">JS Build Failure!</b>`, 15000);
+			throw err;
+		});
 	},
 
 	js_minify() {
@@ -118,10 +124,14 @@ const T = {
 	},
 
 	css_build() {
+		bs.notify(`Building CSS...`);
 		let dst = `${paths.styles}/docolatte.css`;
 		let src = `${paths.src.styles}/theme.less`;
 		let opts = sh.prod() ? '' : '--source-map';
-		return sh.exec(`lessc ${opts} '${src}' '${dst}'`);
+		return sh.exec(`lessc ${opts} '${src}' '${dst}'`).catch(err => {
+			bs.notify(`<b style="color:hotpink">CSS Build Failure!</b>`, 15000);
+			throw err;
+		});
 	},
 
 	css_minify() {
@@ -201,6 +211,7 @@ const T = {
 				if (!dst.match(/\/_src\//) && dst.match(/\.(js|css)$/)) {
 					log(' :: Browsersync - Reload:', dst);
 					bs.reload(basename(dst));
+					bs.notify(`<b style="color:lime">Reloaded</b>: <code>${dst}</code>`);
 				}
 			});
 		});

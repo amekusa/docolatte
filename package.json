@@ -15,9 +15,10 @@
     "lib"
   ],
   "scripts": {
-    "build": "gulp",
+    "build": "gulp build",
+    "dev": "gulp dev",
+    "prepack": "gulp dist",
     "screenshot": "node screenshot.js",
-    "watch": "gulp watch",
     "bump": "ncu -u -t minor -x jsdoc,@jsdoc/salty,@jsdoc/util",
     "bump-major": "ncu -u -x jsdoc,@jsdoc/salty,@jsdoc/util"
   },

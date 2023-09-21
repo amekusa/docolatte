@@ -11,20 +11,20 @@ a code {
 }
 
 table {
-	.bb(4px solid var(--c-theme); 1px solid var(--c-theme));
+	.bb(4px solid var(--c-table-border); 1px solid var(--c-table-border));
 }
 tr {
 	+ tr > * {
-		.bt(1px solid var(--c-theme));
+		.bt(1px solid var(--c-table-border));
 	}
 }
 td + td,
 th + th,
 th + td {
-	.bl(1px dashed var(--c-theme));
+	.bl(1px dashed var(--c-table-border));
 }
 td + th {
-	.bl(1px solid var(--c-theme));
+	.bl(1px solid var(--c-table-border));
 }
 th,
 thead > tr > td {
@@ -32,7 +32,7 @@ thead > tr > td {
 }
 thead {
 	> tr {
-		.stripe(-60deg; var(--c-theme); var(--c-main); 1px; 3px);
+		.stripe(-60deg; var(--c-table-stripe1); var(--c-table-stripe2); 1px; 3px);
 
 		> * + * {
 			.bl(none);

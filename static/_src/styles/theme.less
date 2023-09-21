@@ -37,7 +37,7 @@
 	.flex;
 	.pos-tl(0; 0; fixed; @z-masthead);
 	.dim(100%; @topbar-h; border-box);
-	color: white;
+	color: var(--c-header-text);
 
 	.branding {
 		flex-shrink: 0; // No shrink
@@ -46,16 +46,20 @@
 		justify-content: flex-end;
 		.dim(@sidebar-w; 100%; border-box);
 		.ph(@topbar-h; @gutter);
-		.bg-c(rgba(0, 0, 0, .7));
+		.bg-c(var(--c-header));
 		.fs(@fs-l; 1);
 		font-weight: normal;
 		text-transform: uppercase;
+		transition: background-color .25s ease-out;
 
+		&:hover {
+			.bg-c(var(--c-header-hov));
+		}
 		a {
 			transition: color .25s ease-out;
 
 			&:hover, &:focus {
-				color: var(--c-code);
+				color: var(--c-header-text-hov);
 			}
 		}
 		.link {
@@ -73,7 +77,7 @@
 		.flex-center-v;
 		.dim(auto; 100%; border-box);
 		.ph(@gutter);
-		.bg-c(rgba(0, 0, 0, .5));
+		.bg-c(var(--c-topbar));
 
 		.page-title {
 			.m(0);
@@ -90,7 +94,7 @@
 	.h-min(100%);
 	.pv(@topbar-h; (@gutter * 2));
 	.ph(@sidebar-w; 0);
-	.bg-c(var(--c-main));
+	.bg-c(var(--c-backdrop));
 
 	&.has-footer {
 		.pb((@footer-h + @gutter * 2));
@@ -118,7 +122,7 @@ main {
 	.pl((@sidebar-w + @gutter));
 	.pv(@gutter);
 	.bb(@gutter solid var(--c-theme));
-	.stripe(-60deg; var(--c-theme); var(--c-main); 1px; 4px);
+	.stripe(-60deg; var(--c-footer-stripe1); var(--c-footer-stripe2); 1px; 4px);
 	background-attachment: fixed;
 	color: var(--c-footer-text);
 

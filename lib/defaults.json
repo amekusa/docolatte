@@ -53,8 +53,7 @@
         "hint": {
           "hide": false,
           "body": [
-            "<p><b>Hint:</b> You don't need to click on this search box to input.</p>",
-            "<p class=\"more\">You can just type at <strong>any time</strong> to start searching for it.</p>"
+            "<p><b>Hint:</b> You can start typing at <strong>any time</strong> to search without clicking or focusing on the search box.</p>"
           ]
         }
       }

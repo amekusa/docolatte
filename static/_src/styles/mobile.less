@@ -10,7 +10,7 @@
 	body {
 		overflow: auto;
 	}
-	.masthead {
+	.header {
 		display: block;
 		overflow: visible;
 		.pos(absolute);
@@ -54,7 +54,7 @@
 
 	@sidebar-w2: 320px;
 	.sidebar {
-		z-index: (@z-masthead + 2);
+		z-index: (@z-header + 2);
 		.pos-l(-@sidebar-w2);
 		.w(@sidebar-w2);
 		transition: left .16s ease-out;
@@ -82,7 +82,7 @@
 			box-shadow: .5rem 0 .5rem rgba(0, 0, 0, .25);
 		}
 		~ .overlay {
-			z-index: (@z-masthead + 1);
+			z-index: (@z-header + 1);
 
 			&::before {
 				opacity: .618;
@@ -110,7 +110,7 @@
 @media (max-width: 512px) {
 	@_gutter: (@gutter / 2);
 
-	.masthead {
+	.header {
 		.branding {
 			.ph(@_gutter; (@branding-h + @_gutter));
 		}
@@ -127,7 +127,7 @@
 	:root {
 		font-size: 15px;
 	}
-	.masthead {
+	.header {
 		.branding {
 			.fs(@fs-l);
 		}

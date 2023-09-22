@@ -33,9 +33,9 @@
 	.w-min(320px);
 }
 
-.masthead {
+.header {
 	.flex;
-	.pos-tl(0; 0; fixed; @z-masthead);
+	.pos-tl(0; 0; fixed; @z-header);
 	.dim(100%; @topbar-h; border-box);
 	color: var(--c-header-text);
 
@@ -345,7 +345,7 @@ input#docolatte-sidebar-toggle,
 	.square(@size);
 	cursor: pointer;
 
-	.pos-br(@gutter; @gutter; fixed; @z-masthead+10);
+	.pos-br(@gutter; @gutter; fixed; @z-header+10);
 
 	> .shape {
 		.flex-center;

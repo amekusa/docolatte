@@ -151,35 +151,6 @@
 			100% { transform: translateY(-8px) rotateZ(45deg) }
 		}
 	}
-	&.magnifier {
-		@size: 1em;
-		@thickness: 1px;
-		.square(@size);
-
-		&::before,
-		&::after {
-			content: "";
-			.pos(absolute);
-			.block;
-			box-sizing: border-box;
-		}
-		// lense
-		&::before {
-			.pos-tl(0; 0);
-			.square(80%);
-			.b(@thickness solid var(--c-heading));
-			border-radius: (@size / 2);
-		}
-		// handle
-		&::after {
-			.dim(@thickness; 40%);
-			.pos-br(0; (-@thickness / 2));
-			// transform-box: fill-box;
-			transform-origin: bottom right;
-			transform: translate(-@thickness, -@thickness) rotateZ(-45deg);
-			.bg-c(var(--c-heading));
-		}
-	}
 	// feather icons (github.com/feathericons/feather)
 	&.feather {
 		stroke: currentColor;

@@ -244,8 +244,11 @@ main {
 			.b(none);
 			border-radius: (@h / 2);
 
+			.c(var(--c-search-text));
+			.bg-c(var(--c-search));
+
 			&::placeholder {
-				color: var(--c-text-thin);
+				color: var(--c-search-ph);
 			}
 			&:focus ~ ol.suggestions {
 				visibility: visible;

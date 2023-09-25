@@ -1,4 +1,4 @@
-@branding-h: (@topbar-h * 1.618);
+@masthead-h: (@topbar-h * 1.618);
 
 @media (max-width: 680px) {
 	.not-for-mobile {
@@ -16,23 +16,23 @@
 		.pos(absolute);
 		.h(auto);
 
-		.branding {
+		.masthead {
 			justify-content: flex-start;
 			.w(auto);
-			.h(@branding-h);
-			.ph(@gutter; (@branding-h + @gutter));
+			.h(@masthead-h);
+			.ph(@gutter; (@masthead-h + @gutter));
 			.fs(@fs-xl);
 
 			.link {
 				left: auto;
 				right: 0;
-				.w(@branding-h);
+				.w(@masthead-h);
 
 				&::before {
 					content: "";
 					.pos-tl((@gutter / 2); -1px; absolute);
 					.block;
-					.dim(0; (@branding-h - @gutter));
+					.dim(0; (@masthead-h - @gutter));
 					.bl(1px dashed white);
 					opacity: .38;
 				}
@@ -44,7 +44,7 @@
 	}
 	.primary {
 		.w-min(320px);
-		.pt((@topbar-h + @branding-h));
+		.pt((@topbar-h + @masthead-h));
 		.pl(0);
 	}
 	.colophon {
@@ -111,8 +111,8 @@
 	@_gutter: (@gutter / 2);
 
 	.header {
-		.branding {
-			.ph(@_gutter; (@branding-h + @_gutter));
+		.masthead {
+			.ph(@_gutter; (@masthead-h + @_gutter));
 		}
 		.topbar {
 			.ph(@_gutter);
@@ -128,7 +128,7 @@
 		font-size: 15px;
 	}
 	.header {
-		.branding {
+		.masthead {
 			.fs(@fs-l);
 		}
 		.topbar {

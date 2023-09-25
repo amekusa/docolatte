@@ -17,25 +17,16 @@
 		.h(auto);
 
 		.masthead {
-			justify-content: flex-start;
+			flex-direction: row-reverse;
 			.w(auto);
 			.h(@masthead-h);
-			.ph(@gutter; (@masthead-h + @gutter));
 			.fs(@fs-xl);
 
 			.link {
-				left: auto;
-				right: 0;
 				.w(@masthead-h);
-
-				&::before {
-					content: "";
-					.pos-tl((@gutter / 2); -1px; absolute);
-					.block;
-					.dim(0; (@masthead-h - @gutter));
-					.bl(1px dashed white);
-					opacity: .38;
-				}
+			}
+			.title {
+				justify-content: left;
 			}
 		}
 		.topbar {
@@ -112,7 +103,9 @@
 
 	.header {
 		.masthead {
-			.ph(@_gutter; (@masthead-h + @_gutter));
+			.title {
+				.ph(@_gutter);
+			}
 		}
 		.topbar {
 			.ph(@_gutter);

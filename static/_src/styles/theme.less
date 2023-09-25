@@ -41,34 +41,37 @@
 
 	.masthead {
 		flex-shrink: 0; // No shrink
-		.pos(relative);
-		.flex-center-v;
-		justify-content: flex-end;
+		.flex;
 		.dim(@sidebar-w; 100%; border-box);
-		.ph(@topbar-h; @gutter);
 		.bg-c(var(--c-header));
 		.fs(@fs-l; 1);
 		font-weight: normal;
-		transition: background-color .25s ease-out;
 
-		&:hover {
-			.bg-c(var(--c-header-hov));
-		}
-		a {
-			transition: color .25s ease-out;
+		.link,
+		.title {
+			.h(100%);
+			transition-property: color, background-color;
+			transition-duration: .25s;
+			transition-timing-function: ease-out;
 
 			&:hover, &:focus {
-				color: var(--c-header-text-hov);
+				.c(var(--c-header-text-hov));
+				.bg-c(var(--c-header-hov));
 			}
 		}
 		.link {
+			flex-shrink: 0;
 			.flex-center;
-			.pos-tl(0; 0; absolute);
-			.dim(@topbar-h; 100%);
+			.w(@topbar-h);
 
 			svg.icon {
 				.square(1.25em);
 			}
+		}
+		.title {
+			flex-grow: 1;
+			.flex-center-v; justify-content: right;
+			.ph(@gutter);
 		}
 	}
 	.topbar {

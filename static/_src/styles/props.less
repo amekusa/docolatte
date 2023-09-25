@@ -5,10 +5,11 @@ body {
 	--c-backdrop:        white; // background of the main content area
 	--c-text:            #4d4e53; // default text color
 	--c-text-thin:       #5e5f9180;
+	--c-text-thinner:    #5e5f9140;
 	--c-heading:         #5e5f91;
 	--c-heading-thin:    #5e5f9180;
-	--c-border:          #5e5f9180;
-	--c-border-thin:     #5e5f9140;
+	--c-border:          var(--c-text-thin);
+	--c-border-thin:     var(--c-text-thinner);
 	--c-link:            #0095dd;
 	--c-code:            lightseagreen; // color for <code>...</code>
 	--c-member:          hotpink; // methods and properties
@@ -29,6 +30,7 @@ body {
 	--c-search:          var(--c-backdrop);
 	--c-search-text:     var(--c-text);
 	--c-search-ph:       var(--c-text-thin); // placeholder
+	--c-search-icon:     var(--c-text-thinner); // magnifier icon
 	--c-hint:            black;
 	--c-hint-text:       white;
 }

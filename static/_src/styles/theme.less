@@ -70,7 +70,9 @@
 		}
 		.title {
 			flex-grow: 1;
-			.flex-center-v; justify-content: right;
+			.flex-center-v;
+			// justify-content: right; // Doesn't work on Chrome :(
+			justify-content: flex-end; // This works on Chrome :)
 			.ph(@gutter);
 		}
 	}

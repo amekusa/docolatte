@@ -250,7 +250,7 @@ main {
 			&::placeholder {
 				color: var(--c-search-ph);
 			}
-			&:focus ~ ol.suggestions {
+			&:focus ~ .dropdown {
 				visibility: visible;
 			}
 			+ .icon {
@@ -259,8 +259,8 @@ main {
 				.c(var(--c-search-icon));
 			}
 		}
-		ol.suggestions {
 			@bg: white;
+		.dropdown {
 			list-style: none;
 			.block;
 			.pos-l(0; absolute; (@z-sidebar + 2));

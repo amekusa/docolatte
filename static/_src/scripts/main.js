@@ -192,7 +192,7 @@ import HLJS from 'highlight.js/lib/common';
 			);
 			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);
-			let suggests = find(base, '.suggestions', 0);
+			let dropdown = find(base, '.dropdown', 0);
 			let hint = find(base, '.hint', 0); // can be not present
 			let lastQuery = '';
 
@@ -202,8 +202,8 @@ import HLJS from 'highlight.js/lib/common';
 				if (query == lastQuery) return;
 				lastQuery = query;
 
-				suggests.innerHTML = ''; // clear
-				suggests.setAttribute('data-select', 0); // reset the state
+				dropdown.innerHTML = ''; // clear
+				dropdown.setAttribute('data-select', 0); // reset the state
 
 				if (!query.length) return;
 				let results = fuse.search(query, { limit: 8 });
@@ -218,16 +218,16 @@ import HLJS from 'highlight.js/lib/common';
 					let label = item.longname.replaceAll(/(\W)/g, '<i class="symbol">$1</i><wbr>'); // insert <WBR> at every symbol chars
 					let li = elem('li', null, elem('a', { href: item.url }, label));
 					if (i == 0) li.classList.add('selected'); // select the 1st item
-					suggests.appendChild(li);
+					dropdown.appendChild(li);
 				}
 			});
 
-			// navigate through suggestions with key presses
+			// navigate through dropdown-list with key presses
 			input.addEventListener('keydown', ev => {
 				if (ev.key == 'Escape') return ev.target.blur(); // ESC to unfocus
-				if (!suggests.children.length) return;
+				if (!dropdown.children.length) return;
 
-				let select = Number.parseInt(suggests.getAttribute('data-select') || 0);
+				let select = Number.parseInt(dropdown.getAttribute('data-select') || 0);
 				let selectNew = select;
 
 				// navigation
@@ -242,16 +242,16 @@ import HLJS from 'highlight.js/lib/common';
 					selectNew += (ev.shiftKey ? -1 : 1);
 					break;
 				case 'Enter':
-					find(suggests.children[select], 'a', 0).click();
+					find(dropdown.children[select], 'a', 0).click();
 					break;
 				default:
 					return; // do nothing
 				}
-				if (selectNew < 0) selectNew = suggests.children.length - 1;   // jump to bottom from top
-				else if (selectNew >= suggests.children.length) selectNew = 0; // jump to top from bottom
-				suggests.children[select].classList.remove('selected'); // unselect the previous
-				suggests.children[selectNew].classList.add('selected'); // select the new
-				suggests.setAttribute('data-select', selectNew);
+				if (selectNew < 0) selectNew = dropdown.children.length - 1;   // jump to bottom from top
+				else if (selectNew >= dropdown.children.length) selectNew = 0; // jump to top from bottom
+				dropdown.children[select].classList.remove('selected'); // unselect the previous
+				dropdown.children[selectNew].classList.add('selected'); // select the new
+				dropdown.setAttribute('data-select', selectNew);
 				ev.preventDefault();
 			});
 

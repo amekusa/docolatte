@@ -103,15 +103,6 @@
 	&.has-footer {
 		.pb((@footer-h + @gutter * 2));
 	}
-
-	a {
-		.c(var(--c-link));
-		overflow-wrap: break-word;
-
-		&:hover, &:focus {
-			text-decoration: underline;
-		}
-	}
 }
 
 .main {
@@ -130,6 +121,13 @@
 	background-attachment: fixed;
 	color: var(--c-footer-text);
 
+	a {
+		.c(var(--c-footer-link));
+
+		&:hover, &:focus {
+			.c(var(--c-footer-link-hov));
+		}
+	}
 	p {
 		.m(0);
 	}
@@ -153,15 +151,14 @@
 	.pos-tl(0; 0; fixed; @z-sidebar);
 	.dim(@sidebar-w; 100%; border-box);
 	overflow: hidden;
-	.bg-c(var(--c-theme));
-	.c(var(--c-heading));
+	.bg-c(var(--c-sidebar));
 	-webkit-overflow-scrolling: touch; // momentum scrolling for mobile
 
 	a {
-		opacity: .618;
+		.c(var(--c-sidebar-link));
 
 		&:hover, &:focus {
-			opacity: 1;
+			.c(var(--c-sidebar-link-hov));
 		}
 	}
 	.toc {
@@ -172,14 +169,15 @@
 
 		a {
 			&[data-current] {
-				opacity: 1;
+				.c(var(--c-sidebar-link-sel));
 			}
 		}
 		h2, h3 {
 			.fs(unit(@fs-m, em));
 			.heading;
+			.c(var(--c-sidebar-heading));
 		}
-		h2 { // might not be necessary
+		h2 { // maybe unnecessary
 			.p(0);
 			.b(none);
 		}
@@ -193,6 +191,12 @@
 					&::before {
 						content: none;
 					}
+					&:hover, &:focus {
+						a {
+							.c(var(--c-sidebar-link-hov));
+						}
+					}
+
 				}
 				a {
 					.mr(@gutter);
@@ -207,12 +211,11 @@
 
 					a {
 						.pos(relative);
-						transition: padding-left .25s ease-out;
+						transition-property: padding-left, color;
 
 						&[data-current] {
 							font-weight: bold;
 							.pl(.25em);
-							opacity: 1;
 
 							// arrow
 							&::before {
@@ -259,20 +262,18 @@
 				.c(var(--c-search-icon));
 			}
 		}
-			@bg: white;
 		.dropdown {
 			list-style: none;
-			.block;
 			.pos-l(0; absolute; (@z-sidebar + 2));
 			.w-max(100%);
 			overflow: hidden;
 			.m(0);
 			.p(0);
-			.bg-c(@bg);
+			.bg-c(var(--c-dropdown));
 			border-radius: .5em;
 			box-shadow: .1em .2em .4em rgba(0, 0, 0, .25);
 
-			visibility: hidden;
+			// visibility: hidden; // @DEBUG
 			transition: visibility .25s; // needs delay for touch devices (because no :hover)
 
 			&:hover {
@@ -285,26 +286,26 @@
 				> a {
 					.block;
 					.p(.5em .75em);
-					.op(.618);
 					overflow-wrap: break-word;
+					.c(var(--c-dropdown-text));
 
 					> i.symbol {
-						.op(.382);
+						.op(.3);
 						.mh(.25em);
 						font-style: normal;
 					}
 				}
-				&.selected > a,
 				> a:hover,
 				> a:focus {
-					.bg-c(var(--c-heading));
-					.c(@bg);
+					.bg-c(var(--c-dropdown-hov));
+					.c(var(--c-dropdown-text-hov));
 				}
 				&.selected > a {
-					.op(1);
+					.bg-c(var(--c-dropdown-sel));
+					.c(var(--c-dropdown-text-sel));
 				}
 				+ li > a {
-					.bt(1px dashed var(--c-border));
+					.bt(1px solid var(--c-dropdown-border));
 				}
 			}
 		}

@@ -1,13 +1,34 @@
 h1, h2, h3, h4, h5, h6 {
 	color: var(--c-heading);
+
+	a {
+		.c(var(--c-heading-link));
+
+		&:hover, &:focus {
+			.c(var(--c-heading-link-hov));
+		}
+	}
+}
+
+a {
+	.c(var(--c-link));
+	overflow-wrap: break-word;
+
+	&:hover, &:focus {
+		.c(var(--c-link-hov));
+		text-decoration: underline;
+	}
+	&:visited {
+		.c(var(--c-link-visited));
+	}
+	code {
+		color: inherit;
+	}
 }
 
 code:not(.hljs) {
 	.ph(.25em);
 	color: var(--c-code);
-}
-a code {
-	color: inherit;
 }
 
 table {
@@ -26,13 +47,11 @@ th + td {
 td + th {
 	.bl(1px solid var(--c-table-border));
 }
-th,
-thead > tr > td {
-	// color: var(--c-heading);
-}
 thead {
+	.c(var(--c-thead-text));
+
 	> tr {
-		.stripe(-60deg; var(--c-table-stripe1); var(--c-table-stripe2); 1px; 3px);
+		.stripe(-60deg; var(--c-thead-stripe1); var(--c-thead-stripe2); 1px; 3px);
 
 		> * + * {
 			.bl(none);
@@ -136,16 +155,16 @@ article {
 	}
 }
 
-// class name
-h2.name {
-	.ancestors, .attribs {
-		opacity: 0.5;
+// class name @TODO
+// h2.name {
+// 	.ancestors, .attribs {
+// 		opacity: 0.5;
 
-		a {
-			.c(inherit);
-		}
-	}
-}
+// 		a {
+// 			.c(inherit);
+// 		}
+// 	}
+// }
 
 // member name
 h4.name {

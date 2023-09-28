@@ -7,7 +7,9 @@ body {
 	--c-text-thin:       #5e5f9180;
 	--c-text-thinner:    #5e5f9140;
 	--c-heading:         #5e5f91;
-	--c-heading-link:    #5e5f9180;
+	--c-heading-thin:    #5e5f91c0;
+	--c-heading-thinner: #5e5f9180;
+	--c-heading-link:    var(--c-heading-thinner);
 	--c-heading-link-hov: var(--c-heading);
 	--c-border:          var(--c-text-thin);
 	--c-border-thin:     var(--c-text-thinner);
@@ -43,12 +45,12 @@ body {
 	--c-search-ph:       var(--c-text-thin); // placeholder
 	--c-search-icon:     var(--c-text-thinner); // magnifier icon
 	--c-dropdown:        var(--c-backdrop);
-	--c-dropdown-text:   var(--c-heading);
-	--c-dropdown-border: var(--c-border-thin);
+	--c-dropdown-text:   var(--c-heading-thin);
 	--c-dropdown-hov:      var(--c-dropdown-text);
 	--c-dropdown-text-hov: var(--c-dropdown);
-	--c-dropdown-sel:      var(--c-dropdown-text);
+	--c-dropdown-sel:      var(--c-heading);
 	--c-dropdown-text-sel: var(--c-dropdown);
+	--c-dropdown-border: var(--c-border-thin);
 	--c-hint:            black;
 	--c-hint-text:       white;
 }

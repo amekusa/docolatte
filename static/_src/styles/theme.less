@@ -81,7 +81,7 @@
 		.flex-center-v;
 		.dim(auto; 100%; border-box);
 		.ph(@gutter);
-		.stripe(-60deg; var(--c-topbar-stripe1); var(--c-topbar-stripe2); 2px; 2px);
+		.stripe(var(--stripes-angle); var(--c-topbar-stripe1); var(--c-topbar-stripe2); 2px; 2px);
 		backdrop-filter: blur(4px);
 
 		.page-title {
@@ -118,7 +118,7 @@
 	.pl((@sidebar-w + @gutter));
 	.pv(@gutter);
 	.bb(@gutter solid var(--c-theme));
-	.stripe(-60deg; var(--c-footer-stripe1); var(--c-footer-stripe2); 1px; 4px);
+	.stripe(var(--stripes-angle); var(--c-footer-stripe1); var(--c-footer-stripe2); 1px; 4px);
 	background-attachment: fixed;
 	color: var(--c-footer-text);
 

@@ -1,5 +1,5 @@
 h1, h2, h3, h4, h5, h6 {
-	color: var(--c-heading);
+	.c(var(--c-heading));
 
 	a {
 		.c(var(--c-heading-link));
@@ -22,13 +22,13 @@ a {
 		.c(var(--c-link-visited));
 	}
 	code {
-		color: inherit;
+		.c(inherit);
 	}
 }
 
 code:not(.hljs) {
 	.ph(.25em);
-	color: var(--c-code);
+	.c(var(--c-code));
 }
 
 table {
@@ -173,7 +173,7 @@ h4.name {
 	.bt(1px dashed var(--c-border));
 	font-weight: normal;
 	font-family: @ff-code;
-	color: var(--c-member);
+	.c(var(--c-member));
 
 	// attributes ('static', 'abstract', etc.)
 	.attributes {
@@ -182,7 +182,7 @@ h4.name {
 		> .attribute {
 			display: inline-block;
 			font-size: @fs-xs;
-			color: var(--c-member-attr);
+			.c(var(--c-member-attr));
 			.bg-c(var(--c-member));
 			.ph(.5em);
 			border-radius: .25em;
@@ -195,10 +195,10 @@ h4.name {
 	}
 	// parameters
 	.signature {
-		color: var(--c-params);
+		.c(var(--c-params));
 
 		.signature-attributes {
-			color: var(--c-params-attr);
+			.c(var(--c-params-attr));
 		}
 	}
 	// type

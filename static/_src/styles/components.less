@@ -44,7 +44,7 @@
 		text-align: right;
 		@bg: #2d2d2d; // derived from: Tomorrow Night 80s
 		.bg-c(fade(darken(@bg, 10%), 61.8%));
-		color: white;
+		.c(white);
 		text-shadow: -.1em .1em .1em rgba(0, 0, 0, 1);
 		transition: opacity .25s ease-out;
 	}
@@ -83,7 +83,7 @@
 				.br(solid 1px);
 				text-align: right;
 				text-decoration: none;
-				color: inherit;
+				.c(inherit);
 				opacity: .35;
 
 				&:hover, &:focus {

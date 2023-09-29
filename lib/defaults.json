@@ -53,7 +53,7 @@
         "hint": {
           "hide": false,
           "body": [
-            "<p><b>Hint:</b> You can start typing at <strong>any time</strong> to search without clicking or focusing on the search box.</p>"
+            "<p><b>Hint:</b> You can press <em>any key</em> to focus and start searching without clicking.</p>"
           ]
         }
       }

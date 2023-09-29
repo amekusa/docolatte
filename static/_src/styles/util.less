@@ -406,7 +406,7 @@
 	}
 }
 
-.stripe(@angle; @color1; @color2; @c1-width; @c2-width: -) {
+.stripes(@angle; @color1; @color2; @c1-width; @c2-width: -) {
 	@c2w: if((@c2-width = -), @c1-width, @c2-width);
 	background-image: repeating-linear-gradient(
 		@angle,

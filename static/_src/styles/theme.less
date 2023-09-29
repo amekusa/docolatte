@@ -81,8 +81,8 @@
 		.flex-center-v;
 		.dim(auto; 100%; border-box);
 		.ph(@gutter);
-		.stripes(var(--stripes-angle); var(--c-topbar-stripe1); var(--c-topbar-stripe2); 2px; 2px);
-		backdrop-filter: blur(3px);
+		.stripes(var(--stripes-angle); var(--c-topbar-stripe1); var(--c-topbar-stripe2); 1px; 2px);
+		backdrop-filter: blur(4px);
 
 		.page-title {
 			.m(0);
@@ -343,6 +343,14 @@
 			}
 			&.hidden {
 				.no-disp;
+			}
+			b {
+				.op(.5);
+			}
+			em {
+				font-style: normal;
+				font-weight: bold;
+				text-decoration: underline;
 			}
 			p {
 				.m(0);

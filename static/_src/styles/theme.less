@@ -213,11 +213,9 @@
 						.pos(relative);
 						transition-property: padding-left, color;
 
+						// arrow
+						&:hover, &:focus,
 						&[data-current] {
-							font-weight: bold;
-							.pl(.25em);
-
-							// arrow
 							&::before {
 								content: "";
 								@w: .5em;
@@ -227,6 +225,19 @@
 								.dim(0; 0; content-box);
 								.bh(@w solid; none);
 								.bv((@h / 2) solid transparent);
+							}
+						}
+						&:hover, &:focus {
+							&::before {
+								.op(.5);
+							}
+						}
+						&[data-current] {
+							font-weight: bold;
+							.pl(.25em);
+
+							&::before {
+								.op(1);
 							}
 						}
 					}

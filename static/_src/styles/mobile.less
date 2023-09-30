@@ -81,13 +81,42 @@
 		}
 		~ .menu-button {
 			> .shape {
-				.bg-c(white);
+				.bg-c(var(--c-menu-btn-close));
 
 				.icon {
 					opacity: .75;
 
 					&.burger {
-						.icon.burger.animate;
+						.a(count; 1);
+
+						.top, .middle, .bottom {
+							transform: none;
+							transform-box: fill-box;
+							transform-origin: center;
+							.a(duration; .35s);
+							.a(curve; ease-out);
+							.a(count; inherit);
+							.a(fill-mode; forwards);
+						}
+						.top { .a(name; burger-top) }
+						.middle { .a(name; burger-middle) }
+						.bottom { .a(name; burger-bottom) }
+
+						@k1: 45%;
+						@k2: 66%;
+						@keyframes burger-top {
+							@{k1}, @{k2} { transform: translateY(8px) }
+							100% { transform: translateY(8px) rotateZ(45deg) }
+						}
+						@keyframes burger-middle {
+							@{k1}, @{k2} { transform: rotateZ(90deg) }
+							100% { transform: rotateZ(135deg) }
+						}
+						@keyframes burger-bottom {
+							@{k1} { transform: translateY(-8px); opacity: 1 }
+							@{k2} { transform: translateY(-8px); opacity: 0 }
+							100% { transform: translateY(-8px) rotateZ(45deg) }
+						}
 					}
 				}
 			}

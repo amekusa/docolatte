@@ -373,21 +373,34 @@ input#docolatte-sidebar-toggle,
 .menu-button {
 	@size: @menu-btn-size;
 	.square(@size);
-	cursor: pointer;
-
 	.pos-br(@gutter; @gutter; fixed; @z-header+10);
+	cursor: pointer;
 
 	> .shape {
 		.flex-center;
 		.spread;
 		border-radius: (@size / 2);
-
-		.bg-c(var(--c-theme));
 		box-shadow: -.1rem .1rem .4rem rgba(0, 0, 0, .5);
 		transition: all .25s ease-out;
+		.bg-c(var(--c-menu-btn));
 
 		.icon {
 			opacity: .5;
+
+			&.burger {
+				.dim(26px; 20px);
+
+				.top, .middle, .bottom {
+					display: block;
+					.pos-l(0; absolute);
+					.dim(26px; 4px);
+					border-radius: 2px;
+					.bg-c(var(--c-menu-btn-icon));
+				}
+				.top { top: 0 }
+				.middle { top: 8px }
+				.bottom { top: 16px }
+			}
 		}
 	}
 	// *boop*

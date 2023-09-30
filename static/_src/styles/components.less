@@ -105,52 +105,6 @@
 	.pos(relative);
 	.iblock;
 
-	&.burger {
-		.dim(26px; 20px);
-
-		.top, .middle, .bottom {
-			display: block;
-			.pos-l(0; absolute);
-			.dim(26px; 4px);
-			border-radius: 2px;
-			.bg-c(black);
-		}
-		.top { top: 0 }
-		.middle { top: 8px }
-		.bottom { top: 16px }
-
-		&.animate {
-			.a(count; 1);
-
-			.top, .middle, .bottom {
-				transform: none;
-				transform-box: fill-box;
-				transform-origin: center;
-				.a(duration; .35s);
-				.a(curve; ease-out);
-				.a(count; inherit);
-				.a(fill-mode; forwards);
-			}
-			.top { .a(name; burger-top) }
-			.middle { .a(name; burger-middle) }
-			.bottom { .a(name; burger-bottom) }
-		}
-		@k1: 45%;
-		@k2: 66%;
-		@keyframes burger-top {
-			@{k1}, @{k2} { transform: translateY(8px) }
-			100% { transform: translateY(8px) rotateZ(45deg) }
-		}
-		@keyframes burger-middle {
-			@{k1}, @{k2} { transform: rotateZ(90deg) }
-			100% { transform: rotateZ(135deg) }
-		}
-		@keyframes burger-bottom {
-			@{k1} { transform: translateY(-8px); opacity: 1 }
-			@{k2} { transform: translateY(-8px); opacity: 0 }
-			100% { transform: translateY(-8px) rotateZ(45deg) }
-		}
-	}
 	// feather icons (github.com/feathericons/feather)
 	&.feather {
 		stroke: currentColor;

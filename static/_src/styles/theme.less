@@ -376,6 +376,9 @@ input#docolatte-sidebar-toggle,
 	.pos-br(@gutter; @gutter; fixed; @z-header+10);
 	cursor: pointer;
 
+	// [@FIX:iOS] Remove rectangle highlight on touch
+	-webkit-tap-highlight-color: transparent;
+
 	> .shape {
 		.flex-center;
 		.spread;

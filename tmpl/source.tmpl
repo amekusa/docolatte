@@ -3,5 +3,5 @@
     var self = this;
 ?>
 <article class="src">
-    <pre class="prettyprint source linenums<?js= this.u.append(data.lang, ' lang-') ?>"><span class="_char">_</span><code><?js= data.code ?></code></pre>
+    <pre class="prettyprint source linenums<?js= this.u.if(data.lang, ' lang-{*}') ?>"><span class="_char">_</span><code><?js= data.code ?></code></pre>
 </article>

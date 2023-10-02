@@ -1,11 +1,11 @@
 <?js
     var data = obj;
     var self = this;
-    var U = this.u;
+    var u = this.u;
 ?>
 <?js data.forEach(function(example) { ?>
-<figure class="code-wrap<?js= U.if(example.caption, ' has-caption') ?>">
-    <pre class="prettyprint<?js= U.append(example.lang, ' lang-') ?>"><code><?js= self.htmlsafe(example.code) ?></code></pre>
+<figure class="code-wrap<?js= u.if(example.caption, ' has-caption') ?>">
+    <pre class="prettyprint<?js= u.if(example.lang, ' lang-{*}') ?>"><code><?js= self.htmlsafe(example.code) ?></code></pre>
     <?js   if (example.caption) { ?>
     <figcaption class="code-caption"><?js= example.caption ?></figcaption>
     <?js   } ?>

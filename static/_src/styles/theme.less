@@ -88,7 +88,7 @@
 			.m(0);
 			.fs(@fs-l; 1);
 			font-weight: normal;
-			text-shadow: 0 .05em .25em rgba(0, 0, 0, 1);
+			text-shadow: 0 .05em .25em #000f;
 		}
 	}
 }
@@ -282,7 +282,7 @@
 			.p(0);
 			.bg-c(var(--c-dropdown));
 			border-radius: .5em;
-			box-shadow: .1em .2em .4em rgba(0, 0, 0, .25);
+			box-shadow: .1em .2em .4em var(--c-dropdown-shadow);
 
 			visibility: hidden;
 			transition: visibility .25s; // needs delay for touch devices (because no :hover)
@@ -329,7 +329,7 @@
 			.round(.38em);
 			.bg-c(var(--c-hint));
 			.c(var(--c-hint-text));
-			box-shadow: .1em .2em .4em rgba(0, 0, 0, .25);
+			box-shadow: .1em .2em .4em var(--c-hint-shadow);
 
 			&::before {
 				@w: 1em;
@@ -383,7 +383,7 @@ input#docolatte-sidebar-toggle,
 		.flex-center;
 		.spread;
 		border-radius: (@size / 2);
-		box-shadow: -.1rem .1rem .4rem rgba(0, 0, 0, .5);
+		box-shadow: 0 .1rem .4rem var(--c-menu-btn-shadow);
 		transition: all .25s ease-out;
 		.bg-c(var(--c-menu-btn));
 
@@ -409,6 +409,7 @@ input#docolatte-sidebar-toggle,
 		> .shape {
 			transform: scale(.8, .8);
 			transition: all .05s ease-out;
+			box-shadow: 0 .1rem .2rem var(--c-menu-btn-shadow);
 		}
 	}
 }

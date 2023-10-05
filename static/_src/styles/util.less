@@ -406,6 +406,28 @@
 	}
 }
 
+.oneline(@h; @overflow: hidden; @text-overflow: ellipsis) {
+	height: @h;
+	line-height: @h;
+	white-space: nowrap;
+	overflow: @overflow;
+
+	& when (@overflow = hidden) {
+		text-overflow: @text-overflow;
+	}
+	br, wbr {
+		display: none;
+	}
+}
+
+.no-scrollbar {
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
 .stripes(@angle; @color1; @color2; @c1-width; @c2-width: -) {
 	@c2w: if((@c2-width = -), @c1-width, @c2-width);
 	background-image: repeating-linear-gradient(

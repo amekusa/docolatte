@@ -9,43 +9,14 @@
 	}
 }
 
-// wraps each '@example' code block
-.code-wrap {
-	.pos(relative);
-
-	&:hover {
-		.code-caption {
-			pointer-events: none; // click through
-			opacity: .25;
-		}
-	}
-	// @example <caption>...</caption>
-	.code-caption {
-		.block;
-		.pos-tr(0; 0; absolute);
-		.fs(@fs-m; 1.25);
-		.w-max(61.8%);
-		.pv(.45em); // .5em would slightly overlap the 2nd line of <PRE>
-		.ph(1em);
-		.round-tr(.5rem);
-		.round-bl(.5rem);
-		text-align: right;
-		@bg: #2d2d2d; // derived from: Tomorrow Night 80s
-		.bg-c(fade(darken(@bg, 10%), 61.8%));
-		.c(white);
-		text-shadow: -.1em .1em .1em rgba(0, 0, 0, 1);
-		transition: opacity .25s ease-out;
-	}
-}
-
 // code highlighter
 .prettyprint {
 	.pos(relative);
-	.fs(@fs-s; 1.5);
-	font-family: @ff-code;
-	width: auto;
+	.w(auto);
 	overflow: auto;
-	border-radius: .5rem;
+	.fs(@fs-s; 1.5);
+	.round(.5rem);
+	.ff(@ff-code);
 
 	._char { // for measuring char width
 		.pos-tl(0; 0; absolute);
@@ -85,6 +56,27 @@
 					opacity: 1;
 				}
 			}
+		}
+	}
+	&.has-caption {
+		@capt-h: 2.5em;
+
+		// @example <caption>...</caption>
+		.code-caption {
+			.ff(@ff-body);
+			.block;
+			.pos-tl(0; 0; absolute);
+			.w(100%; border-box);
+			.ph(1em);
+			.oneline(@capt-h; auto);
+			.no-scrollbar;
+			text-align: right;
+
+			.bg-c(var(--c-code-capt));
+			.stripes(var(--stripes-angle); var(--c-code-capt-stripe1); var(--c-code-capt-stripe2); 1px; 3px);
+		}
+		code {
+			.pt((@capt-h + .5em)) !important;
 		}
 	}
 }

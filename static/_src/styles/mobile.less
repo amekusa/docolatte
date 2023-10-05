@@ -40,7 +40,7 @@
 	}
 	.colophon {
 		.pl(@gutter);
-		.pr(((@gutter * .5) + @menu-btn-size + @gutter));
+		.pr(((@gutter * .25) + @menu-btn-size + @gutter));
 	}
 
 	@sidebar-w2: 320px;
@@ -139,8 +139,11 @@
 			.ph(@_gutter);
 		}
 	}
-	main article {
+	.main article {
 		.mh(@_gutter);
+	}
+	.colophon {
+		.pl(@_gutter);
 	}
 }
 

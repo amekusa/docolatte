@@ -81,6 +81,7 @@
 		.flex-center-v;
 		.dim(auto; 100%; border-box);
 		.ph(@gutter);
+		.bg-c(var(--c-topbar));
 		.stripes(var(--stripes-angle); var(--c-topbar-stripe1); var(--c-topbar-stripe2); 1px; 2px);
 		backdrop-filter: blur(4px);
 
@@ -118,9 +119,10 @@
 	.pl((@sidebar-w + @gutter));
 	.pv(@gutter);
 	.bb(@gutter solid var(--c-theme));
+	.c(var(--c-footer-text));
+	.bg-c(var(--c-footer));
 	.stripes(var(--stripes-angle); var(--c-footer-stripe1); var(--c-footer-stripe2); 1px; 4px);
 	background-attachment: fixed;
-	.c(var(--c-footer-text));
 
 	a {
 		.c(var(--c-footer-link));

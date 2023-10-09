@@ -177,7 +177,7 @@ const T = {
 	watch() {
 		// auto-build js
 		$.watch([
-			`${paths.src.scripts}/main.js`
+			`${paths.src.scripts}/*.js`
 		], T.js_build);
 
 		// auto-build css

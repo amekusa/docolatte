@@ -1,6 +1,7 @@
 import Fuse from 'fuse.js';
 import SimpleBar from 'simplebar';
 import HLJS from 'highlight.js/lib/common';
+import ScrollWatcher from './ScrollWatcher.js';
 
 /*!
  * The main script for docolatte
@@ -148,6 +149,9 @@ import HLJS from 'highlight.js/lib/common';
 		// local storage
 		const storage = window.sessionStorage;
 
+		// window scroll watcher
+		const sw = new ScrollWatcher(window);
+
 		// table of contents
 		const toc = q('.sidebar .toc', 0);
 		const tocScroll = new SimpleBar(toc).getScrollElement();
@@ -284,23 +288,12 @@ import HLJS from 'highlight.js/lib/common';
 		}
 
 		{ // mark a TOC item as "current" on scroll
-			let scroll = window.scrollY;
-			let ticking = false;
-
-			window.addEventListener('scroll', ev => {
-				if (ticking) return;
-				if (window.scrollY == scroll) return;
-				scroll = window.scrollY;
-				ticking = true;
-				window.requestAnimationFrame(update);
-			});
-
 			let headings = q('article.doc h4.name[id]');
 			let curr = { i: -1, a: null, wrap: null };
 
-			const update = () => {
+			sw.onScroll(scr => {
 				for (let i = 0; i < headings.length; i++) {
-					if (headings[i].offsetTop < scroll) continue;
+					if (headings[i].offsetTop < scr.curr.y) continue;
 					if (i == curr.i) break;
 					let flag = 'data-current';
 					if (curr.i >= 0 && curr.a.length) curr.a.forEach(a => { a.removeAttribute(flag) });
@@ -330,10 +323,7 @@ import HLJS from 'highlight.js/lib/common';
 					}
 					break;
 				}
-				ticking = false;
-			}
-
-			update();
+			});
 		}
 
 		{ // code highlight
@@ -384,6 +374,9 @@ import HLJS from 'highlight.js/lib/common';
 
 			selectLine();
 		}
+
+		// start window scroll watcher
+		sw.watch(true);
 
 	}); // DOM setup
 

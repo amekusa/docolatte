@@ -15,6 +15,7 @@ const // gulp
 
 const // rollup
 	{ rollup } = require('rollup'),
+	rStrip = require('@rollup/plugin-strip'),
 	rNode = require('@rollup/plugin-node-resolve'),
 	rCJS = require('@rollup/plugin-commonjs');
 
@@ -68,25 +69,36 @@ const T = {
 		if (conf) {
 			if (typeof conf.cache == 'object') log(' :: Rollup - Cache Used');
 
-		} else conf = {
-			input: `${paths.src.scripts}/main.js`,
-			output: {
-				file: `${paths.scripts}/docolatte.js`,
-				name: 'docolatte',
-				format: 'iife',
-				sourcemap: !sh.prod(),
-				indent: false,
-			},
-			plugins: [
-				rNode({
-					browser: true,
-				}),
-				rCJS(),
-			],
-			treeshake: sh.prod(),
-			cache: true,
-		};
-
+		} else {
+			conf = {
+				input: `${paths.src.scripts}/main.js`,
+				output: {
+					file: `${paths.scripts}/docolatte.js`,
+					name: 'docolatte',
+					format: 'iife',
+					sourcemap: !sh.prod(),
+					indent: false,
+				},
+				plugins: [
+					rCJS(),
+					rNode({ browser: true }),
+				],
+				treeshake: sh.prod(),
+				cache: true,
+			};
+			if (sh.prod()) {
+				conf.plugins.push(
+					rStrip({
+						include: `${paths.src.scripts}/*.js`,
+						functions: [
+							'console.*',
+							'assert.*',
+							'debug.*',
+						]
+					})
+				);
+			}
+		}
 		return rollup(conf).then(bundle => {
 			if (bundle.cache) {
 				conf.cache = bundle.cache;

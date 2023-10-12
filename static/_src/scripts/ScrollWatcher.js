@@ -38,7 +38,7 @@ class ScrollWatcher {
 			c.prev.time = c.curr.time;
 			c.curr.time = time;
 			c.diff.time = c.curr.time - c.prev.time;
-			debug.log('- diff:', c.diff.time);
+			debug.log(' - diff:', c.diff.time);
 			// debug.slow(8);
 			for (let i = 0; i < this.tasks.length; i++) this.tasks[i](c);
 			if (c.isFirst) c.isFirst = false;
@@ -75,7 +75,8 @@ class ScrollWatcher {
 		if (dispatchFirst) { // mimicking 'scroll' event
 			c.curr.x = this.target[propX];
 			c.curr.y = this.target[propY];
-			tick(performance.now());
+			window.requestAnimationFrame(tick);
+			debug.log('1st animation frame requested');
 		}
 	}
 }

@@ -1,3 +1,6 @@
+import Debugger from './Debugger.js';
+const debug = new Debugger('[DBG:SW]', true);
+
 /**
  * Scroll event watcher for smooth animation
  * @author amekusa
@@ -29,14 +32,18 @@ class ScrollWatcher {
 			prev: { x: 0, y: 0, time: 0 },
 			diff: { x: 0, y: 0, time: 0 }
 		};
-		let busy = false;
+		let ticking = false;
 		let tick = time => {
+			debug.log('animation frame started @', time);
 			c.prev.time = c.curr.time;
 			c.curr.time = time;
 			c.diff.time = c.curr.time - c.prev.time;
+			debug.log('- diff:', c.diff.time);
+			// debug.slow(8);
 			for (let i = 0; i < this.tasks.length; i++) this.tasks[i](c);
 			if (c.isFirst) c.isFirst = false;
-			busy = false;
+			ticking = false;
+			debug.log('animation frame done');
 		};
 		let propX, propY;
 		if (this.target === window) {
@@ -47,8 +54,11 @@ class ScrollWatcher {
 			propY = 'scrollTop';
 		}
 		this.target.addEventListener('scroll', ev => {
-			if (busy) return;
-			busy = true;
+			debug.log('--- scroll event ---');
+			if (ticking) {
+				debug.log('[BUSY!] skipped requesting animation frame');
+				return;
+			};
 			c.ev = ev;
 			c.prev.x = c.curr.x;
 			c.prev.y = c.curr.y;
@@ -56,8 +66,11 @@ class ScrollWatcher {
 			c.curr.y = this.target[propY];
 			c.diff.x = c.curr.x - c.prev.x;
 			c.diff.y = c.curr.y - c.prev.y;
-			if (c.diff.x || c.diff.y) window.requestAnimationFrame(tick);
-			else busy = false;
+			if (c.diff.x || c.diff.y) {
+				ticking = true;
+				window.requestAnimationFrame(tick);
+				debug.log('animation frame requested');
+			}
 		});
 		if (dispatchFirst) { // mimicking 'scroll' event
 			c.curr.x = this.target[propX];

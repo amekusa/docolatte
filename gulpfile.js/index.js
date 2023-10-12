@@ -274,18 +274,17 @@ T.build = $S(
 		T.js,
 		T.css
 	),
-	T.fixtures_clean,
-	T.fixtures_build
+	T.fixtures
 );
 T.dev = $S(
 	t.env_dev,
 	T.build,
-	T.fixtures_serve,
 	T.watch
 );
-T.dist = $S(
+T.prod = $S(
 	t.env_prod,
-	T.build
+	T.build,
+	T.watch
 );
 
 module.exports = T;

@@ -18,6 +18,10 @@ class Debugger {
 		if (!this.enabled) return false;
 		return console.debug(this.label, ...args);
 	}
+	call(fn, ...args) {
+		if (!this.enabled) return false;
+		return fn(...args);
+	}
 	slow(weight) {
 		if (!this.enabled) return false;
 		console.time(this.label + ' slow');

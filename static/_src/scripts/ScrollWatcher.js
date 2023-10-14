@@ -11,73 +11,106 @@ class ScrollWatcher {
 	 */
 	constructor(target = window) {
 		this.target = target;
-		this.tasks = [];
+		this.tasks = {
+			init: [],
+			scroll: [],
+			resize: [],
+		};
 	}
 	/**
 	 * Registers a callback
-	 * @param {function} fn
+	 * @param {string|string[]} ev - Event name(s). Pass `any` to register to all the available events
+	 * @param {function} fn - Callback
 	 */
-	onScroll(fn) {
-		this.tasks.push(fn);
+	on(ev, fn) {
+		if (Array.isArray(ev)) {
+			for (let i = 0; i < ev.length; i++) this.on(ev[i], fn);
+		} else if (ev == 'any') {
+			for (let key in this.tasks) this.on(key, fn);
+		} else this.tasks[ev].push(fn);
 	}
 	/**
 	 * Starts watching scroll event
-	 * @param {bool} dispatchFirst=false - If true, dispatches the tasks at once first
+	 * @param {bool} dispatchFirst - If `true`, dispatches all tasks at once first with `event.type: 'init'`
 	 */
 	watch(dispatchFirst = false) {
-		let c = { // context
-			ev: null,
-			isFirst: true,
-			curr: { x: 0, y: 0, time: 0 },
-			prev: { x: 0, y: 0, time: 0 },
-			diff: { x: 0, y: 0, time: 0 }
-		};
+		// context
+		let c = new Stats({ x: 0, y: 0, mx: 0, my: 0, time: 0 });
+		c.isFirst = true;
+		c.event = null;
+
 		let ticking = false;
 		let tick = time => {
+			c.set('time', time);
 			debug.log('animation frame started @', time);
-			c.prev.time = c.curr.time;
-			c.curr.time = time;
-			c.diff.time = c.curr.time - c.prev.time;
 			debug.log(' - diff:', c.diff.time);
-			// debug.slow(8);
-			for (let i = 0; i < this.tasks.length; i++) this.tasks[i](c);
+			let tasks = this.tasks[c.event.type];
+			for (let i = 0; i < tasks.length; i++) tasks[i](c);
 			if (c.isFirst) c.isFirst = false;
 			ticking = false;
 			debug.log('animation frame done');
 		};
-		let propX, propY;
+		let propX, propY, propMX, propMY;
 		if (this.target === window) {
 			propX = 'scrollX';
 			propY = 'scrollY';
+			propMX = 'scrollMaxX';
+			propMY = 'scrollMaxY';
 		} else {
 			propX = 'scrollLeft';
 			propY = 'scrollTop';
+			propMX = 'scrollLeftMax';
+			propMY = 'scrollTopMax';
 		}
-		this.target.addEventListener('scroll', ev => {
-			debug.log('--- scroll event ---');
+		let handler = ev => {
+			debug.log(`--- ${ev.type} event ---`);
 			if (ticking) {
 				debug.log('[BUSY!] skipped requesting animation frame');
 				return;
 			};
-			c.ev = ev;
-			c.prev.x = c.curr.x;
-			c.prev.y = c.curr.y;
-			c.curr.x = this.target[propX];
-			c.curr.y = this.target[propY];
-			c.diff.x = c.curr.x - c.prev.x;
-			c.diff.y = c.curr.y - c.prev.y;
-			if (c.diff.x || c.diff.y) {
-				ticking = true;
-				window.requestAnimationFrame(tick);
-				debug.log('animation frame requested');
-			}
-		});
-		if (dispatchFirst) { // mimicking 'scroll' event
-			c.curr.x = this.target[propX];
-			c.curr.y = this.target[propY];
+			ticking = true;
+			c.event = ev;
+			c.set('x', this.target[propX]);
+			c.set('y', this.target[propY]);
+			c.set('mx', this.target[propMX]);
+			c.set('my', this.target[propMY]);
+			window.requestAnimationFrame(tick);
+			debug.log('animation frame requested');
+		};
+		this.target.addEventListener('scroll', handler);
+		window.addEventListener('resize', handler);
+
+		if (dispatchFirst) {
+			c.event = { type: 'init' }; // fake event
+			c.set('x', this.target[propX]);
+			c.set('y', this.target[propY]);
+			c.set('mx', this.target[propMX]);
+			c.set('my', this.target[propMY]);
 			window.requestAnimationFrame(tick);
 			debug.log('1st animation frame requested');
 		}
+	}
+}
+
+class Stats {
+	constructor(data) {
+		this.curr = {};
+		this.prev = {};
+		this.diff = {};
+		for (let key in data) {
+			this.curr[key] = data[key];
+			this.prev[key] = undefined;
+			this.diff[key] = undefined;
+		}
+	}
+	get(key) {
+		return this.curr[key];
+	}
+	set(key, value) {
+		this.prev[key] = this.curr[key];
+		this.curr[key] = value;
+		this.diff[key] = this.curr[key] - this.prev[key];
+		return this;
 	}
 }
 

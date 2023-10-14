@@ -3,6 +3,9 @@ import SimpleBar from 'simplebar';
 import HLJS from 'highlight.js/lib/common';
 import ScrollWatcher from './ScrollWatcher.js';
 
+import Debugger from './Debugger.js';
+const debug = new Debugger('[main]', true);
+
 /*!
  * The main script for docolatte
  * @author Satoshi Soma (amekusa.com)
@@ -291,14 +294,14 @@ import ScrollWatcher from './ScrollWatcher.js';
 			let headings = q('article.doc h4.name[id]');
 			let curr = { i: -1, a: null, wrap: null };
 
-			sw.onScroll(scr => {
+			sw.on(['init', 'scroll'], c => {
 				for (let i = 0; i < headings.length; i++) {
-					if (headings[i].offsetTop < scr.curr.y) continue;
+					// update "current" state of TOC
+					if (headings[i].offsetTop < c.curr.y) continue;
 					if (i == curr.i) break;
 					let flag = 'data-current';
 					if (curr.i >= 0 && curr.a.length) curr.a.forEach(a => { a.removeAttribute(flag) });
 					curr.i = i;
-
 					curr.a = find(toc, `a[href="${currentPage}#${headings[i].id}"]`);
 					if (!curr.a.length) break;
 					curr.a.forEach(a => { a.setAttribute(flag, 1) });
@@ -376,7 +379,7 @@ import ScrollWatcher from './ScrollWatcher.js';
 		}
 
 		// start window scroll watcher
-		sw.watch(true);
+		sw.watch(['init', 'scroll']);
 
 	}); // DOM setup
 

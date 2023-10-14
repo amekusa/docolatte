@@ -7,7 +7,7 @@ const debug = new Debugger('[DBG:SW]', true);
  */
 class ScrollWatcher {
 	/**
-	 * @param {Element} target=window
+	 * @param {Element} [target=window]
 	 */
 	constructor(target = window) {
 		this.target = target;

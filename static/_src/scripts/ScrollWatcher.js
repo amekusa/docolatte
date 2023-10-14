@@ -31,9 +31,12 @@ class ScrollWatcher {
 	}
 	/**
 	 * Starts watching scroll event
-	 * @param {bool} dispatchFirst - If `true`, dispatches all tasks at once first with `event.type: 'init'`
+	 * @param {string|string[]} ev - Event name(s) to watch. `any` to watch all the available events
 	 */
-	watch(dispatchFirst = false) {
+	watch(ev = 'any') {
+		if (ev == 'any') ev = Object.keys(this.tasks);
+		else if (!Array.isArray(ev)) ev = [ev];
+
 		// context
 		let c = new Stats({ x: 0, y: 0, mx: 0, my: 0, time: 0 });
 		c.isFirst = true;
@@ -77,10 +80,9 @@ class ScrollWatcher {
 			window.requestAnimationFrame(tick);
 			debug.log('animation frame requested');
 		};
-		this.target.addEventListener('scroll', handler);
-		window.addEventListener('resize', handler);
-
-		if (dispatchFirst) {
+		if (ev.includes('scroll')) this.target.addEventListener('scroll', handler);
+		if (ev.includes('resize')) window.addEventListener('resize', handler);
+		if (ev.includes('init')) {
 			c.event = { type: 'init' }; // fake event
 			c.set('x', this.target[propX]);
 			c.set('y', this.target[propY]);

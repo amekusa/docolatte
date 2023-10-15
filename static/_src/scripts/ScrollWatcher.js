@@ -42,16 +42,16 @@ class ScrollWatcher {
 		c.isFirst = true;
 		c.event = null;
 
-		let ticking = false;
+		let request = false; // animation frame request id
 		let tick = time => {
 			c.set('time', time);
-			debug.log('animation frame started @', time);
+			debug.log(`animation frame #${request} started @`, time);
 			debug.log(' - diff:', c.diff.time);
 			let tasks = this.tasks[c.event.type];
 			for (let i = 0; i < tasks.length; i++) tasks[i](c);
 			if (c.isFirst) c.isFirst = false;
-			ticking = false;
-			debug.log('animation frame done');
+			debug.log(`animation frame #${request} done`);
+			request = false;
 		};
 		let propX, propY, propMX, propMY;
 		if (this.target === window) {
@@ -67,18 +67,17 @@ class ScrollWatcher {
 		}
 		let handler = ev => {
 			debug.log(`--- ${ev.type} event ---`);
-			if (ticking) {
-				debug.log('[BUSY!] skipped requesting animation frame');
-				return;
+			if (request) { // previous request is still in the queue
+				window.cancelAnimationFrame(request); // cancel the previous request
+				debug.log(`<BUSY!> canceled animation frame #${request}`);
 			};
-			ticking = true;
 			c.event = ev;
 			c.set('x', this.target[propX]);
 			c.set('y', this.target[propY]);
 			c.set('mx', this.target[propMX]);
 			c.set('my', this.target[propMY]);
-			window.requestAnimationFrame(tick);
-			debug.log('animation frame requested');
+			request = window.requestAnimationFrame(tick);
+			debug.log(`animation frame #${request} requested`);
 		};
 		if (ev.includes('init'))   handler({ type: 'init' }); // fake event
 		if (ev.includes('scroll')) this.target.addEventListener('scroll', handler);

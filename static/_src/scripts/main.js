@@ -295,6 +295,7 @@ const debug = new Debugger('[main]', true);
 			let curr = { i: -1, a: null, wrap: null };
 
 			sw.on(['init', 'scroll'], c => {
+				debug.log('toc update started');
 				for (let i = 0; i < headings.length; i++) {
 					// update "current" state of TOC
 					if (headings[i].offsetTop < c.curr.y) continue;
@@ -326,6 +327,7 @@ const debug = new Debugger('[main]', true);
 					}
 					break;
 				}
+				debug.log('toc update done');
 			});
 		}
 

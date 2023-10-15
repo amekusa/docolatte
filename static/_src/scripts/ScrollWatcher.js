@@ -79,9 +79,13 @@ class ScrollWatcher {
 			request = window.requestAnimationFrame(tick);
 			debug.log(`animation frame #${request} requested`);
 		};
-		if (ev.includes('init'))   handler({ type: 'init' }); // fake event
-		if (ev.includes('scroll')) this.target.addEventListener('scroll', handler);
-		if (ev.includes('resize')) window.addEventListener('resize', handler);
+		for (let i = 0; i < ev.length; i++) {
+			switch (ev[i]) {
+				case 'init':   handler({ type: 'init' }); break; // fake event
+				case 'scroll': this.target.addEventListener('scroll', handler); break;
+				case 'resize': window.addEventListener('resize', handler); break;
+			}
+		}
 	}
 }
 

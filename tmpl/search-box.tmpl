@@ -1,5 +1,5 @@
 <div class="search-box">
-	<input class="search" type="text" placeholder="<?js= this.theme.config.search.placeholder ?>"><svg class="icon feather"><use xlink:href="assets/feather-sprite.svg#search"/></svg>
+	<input class="search" type="text" placeholder="<?js= this.theme.config.search.placeholder ?>"><?js= this.u.icon('search', { class: 'icon' }) ?>
 	<ol class="dropdown"></ol>
 	<?js if (!this.theme.config.search.hint.hide) { ?>
 	<div class="hint hidden not-for-mobile">

@@ -182,6 +182,11 @@ const T = {
 			server: {
 				baseDir: paths.fixtures,
 				index: 'index.html'
+			},
+			ghostMode: {
+				clicks: false,
+				forms: false,
+				scroll: false
 			}
 		}, done);
 	},

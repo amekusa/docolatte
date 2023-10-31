@@ -71,14 +71,14 @@
 			.flex-center-v;
 			// justify-content: right; // Doesn't work on Chrome :(
 			justify-content: flex-end; // This works on Chrome :)
-			.ph(@gutter);
+			.px(@gutter);
 		}
 	}
 	.topbar {
 		flex-grow: 1; // Grows
 		.flex-center-v;
 		.dim(auto; 100%; border-box);
-		.ph(@gutter);
+		.px(@gutter);
 		.bg-c(var(--c-topbar));
 		.stripes(var(--stripes-angle); var(--c-topbar-stripe1); var(--c-topbar-stripe2); 1px; 2px);
 		backdrop-filter: blur(4px);
@@ -96,8 +96,8 @@
 	.pos(relative);
 	.w(100%; border-box);
 	.h-min(100%);
-	.pv(@topbar-h; (@gutter * 2));
-	.ph(@sidebar-w; 0);
+	.py(@topbar-h; (@gutter * 2));
+	.px(@sidebar-w; 0);
 	.bg-c(var(--c-backdrop));
 
 	&.has-footer {
@@ -166,7 +166,7 @@
 			.block;
 			.dim(@size; @size; content-box);
 			.mt(@gutter);
-			.mh(auto);
+			.mx(auto);
 			.pt(0);
 			.round(50%);
 			.align(center);
@@ -251,7 +251,7 @@
 
 				// methods, members
 				ul {
-					.mv(.35em; .75em);
+					.my(.35em; .75em);
 					.pl(1.5em);
 					.ff(@ff-code);
 					.regular;
@@ -270,8 +270,8 @@
 								.pos-tl(.38em; -1em; absolute);
 								.block;
 								.dim(0; 0; content-box);
-								.bh(@w solid; none);
-								.bv((@h / 2) solid transparent);
+								.bx(@w solid; none);
+								.by((@h / 2) solid transparent);
 							}
 						}
 						&:hover, &:focus {
@@ -301,7 +301,7 @@
 			.fs(unit(@fs-m, em));
 			@h: 1.75em;
 			.dim(100%; @h; border-box);
-			.ph(.75em; 2em);
+			.px(.75em; 2em);
 			.b(none);
 			.round((@h / 2));
 
@@ -350,7 +350,7 @@
 
 					> i.symbol {
 						.op(.3);
-						.mh(.25em);
+						.mx(.25em);
 						.roman;
 					}
 				}
@@ -385,8 +385,8 @@
 				.block;
 				.pos-tl(calc(-@h + 1px); 1.5em; absolute);
 				.dim(0; 0; content-box);
-				.bv(none; @h solid var(--c-hint));
-				.bh((@w / 2) solid transparent);
+				.by(none; @h solid var(--c-hint));
+				.bx((@w / 2) solid transparent);
 			}
 			&.hidden {
 				.no-disp;

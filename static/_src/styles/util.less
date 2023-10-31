@@ -156,13 +156,13 @@
 	.pos(absolute; @z);
 	top: 0;
 	bottom: 0;
-	.mv(auto);
+	.my(auto);
 }
 .pos-center-h(@z: -) {
 	.pos(absolute; @z);
 	left: 0;
 	right: 0;
-	.mh(auto);
+	.mx(auto);
 }
 
 // Dimension
@@ -201,8 +201,8 @@
 	& when (@others = -) { margin-bottom: @b }
 	& when not(@others = -) { margin: @others @others @b @others }
 }
-.mv(@v) { .mv(@v; @v) }
-.mv(@t; @b) {
+.my(@y) { .my(@y; @y) }
+.my(@t; @b) {
 	margin-top: @t;
 	margin-bottom: @b;
 }
@@ -214,8 +214,8 @@
 	& when (@others = -) { margin-right: @r }
 	& when not(@others = -) { margin: @others @r @others @others }
 }
-.mh(@h) { .mh(@h; @h) }
-.mh(@l; @r) {
+.mx(@x) { .mx(@x; @x) }
+.mx(@l; @r) {
 	margin-left: @l;
 	margin-right: @r;
 }
@@ -262,8 +262,8 @@
 	& when (@others = -) { padding-bottom: @b }
 	& when not(@others = -) { padding: @others @others @b @others }
 }
-.pv(@v) { .pv(@v; @v) }
-.pv(@t; @b) {
+.py(@y) { .py(@y; @y) }
+.py(@t; @b) {
 	padding-top: @t;
 	padding-bottom: @b;
 }
@@ -275,8 +275,8 @@
 	& when (@others = -) { padding-right: @r }
 	& when not(@others = -) { padding: @others @r @others @others }
 }
-.ph(@h) { .ph(@h; @h) }
-.ph(@l; @r) {
+.px(@x) { .px(@x; @x) }
+.px(@l; @r) {
 	padding-left: @l;
 	padding-right: @r;
 }
@@ -331,8 +331,8 @@
 		border-right: @others;
 	}
 }
-.bv(@v) { .bv(@v; @v) }
-.bv(@t; @b) {
+.by(@y) { .by(@y; @y) }
+.by(@t; @b) {
 	border-top: @t;
 	border-bottom: @b;
 }
@@ -352,8 +352,8 @@
 		border-left: @others;
 	}
 }
-.bh(@h) { .bh(@h; @h) }
-.bh(@l; @r) {
+.bx(@x) { .bx(@x; @x) }
+.bx(@l; @r) {
 	border-left: @l;
 	border-right: @r;
 }

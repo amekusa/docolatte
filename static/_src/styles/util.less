@@ -2,6 +2,10 @@
 
 .c(@color) { color: @color }
 .op(@opacity) { opacity: @opacity }
+.of(@overflow) { overflow: @overflow }
+.align(@text-align) { text-align: @text-align }
+.empty() { content: "" }
+.no-hover() { pointer-events: none }
 
 
 // ---- Background ----
@@ -9,6 +13,7 @@
 .bg(@background) { background: @background }
 .bg-c(@background-color) { background-color: @background-color }
 .bg-img(@background-image) { background-image: @background-image }
+.bg-fixed() { background-attachment: fixed }
 
 
 // ---- Font ----
@@ -84,6 +89,7 @@
 }
 
 // Positioning
+.z(@z-index) { z-index: @z-index }
 .pos(@pos; @z: -) {
 	position: @pos;
 	& when not(@z = -) { z-index: @z }
@@ -176,6 +182,8 @@
 	.pos-tl(0; 0; absolute; @z);
 	.dim(100%; 100%; border-box);
 }
+.content-box { box-sizing: content-box }
+.border-box  { box-sizing: border-box }
 
 // Margin
 .m(@m) { margin: @m }
@@ -391,6 +399,13 @@
 .round-r(@t; @b) {
 	border-top-right-radius: @t;
 	border-bottom-right-radius: @b;
+}
+
+.trans(@props: -; @duration: -; @easing: -; @delay: -) {
+	& when not(@props = -) { transition-property: @props }
+	& when not(@duration = -) { transition-duration: @duration }
+	& when not(@easing = -) { transition-timing-function: @easing }
+	& when not(@delay = -) { transition-delay: @delay }
 }
 
 .bare() {

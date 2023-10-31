@@ -312,7 +312,7 @@
 				.c(var(--c-search-ph));
 			}
 			&:focus ~ .dropdown {
-				visibility: visible;
+				.visible;
 			}
 			+ .icon {
 				.square(1em);
@@ -331,11 +331,11 @@
 			.round(.5em);
 			box-shadow: .1em .2em .4em var(--c-dropdown-shadow);
 
-			visibility: hidden;
+			.hidden;
 			transition: visibility .25s; // needs delay for touch devices (because no :hover)
 
 			&:hover {
-				visibility: visible;
+				.visible;
 			}
 			li {
 				.ff(@ff-code);
@@ -429,7 +429,7 @@ input#docolatte-sidebar-toggle,
 	> .shape {
 		.flex-center;
 		.spread;
-		.round((@size / 2));
+		.round(50%);
 		box-shadow: 0 .1rem .4rem var(--c-menu-btn-shadow);
 		transition: all .25s ease-out;
 		.bg-c(var(--c-menu-btn));

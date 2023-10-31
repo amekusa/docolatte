@@ -1074,7 +1074,7 @@ input#docolatte-sidebar-toggle,
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  border-radius: 2rem;
+  border-radius: 50%;
   box-shadow: 0 0.1rem 0.4rem var(--c-menu-btn-shadow);
   transition: all 0.25s ease-out;
   background-color: var(--c-menu-btn);

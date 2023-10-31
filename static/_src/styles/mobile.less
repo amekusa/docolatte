@@ -6,14 +6,14 @@
 		.no-disp !important;
 	}
 	:root {
-		font-size: 16px;
+		.fs(16px);
 	}
 	body {
-		overflow: auto;
+		.of(auto);
 	}
 	.header {
-		display: block;
-		overflow: visible;
+		.block;
+		.of(visible);
 		.pos(absolute);
 		.h(auto);
 
@@ -63,7 +63,7 @@
 
 	@sidebar-w2: 320px;
 	.sidebar {
-		z-index: (@z-header + 2);
+		.z((@z-header + 2));
 		.pos-l(-@sidebar-w2);
 		.w(@sidebar-w2);
 		transition: left .16s ease-out;
@@ -91,10 +91,10 @@
 			box-shadow: .5rem 0 .5rem var(--c-menu-shadow);
 		}
 		~ .overlay {
-			z-index: (@z-header + 1);
+			.z((@z-header + 1));
 
 			&::before {
-				opacity: .618;
+				.op(.618);
 			}
 		}
 		~ .menu-button {
@@ -140,7 +140,7 @@
 		}
 	}
 	.menu-button {
-		display: block;
+		.block;
 	}
 }
 
@@ -169,7 +169,7 @@
 
 @media (max-width: 414px) {
 	:root {
-		font-size: 15px;
+		.fs(15px);
 	}
 	.header {
 		.masthead {

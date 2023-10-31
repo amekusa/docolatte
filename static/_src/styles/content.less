@@ -16,7 +16,7 @@ a {
 
 	&:hover, &:focus {
 		.c(var(--c-link-hov));
-		text-decoration: underline;
+		.underline;
 	}
 	&:visited {
 		.c(var(--c-link-visited));
@@ -65,7 +65,7 @@ dl {
 	.mv((@gutter * .5); 0);
 	.bl(1px solid var(--c-border-thin));
 	.pl(@gutter);
-	overflow: auto;
+	.of(auto);
 
 	&:empty {
 		.no-disp;
@@ -77,7 +77,7 @@ dl {
 dt {
 	.fs(@fs-s; 1.25);
 	.pv(.25em);
-	text-align: right;
+	.align(right);
 	white-space: nowrap;
 	.c(var(--c-text-thin));
 }
@@ -101,26 +101,26 @@ blockquote {
 article {
 	.m(@gutter);
 	.w-max(960px);
-	overflow: hidden;
+	.of(hidden);
 
 	&.readme {
 		&:first-child {
 			.mt((@gutter * 2));
 		}
 		h1 {
-			font-size: @fs-xl;
+			.fs(@fs-xl);
 		}
 		h2, h3 {
-			font-size: @fs-l;
+			.fs(@fs-l);
 		}
 		h2 {
 			.subsection-title;
 		}
 		h4, h5, h6 {
-			font-size: @fs-m;
+			.fs(@fs-m);
 		}
 		pre > code {
-			font-size: @fs-s;
+			.fs(@fs-s);
 		}
 	}
 	&.src {
@@ -159,7 +159,7 @@ article {
 // class name @TODO
 // h2.name {
 // 	.ancestors, .attribs {
-// 		opacity: 0.5;
+// 		.op(0.5);
 
 // 		a {
 // 			.c(inherit);
@@ -172,21 +172,21 @@ h4.name {
 	.mt((@gutter * 2));
 	.pt(@gutter);
 	.bt(1px dashed var(--c-border));
-	font-weight: normal;
-	font-family: @ff-code;
+	.regular;
+	.ff(@ff-code);
 	.c(var(--c-member));
 
 	// attributes ('static', 'abstract', etc.)
 	.attributes {
-		vertical-align: .1em;
+		.v-align(.1em);
 
 		> .attribute {
-			display: inline-block;
-			font-size: @fs-xs;
+			.iblock;
+			.fs(@fs-xs);
 			.c(var(--c-member-attr));
 			.bg-c(var(--c-member));
 			.ph(.5em);
-			border-radius: .25em;
+			.round(.25em);
 			.mr(.5em);
 
 			&:last-child {
@@ -248,16 +248,16 @@ table {
 	&.params,
 	&.props {
 		td.type {
-			font-family: @ff-code;
+			.ff(@ff-code);
 			.fs(@fs-s);
 		}
 	}
 }
 
 .params, .props {
-	font-size: @fs-m;
+	.fs(@fs-m);
 
 	.name {
-		font-family: @ff-code;
+		.ff(@ff-code);
 	}
 }

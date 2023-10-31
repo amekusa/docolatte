@@ -6,6 +6,12 @@
 .align(@text-align) { text-align: @text-align }
 .empty() { content: "" }
 .no-hover() { pointer-events: none }
+.no-bullets() { list-style-type: none }
+
+.no-deco() { text-decoration: none }
+.underline() { text-decoration: underline }
+
+.v-align(@v-align) { vertical-align: @v-align }
 
 
 // ---- Background ----
@@ -182,8 +188,8 @@
 	.pos-tl(0; 0; absolute; @z);
 	.dim(100%; 100%; border-box);
 }
-.content-box { box-sizing: content-box }
-.border-box  { box-sizing: border-box }
+.content-box() { box-sizing: content-box }
+.border-box()  { box-sizing: border-box }
 
 // Margin
 .m(@m) { margin: @m }
@@ -435,7 +441,7 @@
 	}
 }
 
-.no-scrollbar {
+.no-scrollbar() {
 	scrollbar-width: none;
 
 	&::-webkit-scrollbar {

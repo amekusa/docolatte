@@ -1,10 +1,10 @@
 // scrollable table wrapper
 .table-wrap {
-	overflow: auto;
+	.of(auto);
 
 	> table {
 		.table-wrap {
-			overflow: initial;
+			.of(initial);
 		}
 	}
 }
@@ -13,17 +13,17 @@
 .prettyprint {
 	.pos(relative);
 	.w(auto);
-	overflow: auto;
+	.of(auto);
 	.fs(@fs-s; 1.5);
 	.round(.5rem);
 	.ff(@ff-code);
 
 	._char { // for measuring char width
 		.pos-tl(0; 0; absolute);
-		opacity: 0;
+		.op(0);
 	}
 	code {
-		display: block;
+		.block;
 		.pv(.5em) !important;
 		.ph(1em);
 	}
@@ -31,29 +31,29 @@
 		.pos-tl(0; 0; absolute);
 
 		.linenum {
-			box-sizing: border-box;
-			opacity: .9;
+			.border-box;
+			.op(.9);
 
 			&:first-child { .pt(.5em); }
 			&:last-child { .pb(.5em); }
 
 			a {
-				display: block;
+				.block;
 				.br(solid 1px);
-				text-align: right;
-				text-decoration: none;
+				.align(right);
+				.no-deco;
 				.c(inherit);
-				opacity: .35;
+				.op(.35);
 
 				&:hover, &:focus {
-					opacity: .75;
+					.op(.75);
 				}
 			}
 
 			&[data-selected] {
 
 				a {
-					opacity: 1;
+					.op(1);
 				}
 			}
 		}
@@ -70,7 +70,7 @@
 			.ph(1em);
 			.oneline(@capt-h; auto);
 			.no-scrollbar;
-			text-align: right;
+			.align(right);
 
 			.bg-c(var(--c-code-capt));
 			.stripes(var(--stripes-angle); var(--c-code-capt-stripe1); var(--c-code-capt-stripe2); 1px; 3px);
@@ -84,7 +84,7 @@
 .icon {
 	.pos(relative);
 	.iblock;
-	vertical-align: middle;
+	.v-align(middle);
 
 	// feather icons (github.com/feathericons/feather)
 	&.feather {

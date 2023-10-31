@@ -873,7 +873,7 @@ figure {
 }
 .sidebar .toc nav ul {
   padding-left: 0;
-  list-style: none;
+  list-style-type: none;
   font-weight: bold;
 }
 .sidebar .toc nav ul li::before {
@@ -956,7 +956,7 @@ figure {
   color: var(--c-search-icon);
 }
 .sidebar .search-box .dropdown {
-  list-style: none;
+  list-style-type: none;
   position: absolute;
   z-index: 12;
   left: 0;

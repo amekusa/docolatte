@@ -116,23 +116,25 @@
 	.dim(100%; auto; border-box);
 	.h-max(@footer-h);
 	.pos-br(0; 0; absolute);
-	.pl((@sidebar-w + @gutter));
-	.pv(@gutter);
-	.bb(@gutter solid var(--c-theme));
+	.pl(@sidebar-w);
 	.c(var(--c-footer-text));
 	.bg-c(var(--c-footer));
 	.stripes(var(--stripes-angle); var(--c-footer-stripe1); var(--c-footer-stripe2); 1px; 4px);
 	background-attachment: fixed;
 
-	a {
-		.c(var(--c-footer-link));
+	.lines {
+		.p-b(@gutter);
 
-		&:hover, &:focus {
-			.c(var(--c-footer-link-hov));
+		a {
+			.c(var(--c-footer-link));
+
+			&:hover, &:focus {
+				.c(var(--c-footer-link-hov));
+			}
 		}
-	}
-	p {
-		.m(0);
+		p {
+			.m(0);
+		}
 	}
 	.copyright,
 	.license {
@@ -146,6 +148,51 @@
 	}
 	.license + .generator {
 		.mt((@gutter * .5));
+	}
+	.bottom {
+		.pos(relative);
+		.h((@bottom-h + @gutter));
+		.c(var(--c-bottom-text));
+		.of(hidden);
+
+		&::before { // background
+			.empty;
+			.pos-bl(0; 0; absolute; 0);
+			.block;
+			.dim(100%; @bottom-h);
+			.bg-c(var(--c-bottom));
+		}
+		.to-top { // button
+			@size: 10em;
+			.pos(relative; 1);
+			.block;
+			.dim(@size; @size; content-box);
+			.mt(@gutter);
+			.mh(auto);
+			.pt(0);
+			.round(50%);
+			.align(center);
+			.bg-c(var(--c-bottom));
+			.c(var(--c-bottom-text));
+			.ff(@ff-head);
+			.trans(margin-top, padding-top, color, background-color; .25s; ease-out);
+
+			&:hover {
+				.mt(0);
+				.pt(@gutter * .5);
+				.bg-c(var(--c-bottom-hov));
+				.c(var(--c-bottom-text-hov));
+			}
+			.label {
+				.h(@bottom-h);
+				.flex-center;
+				.no-hover;
+			}
+			.icon {
+				.square(1.25em);
+				.ml(.25em);
+			}
+		}
 	}
 }
 

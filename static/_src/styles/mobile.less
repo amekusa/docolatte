@@ -1,6 +1,7 @@
-@masthead-h: (@topbar-h * 1.618);
-
 @media (max-width: 680px) {
+	@masthead-h: (@topbar-h * 1.618);
+	@bottom-h: (@gutter * 3);
+
 	.not-for-mobile {
 		.no-disp !important;
 	}
@@ -33,14 +34,31 @@
 			.h(@topbar-h);
 		}
 	}
+	.primary,
+	.footer {
+		.pl(0);
+	}
 	.primary {
 		.w-min(320px);
 		.pt((@topbar-h + @masthead-h));
-		.pl(0);
 	}
 	.footer {
-		.pl(@gutter);
-		.pr(((@gutter * .25) + @menu-btn-size + @gutter));
+		.bottom {
+			.h((@bottom-h + @gutter));
+
+			&::before { // background
+				.h(@bottom-h);
+			}
+			.to-top { // button
+				@size: 12em;
+				.square(@size);
+
+				.label {
+					.h(@bottom-h);
+					.fs(@fs-l); // this shouldn't affect height
+				}
+			}
+		}
 	}
 
 	@sidebar-w2: 320px;
@@ -143,7 +161,9 @@
 		.mh(@_gutter);
 	}
 	.footer {
-		.pl(@_gutter);
+		.lines {
+			.ph(@_gutter);
+		}
 	}
 }
 

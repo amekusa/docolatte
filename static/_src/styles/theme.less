@@ -63,7 +63,7 @@
 			.w(@topbar-h);
 
 			svg.icon {
-				.square(1.25em);
+				.wh(1.25em);
 			}
 		}
 		.title {
@@ -187,7 +187,7 @@
 				.no-hover;
 			}
 			.icon {
-				.square(1.25em);
+				.wh(1.25em);
 				.ml(.25em);
 			}
 		}
@@ -315,7 +315,7 @@
 				.visible;
 			}
 			+ .icon {
-				.square(1em);
+				.wh(1em);
 				.pos-tr(.35em; .5em; absolute);
 				.c(var(--c-search-icon));
 			}
@@ -419,7 +419,7 @@ input#docolatte-sidebar-toggle,
 }
 .menu-button {
 	@size: @menu-btn-size;
-	.square(@size);
+	.wh(@size);
 	.pos-br(@gutter; @gutter; fixed; @z-header+10);
 	cursor: pointer;
 
@@ -464,7 +464,7 @@ input#docolatte-sidebar-toggle,
 .overlay::before {
 	.block;
 	.pos-tl(0; 0);
-	.square(100%);
+	.wh(100%);
 }
 .overlay {
 	.pos(fixed; -1); // hidden behind the entire page

@@ -177,7 +177,7 @@
 	& when not(@sizing = -) { box-sizing: @sizing }
 	height: @h;
 }
-.square(@wh; @sizing: -) { .dim(@wh; @wh; @sizing) }
+.wh(@wh; @sizing: -) { .dim(@wh; @wh; @sizing) }
 .dim(@w; @h; @sizing: -) {
 	.w(@w; @sizing);
 	.h(@h);

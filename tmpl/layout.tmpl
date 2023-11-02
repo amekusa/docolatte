@@ -43,7 +43,7 @@
         <div class="masthead">
             <?js if (this.theme.config.branding.link) { ?>
             <a class="link" href="<?js= this.theme.config.branding.link ?>">
-                <?js= this.u.icon(this.theme.config.branding.icon || 'home', { class: 'icon' }) ?>
+                <?js= this.u.icon(this.theme.config.branding.icon || 'home') ?>
             </a>
             <?js } ?>
             <a class="title" href="index.html"><?js= this.theme.config.branding.title ?></a>
@@ -81,7 +81,7 @@
             <?js } ?>
             <div class="bottom">
                 <a class="to-top" href="#">
-                    <div class="label">Top<?js= this.u.icon('chevron-up', { class: 'icon' }) ?></div>
+                    <div class="label">Top<?js= this.u.icon('chevron-up') ?></div>
                 </a>
             </div>
         </footer>

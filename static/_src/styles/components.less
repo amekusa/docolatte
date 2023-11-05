@@ -16,7 +16,7 @@
 	.of(auto);
 	.fs(@fs-s; 1.5);
 	.round(.5rem);
-	.ff(@ff-code);
+	.ff(var(--font-code));
 
 	._char { // for measuring char width
 		.pos-tl(0; 0; absolute);
@@ -63,7 +63,7 @@
 
 		// @example <caption>...</caption>
 		.code-caption {
-			.ff(@ff-body);
+			.ff(var(--font-body));
 			.block;
 			.pos-tl(0; 0; absolute);
 			.w(100%; border-box);

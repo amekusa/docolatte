@@ -83,7 +83,7 @@ dt {
 }
 
 hr {
-	.bt(1px dashed var(--c-border); none);
+	.bt(var(--border-style) var(--c-border); none);
 }
 
 img,
@@ -147,7 +147,7 @@ article {
 // method parameters
 .signature {
 	.ml(.5em);
-	.ff(@ff-code);
+	.ff(var(--font-code));
 	.fs(@fs-m);
 
 	.signature-attributes {
@@ -171,9 +171,9 @@ article {
 h4.name {
 	.mt((@gutter * 2));
 	.pt(@gutter);
-	.bt(1px dashed var(--c-border));
+	.bt(var(--border-style) var(--c-border));
 	.regular;
-	.ff(@ff-code);
+	.ff(var(--font-code));
 	.c(var(--c-member));
 
 	// attributes ('static', 'abstract', etc.)
@@ -248,7 +248,7 @@ table {
 	&.params,
 	&.props {
 		td.type {
-			.ff(@ff-code);
+			.ff(var(--font-code));
 			.fs(@fs-s);
 		}
 	}
@@ -258,6 +258,6 @@ table {
 	.fs(@fs-m);
 
 	.name {
-		.ff(@ff-code);
+		.ff(var(--font-code));
 	}
 }

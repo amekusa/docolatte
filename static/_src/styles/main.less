@@ -173,7 +173,7 @@
 			.align(center);
 			.bg-c(var(--c-bottom));
 			.c(var(--c-bottom-text));
-			.ff(@ff-head);
+			.ff(var(--font-heading));
 			.trans(margin-top, padding-top, color, background-color; .25s; ease-out);
 
 			&:hover {
@@ -255,7 +255,7 @@
 				ul {
 					.my(.35em; .75em);
 					.pl(1.5em);
-					.ff(@ff-code);
+					.ff(var(--font-code));
 					.regular;
 
 					a {
@@ -340,7 +340,7 @@
 				.visible;
 			}
 			li {
-				.ff(@ff-code);
+				.ff(var(--font-code));
 				.fs(unit(@fs-s, em); 1.5);
 
 				> a {

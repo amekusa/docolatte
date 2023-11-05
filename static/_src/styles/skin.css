@@ -20,6 +20,11 @@
  * - You can reference a property via `var()` from one another
  */
 body {
+	/* Fonts */
+	--font-body:     HelveticaNeue, Helvetica, Arial, sans-serif;
+	--font-heading:  Avenir, "Century Gothic", var(--font-body);
+	--font-code:     "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+
 	/* Colors */
 	--c-theme:             #e8e2da;  /* thematic color */
 	--c-backdrop:          white;  /* background of the main content area */
@@ -111,5 +116,6 @@ body {
 	--c-menu-shadow:       #00000044;
 
 	/* Misc. */
+	--border-style:        1px dashed;
 	--stripes-angle:       300deg;
 }

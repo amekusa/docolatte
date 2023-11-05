@@ -199,7 +199,7 @@ const T = {
 
 		// auto-build css
 		$.watch([
-			`${paths.src.styles}/*.less`
+			`${paths.src.styles}/*.{less,css}`
 		], T.css_build);
 
 		// auto-build fixtures

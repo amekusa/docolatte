@@ -2,8 +2,7 @@
  * Custom Properties
  *
  * TIPS:
- * - You can reference other properties via `var()`
- * - For color props, you can use `color-mix()` for better control of your colors
+ * - You can reference a property via `var()` from one another
  */
 body {
 	/* Colors */

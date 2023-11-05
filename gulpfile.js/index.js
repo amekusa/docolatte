@@ -138,7 +138,7 @@ const T = {
 	css_build() {
 		bs.notify(`Building CSS...`);
 		let dst = `${paths.styles}/docolatte.css`;
-		let src = `${paths.src.styles}/theme.less`;
+		let src = `${paths.src.styles}/main.less`;
 		let opts = sh.prod() ? '' : '--source-map';
 		return sh.exec(`lessc ${opts} '${src}' '${dst}'`).catch(err => {
 			bs.notify(`<b style="color:hotpink">CSS Build Failure!</b>`, 15000);

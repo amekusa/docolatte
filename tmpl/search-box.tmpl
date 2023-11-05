@@ -3,7 +3,7 @@
 	<ol class="dropdown"></ol>
 	<?js if (!this.theme.config.search.hint.hide) { ?>
 	<div class="hint hidden not-for-mobile">
-		<?js= this.u.lines(this.theme.config.search.hint.body) ?>
+		<?js= this.u.icon('info') + ' ' + this.u.lines(this.theme.config.search.hint.body) ?>
 	</div>
 	<?js } ?>
 </div>

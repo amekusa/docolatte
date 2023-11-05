@@ -53,7 +53,7 @@
         "hint": {
           "hide": false,
           "body": [
-            "<p><b>Hint:</b> Type <em>any key</em> to focus and start searching without clicking.</p>"
+            "Type <em>any key</em> to focus."
           ]
         }
       }

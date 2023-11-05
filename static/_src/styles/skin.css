@@ -1,7 +1,22 @@
 /**
- * Custom Properties
+ * Custom CSS properties for Docolatte
  *
- * TIPS:
+ * ## How to customise
+ * 1. Copy this file (skin.css) to under your project directory, and edit it.
+ * 2. Import the file with `templates.docolatte.imports` option in your JSDoc config JSON.
+ *
+ *   Example JSON:
+ *   {
+ *     "templates": {
+ *       "docolatte": {
+ *         "imports": [
+ *           "./skin.css"
+ *         ]
+ *       }
+ *     }
+ *   }
+ *
+ * ## TIPs
  * - You can reference a property via `var()` from one another
  */
 body {

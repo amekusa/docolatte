@@ -1882,10 +1882,10 @@ var store$2 = sharedStore;
 (shared$6.exports = function (key, value) {
   return store$2[key] || (store$2[key] = value !== undefined ? value : {});
 })('versions', []).push({
-  version: '3.32.2',
+  version: '3.33.2',
   mode: IS_PURE$3 ? 'pure' : 'global',
   copyright: '© 2014-2023 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.32.2/LICENSE',
+  license: 'https://github.com/zloirock/core-js/blob/v3.33.2/LICENSE',
   source: 'https://github.com/zloirock/core-js'
 });
 
@@ -1947,7 +1947,7 @@ var $TypeError$b = TypeError;
 // `RequireObjectCoercible` abstract operation
 // https://tc39.es/ecma262/#sec-requireobjectcoercible
 var requireObjectCoercible$6 = function (it) {
-  if (isNullOrUndefined$6(it)) throw $TypeError$b("Can't call method on " + it);
+  if (isNullOrUndefined$6(it)) throw new $TypeError$b("Can't call method on " + it);
   return it;
 };
 
@@ -2206,7 +2206,7 @@ var $TypeError$a = TypeError;
 // `Assert: Type(argument) is Object`
 var anObject$d = function (argument) {
   if (isObject$e(argument)) return argument;
-  throw $TypeError$a($String$4(argument) + ' is not an object');
+  throw new $TypeError$a($String$4(argument) + ' is not an object');
 };
 
 var anObject$e = /*@__PURE__*/getDefaultExportFromCjs(anObject$d);
@@ -2282,7 +2282,7 @@ var $TypeError$9 = TypeError;
 // `Assert: IsCallable(argument) is true`
 var aCallable$5 = function (argument) {
   if (isCallable$g(argument)) return argument;
-  throw $TypeError$9(tryToString$2(argument) + ' is not a function');
+  throw new $TypeError$9(tryToString$2(argument) + ' is not a function');
 };
 
 var aCallable$6 = /*@__PURE__*/getDefaultExportFromCjs(aCallable$5);
@@ -2314,7 +2314,7 @@ var ordinaryToPrimitive$1 = function (input, pref) {
   if (pref === 'string' && isCallable$f(fn = input.toString) && !isObject$d(val = call$c(fn, input))) return val;
   if (isCallable$f(fn = input.valueOf) && !isObject$d(val = call$c(fn, input))) return val;
   if (pref !== 'string' && isCallable$f(fn = input.toString) && !isObject$d(val = call$c(fn, input))) return val;
-  throw $TypeError$8("Can't convert object to primitive value");
+  throw new $TypeError$8("Can't convert object to primitive value");
 };
 
 var ordinaryToPrimitive$2 = /*@__PURE__*/getDefaultExportFromCjs(ordinaryToPrimitive$1);
@@ -2340,7 +2340,7 @@ var toPrimitive$1 = function (input, pref) {
     if (pref === undefined) pref = 'default';
     result = call$b(exoticToPrim, input, pref);
     if (!isObject$c(result) || isSymbol$3(result)) return result;
-    throw $TypeError$7("Can't convert object to primitive value");
+    throw new $TypeError$7("Can't convert object to primitive value");
   }
   if (pref === undefined) pref = 'number';
   return ordinaryToPrimitive(input, pref);
@@ -2401,7 +2401,7 @@ var f$6 = objectDefineProperty.f = DESCRIPTORS$8 ? V8_PROTOTYPE_DEFINE_BUG$1 ? f
   if (IE8_DOM_DEFINE$1) try {
     return $defineProperty(O, P, Attributes);
   } catch (error) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw $TypeError$6('Accessors not supported');
+  if ('get' in Attributes || 'set' in Attributes) throw new $TypeError$6('Accessors not supported');
   if ('value' in Attributes) O[P] = Attributes.value;
   return O;
 };
@@ -2523,7 +2523,7 @@ var getterFor = function (TYPE) {
   return function (it) {
     var state;
     if (!isObject$b(it) || (state = get(it)).type !== TYPE) {
-      throw TypeError$1('Incompatible receiver, ' + TYPE + ' required');
+      throw new TypeError$1('Incompatible receiver, ' + TYPE + ' required');
     } return state;
   };
 };
@@ -2536,7 +2536,7 @@ if (NATIVE_WEAK_MAP$1 || shared$1.state) {
   store.set = store.set;
   /* eslint-enable no-self-assign -- prototype methods protection */
   set = function (it, metadata) {
-    if (store.has(it)) throw TypeError$1(OBJECT_ALREADY_INITIALIZED);
+    if (store.has(it)) throw new TypeError$1(OBJECT_ALREADY_INITIALIZED);
     metadata.facade = it;
     store.set(it, metadata);
     return metadata;
@@ -2551,7 +2551,7 @@ if (NATIVE_WEAK_MAP$1 || shared$1.state) {
   var STATE = sharedKey$2('state');
   hiddenKeys$4[STATE] = true;
   set = function (it, metadata) {
-    if (hasOwn$8(it, STATE)) throw TypeError$1(OBJECT_ALREADY_INITIALIZED);
+    if (hasOwn$8(it, STATE)) throw new TypeError$1(OBJECT_ALREADY_INITIALIZED);
     metadata.facade = it;
     createNonEnumerableProperty$5(it, STATE, metadata);
     return metadata;
@@ -2911,7 +2911,7 @@ var empty = [];
 var construct = getBuiltIn$2('Reflect', 'construct');
 var constructorRegExp = /^\s*(?:class|function)\b/;
 var exec$2 = uncurryThis$h(constructorRegExp.exec);
-var INCORRECT_TO_STRING = !constructorRegExp.exec(noop);
+var INCORRECT_TO_STRING = !constructorRegExp.test(noop);
 
 var isConstructorModern = function isConstructor(argument) {
   if (!isCallable$9(argument)) return false;
@@ -3425,7 +3425,7 @@ var classof$5 = classof$a;
 var $String$1 = String;
 
 var toString$7 = function (argument) {
-  if (classof$5(argument) === 'Symbol') throw TypeError('Cannot convert a Symbol value to a string');
+  if (classof$5(argument) === 'Symbol') throw new TypeError('Cannot convert a Symbol value to a string');
   return $String$1(argument);
 };
 
@@ -3927,7 +3927,7 @@ var $TypeError$5 = TypeError;
 
 var aPossiblePrototype$1 = function (argument) {
   if (typeof argument == 'object' || isCallable$5(argument)) return argument;
-  throw $TypeError$5("Can't set " + $String(argument) + ' as a prototype');
+  throw new $TypeError$5("Can't set " + $String(argument) + ' as a prototype');
 };
 
 var aPossiblePrototype$2 = /*@__PURE__*/getDefaultExportFromCjs(aPossiblePrototype$1);
@@ -4113,13 +4113,12 @@ var es_array_iterator = defineIterator$1(Array, 'Array', function (iterated, kin
 }, function () {
   var state = getInternalState$2(this);
   var target = state.target;
-  var kind = state.kind;
   var index = state.index++;
   if (!target || index >= target.length) {
     state.target = undefined;
     return createIterResultObject$1(undefined, true);
   }
-  switch (kind) {
+  switch (state.kind) {
     case 'keys': return createIterResultObject$1(index, false);
     case 'values': return createIterResultObject$1(target[index], false);
   } return createIterResultObject$1([index, target[index]], false);
@@ -4476,7 +4475,7 @@ var $TypeError$4 = TypeError;
 var getIterator$1 = function (argument, usingIterator) {
   var iteratorMethod = arguments.length < 2 ? getIteratorMethod$1(argument) : usingIterator;
   if (aCallable$1(iteratorMethod)) return anObject$7(call$7(iteratorMethod, argument));
-  throw $TypeError$4(tryToString$1(argument) + ' is not iterable');
+  throw new $TypeError$4(tryToString$1(argument) + ' is not iterable');
 };
 
 var getIterator$2 = /*@__PURE__*/getDefaultExportFromCjs(getIterator$1);
@@ -4556,7 +4555,7 @@ var iterate$2 = function (iterable, unboundFunction, options) {
     iterator = iterable;
   } else {
     iterFn = getIteratorMethod(iterable);
-    if (!iterFn) throw $TypeError$3(tryToString(iterable) + ' is not iterable');
+    if (!iterFn) throw new $TypeError$3(tryToString(iterable) + ' is not iterable');
     // optimisation for array iterators
     if (isArrayIteratorMethod(iterFn)) {
       for (index = 0, length = lengthOfArrayLike$1(iterable); length > index; index++) {
@@ -4587,7 +4586,7 @@ var $TypeError$2 = TypeError;
 
 var anInstance$2 = function (it, Prototype) {
   if (isPrototypeOf(Prototype, it)) return it;
-  throw $TypeError$2('Incorrect invocation');
+  throw new $TypeError$2('Incorrect invocation');
 };
 
 var anInstance$3 = /*@__PURE__*/getDefaultExportFromCjs(anInstance$2);
@@ -7082,7 +7081,7 @@ var createMethod = function (IS_RIGHT) {
       }
       index += i;
       if (IS_RIGHT ? index < 0 : length <= index) {
-        throw $TypeError$1('Reduce of empty array with no initial value');
+        throw new $TypeError$1('Reduce of empty array with no initial value');
       }
     }
     for (;IS_RIGHT ? index >= 0 : length > index; index += i) if (index in self) {
@@ -7198,7 +7197,7 @@ var $RegExp$1 = global$2.RegExp;
 
 var regexpUnsupportedDotAll = fails$3(function () {
   var re = $RegExp$1('.', 's');
-  return !(re.dotAll && re.exec('\n') && re.flags === 's');
+  return !(re.dotAll && re.test('\n') && re.flags === 's');
 });
 
 var regexpUnsupportedDotAll$1 = /*@__PURE__*/getDefaultExportFromCjs(regexpUnsupportedDotAll);
@@ -7460,7 +7459,7 @@ var regexpExecAbstract = function (R, S) {
     return result;
   }
   if (classof(R) === 'RegExp') return call$3(regexpExec, R, S);
-  throw $TypeError('RegExp#exec called on incompatible receiver');
+  throw new $TypeError('RegExp#exec called on incompatible receiver');
 };
 
 var regexpExecAbstract$1 = /*@__PURE__*/getDefaultExportFromCjs(regexpExecAbstract);
@@ -8945,8 +8944,8 @@ class HTMLRenderer {
   }
 }
 
-/** @typedef {{scope?: string, language?: string, sublanguage?: boolean, children: Node[]} | string} Node */
-/** @typedef {{scope?: string, language?: string, sublanguage?: boolean, children: Node[]} } DataNode */
+/** @typedef {{scope?: string, language?: string, children: Node[]} | string} Node */
+/** @typedef {{scope?: string, language?: string, children: Node[]} } DataNode */
 /** @typedef {import('highlight.js').Emitter} Emitter */
 /**  */
 
@@ -9413,28 +9412,18 @@ const BINARY_NUMBER_MODE = {
   relevance: 0
 };
 const REGEXP_MODE = {
-  // this outer rule makes sure we actually have a WHOLE regex and not simply
-  // an expression such as:
-  //
-  //     3 / something
-  //
-  // (which will then blow up when regex's `illegal` sees the newline)
-  begin: /(?=\/[^/\n]*\/)/,
-  contains: [{
-    scope: 'regexp',
-    begin: /\//,
-    end: /\/[gimuy]*/,
-    illegal: /\n/,
-    contains: [
-      BACKSLASH_ESCAPE,
-      {
-        begin: /\[/,
-        end: /\]/,
-        relevance: 0,
-        contains: [BACKSLASH_ESCAPE]
-      }
-    ]
-  }]
+  scope: "regexp",
+  begin: /\/(?=[^/\n]*\/)/,
+  end: /\/[gimuy]*/,
+  contains: [
+    BACKSLASH_ESCAPE,
+    {
+      begin: /\[/,
+      end: /\]/,
+      relevance: 0,
+      contains: [BACKSLASH_ESCAPE]
+    }
+  ]
 };
 const TITLE_MODE = {
   scope: 'title',
@@ -9471,30 +9460,30 @@ const END_SAME_AS_BEGIN = function(mode) {
 
 var MODES = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  MATCH_NOTHING_RE: MATCH_NOTHING_RE,
-  IDENT_RE: IDENT_RE,
-  UNDERSCORE_IDENT_RE: UNDERSCORE_IDENT_RE,
-  NUMBER_RE: NUMBER_RE,
-  C_NUMBER_RE: C_NUMBER_RE,
+  APOS_STRING_MODE: APOS_STRING_MODE,
+  BACKSLASH_ESCAPE: BACKSLASH_ESCAPE,
+  BINARY_NUMBER_MODE: BINARY_NUMBER_MODE,
   BINARY_NUMBER_RE: BINARY_NUMBER_RE,
+  COMMENT: COMMENT,
+  C_BLOCK_COMMENT_MODE: C_BLOCK_COMMENT_MODE,
+  C_LINE_COMMENT_MODE: C_LINE_COMMENT_MODE,
+  C_NUMBER_MODE: C_NUMBER_MODE,
+  C_NUMBER_RE: C_NUMBER_RE,
+  END_SAME_AS_BEGIN: END_SAME_AS_BEGIN,
+  HASH_COMMENT_MODE: HASH_COMMENT_MODE,
+  IDENT_RE: IDENT_RE,
+  MATCH_NOTHING_RE: MATCH_NOTHING_RE,
+  METHOD_GUARD: METHOD_GUARD,
+  NUMBER_MODE: NUMBER_MODE,
+  NUMBER_RE: NUMBER_RE,
+  PHRASAL_WORDS_MODE: PHRASAL_WORDS_MODE,
+  QUOTE_STRING_MODE: QUOTE_STRING_MODE,
+  REGEXP_MODE: REGEXP_MODE,
   RE_STARTERS_RE: RE_STARTERS_RE,
   SHEBANG: SHEBANG,
-  BACKSLASH_ESCAPE: BACKSLASH_ESCAPE,
-  APOS_STRING_MODE: APOS_STRING_MODE,
-  QUOTE_STRING_MODE: QUOTE_STRING_MODE,
-  PHRASAL_WORDS_MODE: PHRASAL_WORDS_MODE,
-  COMMENT: COMMENT,
-  C_LINE_COMMENT_MODE: C_LINE_COMMENT_MODE,
-  C_BLOCK_COMMENT_MODE: C_BLOCK_COMMENT_MODE,
-  HASH_COMMENT_MODE: HASH_COMMENT_MODE,
-  NUMBER_MODE: NUMBER_MODE,
-  C_NUMBER_MODE: C_NUMBER_MODE,
-  BINARY_NUMBER_MODE: BINARY_NUMBER_MODE,
-  REGEXP_MODE: REGEXP_MODE,
   TITLE_MODE: TITLE_MODE,
-  UNDERSCORE_TITLE_MODE: UNDERSCORE_TITLE_MODE,
-  METHOD_GUARD: METHOD_GUARD,
-  END_SAME_AS_BEGIN: END_SAME_AS_BEGIN
+  UNDERSCORE_IDENT_RE: UNDERSCORE_IDENT_RE,
+  UNDERSCORE_TITLE_MODE: UNDERSCORE_TITLE_MODE
 });
 
 /**
@@ -10307,7 +10296,7 @@ function expandOrCloneMode(mode) {
   return mode;
 }
 
-var version = "11.8.0";
+var version = "11.9.0";
 
 class HTMLInjectionError extends Error {
   constructor(reason, html) {
@@ -10321,6 +10310,7 @@ class HTMLInjectionError extends Error {
 Syntax highlighting with language autodetection.
 https://highlightjs.org/
 */
+
 
 
 /**
@@ -11050,6 +11040,11 @@ const HLJS = function(hljs) {
     fire("before:highlightElement",
       { el: element, language });
 
+    if (element.dataset.highlighted) {
+      console.log("Element previously highlighted. To highlight again, first unset `dataset.highlighted`.", element);
+      return;
+    }
+
     // we should be all text, no child nodes (unescaped HTML) - this is possibly
     // an HTML injection attack - it's likely too late if this is already in
     // production (the code has likely already done its damage by the time
@@ -11076,6 +11071,7 @@ const HLJS = function(hljs) {
     const result = language ? highlight(text, { language, ignoreIllegals: true }) : highlightAuto(text);
 
     element.innerHTML = result.value;
+    element.dataset.highlighted = "yes";
     updateClassName(element, language, result.language);
     element.result = {
       language: result.language,
@@ -11666,14 +11662,15 @@ function requireBash () {
 	  };
 	  SUBST.contains.push(QUOTE_STRING);
 	  const ESCAPED_QUOTE = {
-	    className: '',
-	    begin: /\\"/
-
+	    match: /\\"/
 	  };
 	  const APOS_STRING = {
 	    className: 'string',
 	    begin: /'/,
 	    end: /'/
+	  };
+	  const ESCAPED_APOS = {
+	    match: /\\'/
 	  };
 	  const ARITHMETIC = {
 	    begin: /\$?\(\(/,
@@ -11987,6 +11984,7 @@ function requireBash () {
 	      QUOTE_STRING,
 	      ESCAPED_QUOTE,
 	      APOS_STRING,
+	      ESCAPED_APOS,
 	      VAR
 	    ]
 	  };
@@ -13355,7 +13353,7 @@ function requireCss () {
 	    },
 	    CSS_VARIABLE: {
 	      className: "attr",
-	      begin: /--[A-Za-z][A-Za-z0-9_-]*/
+	      begin: /--[A-Za-z_][A-Za-z0-9_-]*/
 	    }
 	  };
 	};
@@ -13921,6 +13919,7 @@ function requireCss () {
 	Category: common, css, web
 	Website: https://developer.mozilla.org/en-US/docs/Web/CSS
 	*/
+
 
 	/** @type LanguageFn */
 	function css(hljs) {
@@ -15248,6 +15247,7 @@ function requireJava () {
 	Website: https://www.java.com/
 	*/
 
+
 	/**
 	 * Allows recursive regex expressions to a given depth
 	 *
@@ -15667,6 +15667,7 @@ function requireJavascript () {
 	Category: common, scripting, web
 	Website: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 	*/
+
 
 	/** @type LanguageFn */
 	function javascript(hljs) {
@@ -16382,6 +16383,7 @@ function requireKotlin () {
 	 Category: common
 	 */
 
+
 	function kotlin(hljs) {
 	  const KEYWORDS = {
 	    keyword:
@@ -16673,7 +16675,7 @@ function requireLess () {
 	    },
 	    CSS_VARIABLE: {
 	      className: "attr",
-	      begin: /--[A-Za-z][A-Za-z0-9_-]*/
+	      begin: /--[A-Za-z_][A-Za-z0-9_-]*/
 	    }
 	  };
 	};
@@ -17244,6 +17246,7 @@ function requireLess () {
 	Website: http://lesscss.org
 	Category: common, css, web
 	*/
+
 
 	/** @type LanguageFn */
 	function less(hljs) {
@@ -19885,7 +19888,7 @@ function requireRust () {
 	    relevance: 0,
 	    begin: regex.concat(
 	      /\b/,
-	      /(?!let\b)/,
+	      /(?!let|for|while|if|else|match\b)/,
 	      hljs.IDENT_RE,
 	      regex.lookahead(/\s*\(/))
 	  };
@@ -19994,6 +19997,7 @@ function requireRust () {
 	    "debug_assert!",
 	    "debug_assert_eq!",
 	    "env!",
+	    "eprintln!",
 	    "panic!",
 	    "file!",
 	    "format!",
@@ -20222,7 +20226,7 @@ function requireScss () {
 	    },
 	    CSS_VARIABLE: {
 	      className: "attr",
-	      begin: /--[A-Za-z][A-Za-z0-9_-]*/
+	      begin: /--[A-Za-z_][A-Za-z0-9_-]*/
 	    }
 	  };
 	};
@@ -20790,6 +20794,7 @@ function requireScss () {
 	Website: https://sass-lang.com
 	Category: common, css, web
 	*/
+
 
 	/** @type LanguageFn */
 	function scss(hljs) {
@@ -21754,12 +21759,16 @@ function requireSwift () {
 	  /as\?/, // operator
 	  /as!/, // operator
 	  'as', // operator
+	  'borrowing', // contextual
 	  'break',
 	  'case',
 	  'catch',
 	  'class',
+	  'consume', // contextual
+	  'consuming', // contextual
 	  'continue',
 	  'convenience', // contextual
+	  'copy', // contextual
 	  'default',
 	  'defer',
 	  'deinit',
@@ -21767,6 +21776,7 @@ function requireSwift () {
 	  'distributed',
 	  'do',
 	  'dynamic', // contextual
+	  'each',
 	  'else',
 	  'enum',
 	  'extension',
@@ -21793,6 +21803,7 @@ function requireSwift () {
 	  'nonisolated', // contextual
 	  'lazy', // contextual
 	  'let',
+	  'macro',
 	  'mutating', // contextual
 	  'nonmutating', // contextual
 	  /open\(set\)/, // contextual
@@ -21877,7 +21888,6 @@ function requireSwift () {
 	  '#line',
 	  '#selector',
 	  '#sourceLocation',
-	  '#warn_unqualified_access',
 	  '#warning'
 	];
 
@@ -21991,13 +22001,16 @@ function requireSwift () {
 
 	// Built-in attributes, which are highlighted as keywords.
 	// @available is handled separately.
+	// https://docs.swift.org/swift-book/documentation/the-swift-programming-language/attributes
 	const keywordAttributes = [
+	  'attached',
 	  'autoclosure',
 	  concat(/convention\(/, either('swift', 'block', 'c'), /\)/),
 	  'discardableResult',
 	  'dynamicCallable',
 	  'dynamicMemberLookup',
 	  'escaping',
+	  'freestanding',
 	  'frozen',
 	  'GKInspectable',
 	  'IBAction',
@@ -22017,10 +22030,13 @@ function requireSwift () {
 	  'propertyWrapper',
 	  'requires_stored_property_inits',
 	  'resultBuilder',
+	  'Sendable',
 	  'testable',
 	  'UIApplicationMain',
+	  'unchecked',
 	  'unknown',
-	  'usableFromInline'
+	  'usableFromInline',
+	  'warn_unqualified_access'
 	];
 
 	// Contextual keywords used in @available and #(un)available.
@@ -22046,6 +22062,7 @@ function requireSwift () {
 	Website: https://swift.org
 	Category: common, system
 	*/
+
 
 	/** @type LanguageFn */
 	function swift(hljs) {
@@ -22213,6 +22230,50 @@ function requireSwift () {
 	    ]
 	  };
 
+	  const REGEXP_CONTENTS = [
+	    hljs.BACKSLASH_ESCAPE,
+	    {
+	      begin: /\[/,
+	      end: /\]/,
+	      relevance: 0,
+	      contains: [ hljs.BACKSLASH_ESCAPE ]
+	    }
+	  ];
+
+	  const BARE_REGEXP_LITERAL = {
+	    begin: /\/[^\s](?=[^/\n]*\/)/,
+	    end: /\//,
+	    contains: REGEXP_CONTENTS
+	  };
+
+	  const EXTENDED_REGEXP_LITERAL = (rawDelimiter) => {
+	    const begin = concat(rawDelimiter, /\//);
+	    const end = concat(/\//, rawDelimiter);
+	    return {
+	      begin,
+	      end,
+	      contains: [
+	        ...REGEXP_CONTENTS,
+	        {
+	          scope: "comment",
+	          begin: `#(?!.*${end})`,
+	          end: /$/,
+	        },
+	      ],
+	    };
+	  };
+
+	  // https://docs.swift.org/swift-book/documentation/the-swift-programming-language/lexicalstructure/#Regular-Expression-Literals
+	  const REGEXP = {
+	    scope: "regexp",
+	    variants: [
+	      EXTENDED_REGEXP_LITERAL('###'),
+	      EXTENDED_REGEXP_LITERAL('##'),
+	      EXTENDED_REGEXP_LITERAL('#'),
+	      BARE_REGEXP_LITERAL
+	    ]
+	  };
+
 	  // https://docs.swift.org/swift-book/ReferenceManual/LexicalStructure.html#ID412
 	  const QUOTED_IDENTIFIER = { match: concat(/`/, identifier, /`/) };
 	  const IMPLICIT_PARAMETER = {
@@ -22232,7 +22293,7 @@ function requireSwift () {
 	  // https://docs.swift.org/swift-book/ReferenceManual/Attributes.html
 	  const AVAILABLE_ATTRIBUTE = {
 	    match: /(@|#(un)?)available/,
-	    className: "keyword",
+	    scope: 'keyword',
 	    starts: { contains: [
 	      {
 	        begin: /\(/,
@@ -22247,11 +22308,11 @@ function requireSwift () {
 	    ] }
 	  };
 	  const KEYWORD_ATTRIBUTE = {
-	    className: 'keyword',
+	    scope: 'keyword',
 	    match: concat(/@/, either(...keywordAttributes))
 	  };
 	  const USER_DEFINED_ATTRIBUTE = {
-	    className: 'meta',
+	    scope: 'meta',
 	    match: concat(/@/, identifier)
 	  };
 	  const ATTRIBUTES = [
@@ -22319,6 +22380,7 @@ function requireSwift () {
 	      'self',
 	      TUPLE_ELEMENT_NAME,
 	      ...COMMENTS,
+	      REGEXP,
 	      ...KEYWORD_MODES,
 	      ...BUILT_INS,
 	      ...OPERATORS,
@@ -22333,6 +22395,7 @@ function requireSwift () {
 	  const GENERIC_PARAMETERS = {
 	    begin: /</,
 	    end: />/,
+	    keywords: 'repeat each',
 	    contains: [
 	      ...COMMENTS,
 	      TYPE
@@ -22375,9 +22438,10 @@ function requireSwift () {
 	    illegal: /["']/
 	  };
 	  // https://docs.swift.org/swift-book/ReferenceManual/Declarations.html#ID362
-	  const FUNCTION = {
+	  // https://docs.swift.org/swift-book/documentation/the-swift-programming-language/declarations/#Macro-Declaration
+	  const FUNCTION_OR_MACRO = {
 	    match: [
-	      /func/,
+	      /(func|macro)/,
 	      /\s+/,
 	      either(QUOTED_IDENTIFIER.match, identifier, operator)
 	    ],
@@ -22474,7 +22538,7 @@ function requireSwift () {
 	    keywords: KEYWORDS,
 	    contains: [
 	      ...COMMENTS,
-	      FUNCTION,
+	      FUNCTION_OR_MACRO,
 	      INIT_SUBSCRIPT,
 	      {
 	        beginKeywords: 'struct protocol class extension enum actor',
@@ -22497,6 +22561,7 @@ function requireSwift () {
 	        contains: [ ...COMMENTS ],
 	        relevance: 0
 	      },
+	      REGEXP,
 	      ...KEYWORD_MODES,
 	      ...BUILT_INS,
 	      ...OPERATORS,
@@ -22888,6 +22953,7 @@ function requireTypescript () {
 	Category: common, scripting, web
 	Website: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 	*/
+
 
 	/** @type LanguageFn */
 	function javascript(hljs) {
@@ -23497,6 +23563,7 @@ function requireTypescript () {
 	Category: common, scripting
 	*/
 
+
 	/** @type LanguageFn */
 	function typescript(hljs) {
 	  const tsLanguage = javascript(hljs);
@@ -23966,6 +24033,154 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 
 // https://nodejs.org/api/packages.html#packages_writing_dual_packages_while_avoiding_or_minimizing_hazards
 
+/**
+ * Debugging Utility
+ */
+class Debugger {
+	constructor(label = '[DEBUG]', enabled = true) {
+		this.label = label;
+		this.enabled = enabled;
+	}
+	enable() {
+		this.enabled = true;
+		return this;
+	}
+	disable() {
+		this.enabled = false;
+		return this;
+	}
+	log(...args) {
+		if (!this.enabled) return false;
+		return console.debug(this.label, ...args);
+	}
+	call(fn, ...args) {
+		if (!this.enabled) return false;
+		return fn(...args);
+	}
+	slow(weight) {
+		if (!this.enabled) return false;
+		console.time(this.label + ' slow');
+		let r = 0;
+		for (let i = Math.pow(weight, 7); i >= 0; i--) r += Math.atan(i) * Math.tan(i);
+		console.timeEnd(this.label + ' slow');
+		return r;
+	}
+}
+
+const debug$1 = new Debugger('[DBG:SW]', true);
+
+/**
+ * Scroll event watcher for smooth animation
+ * @author amekusa
+ */
+class ScrollWatcher {
+	/**
+	 * @param {Element} [target=window]
+	 */
+	constructor(target = window) {
+		this.target = target;
+		this.tasks = {
+			init: [],
+			scroll: [],
+			resize: [],
+		};
+	}
+	/**
+	 * Registers a callback
+	 * @param {string|string[]} ev - Event name(s). Pass `any` to register to all the available events
+	 * @param {function} fn - Callback
+	 */
+	on(ev, fn) {
+		if (Array.isArray(ev)) {
+			for (let i = 0; i < ev.length; i++) this.on(ev[i], fn);
+		} else if (ev == 'any') {
+			for (let key in this.tasks) this.on(key, fn);
+		} else this.tasks[ev].push(fn);
+	}
+	/**
+	 * Starts watching scroll event
+	 * @param {string|string[]} ev - Event name(s) to watch. `any` to watch all the available events
+	 */
+	watch(ev = 'any') {
+		if (ev == 'any') ev = Object.keys(this.tasks);
+		else if (!Array.isArray(ev)) ev = [ev];
+
+		// context
+		let c = new Stats({ x: 0, y: 0, mx: 0, my: 0, time: 0 });
+		c.isFirst = true;
+		c.event = null;
+
+		let request = false; // animation frame request id
+		let tick = time => {
+			c.set('time', time);
+			debug$1.log(`animation frame #${request} started @`, time);
+			debug$1.log(' - diff:', c.diff.time);
+			let tasks = this.tasks[c.event.type];
+			for (let i = 0; i < tasks.length; i++) tasks[i](c);
+			if (c.isFirst) c.isFirst = false;
+			debug$1.log(`animation frame #${request} done`);
+			request = false;
+		};
+		let propX, propY, propMX, propMY;
+		if (this.target === window) {
+			propX = 'scrollX';
+			propY = 'scrollY';
+			propMX = 'scrollMaxX';
+			propMY = 'scrollMaxY';
+		} else {
+			propX = 'scrollLeft';
+			propY = 'scrollTop';
+			propMX = 'scrollLeftMax';
+			propMY = 'scrollTopMax';
+		}
+		let handler = ev => {
+			debug$1.log(`--- ${ev.type} event ---`);
+			if (request) { // previous request is still in the queue
+				window.cancelAnimationFrame(request); // cancel the previous request
+				debug$1.log(`<BUSY!> canceled animation frame #${request}`);
+			};
+			c.event = ev;
+			c.set('x', this.target[propX]);
+			c.set('y', this.target[propY]);
+			c.set('mx', this.target[propMX]);
+			c.set('my', this.target[propMY]);
+			request = window.requestAnimationFrame(tick);
+			debug$1.log(`animation frame #${request} requested`);
+		};
+		for (let i = 0; i < ev.length; i++) {
+			switch (ev[i]) {
+				case 'init':   handler({ type: 'init' }); break; // fake event
+				case 'scroll': this.target.addEventListener('scroll', handler); break;
+				case 'resize': window.addEventListener('resize', handler); break;
+			}
+		}
+	}
+}
+
+class Stats {
+	constructor(data) {
+		this.curr = {};
+		this.prev = {};
+		this.diff = {};
+		for (let key in data) {
+			this.curr[key] = data[key];
+			this.prev[key] = undefined;
+			this.diff[key] = undefined;
+		}
+	}
+	get(key) {
+		return this.curr[key];
+	}
+	set(key, value) {
+		this.prev[key] = this.curr[key];
+		this.curr[key] = value;
+		this.diff[key] = this.curr[key] - this.prev[key];
+		return this;
+	}
+}
+
+const debug = new Debugger('[main]', true);
+
 /*!
  * The main script for docolatte
  * @author Satoshi Soma (amekusa.com)
@@ -24112,6 +24327,9 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 		// local storage
 		const storage = window.sessionStorage;
 
+		// window scroll watcher
+		const sw = new ScrollWatcher(window);
+
 		// table of contents
 		const toc = q('.sidebar .toc', 0);
 		const tocScroll = new SimpleBar(toc).getScrollElement();
@@ -24156,7 +24374,7 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 			);
 			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);
-			let suggests = find(base, '.suggestions', 0);
+			let dropdown = find(base, '.dropdown', 0);
 			let hint = find(base, '.hint', 0); // can be not present
 			let lastQuery = '';
 
@@ -24166,8 +24384,8 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 				if (query == lastQuery) return;
 				lastQuery = query;
 
-				suggests.innerHTML = ''; // clear
-				suggests.setAttribute('data-select', 0); // reset the state
+				dropdown.innerHTML = ''; // clear
+				dropdown.setAttribute('data-select', 0); // reset the state
 
 				if (!query.length) return;
 				let results = fuse.search(query, { limit: 8 });
@@ -24182,16 +24400,16 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 					let label = item.longname.replaceAll(/(\W)/g, '<i class="symbol">$1</i><wbr>'); // insert <WBR> at every symbol chars
 					let li = elem('li', null, elem('a', { href: item.url }, label));
 					if (i == 0) li.classList.add('selected'); // select the 1st item
-					suggests.appendChild(li);
+					dropdown.appendChild(li);
 				}
 			});
 
-			// navigate through suggestions with key presses
+			// navigate through dropdown-list with key presses
 			input.addEventListener('keydown', ev => {
 				if (ev.key == 'Escape') return ev.target.blur(); // ESC to unfocus
-				if (!suggests.children.length) return;
+				if (!dropdown.children.length) return;
 
-				let select = Number.parseInt(suggests.getAttribute('data-select') || 0);
+				let select = Number.parseInt(dropdown.getAttribute('data-select') || 0);
 				let selectNew = select;
 
 				// navigation
@@ -24206,16 +24424,16 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 					selectNew += (ev.shiftKey ? -1 : 1);
 					break;
 				case 'Enter':
-					find(suggests.children[select], 'a', 0).click();
+					find(dropdown.children[select], 'a', 0).click();
 					break;
 				default:
 					return; // do nothing
 				}
-				if (selectNew < 0) selectNew = suggests.children.length - 1;   // jump to bottom from top
-				else if (selectNew >= suggests.children.length) selectNew = 0; // jump to top from bottom
-				suggests.children[select].classList.remove('selected'); // unselect the previous
-				suggests.children[selectNew].classList.add('selected'); // select the new
-				suggests.setAttribute('data-select', selectNew);
+				if (selectNew < 0) selectNew = dropdown.children.length - 1;   // jump to bottom from top
+				else if (selectNew >= dropdown.children.length) selectNew = 0; // jump to top from bottom
+				dropdown.children[select].classList.remove('selected'); // unselect the previous
+				dropdown.children[selectNew].classList.add('selected'); // select the new
+				dropdown.setAttribute('data-select', selectNew);
 				ev.preventDefault();
 			});
 
@@ -24248,28 +24466,18 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 		}
 
 		{ // mark a TOC item as "current" on scroll
-			let scroll = window.scrollY;
-			let ticking = false;
-
-			window.addEventListener('scroll', ev => {
-				if (ticking) return;
-				if (window.scrollY == scroll) return;
-				scroll = window.scrollY;
-				ticking = true;
-				window.requestAnimationFrame(update);
-			});
-
 			let headings = q('article.doc h4.name[id]');
 			let curr = { i: -1, a: null, wrap: null };
 
-			const update = () => {
+			sw.on(['init', 'scroll'], c => {
+				debug.log('toc update started');
 				for (let i = 0; i < headings.length; i++) {
-					if (headings[i].offsetTop < scroll) continue;
+					// update "current" state of TOC
+					if (headings[i].offsetTop < c.curr.y) continue;
 					if (i == curr.i) break;
 					let flag = 'data-current';
 					if (curr.i >= 0 && curr.a.length) curr.a.forEach(a => { a.removeAttribute(flag); });
 					curr.i = i;
-
 					curr.a = find(toc, `a[href="${currentPage}#${headings[i].id}"]`);
 					if (!curr.a.length) break;
 					curr.a.forEach(a => { a.setAttribute(flag, 1); });
@@ -24294,10 +24502,8 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 					}
 					break;
 				}
-				ticking = false;
-			};
-
-			update();
+				debug.log('toc update done');
+			});
 		}
 
 		{ // code highlight
@@ -24348,6 +24554,9 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 
 			selectLine();
 		}
+
+		// start window scroll watcher
+		sw.watch(['init', 'scroll']);
 
 	}); // DOM setup
 

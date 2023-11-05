@@ -273,9 +273,17 @@ const debug = new Debugger('[main]', true);
 				});
 			}
 
-			// force sidebar to show when searchbox gets focused
+			// on focus searchbox
 			input.addEventListener('focus', ev => {
+				// force sidebar to show when searchbox gets focused
 				sidebarToggle.checked = true;
+
+				// scroll sidebar to top
+				tocScroll.scrollTo({
+					left: 0,
+					top: 0,
+					behavior: 'instant'
+				});
 			});
 
 			// type any "printable" key to start a search

@@ -147,10 +147,10 @@ const debug = new Debugger('[main]', true);
 	document.addEventListener('DOMContentLoaded', () => {
 
 		// current page path
-		const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
+		const currentPage = location.pathname.substring(location.pathname.lastIndexOf('/')+1);
 
 		// local storage
-		const storage = window.sessionStorage;
+		const storage = sessionStorage;
 
 		// window scroll watcher
 		const sw = new ScrollWatcher(window);
@@ -168,7 +168,7 @@ const debug = new Debugger('[main]', true);
 		toc.setAttribute('data-ready', 1);
 
 		// save TOC scroll position
-		window.onbeforeunload = () => {
+		onbeforeunload = () => {
 			storage.setItem('scrollX', tocScroll.scrollLeft);
 			storage.setItem('scrollY', tocScroll.scrollTop);
 		};

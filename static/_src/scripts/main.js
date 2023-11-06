@@ -305,13 +305,18 @@ const debug = new Debugger('[main]', true);
 			sw.on(['init', 'scroll'], c => {
 				debug.log('toc update started');
 				for (let i = 0; i < headings.length; i++) {
-					// update "current" state of TOC
 					if (headings[i].offsetTop < c.curr.y) continue;
 					if (i == curr.i) break;
+
+					// change current URL hash
+					let hash = '#' + headings[i].id;
+					history.replaceState(null, null, hash);
+
+					// update "current" state of TOC
 					let flag = 'data-current';
 					if (curr.i >= 0 && curr.a.length) curr.a.forEach(a => { a.removeAttribute(flag) });
 					curr.i = i;
-					curr.a = find(toc, `a[href="${currentPage}#${headings[i].id}"]`);
+					curr.a = find(toc, `a[href="${currentPage + hash}"]`);
 					if (!curr.a.length) break;
 					curr.a.forEach(a => { a.setAttribute(flag, 1) });
 

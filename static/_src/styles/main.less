@@ -85,10 +85,25 @@
 		backdrop-filter: blur(4px);
 
 		.page-title {
+			flex-grow: 1;
 			.m(0);
 			.fs(@fs-l; 1);
 			.regular;
 			text-shadow: 0 .05em .25em #000f;
+		}
+		.light-switch {
+			flex-grow: 0;
+			.block;
+
+			.light, .dark {
+				.no-disp;
+			}
+			&[data-state="light"] {
+				.light { .block; }
+			}
+			&[data-state="dark"] {
+				.dark { .block; }
+			}
 		}
 	}
 }

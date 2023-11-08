@@ -7,6 +7,14 @@
     "docolatte": {
       "imports": [],
       "minify": true,
+      "lightSwitch": {
+        "hide": false,
+        "default": "auto",
+        "icons": {
+          "light": "sun",
+          "dark": "moon"
+        }
+      },
       "meta": {
         "lang": "en",
         "title": null,

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html<?js= this.u.if(this.theme.config.meta.lang, ' lang="{*}"') ?>>
+<html<?js= this.u.if(this.theme.config.meta.lang, ' lang="{*}"') ?> data-color-scheme="<?js= this.theme.config.lightSwitch.default ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -52,6 +52,12 @@
             <h1 class="page-title">
                 <a href="#"><?js= title ?></a>
             </h1>
+            <?js if (!this.theme.config.lightSwitch.hide) { ?>
+            <a title="Switch light/dark mode" href="#" class="light-switch" data-state="<?js= this.theme.config.lightSwitch.default ?>">
+                <span class="light"><?js= this.u.icon(this.theme.config.lightSwitch.icons.light) ?></span>
+                <span class="dark"><?js= this.u.icon(this.theme.config.lightSwitch.icons.dark) ?></span>
+            </a>
+            <?js } ?>
         </div>
     </header>
 

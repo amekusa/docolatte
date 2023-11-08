@@ -2,9 +2,8 @@ import Fuse from 'fuse.js';
 import SimpleBar from 'simplebar';
 import HLJS from 'highlight.js/lib/common';
 import ScrollWatcher from './ScrollWatcher.js';
-
+import LightSwitch from './LightSwitch.js';
 import Debugger from './Debugger.js';
-const debug = new Debugger('[main]', true);
 
 /*!
  * The main script for docolatte
@@ -26,6 +25,12 @@ const debug = new Debugger('[main]', true);
  */
 
 (() => {
+	const debug = new Debugger('[main]', true);
+	debug.log('script started');
+	// NOTE: debug lines should be removed at the automated bundling process for product
+
+
+	// ---- Functions -------- *
 
 	/**
 	 * @param {string} query
@@ -37,13 +42,13 @@ const debug = new Debugger('[main]', true);
 	}
 
 	/**
-	 * @param {Element} elem
+	 * @param {Element} scope
 	 * @param {string} query
 	 * @param {int} index
 	 * @return {NodeList|Element|null}
 	 */
-	function find(elem, query, index = null) {
-		let items = elem.querySelectorAll(query);
+	function find(scope, query, index = null) {
+		let items = scope.querySelectorAll(query);
 		if (index == null) return items;
 		if ((index+1) > items.length) return null;
 		return items[index];
@@ -143,13 +148,22 @@ const debug = new Debugger('[main]', true);
 		return 0;
 	}
 
+
+	// ---- Tasks -------- *
+
+	const ls = new LightSwitch();
+	ls.setStorage(localStorage, 'lightSwitch');
+	ls.setRoom(document.documentElement, 'data-color-scheme');
+	ls.load();
+
 	// DOM setup
 	document.addEventListener('DOMContentLoaded', () => {
+		debug.log('dom content loaded');
 
 		// current page path
 		const currentPage = location.pathname.substring(location.pathname.lastIndexOf('/')+1);
 
-		// local storage
+		// browser storage
 		const storage = sessionStorage;
 
 		// window scroll watcher
@@ -190,6 +204,14 @@ const debug = new Debugger('[main]', true);
 		document.addEventListener('keydown', ev => {
 			if (ev.key == 'Escape') sidebarToggle.checked = false;
 		});
+
+		{ // light switch
+			let btn = q('.light-switch', 0);
+			if (btn) {
+				ls.setButton(btn, 'data-state');
+				ls.render();
+			}
+		}
 
 		{ // initialize search box
 			let fuse = new Fuse(
@@ -397,5 +419,7 @@ const debug = new Debugger('[main]', true);
 		sw.watch(['init', 'scroll']);
 
 	}); // DOM setup
+
+	debug.log('script done');
 
 })(); // END

@@ -4,26 +4,32 @@
  */
 class LightSwitch {
 	/**
-	 * @param {string[]} states
-	 * @param {number} initial
+	 * @param {string[]} states - All possible states
+	 * @param {number} initial - Initial state index
 	 */
 	constructor(states = null, initial = 0) {
 		this.room = null;
 		this.button = null;
 		this.storage = null;
 		this.states = states || ['light', 'dark'];
-		this.state = 0;
-		this.preference = 0;
+		this.state = initial;
+		this.pref;
 	}
+	/**
+	 * Fetch user's system preference
+	 * @return {number} index of the preferred state
+	 */
 	getPreference() {
-		if (!this.preference) for (let i = 0; i < this.states.length; i++) {
-			let state = this.states[i];
-			if (matchMedia(`(prefers-color-scheme: ${state})`).matches) {
-				this.preference = i;
-				break;
+		if (this.pref === undefined) {
+			for (let i = 0; i < this.states.length; i++) {
+				let state = this.states[i];
+				if (matchMedia(`(prefers-color-scheme: ${state})`).matches) {
+					this.pref = i;
+					break;
+				}
 			}
 		}
-		return this.preference;
+		return this.pref;
 	}
 	/**
 	 * @param {Storage} obj
@@ -48,7 +54,8 @@ class LightSwitch {
 	setButton(elem, attr) {
 		this.button = { elem, attr };
 		elem.addEventListener('click', ev => {
-			this.nextState();
+			ev.preventDefault();
+			this.nextState().save();
 		});
 		return this;
 	}
@@ -72,6 +79,7 @@ class LightSwitch {
 		return this;
 	}
 	load() {
+		// load saved state stored in the browser storage, if it exists
 		if (this.storage) {
 			let loaded = this.storage.obj.getItem(this.storage.key);
 			if (loaded) {
@@ -79,13 +87,16 @@ class LightSwitch {
 				return;
 			}
 		}
+		// if saved state not found, use room's current state
 		let { elem, attr } = this.room;
 		let state = elem.getAttribute(attr);
 		let idx = this.states.indexOf(state);
 		this.setState(idx < 0 ? this.getPreference() : idx);
+		return this;
 	}
 	save() {
 		if (this.storage) this.storage.obj.setItem(this.storage.key, this.state);
+		return this;
 	}
 }
 

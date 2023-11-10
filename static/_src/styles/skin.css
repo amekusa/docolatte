@@ -24,39 +24,37 @@
 	--font-body:     HelveticaNeue, Helvetica, Arial, sans-serif;
 	--font-heading:  Avenir, "Century Gothic", var(--font-body);
 	--font-code:     "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
-}
 
-:root[data-color-scheme="light"] {
 	/* Colors */
-	--c-theme:             #e8e2da;  /* thematic color */
+	--c-theme:             hsl(34, 23%, 88%);  /* thematic color */
 	--c-backdrop:          white;  /* background of the main content area */
 
-	--c-text:              #4d4e53;  /* default text color */
-	--c-text-thin:         #5e5f9188;  /* opacity variant 1 */
-	--c-text-thinner:      #5e5f9144;  /* opacity variant 2 */
+	--c-text:              hsl(239, 4%, 31%);  /* default text color */
+	--c-text-thin:         hsla(239, 21%, 47%, 0.5);  /* opacity variant 1 */
+	--c-text-thinner:      hsla(239, 21%, 47%, 0.25);  /* opacity variant 2 */
 
-	--c-heading:           #5e5f91;  /* <hN> color */
-	--c-heading-thin:      #5e5f91cc;  /* opacity variant 1 */
-	--c-heading-thinner:   #5e5f9188;  /* opacity variant 2 */
+	--c-heading:           hsl(239, 21%, 47%);  /* <hN> color */
+	--c-heading-thin:      hsla(239, 21%, 47%, 0.75);  /* opacity variant 1 */
+	--c-heading-thinner:   hsla(239, 21%, 47%, 0.5);  /* opacity variant 2 */
 	--c-heading-link:      var(--c-heading-thinner);  /* link in <hN> */
 	--c-heading-link-hov:  var(--c-heading);
 
 	--c-border:            var(--c-text-thin);
 	--c-border-thin:       var(--c-text-thinner);
 
-	--c-link:              #0095dd;
+	--c-link:              hsl(200, 100%, 43%);
 	--c-link-hov:          var(--c-link);
 	--c-link-visited:      var(--c-link);
 
-	--c-code:              lightseagreen;  /* <code> color */
+	--c-code:              hsl(177, 70%, 41%);  /* <code> color */
 	--c-code-capt:         transparent; /* @example code caption */
-	--c-code-capt-stripe1: #aaaaaa44;
-	--c-code-capt-stripe2: #aaaaaa11;
+	--c-code-capt-stripe1: hsla(0, 0%, 62%, 0.25);
+	--c-code-capt-stripe2: hsla(0, 0%, 62%, 0.1);
 
-	--c-member:            hotpink;  /* methods and properties */
+	--c-member:            hsl(330, 100%, 71%);  /* methods and properties */
 	--c-member-attr:       white;  /* member attributes ("static", "readonly", etc.) */
-	--c-params:            lightpink;  /* method parameters */
-	--c-params-attr:       #ffdcb6;  /* parameter attributes ("opt", "nullable", "non-null") */
+	--c-params:            hsl(351, 100%, 86%);  /* method parameters */
+	--c-params-attr:       hsl(31, 100%, 86%);  /* parameter attributes ("opt", "nullable", "non-null") */
 
 	--c-table-border:      var(--c-theme);
 	--c-thead:             transparent;
@@ -64,19 +62,19 @@
 	--c-thead-stripe2:     var(--c-backdrop);
 	--c-thead-text:        var(--c-text);
 
-	--c-header:            #454341;
+	--c-header:            hsl(34, 3%, 26%);
 	--c-header-text:       white;
 	--c-header-hov:        var(--c-heading);
 	--c-header-text-hov:   white;
 
 	--c-topbar:            transparent;
-	--c-topbar-stripe1:    #45434166;
-	--c-topbar-stripe2:    #454341cc;
+	--c-topbar-stripe1:    hsla(34, 3%, 26%, 0.5);
+	--c-topbar-stripe2:    hsla(34, 3%, 26%, 0.75);
 
 	--c-footer:            transparent;
 	--c-footer-stripe1:    var(--c-theme);
 	--c-footer-stripe2:    var(--c-backdrop);
-	--c-footer-text:       #a69494;
+	--c-footer-text:       hsl(0, 9%, 62%);
 	--c-footer-link:       var(--c-link);
 	--c-footer-link-hov:   var(--c-link-hov);
 
@@ -103,25 +101,28 @@
 	--c-dropdown-sel:      var(--c-heading);
 	--c-dropdown-text-sel: var(--c-dropdown);
 	--c-dropdown-border:   var(--c-border-thin);
-	--c-dropdown-shadow:   #00000044;
+	--c-dropdown-shadow:   hsla(0, 0%, 0%, 0.25);
 
 	--c-hint:              black;
 	--c-hint-text:         white;
-	--c-hint-shadow:       #00000088;
+	--c-hint-shadow:       hsla(0, 0%, 0%, 0.5);
 
 	/* Only for mobile */
 	--c-menu-btn:          var(--c-sidebar);
 	--c-menu-btn-icon:     var(--c-sidebar-heading);
 	--c-menu-btn-close:      var(--c-backdrop);
 	--c-menu-btn-close-icon: var(--c-text);
-	--c-menu-btn-shadow:   #00000088;
-	--c-menu-shadow:       #00000044;
+	--c-menu-btn-shadow:   hsla(0, 0%, 0%, 0.5);
+	--c-menu-shadow:       hsla(0, 0%, 0%, 0.25);
 
 	/* Misc. */
 	--border-style:        1px dashed;
 	--stripes-angle:       300deg;
 }
 
+/**
+ * Dark theme
+ */
 :root[data-color-scheme="dark"] {
 	/* Colors */
 	--c-theme:             hsl(239, 8%, 11%);  /* thematic color */

@@ -76,20 +76,24 @@
 		}
 	}
 	.topbar {
+		@shadow: 0 .05em .25em #000f;
 		flex-grow: 1; // Grows
 		.flex-center-y;
 		.dim(auto; 100%; border-box);
 		.px(@gutter);
 		.bg-c(var(--c-topbar));
 		.stripes(var(--stripes-angle); var(--c-topbar-stripes); transparent; 1px; 2px);
-		backdrop-filter: blur(4px);
+		text-shadow: @shadow;
+		backdrop-filter: blur(6px);
 
+		svg {
+			filter: drop-shadow(@shadow);
+		}
 		.page-title {
 			flex-grow: 1;
 			.m(0);
 			.fs(@fs-l; 1);
 			.regular;
-			text-shadow: 0 .05em .25em #000f;
 		}
 		.light-switch {
 			flex-grow: 0;

@@ -25,6 +25,10 @@
 	--font-heading:  Avenir, "Century Gothic", var(--font-body);
 	--font-code:     "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
 
+	/* Misc. */
+	--border-style:        1px dashed;
+	--stripes-angle:       300deg;
+
 	/* Colors */
 	--c-theme:             hsl(34, 23%, 88%);  /* thematic color */
 	--c-backdrop:          white;  /* background of the main content area */
@@ -110,10 +114,6 @@
 	--c-menu-btn-close-icon: var(--c-text);
 	--c-menu-btn-shadow:   hsla(0, 0%, 0%, 0.5);
 	--c-menu-shadow:       hsla(0, 0%, 0%, 0.25);
-
-	/* Misc. */
-	--border-style:        1px dashed;
-	--stripes-angle:       300deg;
 }
 
 /**
@@ -122,15 +122,15 @@
 :root[data-color-scheme="dark"] {
 	/* Colors */
 	--c-theme:             hsl(239, 8%, 11%);  /* thematic color */
-	--c-backdrop:          hsl(239, 8%, 13%);  /* background of the main content area */
+	--c-backdrop:          hsl(239, 8%, 14%);  /* background of the main content area */
 
 	--c-text:              hsl(239, 12%, 50%);  /* default text color */
-	--c-text-thin:         hsla(239, 12%, 50%, .5);  /* opacity variant 1 */
-	--c-text-thinner:      hsla(239, 12%, 50%, .25);  /* opacity variant 2 */
+	--c-text-thin:         hsla(239, 12%, 50%, 0.5);  /* opacity variant 1 */
+	--c-text-thinner:      hsla(239, 12%, 50%, 0.3);  /* opacity variant 2 */
 
 	--c-heading:           hsl(239, 60%, 60%);  /* <hN> color */
-	--c-heading-thin:      hsla(239, 0%, 100%, 0.75);  /* opacity variant 1 */
-	--c-heading-thinner:   hsla(239, 21%, 47%, 0.5);  /* opacity variant 2 */
+	--c-heading-thin:      hsla(239, 60%, 60%, 0.75);  /* opacity variant 1 */
+	--c-heading-thinner:   hsla(239, 60%, 60%, 0.5);  /* opacity variant 2 */
 	--c-heading-link:      var(--c-heading-thinner);  /* link in <hN> */
 	--c-heading-link-hov:  var(--c-heading);
 
@@ -155,13 +155,13 @@
 	--c-thead-stripes:     var(--c-table-border);
 	--c-thead-text:        var(--c-text);
 
-	--c-header:            hsl(245, 25%, 25%);
-	--c-header-text:       hsl(245, 12%, 70%);
-	--c-header-hov:        var(--c-heading);
+	--c-header:            hsl(239, 25%, 25%);
+	--c-header-text:       hsl(239, 12%, 70%);
+	--c-header-hov:        hsl(239, 25%, 35%);
 	--c-header-text-hov:   white;
 
-	--c-topbar:            hsla(245, 25%, 25%, .25);
-	--c-topbar-stripes:    hsla(245, 25%, 25%, 1);
+	--c-topbar:            hsla(239, 25%, 25%, 0.25);
+	--c-topbar-stripes:    hsla(239, 25%, 25%, 1);
 
 	--c-footer:            transparent;
 	--c-footer-stripes:    var(--c-text-thinner);
@@ -187,11 +187,11 @@
 
 	--c-dropdown:          var(--c-backdrop);
 	--c-dropdown-text:     var(--c-heading-thin);
-	--c-dropdown-hov:      var(--c-dropdown-text);
-	--c-dropdown-text-hov: var(--c-dropdown);
-	--c-dropdown-sel:      var(--c-heading);
-	--c-dropdown-text-sel: var(--c-dropdown);
-	--c-dropdown-border:   var(--c-border-thin);
+	--c-dropdown-hov:      var(--c-heading-thinner);
+	--c-dropdown-text-hov: white;
+	--c-dropdown-sel:      var(--c-heading-thin);
+	--c-dropdown-text-sel: white;
+	--c-dropdown-border:   hsla(239, 12%, 50%, 0.15);
 	--c-dropdown-shadow:   hsla(0, 0%, 0%, 0.25);
 
 	--c-hint:              black;
@@ -205,8 +205,4 @@
 	--c-menu-btn-close-icon: var(--c-text);
 	--c-menu-btn-shadow:   hsla(0, 0%, 0%, 0.5);
 	--c-menu-shadow:       hsla(0, 0%, 0%, 0.25);
-
-	/* Misc. */
-	--border-style:        1px dashed;
-	--stripes-angle:       300deg;
 }

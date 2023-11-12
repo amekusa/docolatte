@@ -41,15 +41,15 @@
 	--c-heading-thin:      hsla(239, 21%, 47%, 0.75);  /* opacity variant 1 */
 	--c-heading-thinner:   hsla(239, 21%, 47%, 0.5);  /* opacity variant 2 */
 	--c-heading-link:      var(--c-heading-thinner);  /* link in <hN> */
-	--c-heading-link-hov:  var(--c-heading);
-	--c-heading-link-vis:  var(--c-heading-link);
+	--c-heading-link-vis:  var(--c-heading-link);  /* :visited link */
+	--c-heading-link-hov:  var(--c-heading);  /* :hover, :focus link */
 
 	--c-border:            var(--c-text-thin);
 	--c-border-thin:       var(--c-text-thinner);
 
 	--c-link:              hsl(200, 100%, 43%);
-	--c-link-hov:          var(--c-link);
-	--c-link-visited:      var(--c-link);
+	--c-link-vis:          var(--c-link);  /* :visited link */
+	--c-link-hov:          var(--c-link);  /* :hover, :focus link */
 
 	--c-code:              hsl(177, 70%, 41%);  /* <code> color */
 	--c-code-capt:         hsla(0, 0%, 62%, 0.1); /* @example code caption */

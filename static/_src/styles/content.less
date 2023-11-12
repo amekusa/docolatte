@@ -7,6 +7,9 @@ h1, h2, h3, h4, h5, h6 {
 		&:hover, &:focus {
 			.c(var(--c-heading-link-hov));
 		}
+		&:visited {
+			.c(var(--c-heading-link-vis));
+		}
 	}
 }
 
@@ -135,7 +138,7 @@ article {
 	}
 }
 
-// overview
+// class overview
 .container-overview {
 
 	// "Constructor" heading
@@ -155,17 +158,6 @@ article {
 		.fw(normal);
 	}
 }
-
-// class name @TODO
-// h2.name {
-// 	.ancestors, .attribs {
-// 		.op(0.5);
-
-// 		a {
-// 			.c(inherit);
-// 		}
-// 	}
-// }
 
 // member name
 h4.name {

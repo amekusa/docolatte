@@ -42,6 +42,7 @@
 	--c-heading-thinner:   hsla(239, 21%, 47%, 0.5);  /* opacity variant 2 */
 	--c-heading-link:      var(--c-heading-thinner);  /* link in <hN> */
 	--c-heading-link-hov:  var(--c-heading);
+	--c-heading-link-vis:  var(--c-heading-link);
 
 	--c-border:            var(--c-text-thin);
 	--c-border-thin:       var(--c-text-thinner);

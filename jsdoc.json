@@ -27,7 +27,8 @@
     "docolatte": {
       "minify": false,
       "branding": {
-        "title": "Docolatte"
+        "title": "My Project",
+        "icon": "github"
       },
       "code": {
         "theme": "base16/espresso"

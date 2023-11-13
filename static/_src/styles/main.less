@@ -314,13 +314,13 @@
 		}
 	}
 	.search-box {
+		@h: 1.75em;
 		.pos(relative);
 
 		input[type=text] {
 			.pos(relative);
 			.block;
 			.fs(unit(@fs-m, em));
-			@h: 1.75em;
 			.dim(100%; @h; border-box);
 			.px(.75em; 2em);
 			.b(none);
@@ -343,7 +343,7 @@
 		}
 		.dropdown {
 			.no-bullets;
-			.pos-l(0; absolute; (@z-sidebar + 2));
+			.pos-tl(@h + .5em; 0; absolute; (@z-sidebar + 2));
 			.w-max(100%);
 			.of(hidden);
 			.m(0);

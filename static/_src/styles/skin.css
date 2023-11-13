@@ -56,9 +56,11 @@
 	--c-code-capt-stripes: hsla(0, 0%, 62%, 0.25);
 
 	--c-member:            hsl(330, 100%, 71%);  /* methods and properties */
-	--c-member-attr:       white;  /* member attributes ("static", "readonly", etc.) */
-	--c-params:            hsl(351, 100%, 86%);  /* method parameters */
-	--c-params-attr:       hsl(31, 100%, 86%);  /* parameter attributes ("opt", "nullable", "non-null") */
+	--c-member-attr:       var(--c-member);  /* member attributes ("static", "readonly", etc.) */
+	--c-member-attr-text:  var(--c-backdrop);
+	--c-params:            hsl(355, 100%, 86%);  /* method parameters */
+	--c-params-attr:       hsl(31, 100%, 80%);  /* parameter attributes ("opt", "nullable", "non-null") */
+	--c-params-attr-text:  var(--c-backdrop);
 
 	--c-table-border:      var(--c-theme);
 	--c-thead:             transparent;
@@ -95,7 +97,7 @@
 	--c-search-ph:         var(--c-text-thin);  /* placeholder */
 	--c-search-icon:       var(--c-text-thinner);  /* magnifier icon */
 
-	--c-dropdown:          var(--c-backdrop);
+	--c-dropdown:          var(--c-search);
 	--c-dropdown-text:     var(--c-heading-thin);
 	--c-dropdown-hov:      var(--c-dropdown-text);
 	--c-dropdown-text-hov: var(--c-dropdown);
@@ -122,8 +124,8 @@
  */
 :root[data-color-scheme="dark"] {
 	/* Colors */
-	--c-theme:             hsl(239, 8%, 11%);  /* thematic color */
-	--c-backdrop:          hsl(239, 8%, 14%);  /* background of the main content area */
+	--c-theme:             hsl(239, 12%, 10%);  /* thematic color */
+	--c-backdrop:          hsl(239, 12%, 12%);  /* background of the main content area */
 
 	--c-text:              hsl(239, 12%, 50%);  /* default text color */
 	--c-text-thin:         hsla(239, 12%, 50%, 0.5);  /* opacity variant 1 */
@@ -133,23 +135,26 @@
 	--c-heading-thin:      hsla(239, 60%, 60%, 0.75);  /* opacity variant 1 */
 	--c-heading-thinner:   hsla(239, 60%, 60%, 0.5);  /* opacity variant 2 */
 	--c-heading-link:      var(--c-heading-thinner);  /* link in <hN> */
-	--c-heading-link-hov:  var(--c-heading);
+	--c-heading-link-vis:  var(--c-heading-link);  /* :visited link */
+	--c-heading-link-hov:  var(--c-heading);  /* :hover, :focus link */
 
 	--c-border:            var(--c-text-thin);
 	--c-border-thin:       var(--c-text-thinner);
 
 	--c-link:              hsl(200, 100%, 43%);
-	--c-link-hov:          var(--c-link);
-	--c-link-visited:      var(--c-link);
+	--c-link-vis:          var(--c-link);  /* :visited link */
+	--c-link-hov:          var(--c-link);  /* :hover, :focus link */
 
 	--c-code:              hsl(177, 70%, 41%);  /* <code> color */
 	--c-code-capt:         hsla(0, 0%, 67%, 0.1); /* @example code caption */
 	--c-code-capt-stripes: hsla(0, 0%, 67%, 0.25);
 
-	--c-member:            hsl(330, 100%, 45%);  /* methods and properties */
-	--c-member-attr:       white;  /* member attributes ("static", "readonly", etc.) */
-	--c-params:            hsl(347, 30%, 60%);  /* method parameters */
-	--c-params-attr:       hsl(31, 100%, 86%);  /* parameter attributes ("opt", "nullable", "non-null") */
+	--c-member:            hsl(320, 80%, 45%);  /* methods and properties */
+	--c-member-attr:       var(--c-member);  /* member attributes ("static", "readonly", etc.) */
+	--c-member-attr-text:  var(--c-backdrop);
+	--c-params:            hsl(310, 20%, 50%);  /* method parameters */
+	--c-params-attr:       hsl(0, 25%, 50%);  /* parameter attributes ("opt", "nullable", "non-null") */
+	--c-params-attr-text:  var(--c-backdrop);
 
 	--c-table-border:      var(--c-text-thinner);
 	--c-thead:             transparent;
@@ -181,13 +186,13 @@
 	--c-sidebar-link-hov:  var(--c-sidebar-link);
 	--c-sidebar-link-sel:  var(--c-sidebar-link-hov);
 
-	--c-search:            hsl(239, 8%, 18%);
+	--c-search:            hsl(239, 12%, 15%);
 	--c-search-text:       var(--c-text);
 	--c-search-ph:         var(--c-text);  /* placeholder */
 	--c-search-icon:       var(--c-text-thin);  /* magnifier icon */
 
-	--c-dropdown:          var(--c-backdrop);
-	--c-dropdown-text:     var(--c-heading-thin);
+	--c-dropdown:          var(--c-search);
+	--c-dropdown-text:     var(--c-heading);
 	--c-dropdown-hov:      var(--c-heading-thinner);
 	--c-dropdown-text-hov: white;
 	--c-dropdown-sel:      var(--c-heading-thin);

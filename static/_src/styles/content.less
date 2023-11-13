@@ -154,8 +154,18 @@ article {
 	.fs(@fs-m);
 
 	.signature-attributes {
+		.tag;
 		.ml(.25em);
-		.fw(normal);
+		.c(var(--c-params-attr-text));
+	}
+}
+
+// class name in header
+h2.name {
+	.signature {
+		.signature-attributes {
+			.bg-c(var(--c-heading));
+		}
 	}
 }
 
@@ -166,24 +176,18 @@ h4.name {
 	.bt(var(--border-style) var(--c-border));
 	.regular;
 	.ff(var(--font-code));
+	.lh(1.5);
 	.c(var(--c-member));
 
-	// attributes ('static', 'abstract', etc.)
-	.attributes {
-		.v-align(.1em);
+	// 'static', 'abstract', 'readonly', etc.
+	.attribute {
+		.tag;
+		.mr(.25rem);
+		.bg-c(var(--c-member-attr));
+		.c(var(--c-member-attr-text));
 
-		> .attribute {
-			.iblock;
-			.fs(@fs-xs);
-			.c(var(--c-member-attr));
-			.bg-c(var(--c-member));
-			.px(.5em);
-			.round(.25em);
-			.mr(.5em);
-
-			&:last-child {
-				.mr(.5rem);
-			}
+		&:last-child {
+			.mr(.5rem);
 		}
 	}
 	// parameters
@@ -191,7 +195,7 @@ h4.name {
 		.c(var(--c-params));
 
 		.signature-attributes {
-			.c(var(--c-params-attr));
+			.bg-c(var(--c-params-attr));
 		}
 	}
 	// type

@@ -32,18 +32,18 @@ const // shortcuts
 // project root
 const home = dirname(__dirname); chdir(home);
 
-// package info
+// load settings
 const pkg = require(`${home}/package.json`);
+const jsdoc = require(`${home}/jsdoc.json`);
 
 const paths = {
 	src: {
 		scripts:  'static/_src/scripts',
-		styles:   'static/_src/styles',
-		fixtures: 'fixtures'
+		styles:   'static/_src/styles'
 	},
 	scripts:  'static/scripts',
 	styles:   'static/styles',
-	fixtures: 'fixtures-doc',
+	docs:     'docs',
 	tmpl:     'tmpl'
 };
 
@@ -168,19 +168,19 @@ const T = {
 		return io.rm(paths.styles);
 	},
 
-	fixtures_build() {
-		return sh.exec('jsdoc -c fixtures.json').then(bs.reload);
+	docs_build() {
+		return sh.exec('jsdoc -c jsdoc.json').then(bs.reload);
 	},
 
-	fixtures_clean() {
-		return io.rm(paths.fixtures);
+	docs_clean() {
+		return io.rm(paths.docs);
 	},
 
-	fixtures_serve(done) {
+	docs_serve(done) {
 		return bs.active ? done() : bs.init({
 			open: false,
 			server: {
-				baseDir: paths.fixtures,
+				baseDir: paths.docs,
 				index: 'index.html'
 			},
 			ghostMode: {
@@ -202,25 +202,25 @@ const T = {
 			`${paths.src.styles}/*.{less,css}`
 		], T.css_build);
 
-		// auto-build fixtures
+		// auto-build docs
 		$.watch([
-			`${paths.src.fixtures}/**/*`,
-			`${paths.tmpl}/*.tmpl`,
 			'package.json',
-			'fixtures.json',
+			'jsdoc.json',
 			'README.md',
 			'publish.js',
 			'lib/*.{js,json}',
-		], T.fixtures_build);
+			`${paths.tmpl}/*.tmpl`,
+			`${jsdoc.opts.tutorials}/**/*`,
+		], T.docs_build);
 
-		// copy scripts/styles to fixtures on change
+		// copy scripts/styles to docs on change
 		$.watch([
 			`${paths.src.scripts}/**/*`,
 			`${paths.src.styles}/**/*`,
 			`${paths.scripts}/**/*`,
 			`${paths.styles}/**/*`,
 		]).on('change', src => {
-			let dst = src.replace(/^static\//, `${paths.fixtures}/`);
+			let dst = src.replace(/^static\//, `${paths.docs}/`);
 			sh.exec(`cp '${src}' '${dst}'`).then(() => {
 				log(' :: File - Copied:');
 				log('  src:', src);
@@ -264,22 +264,22 @@ T.css = $S(
 	T.css_build,
 	T.css_minify
 );
-T.fixtures = $S(
-	T.fixtures_clean,
-	T.fixtures_build,
-	T.fixtures_serve
+T.docs = $S(
+	T.docs_clean,
+	T.docs_build,
+	T.docs_serve
 );
 T.clean = $P(
 	T.js_clean,
 	T.css_clean,
-	T.fixtures_clean
+	T.docs_clean
 );
 T.build = $S(
 	$P(
 		T.js,
 		T.css
 	),
-	T.fixtures
+	T.docs
 );
 T.dev = $S(
 	t.env_dev,

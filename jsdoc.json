@@ -3,9 +3,9 @@
     "allowUnknownTags": true
   },
   "source": {
-    "includePattern": ".+\\.(e|c)?js(doc|x)?$",
     "include": [
       "./fixtures",
+      "./lib",
       "./README.md"
     ]
   },
@@ -14,7 +14,7 @@
     "encoding": "utf8",
     "template": "./",
     "tutorials": "./fixtures/tutorials",
-    "destination": "./fixtures-doc/",
+    "destination": "./docs/",
     "recurse": true,
     "verbose": true
   },

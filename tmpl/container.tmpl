@@ -1,6 +1,6 @@
 <?js
     var self = this;
-    var U = this.u;
+    var $ = this.theme.util;
     var isGlobalPage;
 
     docs.forEach(function(doc, i) {
@@ -18,7 +18,7 @@
     <?js= self.partial('source.tmpl', doc) ?>
 <?js } else { ?>
 
-<article class="doc<?js= U.if(isGlobalPage, ' global') ?>">
+<article class="doc<?js= $.if(isGlobalPage, ' global') ?>">
     <header>
         <?js if (isGlobalPage) { ?>
             <h2 class="name">Global</h2>
@@ -77,7 +77,7 @@
     <?js if (doc.requires && doc.requires.length) { ?>
         <h3 class="subsection-title">Requires</h3>
 
-        <?js= self.u.list(doc.requires, item => self.linkto(item, item)) ?>
+        <?js= $.list(doc.requires, item => self.linkto(item, item)) ?>
     <?js } ?>
 
     <?js

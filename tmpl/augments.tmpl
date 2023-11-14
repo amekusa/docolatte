@@ -1,6 +1,7 @@
 <?js
     var data = obj;
     var self = this;
+    var $ = this.theme.util;
 ?>
 
-<?js= this.u.list(data.augments, item => self.linkto(item, item)) ?>
+<?js= $.list(data.augments, item => self.linkto(item, item)) ?>

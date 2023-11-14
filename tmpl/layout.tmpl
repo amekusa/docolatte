@@ -1,5 +1,6 @@
+<?js var $ = this.theme.util; ?>
 <!DOCTYPE html>
-<html<?js= this.u.if(this.theme.config.meta.lang, ' lang="{*}"') ?> data-color-scheme="<?js= this.theme.config.lightSwitch.default ?>">
+<html<?js= $.if(this.theme.config.meta.lang, ' lang="{*}"') ?> data-color-scheme="<?js= this.theme.config.lightSwitch.default ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,10 +20,10 @@
     <?js } else { for (let favicon of this.theme.config.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
-    <?js this.u.iterate(this.theme.files.script, file => { ?>
+    <?js $.iterate(this.theme.files.script, file => { ?>
     <script src="<?js= file.url ?>"></script>
     <?js }) ?>
-    <?js this.u.iterate(this.theme.files.style, file => { ?>
+    <?js $.iterate(this.theme.files.style, file => { ?>
     <link type="text/css" rel="stylesheet" href="<?js= file.url ?>">
     <?js }) ?>
     <noscript>
@@ -43,7 +44,7 @@
         <div class="masthead">
             <?js if (this.theme.config.branding.link) { ?>
             <a class="link" href="<?js= this.theme.config.branding.link ?>">
-                <?js= this.u.icon(this.theme.config.branding.icon || 'home') ?>
+                <?js= $.icon(this.theme.config.branding.icon || 'home') ?>
             </a>
             <?js } ?>
             <a class="title" href="index.html"><?js= this.theme.config.branding.title ?></a>
@@ -54,8 +55,8 @@
             </h1>
             <?js if (!this.theme.config.lightSwitch.hide) { ?>
             <a title="Switch light/dark mode" href="#" class="light-switch" data-state="<?js= this.theme.config.lightSwitch.default ?>">
-                <span class="light"><?js= this.u.icon(this.theme.config.lightSwitch.icons.light) ?></span>
-                <span class="dark"><?js= this.u.icon(this.theme.config.lightSwitch.icons.dark) ?></span>
+                <span class="light"><?js= $.icon(this.theme.config.lightSwitch.icons.light) ?></span>
+                <span class="dark"><?js= $.icon(this.theme.config.lightSwitch.icons.dark) ?></span>
             </a>
             <?js } ?>
         </div>
@@ -87,7 +88,7 @@
             <?js } ?>
             <div class="bottom">
                 <a class="to-top" href="#">
-                    <div class="label">Top<?js= this.u.icon('chevron-up') ?></div>
+                    <div class="label">Top<?js= $.icon('chevron-up') ?></div>
                 </a>
             </div>
         </footer>

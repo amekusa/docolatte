@@ -1,6 +1,6 @@
 <?js
     var params = obj;
-    var U = this.u;
+    var $ = this.theme.util;
 
     /* sort subparams under their parent params (like opts.classname) */
     var parentParam = null;
@@ -87,8 +87,8 @@
             <?js if (params.hasName) {?>
                 <td class="name">
                     <code><?js= param.name ?></code><?js
-                    U.iterate(U.paramAttrs(param), item => {
-                        print(U.tag({
+                    $.iterate($.paramAttrs(param), item => {
+                        print($.tag({
                             name: 'i',
                             attrs: { title: item.long, class: 'attribute' },
                             content: item.short

@@ -1,9 +1,10 @@
+<?js var $ = this.theme.util; ?>
 <div class="search-box">
-	<input class="search" type="text" placeholder="<?js= this.theme.config.search.placeholder ?>"><?js= this.u.icon('search') ?>
+	<input class="search" type="text" placeholder="<?js= this.theme.config.search.placeholder ?>"><?js= $.icon('search') ?>
 	<ol class="dropdown"></ol>
 	<?js if (!this.theme.config.search.hint.hide) { ?>
 	<div class="hint hidden not-for-mobile">
-		<?js= this.u.icon('info') + ' ' + this.u.lines(this.theme.config.search.hint.body) ?>
+		<?js= $.icon('info') + ' ' + $.lines(this.theme.config.search.hint.body) ?>
 	</div>
 	<?js } ?>
 </div>

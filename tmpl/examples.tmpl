@@ -1,8 +1,8 @@
 <?js
     var data = obj;
     var self = this;
-    var u = this.u;
+    var $ = this.theme.util;
 ?>
 <?js data.forEach(function(example) { ?>
-    <pre class="prettyprint<?js= u.if(example.lang, ' lang-{*}') + u.if(example.caption, ' has-caption') ?>"><code><?js= self.htmlsafe(example.code) ?></code><?js if (example.caption) { ?><div class="code-caption hljs"><?js= example.caption ?></div><?js } ?></pre>
+    <pre class="prettyprint<?js= $.if(example.lang, ' lang-{*}') + $.if(example.caption, ' has-caption') ?>"><code><?js= self.htmlsafe(example.code) ?></code><?js if (example.caption) { ?><div class="code-caption hljs"><?js= example.caption ?></div><?js } ?></pre>
 <?js }) ?>

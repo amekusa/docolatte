@@ -81,8 +81,13 @@ hr {
 	.my(@gutter*2; @gutter);
 }
 
+ol, ul {
+	&:first-child { .mt(0); }
+	// &:last-child  { .mb(0); }
+}
+
 ul {
-	.pl(1.5em);
+	.pl(1em);
 	.no-bullets;
 
 	li {
@@ -92,9 +97,9 @@ ul {
 		&::before {
 			.empty;
 			.block;
-			.wh(.5em);
-			.pos-tl(.75em; -1em; absolute);
+			.dim(.38em; 1px; border-box);
 			.bt(1px solid);
+			.pos-tl(.7em; -.75em; absolute);
 			.op(.5);
 		}
 	}

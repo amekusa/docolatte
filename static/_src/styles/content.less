@@ -209,21 +209,20 @@ h4.name {
 			}
 			&::before {
 				content: "<";
-				.pr(.25em);
+				.pr(.1em);
 			}
 			&::after {
 				content: ">";
-				.pl(.25em);
+				.pl(.1em);
 			}
 			.sep {
 				.op(.5);
-				.mx(.5em);
+				.mx(.25em);
 				.bl(1px solid);
 			}
 		}
-
 		a {
-			.op(.5);
+			.c(var(--c-link));
 		}
 	}
 }

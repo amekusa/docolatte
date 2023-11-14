@@ -1,7 +1,12 @@
 <?js
     var data = obj;
     var self = this;
-    data.forEach(function(name, i) { ?>
-<span class="param-type"><?js= self.linkto(name, self.htmlsafe(name)) ?></span>
-<?js if (i < data.length-1) { ?>|<?js } ?>
-<?js }); ?>
+    var $ = this.theme.util;
+    print($.list(data, item => {
+        return $.tag({
+            name: 'span',
+            attrs: { class: 'param-type' },
+            content: self.linkto(item, self.htmlsafe(item))
+        });
+    }));
+?>

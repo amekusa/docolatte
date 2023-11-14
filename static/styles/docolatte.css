@@ -17,107 +17,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * Custom Properties
- *
- * TIPS:
- * - You can reference other properties via `var()`
- * - For color props, you can use `color-mix()` for better control of your colors
- */
-body {
-  /* Colors */
-  --c-theme: #e8e2da;
-  /* thematic color */
-  --c-backdrop: white;
-  /* background of the main content area */
-  --c-text: #4d4e53;
-  /* default text color */
-  --c-text-thin: #5e5f9188;
-  /* opacity variant 1 */
-  --c-text-thinner: #5e5f9144;
-  /* opacity variant 2 */
-  --c-heading: #5e5f91;
-  /* <hN> color */
-  --c-heading-thin: #5e5f91cc;
-  /* opacity variant 1 */
-  --c-heading-thinner: #5e5f9188;
-  /* opacity variant 2 */
-  --c-heading-link: var(--c-heading-thinner);
-  /* link in <hN> */
-  --c-heading-link-hov: var(--c-heading);
-  --c-border: var(--c-text-thin);
-  --c-border-thin: var(--c-text-thinner);
-  --c-link: #0095dd;
-  --c-link-hov: var(--c-link);
-  --c-link-visited: var(--c-link);
-  --c-code: lightseagreen;
-  /* <code> color */
-  --c-code-capt: transparent;
-  /* @example code caption */
-  --c-code-capt-stripe1: #aaaaaa44;
-  --c-code-capt-stripe2: #aaaaaa11;
-  --c-member: hotpink;
-  /* methods and properties */
-  --c-member-attr: white;
-  /* member attributes ("static", "readonly", etc.) */
-  --c-params: lightpink;
-  /* method parameters */
-  --c-params-attr: #ffdcb6;
-  /* parameter attributes ("opt", "nullable", "non-null") */
-  --c-table-border: var(--c-theme);
-  --c-thead: transparent;
-  --c-thead-stripe1: var(--c-theme);
-  --c-thead-stripe2: var(--c-backdrop);
-  --c-thead-text: var(--c-text);
-  --c-header: #454341;
-  --c-header-text: white;
-  --c-header-hov: var(--c-heading);
-  --c-header-text-hov: white;
-  --c-topbar: transparent;
-  --c-topbar-stripe1: #45434166;
-  --c-topbar-stripe2: #454341cc;
-  --c-footer: transparent;
-  --c-footer-stripe1: var(--c-theme);
-  --c-footer-stripe2: var(--c-backdrop);
-  --c-footer-text: #a69494;
-  --c-footer-link: var(--c-link);
-  --c-footer-link-hov: var(--c-link-hov);
-  --c-bottom: var(--c-theme);
-  --c-bottom-text: var(--c-footer-text);
-  --c-bottom-hov: var(--c-heading);
-  --c-bottom-text-hov: white;
-  --c-sidebar: var(--c-theme);
-  --c-sidebar-heading: var(--c-heading);
-  --c-sidebar-link: var(--c-sidebar-heading);
-  --c-sidebar-link-hov: var(--c-sidebar-link);
-  --c-sidebar-link-sel: var(--c-sidebar-link-hov);
-  --c-search: var(--c-backdrop);
-  --c-search-text: var(--c-text);
-  --c-search-ph: var(--c-text-thin);
-  /* placeholder */
-  --c-search-icon: var(--c-text-thinner);
-  /* magnifier icon */
-  --c-dropdown: var(--c-backdrop);
-  --c-dropdown-text: var(--c-heading-thin);
-  --c-dropdown-hov: var(--c-dropdown-text);
-  --c-dropdown-text-hov: var(--c-dropdown);
-  --c-dropdown-sel: var(--c-heading);
-  --c-dropdown-text-sel: var(--c-dropdown);
-  --c-dropdown-border: var(--c-border-thin);
-  --c-dropdown-shadow: #00000044;
-  --c-hint: black;
-  --c-hint-text: white;
-  --c-hint-shadow: #00000088;
-  /* Only for mobile */
-  --c-menu-btn: var(--c-sidebar);
-  --c-menu-btn-icon: var(--c-sidebar-heading);
-  --c-menu-btn-close: var(--c-backdrop);
-  --c-menu-btn-close-icon: var(--c-text);
-  --c-menu-btn-shadow: #00000088;
-  --c-menu-shadow: #00000044;
-  /* Misc. */
-  --stripes-angle: 300deg;
-}
 :root,
 body {
   height: 100%;
@@ -132,7 +31,7 @@ body {
   border: 0;
   font-size: 1rem;
   line-height: 1.5;
-  font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   color: var(--c-text);
   background-color: var(--c-theme);
   -webkit-text-size-adjust: none;
@@ -199,7 +98,7 @@ code,
 kbd,
 samp {
   font-size: 0.85rem;
-  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: var(--font-code);
 }
 pre {
   -moz-tab-size: 4;
@@ -241,18 +140,25 @@ table table {
   margin-bottom: 0.5em;
 }
 th,
-thead > tr > td {
+thead {
   font-weight: bold;
+  font-size: 0.85rem;
 }
 td,
 th {
-  padding: 0.5em 1em;
+  padding: 0.5rem 1rem;
   vertical-align: text-top;
   text-align: left;
 }
 td:first-child,
 th:first-child {
   text-align: right;
+}
+td td,
+th td,
+td th,
+th th {
+  padding: 0.5rem;
 }
 figure {
   margin: 0;
@@ -273,7 +179,7 @@ figure {
   font-size: 0.85rem;
   line-height: 1.5;
   border-radius: 0.5rem;
-  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: var(--font-code);
 }
 .prettyprint ._char {
   position: absolute;
@@ -319,7 +225,7 @@ figure {
   opacity: 1;
 }
 .prettyprint.has-caption .code-caption {
-  font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   display: block;
   position: absolute;
   top: 0;
@@ -358,6 +264,235 @@ figure {
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+}
+/**
+ * Custom CSS properties for Docolatte
+ *
+ * ## How to customise
+ * 1. Copy this file (skin.css) to under your project directory, and edit it.
+ * 2. Import the file with `templates.docolatte.imports` option in your JSDoc config JSON.
+ *
+ *   Example JSON:
+ *   {
+ *     "templates": {
+ *       "docolatte": {
+ *         "imports": [
+ *           "./skin.css"
+ *         ]
+ *       }
+ *     }
+ *   }
+ *
+ * ## TIPs
+ * - You can reference a property via `var()` from one another
+ */
+:root {
+  /* Fonts */
+  --font-body: HelveticaNeue, Helvetica, Arial, sans-serif;
+  --font-heading: Avenir, "Century Gothic", var(--font-body);
+  --font-code: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  /* Misc. */
+  --border-style: 1px dashed;
+  --stripes-angle: 300deg;
+  /* Colors */
+  --c-theme: hsl(34, 23%, 88%);
+  /* thematic color */
+  --c-backdrop: white;
+  /* background of the main content area */
+  --c-text: hsl(239, 4%, 31%);
+  /* default text color */
+  --c-text-thin: hsla(239, 21%, 47%, 0.5);
+  /* opacity variant 1 */
+  --c-text-thinner: hsla(239, 21%, 47%, 0.25);
+  /* opacity variant 2 */
+  --c-heading: hsl(239, 21%, 47%);
+  /* <hN> color */
+  --c-heading-thin: hsla(239, 21%, 47%, 0.75);
+  /* opacity variant 1 */
+  --c-heading-thinner: hsla(239, 21%, 47%, 0.5);
+  /* opacity variant 2 */
+  --c-heading-link: var(--c-heading-thinner);
+  /* link in <hN> */
+  --c-heading-link-vis: var(--c-heading-link);
+  /* :visited link */
+  --c-heading-link-hov: var(--c-heading);
+  /* :hover, :focus link */
+  --c-border: var(--c-text-thin);
+  --c-border-thin: var(--c-text-thinner);
+  --c-link: hsl(200, 100%, 43%);
+  --c-link-vis: var(--c-link);
+  /* :visited link */
+  --c-link-hov: var(--c-link);
+  /* :hover, :focus link */
+  --c-code: hsl(177, 70%, 41%);
+  /* <code> color */
+  --c-code-capt: transparent;
+  /* @example code caption */
+  --c-code-capt-stripe1: hsla(0, 0%, 62%, 0.25);
+  --c-code-capt-stripe2: hsla(0, 0%, 62%, 0.1);
+  --c-member: hsl(330, 100%, 71%);
+  /* methods and properties */
+  --c-member-attr: var(--c-member);
+  /* member attributes ("static", "readonly", etc.) */
+  --c-member-attr-text: var(--c-backdrop);
+  --c-params: hsl(355, 100%, 86%);
+  /* method parameters */
+  --c-params-attr: hsl(31, 100%, 80%);
+  /* parameter attributes ("opt", "nullable", "non-null") */
+  --c-params-attr-text: var(--c-backdrop);
+  --c-table-border: var(--c-theme);
+  --c-thead: transparent;
+  --c-thead-stripe1: var(--c-theme);
+  --c-thead-stripe2: var(--c-backdrop);
+  --c-thead-text: var(--c-text);
+  --c-header: hsl(34, 3%, 26%);
+  --c-header-text: white;
+  --c-header-hov: var(--c-heading);
+  --c-header-text-hov: white;
+  --c-topbar: transparent;
+  --c-topbar-stripe1: hsla(34, 3%, 26%, 0.75);
+  --c-topbar-stripe2: hsla(34, 3%, 26%, 0.5);
+  --c-footer: transparent;
+  --c-footer-stripe1: var(--c-theme);
+  --c-footer-stripe2: var(--c-backdrop);
+  --c-footer-text: hsl(0, 9%, 62%);
+  --c-footer-link: var(--c-link);
+  --c-footer-link-hov: var(--c-link-hov);
+  --c-bottom: var(--c-theme);
+  --c-bottom-text: var(--c-footer-text);
+  --c-bottom-hov: var(--c-heading);
+  --c-bottom-text-hov: white;
+  --c-sidebar: var(--c-theme);
+  --c-sidebar-heading: var(--c-heading);
+  --c-sidebar-link: var(--c-sidebar-heading);
+  --c-sidebar-link-hov: var(--c-sidebar-link);
+  --c-sidebar-link-sel: var(--c-sidebar-link-hov);
+  --c-search: var(--c-backdrop);
+  --c-search-text: var(--c-text);
+  --c-search-ph: var(--c-text-thin);
+  /* placeholder */
+  --c-search-icon: var(--c-text-thinner);
+  /* magnifier icon */
+  --c-dropdown: var(--c-search);
+  --c-dropdown-text: var(--c-heading-thin);
+  --c-dropdown-hov: var(--c-dropdown-text);
+  --c-dropdown-text-hov: var(--c-dropdown);
+  --c-dropdown-sel: var(--c-heading);
+  --c-dropdown-text-sel: var(--c-dropdown);
+  --c-dropdown-border: var(--c-border-thin);
+  --c-dropdown-shadow: hsla(0, 0%, 0%, 0.25);
+  --c-hint: black;
+  --c-hint-text: white;
+  --c-hint-shadow: hsla(0, 0%, 0%, 0.5);
+  /* Only for mobile */
+  --c-menu-btn: var(--c-sidebar);
+  --c-menu-btn-icon: var(--c-sidebar-heading);
+  --c-menu-btn-close: var(--c-backdrop);
+  --c-menu-btn-close-icon: var(--c-text);
+  --c-menu-btn-shadow: hsla(0, 0%, 0%, 0.5);
+  --c-menu-shadow: hsla(0, 0%, 0%, 0.25);
+}
+/**
+ * Dark theme
+ */
+:root[data-color-scheme="dark"] {
+  /* Colors */
+  --c-theme: hsl(239, 12%, 10%);
+  /* thematic color */
+  --c-backdrop: hsl(239, 12%, 12%);
+  /* background of the main content area */
+  --c-text: hsl(239, 12%, 50%);
+  /* default text color */
+  --c-text-thin: hsla(239, 12%, 50%, 0.5);
+  /* opacity variant 1 */
+  --c-text-thinner: hsla(239, 12%, 50%, 0.3);
+  /* opacity variant 2 */
+  --c-heading: hsl(239, 60%, 60%);
+  /* <hN> color */
+  --c-heading-thin: hsla(239, 60%, 60%, 0.75);
+  /* opacity variant 1 */
+  --c-heading-thinner: hsla(239, 60%, 60%, 0.5);
+  /* opacity variant 2 */
+  --c-heading-link: var(--c-heading-thinner);
+  /* link in <hN> */
+  --c-heading-link-vis: var(--c-heading-link);
+  /* :visited link */
+  --c-heading-link-hov: var(--c-heading);
+  /* :hover, :focus link */
+  --c-border: var(--c-text-thin);
+  --c-border-thin: var(--c-text-thinner);
+  --c-link: hsl(200, 100%, 43%);
+  --c-link-vis: var(--c-link);
+  /* :visited link */
+  --c-link-hov: var(--c-link);
+  /* :hover, :focus link */
+  --c-code: hsl(177, 70%, 41%);
+  /* <code> color */
+  --c-code-capt: transparent;
+  /* @example code caption */
+  --c-code-capt-stripe1: hsla(0, 0%, 67%, 0.25);
+  --c-code-capt-stripe2: hsla(0, 0%, 67%, 0.1);
+  --c-member: hsl(320, 80%, 45%);
+  /* methods and properties */
+  --c-member-attr: var(--c-member);
+  /* member attributes ("static", "readonly", etc.) */
+  --c-member-attr-text: var(--c-backdrop);
+  --c-params: hsl(310, 20%, 50%);
+  /* method parameters */
+  --c-params-attr: hsl(0, 25%, 50%);
+  /* parameter attributes ("opt", "nullable", "non-null") */
+  --c-params-attr-text: var(--c-backdrop);
+  --c-table-border: var(--c-text-thinner);
+  --c-thead: transparent;
+  --c-thead-stripe1: var(--c-table-border);
+  --c-thead-stripe2: var(--c-backdrop);
+  --c-thead-text: var(--c-text);
+  --c-header: hsl(239, 25%, 25%);
+  --c-header-text: hsl(239, 12%, 70%);
+  --c-header-hov: hsl(239, 25%, 35%);
+  --c-header-text-hov: white;
+  --c-topbar: transparent;
+  --c-topbar-stripe1: hsl(239, 25%, 25%);
+  --c-topbar-stripe2: hsla(239, 25%, 25%, 0.25);
+  --c-footer: transparent;
+  --c-footer-stripe1: var(--c-text-thinner);
+  --c-footer-stripe2: var(--c-backdrop);
+  --c-footer-text: var(--c-text);
+  --c-footer-link: var(--c-link);
+  --c-footer-link-hov: var(--c-link-hov);
+  --c-bottom: var(--c-theme);
+  --c-bottom-text: var(--c-footer-text);
+  --c-bottom-hov: var(--c-heading);
+  --c-bottom-text-hov: white;
+  --c-sidebar: var(--c-theme);
+  --c-sidebar-heading: var(--c-heading);
+  --c-sidebar-link: var(--c-sidebar-heading);
+  --c-sidebar-link-hov: var(--c-sidebar-link);
+  --c-sidebar-link-sel: var(--c-sidebar-link-hov);
+  --c-search: hsl(239, 12%, 15%);
+  --c-search-text: var(--c-text);
+  --c-search-ph: var(--c-text);
+  /* placeholder */
+  --c-search-icon: var(--c-text-thin);
+  /* magnifier icon */
+  --c-dropdown: var(--c-search);
+  --c-dropdown-text: var(--c-heading);
+  --c-dropdown-hov: var(--c-heading-thinner);
+  --c-dropdown-text-hov: white;
+  --c-dropdown-sel: var(--c-heading-thin);
+  --c-dropdown-text-sel: white;
+  --c-dropdown-border: hsla(239, 12%, 50%, 0.15);
+  --c-dropdown-shadow: hsla(0, 0%, 0%, 0.25);
+  --c-hint: black;
+  --c-hint-text: white;
+  --c-hint-shadow: hsla(0, 0%, 0%, 0.5);
+  /* Only for mobile */
+  --c-menu-btn: var(--c-sidebar);
+  --c-menu-btn-icon: var(--c-sidebar-heading);
+  --c-menu-btn-close: var(--c-backdrop);
+  --c-menu-btn-close-icon: var(--c-text);
+  --c-menu-btn-shadow: hsla(0, 0%, 0%, 0.5);
+  --c-menu-shadow: hsla(0, 0%, 0%, 0.25);
 }
 .page {
   position: relative;
@@ -432,14 +567,32 @@ figure {
   padding-right: 1.5rem;
   background-color: var(--c-topbar);
   background-image: repeating-linear-gradient(var(--stripes-angle), var(--c-topbar-stripe2) 0, var(--c-topbar-stripe1) 1px, var(--c-topbar-stripe1) 1px, var(--c-topbar-stripe2) 2px, var(--c-topbar-stripe2) 3px);
-  backdrop-filter: blur(4px);
+  text-shadow: 0 0.05em 0.25em #000f;
+  backdrop-filter: blur(6px);
+}
+.header .topbar svg {
+  filter: drop-shadow(0 0.05em 0.25em #000f);
 }
 .header .topbar .page-title {
+  flex-grow: 1;
   margin: 0;
   font-size: 1.25rem;
   line-height: 1;
   font-weight: normal;
-  text-shadow: 0 0.05em 0.25em #000f;
+}
+.header .topbar .light-switch {
+  flex-grow: 0;
+  display: block;
+}
+.header .topbar .light-switch .light,
+.header .topbar .light-switch .dark {
+  display: none;
+}
+.header .topbar .light-switch[data-state="light"] .light {
+  display: block;
+}
+.header .topbar .light-switch[data-state="dark"] .dark {
+  display: block;
 }
 .primary {
   position: relative;
@@ -485,6 +638,14 @@ figure {
 .main h6 a:focus {
   color: var(--c-heading-link-hov);
 }
+.main h1 a:visited,
+.main h2 a:visited,
+.main h3 a:visited,
+.main h4 a:visited,
+.main h5 a:visited,
+.main h6 a:visited {
+  color: var(--c-heading-link-vis);
+}
 .main a {
   color: var(--c-link);
   overflow-wrap: break-word;
@@ -495,7 +656,7 @@ figure {
   text-decoration: underline;
 }
 .main a:visited {
-  color: var(--c-link-visited);
+  color: var(--c-link-vis);
 }
 .main a code {
   color: inherit;
@@ -565,7 +726,7 @@ figure {
   color: var(--c-text-thin);
 }
 .main hr {
-  border-top: 1px dashed var(--c-border);
+  border-top: var(--border-style) var(--c-border);
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -601,7 +762,7 @@ figure {
   padding-top: 0.1em;
   padding-left: 0.75em;
   line-height: 1;
-  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: var(--font-heading);
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -626,49 +787,63 @@ figure {
   padding-top: 0.1em;
   padding-left: 0.75em;
   line-height: 1;
-  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: var(--font-heading);
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
 .main .signature {
   margin-left: 0.5em;
-  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: var(--font-code);
   font-size: 1rem;
 }
 .main .signature .signature-attributes {
-  margin-left: 0.25em;
+  display: inline-block;
+  font-size: 0.7rem;
   font-weight: normal;
+  font-style: normal;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.25em;
+  vertical-align: 15%;
+  line-height: 1.25;
+  margin-left: 0.25em;
+  color: var(--c-params-attr-text);
+}
+.main h2.name .signature .signature-attributes {
+  background-color: var(--c-heading);
 }
 .main h4.name {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed var(--c-border);
+  border-top: var(--border-style) var(--c-border);
   font-weight: normal;
-  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: var(--font-code);
+  line-height: 1.5;
   color: var(--c-member);
 }
-.main h4.name .attributes {
-  vertical-align: 0.1em;
-}
-.main h4.name .attributes > .attribute {
+.main h4.name .attribute {
   display: inline-block;
   font-size: 0.7rem;
-  color: var(--c-member-attr);
-  background-color: var(--c-member);
+  font-weight: normal;
+  font-style: normal;
   padding-left: 0.5em;
   padding-right: 0.5em;
   border-radius: 0.25em;
-  margin-right: 0.5em;
+  vertical-align: 15%;
+  line-height: 1.25;
+  margin-right: 0.25rem;
+  background-color: var(--c-member-attr);
+  color: var(--c-member-attr-text);
 }
-.main h4.name .attributes > .attribute:last-child {
+.main h4.name .attribute:last-child {
   margin-right: 0.5rem;
 }
 .main h4.name .signature {
   color: var(--c-params);
 }
 .main h4.name .signature .signature-attributes {
-  color: var(--c-params-attr);
+  background-color: var(--c-params-attr);
 }
 .main h4.name .type-signature {
   color: var(--c-text-thin);
@@ -679,20 +854,20 @@ figure {
 }
 .main h4.name .type-signature .type::before {
   content: "<";
-  padding-right: 0.25em;
+  padding-right: 0.1em;
 }
 .main h4.name .type-signature .type::after {
   content: ">";
-  padding-left: 0.25em;
+  padding-left: 0.1em;
 }
 .main h4.name .type-signature .type .sep {
   opacity: 0.5;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  margin-left: 0.25em;
+  margin-right: 0.25em;
   border-left: 1px solid;
 }
 .main h4.name .type-signature a {
-  opacity: 0.5;
+  color: var(--c-link);
 }
 .main h4.name:first-of-type,
 .main .subsection-title + h4.name {
@@ -705,23 +880,33 @@ figure {
   padding-top: 0.1em;
   padding-left: 0.75em;
   line-height: 1;
-  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: var(--font-heading);
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
-.main table.params td.type,
-.main table.props td.type {
-  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+.main td.name,
+.main td.type,
+.main td.default {
+  font-family: var(--font-code);
   font-size: 0.85rem;
 }
-.main .params,
-.main .props {
-  font-size: 1rem;
+.main td i.attribute {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: normal;
+  font-style: normal;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.25em;
+  vertical-align: 15%;
+  line-height: 1.25;
+  vertical-align: middle;
+  background-color: var(--c-params-attr);
+  color: var(--c-params-attr-text);
 }
-.main .params .name,
-.main .props .name {
-  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+.main td i.attribute + i.attribute {
+  margin-left: 0.25em;
 }
 .footer {
   font-size: 1rem;
@@ -798,7 +983,7 @@ figure {
   text-align: center;
   background-color: var(--c-bottom);
   color: var(--c-bottom-text);
-  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: var(--font-heading);
   transition-property: margin-top, padding-top, color, background-color;
   transition-duration: 0.25s;
   transition-timing-function: ease-out;
@@ -862,7 +1047,7 @@ figure {
   padding-top: 0.1em;
   padding-left: 0.75em;
   line-height: 1;
-  font-family: Avenir, "Century Gothic", HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: var(--font-heading);
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -891,7 +1076,7 @@ figure {
   margin-top: 0.35em;
   margin-bottom: 0.75em;
   padding-left: 1.5em;
-  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: var(--font-code);
   font-weight: normal;
 }
 .sidebar .toc nav ul ul a {
@@ -960,6 +1145,7 @@ figure {
   list-style-type: none;
   position: absolute;
   z-index: 12;
+  top: 2.25em;
   left: 0;
   max-width: 100%;
   overflow: hidden;
@@ -975,7 +1161,7 @@ figure {
   visibility: visible;
 }
 .sidebar .search-box .dropdown li {
-  font-family: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+  font-family: var(--font-code);
   font-size: 0.85em;
   line-height: 1.5;
 }
@@ -1300,6 +1486,10 @@ input#docolatte-sidebar-toggle,
   .main article {
     margin-left: 0.75rem;
     margin-right: 0.75rem;
+  }
+  .main td,
+  .main th {
+    padding: 0.5rem;
   }
   .footer .lines {
     padding-left: 0.75rem;

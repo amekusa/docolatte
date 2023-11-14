@@ -240,20 +240,11 @@ h4.name:first-of-type,
 	.heading;
 }
 
-table {
-	&.params,
-	&.props {
-		td.type {
-			.ff(var(--font-code));
-			.fs(@fs-s);
-		}
-	}
-}
-
-.params, .props {
-	.fs(@fs-m);
-
-	.name {
+td {
+	&.name,
+	&.type,
+	&.default {
 		.ff(var(--font-code));
+		.fs(@fs-s);
 	}
 }

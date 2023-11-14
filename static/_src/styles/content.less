@@ -54,8 +54,8 @@ thead {
 	.c(var(--c-thead-text));
 
 	> tr {
-		.bg-c(--c-thead);
-		.stripes(var(--stripes-angle); var(--c-thead-stripes); transparent; 1px; 3px);
+		.bg-c(var(--c-thead));
+		.stripes(var(--stripes-angle); var(--c-thead-stripe1); var(--c-thead-stripe2); 1px; 3px);
 
 		> * + * {
 			.bl(none);

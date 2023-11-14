@@ -94,6 +94,9 @@ function getSignatureAttributes({optional, nullable}) {
 }
 
 function updateItemName(item) {
+    // @OVERRIDE
+    return theme.override('updateItemName', item);
+
     const attributes = getSignatureAttributes(item);
     let itemName = item.name || '';
 
@@ -102,7 +105,7 @@ function updateItemName(item) {
     }
 
     if (attributes && attributes.length) {
-        itemName = util.format( '%s<sup class="signature-attributes">%s</sup>', itemName,
+        itemName = util.format( '%s<span class="signature-attributes">%s</span>', itemName,
             attributes.join(', ') );
     }
 

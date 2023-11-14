@@ -1,5 +1,6 @@
 <?js
     var params = obj;
+    var U = this.u;
 
     /* sort subparams under their parent params (like opts.classname) */
     var parentParam = null;
@@ -67,10 +68,6 @@
 
         <th>Type</th>
 
-        <?js if (params.hasAttributes) {?>
-        <th>Attributes</th>
-        <?js } ?>
-
         <?js if (params.hasDefault) {?>
         <th>Default</th>
         <?js } ?>
@@ -88,7 +85,16 @@
 
         <tr>
             <?js if (params.hasName) {?>
-                <td class="name"><code><?js= param.name ?></code></td>
+                <td class="name">
+                    <code><?js= param.name ?></code><?js
+                    U.iterate(U.paramAttrs(param), item => {
+                        print(U.tag({
+                            name: 'i',
+                            attrs: { title: item.long, class: 'attribute' },
+                            content: item.short
+                        }));
+                    })?>
+                </td>
             <?js } ?>
 
             <td class="type">
@@ -97,26 +103,10 @@
             <?js } ?>
             </td>
 
-            <?js if (params.hasAttributes) {?>
-                <td class="attributes">
-                <?js if (param.optional) { ?>
-                    &lt;optional><br>
-                <?js } ?>
-
-                <?js if (param.nullable) { ?>
-                    &lt;nullable><br>
-                <?js } ?>
-
-                <?js if (param.variable) { ?>
-                    &lt;repeatable><br>
-                <?js } ?>
-                </td>
-            <?js } ?>
-
             <?js if (params.hasDefault) {?>
                 <td class="default">
                 <?js if (typeof param.defaultvalue !== 'undefined') { ?>
-                    <?js= self.htmlsafe(param.defaultvalue) ?>
+                    <code><?js= self.htmlsafe(param.defaultvalue) ?></code>
                 <?js } ?>
                 </td>
             <?js } ?>

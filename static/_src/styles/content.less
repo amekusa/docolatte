@@ -246,4 +246,14 @@ td {
 		.ff(var(--font-code));
 		.fs(@fs-s);
 	}
+	i.attribute {
+		.tag;
+		.v-align(middle);
+		.bg-c(var(--c-params-attr));
+		.c(var(--c-params-attr-text));
+
+		+ i.attribute {
+			.ml(.25em);
+		}
+	}
 }

@@ -150,8 +150,9 @@
 	--c-link-hov:          var(--c-link);  /* :hover, :focus link */
 
 	--c-code:              hsl(177, 70%, 41%);  /* <code> color */
-	--c-code-capt:         hsla(0, 0%, 67%, 0.1); /* @example code caption */
-	--c-code-capt-stripes: hsla(0, 0%, 67%, 0.25);
+	--c-code-capt:         transparent; /* @example code caption */
+	--c-code-capt-stripe1: hsla(0, 0%, 67%, 0.25);
+	--c-code-capt-stripe2: hsla(0, 0%, 67%, 0.1);
 
 	--c-member:            hsl(320, 80%, 45%);  /* methods and properties */
 	--c-member-attr:       var(--c-member);  /* member attributes ("static", "readonly", etc.) */
@@ -162,7 +163,8 @@
 
 	--c-table-border:      var(--c-text-thinner);
 	--c-thead:             transparent;
-	--c-thead-stripes:     var(--c-table-border);
+	--c-thead-stripe1:     var(--c-table-border);
+	--c-thead-stripe2:     var(--c-backdrop);
 	--c-thead-text:        var(--c-text);
 
 	--c-header:            hsl(239, 25%, 25%);
@@ -170,11 +172,13 @@
 	--c-header-hov:        hsl(239, 25%, 35%);
 	--c-header-text-hov:   white;
 
-	--c-topbar:            hsla(239, 25%, 25%, 0.25);
-	--c-topbar-stripes:    hsla(239, 25%, 25%, 1);
+	--c-topbar:            transparent;
+	--c-topbar-stripe1:    hsla(239, 25%, 25%, 1);
+	--c-topbar-stripe2:    hsla(239, 25%, 25%, 0.25);
 
 	--c-footer:            transparent;
-	--c-footer-stripes:    var(--c-text-thinner);
+	--c-footer-stripe1:    var(--c-text-thinner);
+	--c-footer-stripe2:    var(--c-backdrop);
 	--c-footer-text:       var(--c-text);
 	--c-footer-link:       var(--c-link);
 	--c-footer-link-hov:   var(--c-link-hov);

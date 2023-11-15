@@ -6,7 +6,7 @@
         return $.tag({
             name: 'span',
             attrs: { class: 'param-type' },
-            content: self.linkto(item, self.htmlsafe(item))
+            content: $.typeString(item)
         });
     }));
 ?>

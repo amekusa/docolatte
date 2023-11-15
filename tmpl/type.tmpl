@@ -3,7 +3,7 @@
     var self = this;
     var $ = this.theme.util;
     print($.list(data, item => {
-        return $.tag({
+        return $.elem({
             name: 'span',
             attrs: { class: 'param-type' },
             content: $.typeString(item)

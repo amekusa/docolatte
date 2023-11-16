@@ -86,14 +86,12 @@
         <tr>
             <?js if (params.hasName) {?>
                 <td class="name">
-                    <code><?js= param.name ?></code><?js
-                    $.iterate($.paramAttrs(param), item => {
-                        print($.elem({
-                            name: 'i',
-                            attrs: { title: item.long, class: 'attribute' },
-                            content: item.short
-                        }));
-                    })?>
+                    <code><?js= param.name ?></code><?js=
+                    $.iterate($.paramAttrs(param), item => $.elem({
+                        name: 'i',
+                        attrs: { title: item.long, class: 'attribute' },
+                        content: item.short
+                    }))?>
                 </td>
             <?js } ?>
 

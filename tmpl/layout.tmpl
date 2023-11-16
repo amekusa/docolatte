@@ -1,6 +1,7 @@
 <?js
-var $      = this.theme.util;
-var config = this.theme.config;
+var { theme } = this;
+var $      = theme.util;
+var config = theme.config;
 ?>
 <!DOCTYPE html>
 <?js= $.elem({
@@ -14,28 +15,26 @@ var config = this.theme.config;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <?js if (title == 'Home') { ?>
-    <title><?js= config.meta.title ?></title>
-    <?js } else { ?>
-    <title><?js= title ?> | <?js= config.meta.title ?></title>
-    <?js } if (config.meta.description) { ?>
-    <meta name="description" content="<?js= config.meta.description ?>">
-    <?js } if (config.meta.keywords) { ?>
-    <meta name="keywords" content="<?js= config.meta.keywords ?>">
-    <?js } if (config.meta.author) { ?>
-    <meta name="author" content="<?js= config.meta.author ?>">
-    <?js } ?>
-    <?js if (!config.meta.favicon.length) { ?>
-    <link rel="icon" title="dummy" href="data:image/x-icon;base64,AA">
-    <?js } else { for (let favicon of config.meta.favicon) { ?>
-    <link rel="icon" href="<?js= favicon ?>">
-    <?js }} ?>
-    <?js $.iterate(this.theme.files.script, file => { ?>
-    <script src="<?js= file.url ?>"></script>
-    <?js }) ?>
-    <?js $.iterate(this.theme.files.style, file => { ?>
-    <link type="text/css" rel="stylesheet" href="<?js= file.url ?>">
-    <?js }) ?>
+    <title><?js= $.e($.if(title != 'Home', `${title} | `) + config.meta.title)?></title>
+    <?js= $.iterate([
+        'description',
+        'keywords',
+        'author'
+    ], item => {
+        if (config.meta[item]) {
+            return `<meta name="${item}" content="${$.e(config.meta[item])}">`;
+        }
+    })?>
+    <?js= $.iterate(config.meta.favicon, item =>
+        `<link rel="icon" href="${item}">`,
+        `<link rel="icon" title="dummy" href="data:image/x-icon;base64,AA">`
+    )?>
+    <?js= $.iterate(theme.files.script, item =>
+        `<script src="${item.url}"></script>`
+    )?>
+    <?js= $.iterate(theme.files.style, item =>
+        `<link type="text/css" rel="stylesheet" href="${item.url}">`
+    )?>
     <noscript>
         <style>
             [data-ready] {

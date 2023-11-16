@@ -1,23 +1,33 @@
-<?js var $ = this.theme.util; ?>
+<?js
+var $      = this.theme.util;
+var config = this.theme.config;
+?>
 <!DOCTYPE html>
-<html<?js= $.if(this.theme.config.meta.lang, ' lang="{*}"') ?> data-color-scheme="<?js= this.theme.config.lightSwitch.default ?>">
+<?js= $.elem({
+    name: 'html',
+    close: false,
+    attrs: {
+        'lang': config.meta.lang,
+        'data-color-scheme': config.lightSwitch.default
+    }
+})?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <?js if (title == 'Home') { ?>
-    <title><?js= this.theme.config.meta.title ?></title>
+    <title><?js= config.meta.title ?></title>
     <?js } else { ?>
-    <title><?js= title ?> | <?js= this.theme.config.meta.title ?></title>
-    <?js } if (this.theme.config.meta.description) { ?>
-    <meta name="description" content="<?js= this.theme.config.meta.description ?>">
-    <?js } if (this.theme.config.meta.keywords) { ?>
-    <meta name="keywords" content="<?js= this.theme.config.meta.keywords ?>">
-    <?js } if (this.theme.config.meta.author) { ?>
-    <meta name="author" content="<?js= this.theme.config.meta.author ?>">
+    <title><?js= title ?> | <?js= config.meta.title ?></title>
+    <?js } if (config.meta.description) { ?>
+    <meta name="description" content="<?js= config.meta.description ?>">
+    <?js } if (config.meta.keywords) { ?>
+    <meta name="keywords" content="<?js= config.meta.keywords ?>">
+    <?js } if (config.meta.author) { ?>
+    <meta name="author" content="<?js= config.meta.author ?>">
     <?js } ?>
-    <?js if (!this.theme.config.meta.favicon.length) { ?>
+    <?js if (!config.meta.favicon.length) { ?>
     <link rel="icon" title="dummy" href="data:image/x-icon;base64,AA">
-    <?js } else { for (let favicon of this.theme.config.meta.favicon) { ?>
+    <?js } else { for (let favicon of config.meta.favicon) { ?>
     <link rel="icon" href="<?js= favicon ?>">
     <?js }} ?>
     <?js $.iterate(this.theme.files.script, file => { ?>
@@ -33,8 +43,8 @@
             }
         </style>
     </noscript>
-    <?js if (this.theme.config.style) { ?>
-    <style><?js= this.theme.config.style ?></style>
+    <?js if (config.style) { ?>
+    <style><?js= config.style ?></style>
     <?js } ?>
 </head>
 <body>
@@ -42,40 +52,40 @@
 
     <header class="header">
         <div class="masthead">
-            <?js if (this.theme.config.branding.link) { ?>
-            <a class="link" href="<?js= this.theme.config.branding.link ?>">
-                <?js= $.icon(this.theme.config.branding.icon || 'home') ?>
+            <?js if (config.branding.link) { ?>
+            <a class="link" href="<?js= config.branding.link ?>">
+                <?js= $.icon(config.branding.icon || 'home') ?>
             </a>
             <?js } ?>
-            <a class="title" href="index.html"><?js= this.theme.config.branding.title ?></a>
+            <a class="title" href="index.html"><?js= config.branding.title ?></a>
         </div>
         <div class="topbar">
             <h1 class="page-title">
                 <a href="#"><?js= title ?></a>
             </h1>
-            <?js if (!this.theme.config.lightSwitch.hide) { ?>
-            <a title="Switch light/dark mode" href="#" class="light-switch" data-state="<?js= this.theme.config.lightSwitch.default ?>">
-                <span class="light"><?js= $.icon(this.theme.config.lightSwitch.icons.light) ?></span>
-                <span class="dark"><?js= $.icon(this.theme.config.lightSwitch.icons.dark) ?></span>
+            <?js if (!config.lightSwitch.hide) { ?>
+            <a title="Switch light/dark mode" href="#" class="light-switch" data-state="<?js= config.lightSwitch.default ?>">
+                <span class="light"><?js= $.icon(config.lightSwitch.icons.light) ?></span>
+                <span class="dark"><?js= $.icon(config.lightSwitch.icons.dark) ?></span>
             </a>
             <?js } ?>
         </div>
     </header>
 
-    <div class="primary<?js= this.theme.config.footer.hide ? '' : ' has-footer' ?>">
+    <div class="primary<?js= config.footer.hide ? '' : ' has-footer' ?>">
         <main class="main">
             <?js= content ?>
         </main>
         <footer class="footer">
-            <?js if (!this.theme.config.footer.hide) { ?>
+            <?js if (!config.footer.hide) { ?>
             <div class="lines">
-                <?js if (this.theme.config.footer.copyright) { ?>
-                <p class="copyright"><?js= this.theme.config.footer.copyright ?></p>
+                <?js if (config.footer.copyright) { ?>
+                <p class="copyright"><?js= config.footer.copyright ?></p>
                 <?js } ?>
-                <?js if (this.theme.config.footer.license) { ?>
-                <p class="license"><?js= this.theme.config.footer.license ?></p>
+                <?js if (config.footer.license) { ?>
+                <p class="license"><?js= config.footer.license ?></p>
                 <?js } ?>
-                <?js if (!this.theme.config.footer.hideGenerator) { ?>
+                <?js if (!config.footer.hideGenerator) { ?>
                 <p class="generator">
                     Documentation generated by <a rel="external" href="https://github.com/jsdoc/jsdoc">JSDoc <?js= env.version.number ?></a><wbr>
                     using <a rel="external" href="https://github.com/amekusa/docolatte">Docolatte</a> theme

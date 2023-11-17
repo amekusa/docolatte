@@ -11,7 +11,7 @@ class LightSwitch {
 		this.room = null;
 		this.button = null;
 		this.storage = null;
-		this.states = states || ['light', 'dark'];
+		this.states = states || ['auto', 'light', 'dark'];
 		this.state = initial;
 		this.pref;
 	}
@@ -20,18 +20,18 @@ class LightSwitch {
 	 * @return {number} index of the preferred state
 	 */
 	getPreference() {
-		if (this.pref === undefined) {
-			for (let i = 0; i < this.states.length; i++) {
-				let state = this.states[i];
-				if (matchMedia(`(prefers-color-scheme: ${state})`).matches) {
-					this.pref = i;
-					break;
-				}
+		if (this.pref === undefined) for (let i = 0; i < this.states.length; i++) {
+			let state = this.states[i];
+			if (state == 'auto') continue;
+			if (matchMedia(`(prefers-color-scheme: ${state})`).matches) {
+				this.pref = i;
+				break;
 			}
 		}
 		return this.pref;
 	}
 	/**
+	 * Sets a storage object to store state
 	 * @param {Storage} obj
 	 * @param {string} key
 	 */
@@ -40,16 +40,18 @@ class LightSwitch {
 		return this;
 	}
 	/**
-	 * @param {Element} elem
-	 * @param {string} attr
+	 * Connects a "room" element to sync state
+	 * @param {Element} elem - Element
+	 * @param {string} attr - Attribute to sync state
 	 */
 	setRoom(elem, attr) {
 		this.room = { elem, attr };
 		return this;
 	}
 	/**
-	 * @param {Element} elem
-	 * @param {string} attr
+	 * Connects a button element to sync state
+	 * @param {Element} elem - Element
+	 * @param {string} attr - Attribute to sync state
 	 */
 	setButton(elem, attr) {
 		this.button = { elem, attr };
@@ -62,18 +64,18 @@ class LightSwitch {
 	setState(idx) {
 		let max = this.states.length - 1;
 		this.state = idx < 0 ? 0 : (idx > max ? max : idx);
-		this.render();
+		this.sync();
 		return this;
 	}
 	nextState() {
 		this.state = (this.state >= (this.states.length - 1)) ? 0 : (this.state + 1);
-		this.render();
+		this.sync();
 		return this;
 	}
 	/**
 	 * Sync DOM elements with the current state
 	 */
-	render() {
+	sync() {
 		if (this.room)   this.room.elem.setAttribute(this.room.attr, this.states[this.state]);
 		if (this.button) this.button.elem.setAttribute(this.button.attr, this.states[this.state]);
 		return this;

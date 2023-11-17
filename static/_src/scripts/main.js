@@ -154,7 +154,7 @@ import Debugger from './Debugger.js';
 	const ls = new LightSwitch();
 	ls.setStorage(localStorage, 'lightSwitch');
 	ls.setRoom(document.documentElement, 'data-color-scheme');
-	ls.load();
+	ls.load(); // apply color scheme to <html> *before* DOM loaded
 
 	// DOM setup
 	document.addEventListener('DOMContentLoaded', () => {
@@ -209,7 +209,7 @@ import Debugger from './Debugger.js';
 			let btn = q('.light-switch', 0);
 			if (btn) {
 				ls.setButton(btn, 'data-state');
-				ls.render();
+				ls.sync();
 			}
 		}
 

@@ -46,7 +46,7 @@ class LightSwitch {
 				}
 			}
 			E.warn(`cannot find user preference`);
-			return this.states.item()
+			return this.states.item(this.states.initialPos);
 		}
 		return this.states.item(this._pref);
 	}

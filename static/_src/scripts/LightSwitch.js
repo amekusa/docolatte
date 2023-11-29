@@ -1,3 +1,9 @@
+import SelectList from './SelectList.js';
+import Exception from './Exception.js';
+import Debugger from './Debugger.js';
+const E = new Exception('[LightSwitch]');
+const debug = new Debugger('[DBG:LS]', true);
+
 /**
  * Provides color scheme switch functionality
  * @author amekusa
@@ -8,27 +14,41 @@ class LightSwitch {
 	 * @param {number} initial - Initial state index
 	 */
 	constructor(states = null, initial = 0) {
+		this.switch = null;
 		this.room = null;
-		this.button = null;
 		this.storage = null;
-		this.states = states || ['auto', 'light', 'dark'];
-		this.state = initial;
-		this.pref;
+		this.states = new SelectList(states || ['auto', 'light', 'dark'], initial);
+		this.states.onSelect(() => { this.sync(); });
+		this._pref;
+	}
+	get state() {
+		return this.states.curr;
+	}
+	get roomState() {
+		return this.state == 'auto' ? this.getPreference() : this.state;
 	}
 	/**
 	 * Fetch user's system preference
+	 * @param {boolean} [update] - Force update
 	 * @return {number} index of the preferred state
 	 */
-	getPreference() {
-		if (this.pref === undefined) for (let i = 0; i < this.states.length; i++) {
-			let state = this.states[i];
-			if (state == 'auto') continue;
-			if (matchMedia(`(prefers-color-scheme: ${state})`).matches) {
-				this.pref = i;
-				break;
+	getPreference(update = false) {
+		if (this._pref === undefined || update) {
+			debug.log(`matching user preference...`);
+			let states = this.states.items;
+			for (let i = 0; i < states.length; i++) {
+				let state = states[i];
+				if (state == 'auto') continue;
+				if (matchMedia(`(prefers-color-scheme: ${state})`).matches) {
+					debug.log(`matched user preference:`, state);
+					this._pref = i;
+					return state;
+				}
 			}
+			E.warn(`cannot find user preference`);
+			return this.states.item()
 		}
-		return this.pref;
+		return this.states.item(this._pref);
 	}
 	/**
 	 * Sets a storage object to store state
@@ -37,7 +57,19 @@ class LightSwitch {
 	 */
 	setStorage(obj, key) {
 		this.storage = { obj, key };
-		return this;
+	}
+	/**
+	 * Connects a switch element to sync state
+	 * @param {Element} elem - Element
+	 * @param {string} attr - Attribute to sync state
+	 */
+	setSwitch(elem, attr) {
+		this.switch = { elem, attr };
+		elem.addEventListener('click', ev => {
+			ev.preventDefault();
+			this.nextState();
+			this.save();
+		});
 	}
 	/**
 	 * Connects a "room" element to sync state
@@ -46,59 +78,60 @@ class LightSwitch {
 	 */
 	setRoom(elem, attr) {
 		this.room = { elem, attr };
-		return this;
 	}
-	/**
-	 * Connects a button element to sync state
-	 * @param {Element} elem - Element
-	 * @param {string} attr - Attribute to sync state
-	 */
-	setButton(elem, attr) {
-		this.button = { elem, attr };
-		elem.addEventListener('click', ev => {
-			ev.preventDefault();
-			this.nextState().save();
-		});
-		return this;
-	}
-	setState(idx) {
-		let max = this.states.length - 1;
-		this.state = idx < 0 ? 0 : (idx > max ? max : idx);
-		this.sync();
-		return this;
+	prevState() {
+		this.states.prev();
 	}
 	nextState() {
-		this.state = (this.state >= (this.states.length - 1)) ? 0 : (this.state + 1);
-		this.sync();
-		return this;
+		this.states.next();
 	}
 	/**
-	 * Sync DOM elements with the current state
+	 * Sync DOM elements with the current state of LightSwitch
 	 */
 	sync() {
-		if (this.room)   this.room.elem.setAttribute(this.room.attr, this.states[this.state]);
-		if (this.button) this.button.elem.setAttribute(this.button.attr, this.states[this.state]);
-		return this;
+		this.syncSwitch();
+		this.syncRoom();
+	}
+	syncSwitch() {
+		if (this.switch) {
+			this.switch.elem.setAttribute(this.switch.attr, this.state);
+			debug.log(`synced switch`);
+		}
+	}
+	syncRoom() {
+		if (this.room) {
+			this.room.elem.setAttribute(this.room.attr, this.roomState);
+			debug.log(`synced room`);
+		}
 	}
 	load() {
 		// load saved state stored in the browser storage, if it exists
 		if (this.storage) {
+			debug.log(`loading state from storage...`);
+			debug.log(` - storage:`, this.storage);
 			let loaded = this.storage.obj.getItem(this.storage.key);
 			if (loaded) {
-				this.setState(parseInt(loaded));
+				debug.log(`state loaded:`, loaded);
+				this.states.to(parseInt(loaded));
 				return;
 			}
+			debug.log(`state not found`);
 		}
-		// if saved state not found, use room's current state
-		let { elem, attr } = this.room;
+		// if saved state was not found, use DOM attribute instead
+		debug.log(`retrieving state from doms...`);
+		let { elem, attr } = this.switch || this.room;
 		let state = elem.getAttribute(attr);
-		let idx = this.states.indexOf(state);
-		this.setState(idx < 0 ? this.getPreference() : idx);
-		return this;
+		if (!state) return E.error(`load(): cannot find state`);
+		let pos = this.states.indexOf(state);
+		if (pos < 0) return E.error(`load(): invalid state`, { state });
+		debug.log(`state found:`, state);
+		this.states.to(pos);
 	}
 	save() {
-		if (this.storage) this.storage.obj.setItem(this.storage.key, this.state);
-		return this;
+		if (this.storage) {
+			this.storage.obj.setItem(this.storage.key, this.states.pos);
+			debug.log(`saved state`);
+		}
 	}
 }
 

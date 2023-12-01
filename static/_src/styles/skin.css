@@ -28,6 +28,7 @@
 	/* Misc. */
 	--border-style:        1px dashed;
 	--stripes-angle:       300deg;
+	--topbar-filter:       blur(8px);
 
 	/* Colors */
 	--c-theme:             hsl(34, 23%, 88%);  /* thematic color */
@@ -75,8 +76,8 @@
 	--c-header-text-hov:   white;
 
 	--c-topbar:            transparent;
-	--c-topbar-stripe1:    hsla(34, 3%, 26%, 0.75);
-	--c-topbar-stripe2:    hsla(34, 3%, 26%, 0.5);
+	--c-topbar-stripe1:    hsla(34, 3%, 26%, 0.8);
+	--c-topbar-stripe2:    hsla(34, 3%, 26%, 0.4);
 
 	--c-footer:            transparent;
 	--c-footer-stripe1:    var(--c-theme);
@@ -167,14 +168,14 @@
 	--c-thead-stripe2:     var(--c-backdrop);
 	--c-thead-text:        var(--c-text);
 
-	--c-header:            hsl(239, 25%, 25%);
+	--c-header:            hsl(239, 12%, 14%);
 	--c-header-text:       hsl(239, 12%, 70%);
 	--c-header-hov:        hsl(239, 25%, 35%);
 	--c-header-text-hov:   white;
 
 	--c-topbar:            transparent;
-	--c-topbar-stripe1:    hsla(239, 25%, 25%, 1);
-	--c-topbar-stripe2:    hsla(239, 25%, 25%, 0.25);
+	--c-topbar-stripe1:    hsla(239, 12%, 25%, 1);
+	--c-topbar-stripe2:    hsla(239, 12%, 25%, 0);
 
 	--c-footer:            transparent;
 	--c-footer-stripe1:    var(--c-text-thinner);
@@ -194,7 +195,7 @@
 	--c-sidebar-link-hov:  var(--c-sidebar-link);
 	--c-sidebar-link-sel:  var(--c-sidebar-link-hov);
 
-	--c-search:            hsl(239, 12%, 15%);
+	--c-search:            hsl(239, 12%, 16%);
 	--c-search-text:       var(--c-text);
 	--c-search-ph:         var(--c-text);  /* placeholder */
 	--c-search-icon:       var(--c-text-thin);  /* magnifier icon */

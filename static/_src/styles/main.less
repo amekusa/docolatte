@@ -38,6 +38,7 @@
 	.flex;
 	.pos-tl(0; 0; fixed; @z-header);
 	.dim(100%; @topbar-h; border-box);
+	.of(hidden);
 	.c(var(--c-header-text));
 
 	.masthead {
@@ -99,14 +100,17 @@
 			flex-grow: 0;
 			.block;
 
-			.light, .dark {
+			.label {
 				.no-disp;
 			}
+			&[data-state="auto"] {
+				.label.auto { .block; }
+			}
 			&[data-state="light"] {
-				.light { .block; }
+				.label.light { .block; }
 			}
 			&[data-state="dark"] {
-				.dark { .block; }
+				.label.dark { .block; }
 			}
 		}
 	}

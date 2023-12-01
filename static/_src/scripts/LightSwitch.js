@@ -30,7 +30,7 @@ class LightSwitch {
 	/**
 	 * Fetch user's system preference
 	 * @param {boolean} [update] - Force update
-	 * @return {number} index of the preferred state
+	 * @return {string} preferred state
 	 */
 	getPreference(update = false) {
 		if (this._pref === undefined || update) {

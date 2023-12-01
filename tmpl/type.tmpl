@@ -2,11 +2,8 @@
     var data = obj;
     var self = this;
     var $ = this.theme.util;
-    print($.list(data, item => {
-        return $.elem({
-            name: 'span',
-            attrs: { class: 'param-type' },
-            content: $.typeString(item)
-        });
-    }));
 ?>
+<?js= $.list(data, item => $.elem(
+    'span', { class: 'param-type' },
+    $.typeString(item)
+))?>

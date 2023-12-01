@@ -11,6 +11,7 @@
         "hide": false,
         "default": "auto",
         "icons": {
+          "auto": "halfmoon",
           "light": "sun",
           "dark": "moon"
         }

@@ -87,11 +87,13 @@
             <?js if (params.hasName) {?>
                 <td class="name">
                     <code><?js= param.name ?></code><?js=
-                    $.iterate($.paramAttrs(param), item => $.elem({
-                        name: 'i',
-                        attrs: { title: item.long, class: 'attribute' },
-                        content: item.short
-                    }))?>
+                    $.iterate($.paramAttrs(param), item => $.elem(
+                        'i', {
+                            title: item.long,
+                            class: 'attribute'
+                        },
+                        item.short
+                    ))?>
                 </td>
             <?js } ?>
 

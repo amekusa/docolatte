@@ -4,13 +4,9 @@ var $      = theme.util;
 var config = theme.config;
 ?>
 <!DOCTYPE html>
-<?js= $.elem({
-    name: 'html',
-    close: false,
-    attrs: {
-        'lang': config.meta.lang,
-        'data-color-scheme': config.lightSwitch.default
-    }
+<?js= $.tag('html', {
+    'lang': config.meta.lang,
+    'data-color-scheme': config.lightSwitch.default
 })?>
 <head>
     <meta charset="utf-8">
@@ -20,11 +16,9 @@ var config = theme.config;
         'description',
         'keywords',
         'author'
-    ], item => {
-        if (config.meta[item]) {
-            return `<meta name="${item}" content="${$.e(config.meta[item])}">`;
-        }
-    })?>
+    ], item => $.if(config.meta[item],
+        `<meta name="${item}" content="${$.e(config.meta[item])}">`
+    ))?>
     <?js= $.iterate(config.meta.favicon, item =>
         `<link rel="icon" href="${item}">`,
         `<link rel="icon" title="dummy" href="data:image/x-icon;base64,AA">`
@@ -35,39 +29,39 @@ var config = theme.config;
     <?js= $.iterate(theme.files.style, item =>
         `<link type="text/css" rel="stylesheet" href="${item.url}">`
     )?>
-    <noscript>
-        <style>
-            [data-ready] {
-                visibility: visible !important;
-            }
-        </style>
-    </noscript>
-    <?js if (config.style) { ?>
-    <style><?js= config.style ?></style>
-    <?js } ?>
+    <noscript><style>[data-ready] { visibility: visible !important; }</style></noscript>
+    <?js= $.if(config.style,
+        `<style>${config.style}</style>`
+    )?>
 </head>
 <body>
 <div class="site">
 
     <header class="header">
         <div class="masthead">
-            <?js if (config.branding.link) { ?>
-            <a class="link" href="<?js= config.branding.link ?>">
-                <?js= $.icon(config.branding.icon || 'home') ?>
-            </a>
-            <?js } ?>
+            <?js= $.if(config.branding.link, $.elem(
+                'a', {
+                    class: 'link',
+                    href:  config.branding.link
+                },
+                $.icon(config.branding.icon || 'home'))
+            )?>
             <a class="title" href="index.html"><?js= config.branding.title ?></a>
         </div>
         <div class="topbar">
             <h1 class="page-title">
                 <a href="#"><?js= title ?></a>
             </h1>
-            <?js if (!config.lightSwitch.hide) { ?>
-            <a title="Switch light/dark mode" href="#" class="light-switch" data-state="<?js= config.lightSwitch.default ?>">
-                <span class="light"><?js= $.icon(config.lightSwitch.icons.light) ?></span>
-                <span class="dark"><?js= $.icon(config.lightSwitch.icons.dark) ?></span>
-            </a>
-            <?js } ?>
+            <?js= $.if(!config.lightSwitch.hide, $.elem(
+                'a', {
+                    class: 'light-switch',
+                    title: 'Switch light/dark mode',
+                    href:  '#'
+                },
+                $.iterate(config.lightSwitch.icons, (v, k) =>
+                    `<i class="label ${k}">${$.icon(v)}</i>`
+                )
+            ))?>
         </div>
     </header>
 

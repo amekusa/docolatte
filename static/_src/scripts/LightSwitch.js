@@ -5,7 +5,7 @@ const E = new Exception('[LightSwitch]');
 const debug = new Debugger('[DBG:LS]', true);
 
 /**
- * Provides color scheme switch functionality
+ * Color scheme switcher. (Front-end)
  * @author amekusa
  */
 class LightSwitch {
@@ -21,14 +21,24 @@ class LightSwitch {
 		this.states.onSelect(() => { this.sync(); });
 		this._pref;
 	}
+	/**
+	 * The current state.
+	 * @type {string}
+	 * @readonly
+	 */
 	get state() {
 		return this.states.curr;
 	}
+	/**
+	 * The current state of the room.
+	 * @type {string}
+	 * @readonly
+	 */
 	get roomState() {
 		return this.state == 'auto' ? this.getPreference() : this.state;
 	}
 	/**
-	 * Fetch user's system preference
+	 * Fetch user's system preference.
 	 * @param {boolean} [update] - Force update
 	 * @return {string} preferred state
 	 */
@@ -51,7 +61,7 @@ class LightSwitch {
 		return this.states.item(this._pref);
 	}
 	/**
-	 * Sets a storage object to store state
+	 * Sets a storage object to store state.
 	 * @param {Storage} obj
 	 * @param {string} key
 	 */
@@ -59,7 +69,7 @@ class LightSwitch {
 		this.storage = { obj, key };
 	}
 	/**
-	 * Connects a switch element to sync state
+	 * Connects a "switch" element to sync state.
 	 * @param {Element} elem - Element
 	 * @param {string} attr - Attribute to sync state
 	 */
@@ -72,38 +82,63 @@ class LightSwitch {
 		});
 	}
 	/**
-	 * Connects a "room" element to sync state
+	 * Connects a "room" element to sync state.
 	 * @param {Element} elem - Element
 	 * @param {string} attr - Attribute to sync state
 	 */
 	setRoom(elem, attr) {
 		this.room = { elem, attr };
 	}
+	/**
+	 * Sets the current state.
+	 * @param {number|string} state - State name or index
+	 */
+	setState(state) {
+		let pos = typeof state == 'number' ? state : this.states.indexOf(state);
+		if (pos < 0) return E.error(`invalid state`, { state });
+		this.states.to(pos);
+	}
+	/**
+	 * Switches to the previous state.
+	 */
 	prevState() {
 		this.states.prev();
 	}
+	/**
+	 * Switches to the next state.
+	 */
 	nextState() {
 		this.states.next();
 	}
 	/**
-	 * Sync DOM elements with the current state of LightSwitch
+	 * Syncs the "switch" and the "room" elements with the current state of this LightSwitch.
 	 */
 	sync() {
 		this.syncSwitch();
 		this.syncRoom();
 	}
+	/**
+	 * Syncs the "switch" element with the current state of this LightSwitch.
+	 */
 	syncSwitch() {
 		if (this.switch) {
 			this.switch.elem.setAttribute(this.switch.attr, this.state);
 			debug.log(`synced switch`);
 		}
 	}
+	/**
+	 * Syncs the "room" element with the current state of this LightSwitch.
+	 */
 	syncRoom() {
 		if (this.room) {
 			this.room.elem.setAttribute(this.room.attr, this.roomState);
 			debug.log(`synced room`);
 		}
 	}
+	/**
+	 * Initializes the state by loading it from the browser storage,
+	 * or reading the attribute values of a "switch" or a "room" elements.
+	 */
 	load() {
 		// load saved state stored in the browser storage, if it exists
 		if (this.storage) {
@@ -127,6 +162,9 @@ class LightSwitch {
 		debug.log(`state found:`, state);
 		this.states.to(pos);
 	}
+	/**
+	 * Saves the current state to the browser storage.
+	 */
 	save() {
 		if (this.storage) {
 			this.storage.obj.setItem(this.storage.key, this.states.pos);

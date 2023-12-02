@@ -76,8 +76,8 @@
 	--c-header-text-hov:   white;
 
 	--c-topbar:            transparent;
-	--c-topbar-stripe1:    hsla(34, 3%, 26%, 0.8);
-	--c-topbar-stripe2:    hsla(34, 3%, 26%, 0.4);
+	--c-topbar-stripe1:    hsla(34, 3%, 26%, 0.75);
+	--c-topbar-stripe2:    hsla(34, 3%, 26%, 0.5);
 
 	--c-footer:            transparent;
 	--c-footer-stripe1:    var(--c-theme);

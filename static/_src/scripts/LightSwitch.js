@@ -5,15 +5,15 @@ const E = new Exception('[LightSwitch]');
 const debug = new Debugger('[DBG:LS]', true);
 
 /**
- * Color scheme switcher. (Front-end)
+ * Color scheme switcher.
  * @author amekusa
  */
 class LightSwitch {
 	/**
-	 * @param {string[]} states - All possible states
-	 * @param {number} initial - Initial state index
+	 * @param {string[]} [states] - All possible states. Default: `['auto', 'light', 'dark]`
+	 * @param {number} [initial] - Initial state index
 	 */
-	constructor(states = null, initial = 0) {
+	constructor(states, initial = 0) {
 		this.switch = null;
 		this.room = null;
 		this.storage = null;
@@ -64,6 +64,8 @@ class LightSwitch {
 	 * Sets a storage object to store state.
 	 * @param {Storage} obj
 	 * @param {string} key
+	 * @example
+	 * ls.setStorage(localStorage, 'lightSwitch');
 	 */
 	setStorage(obj, key) {
 		this.storage = { obj, key };
@@ -92,6 +94,8 @@ class LightSwitch {
 	/**
 	 * Sets the current state.
 	 * @param {number|string} state - State name or index
+	 * @example
+	 * ls.setState('dark');
 	 */
 	setState(state) {
 		let pos = typeof state == 'number' ? state : this.states.indexOf(state);
@@ -137,7 +141,7 @@ class LightSwitch {
 	}
 	/**
 	 * Initializes the state by loading it from the browser storage,
-	 * or reading the attribute values of a "switch" or a "room" elements.
+	 * or reading the attribute values of "switch" or "room" element.
 	 */
 	load() {
 		// load saved state stored in the browser storage, if it exists

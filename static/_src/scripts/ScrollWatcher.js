@@ -2,12 +2,12 @@ import Debugger from './Debugger.js';
 const debug = new Debugger('[DBG:SW]', true);
 
 /**
- * Scroll event watcher for smooth animation
+ * Scroll event watcher for smooth animation.
  * @author amekusa
  */
 class ScrollWatcher {
 	/**
-	 * @param {Element} [target=window]
+	 * @param {Element} [target=window] - Element to watch
 	 */
 	constructor(target = window) {
 		this.target = target;
@@ -18,9 +18,13 @@ class ScrollWatcher {
 		};
 	}
 	/**
-	 * Registers a callback
+	 * Registers a callback.
 	 * @param {string|string[]} ev - Event name(s). Pass `any` to register to all the available events
 	 * @param {function} fn - Callback
+	 * @example
+	 * let sw.on('scroll', ev => {
+	 *   console.log('Scroll Detected');
+	 * });
 	 */
 	on(ev, fn) {
 		if (Array.isArray(ev)) {
@@ -30,7 +34,7 @@ class ScrollWatcher {
 		} else this.tasks[ev].push(fn);
 	}
 	/**
-	 * Starts watching scroll event
+	 * Starts watching scroll related events.
 	 * @param {string|string[]} ev - Event name(s) to watch. `any` to watch all the available events
 	 */
 	watch(ev = 'any') {

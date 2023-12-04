@@ -48,11 +48,11 @@ For a debugger, you have 2 options:
 - Google Chrome (or Chromium)
 - VS Code
 
-### Google Chrome (or Chromium)
+#### Google Chrome (or Chromium)
 Open `chrome://inspect`. Then, click `inspect`.
 
-### VS Code
-Run command: `Debug: Attach to Node Process`.
+#### VS Code
+Run command: `Debug: Attach to Node Process`. Then, choose the correct process to attach.
 
 ## Technical references
 - [TaffyDB: Writing Queries](https://taffydb.com/writing_queries.html)

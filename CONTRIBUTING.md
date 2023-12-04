@@ -35,3 +35,7 @@ npm run bump
 # Major update (Caution: This may break stuff)
 npm run bump-major
 ```
+
+## Technical references
+- [TaffyDB: Writing Queries](https://taffydb.com/writing_queries.html)
+- [Fuse.js: API/Options](https://www.fusejs.io/api/options.html)

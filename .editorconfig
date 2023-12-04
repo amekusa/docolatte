@@ -18,3 +18,7 @@ trim_trailing_whitespace = false
 [*.tmpl]
 indent_style = space
 indent_size = 4
+
+[publish.js]
+indent_style = space
+indent_size = 4

@@ -54,6 +54,12 @@ Open `chrome://inspect`. Then, click `inspect`.
 #### VS Code
 Run command: `Debug: Attach to Node Process`. Then, choose the correct process to attach.
 
+To end debugging process, type `.exit` in terminal:
+
+```sh
+debug> .exit
+```
+
 ## Technical references
 - [TaffyDB: Writing Queries](https://taffydb.com/writing_queries.html)
 - [Fuse.js: API/Options](https://www.fusejs.io/api/options.html)

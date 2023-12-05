@@ -220,11 +220,10 @@ import Debugger from './Debugger.js';
 		}
 
 		{ // initialize search box
-			let db = global.searchDB;
 			let fuse = new Fuse(
-				JSON.parse(db.records), // records to search
-				JSON.parse(db.options), // options (including keys)
-				Fuse.parseIndex(JSON.parse(db.index)) // index for better performance
+				JSON.parse(q('#docolatte-search-items', 0).innerHTML), // records to search
+				JSON.parse(q('#docolatte-search-options', 0).innerHTML), // options (including keys)
+				Fuse.parseIndex(JSON.parse(q('#docolatte-search-index', 0).innerHTML)) // search index
 			);
 			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);

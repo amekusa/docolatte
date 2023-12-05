@@ -447,7 +447,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     conf.default = conf.default || {};
 
     // @HOOK
-    theme.action('INIT', env, { config: conf });
+    theme.action('INIT', { env, config: conf });
 
     templatePath = path.normalize(opts.template);
     view = new template.Template( path.join(templatePath, 'tmpl') );
@@ -469,11 +469,8 @@ exports.publish = (taffyData, opts, tutorials) => {
     // set up tutorials for helper
     helper.setTutorials(tutorials);
 
-    // cull the members of @ignore'd classes
-    data({ ignore: true, kind: 'class' }).each(item => {
-        if (!('name' in item)) return;
-        data({ memberof: item.name }).remove();
-    });
+    // @HOOK
+    theme.action('INIT_DATA', data);
 
     data = helper.prune(data);
     data.sort('longname, version, since');

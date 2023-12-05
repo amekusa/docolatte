@@ -58,6 +58,7 @@
         "theme": "base16/espresso"
       },
       "search": {
+        "limit": 8,
         "placeholder": "type to search…",
         "hint": {
           "hide": false,

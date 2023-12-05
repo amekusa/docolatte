@@ -27,7 +27,9 @@ import Debugger from './Debugger.js';
 (() => {
 	const debug = new Debugger('[main]', true);
 	debug.log('script started');
-	// NOTE: debug lines should be removed at the automated bundling process for product
+
+	// global namespace
+	const global = window.$docolatte = {};
 
 
 	// ---- Functions -------- *
@@ -160,6 +162,10 @@ import Debugger from './Debugger.js';
 	document.addEventListener('DOMContentLoaded', () => {
 		debug.log('dom content loaded');
 
+		// docolatte config
+		const config = global.config;
+		debug.log('config:', config);
+
 		// current page path
 		const currentPage = location.pathname.substring(location.pathname.lastIndexOf('/')+1);
 
@@ -235,7 +241,7 @@ import Debugger from './Debugger.js';
 				dropdown.setAttribute('data-select', 0); // reset the state
 
 				if (!query.length) return;
-				let results = fuse.search(query, { limit: 8 });
+				let results = fuse.search(query, { limit: config.searchLimit || 8 });
 				if (!results.length) return;
 				// console.debug('RESULTS:', results);
 

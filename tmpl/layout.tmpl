@@ -29,6 +29,7 @@ var config = theme.config;
     <?js= $.iterate(theme.files.style, item =>
         `<link type="text/css" rel="stylesheet" href="${item.url}">`
     )?>
+    <script>window.$docolatte.config = <?js= theme.scriptConfig ?></script>
     <noscript><style>[data-ready] { visibility: visible !important; }</style></noscript>
     <?js= $.if(config.style,
         `<style>${config.style}</style>`

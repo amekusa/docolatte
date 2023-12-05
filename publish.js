@@ -95,7 +95,7 @@ function getSignatureAttributes({optional, nullable}) {
 
 function updateItemName(item) {
     // @OVERRIDE
-    return theme.override('updateItemName', item);
+    try { return theme.override('updateItemName', item); } catch (e) {}
 
     const attributes = getSignatureAttributes(item);
     let itemName = item.name || '';

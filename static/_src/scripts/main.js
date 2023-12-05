@@ -220,10 +220,11 @@ import Debugger from './Debugger.js';
 		}
 
 		{ // initialize search box
+			let db = global.searchDB;
 			let fuse = new Fuse(
-				JSON.parse(_SEARCH.list), // records to search
-				JSON.parse(_SEARCH.options), // options (including keys)
-				Fuse.parseIndex(JSON.parse(_SEARCH.index)) // index for better performance
+				JSON.parse(db.records), // records to search
+				JSON.parse(db.options), // options (including keys)
+				Fuse.parseIndex(JSON.parse(db.index)) // index for better performance
 			);
 			let base = find(toc, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);

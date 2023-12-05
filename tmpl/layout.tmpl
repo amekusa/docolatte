@@ -119,11 +119,11 @@ var config = theme.config;
 
 <!-- %DOCOLATTE::DATA_GOES_HERE% -->
 <script>
-    var _SEARCH = {
-        list: document.getElementById('docolatte-search-list').innerHTML,
-        index: document.getElementById('docolatte-search-index').innerHTML,
+    window.$docolatte.searchDB = {
+        records: document.getElementById('docolatte-search-records').innerHTML,
+        index:   document.getElementById('docolatte-search-index').innerHTML,
         options: document.getElementById('docolatte-search-options').innerHTML
-    };
+    }
 </script>
 
 </body>

@@ -328,14 +328,24 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
                 let displayName = env.conf.templates.default.useLongnameInNav ? item.longname : item.name;
                 itemsNav += linktoFn(item.longname, displayName.replace(/\b(module|event):/g, ''));
 
-                let methods = find({ kind:'function', memberof: item.longname });
-                if (methods.length) {
-                    itemsNav += `<ul class="methods">`;
-                    methods.forEach(method => {
-                        itemsNav += `<li>${linkto(method.longname, method.name)}</li>`;
+                let members = find({ kind:'member', memberof: item.longname });
+                if (members.length) {
+                    itemsNav += `<ul class="members">`;
+                    members.forEach(member => {
+                        itemsNav += `<li>${linkto(member.longname, member.name)}</li>`;
                     });
                     itemsNav += `</ul>`;
                 }
+
+                members = find({ kind:'function', memberof: item.longname });
+                if (members.length) {
+                    itemsNav += `<ul class="methods">`;
+                    members.forEach(member => {
+                        itemsNav += `<li>${linkto(member.longname, member.name)}</li>`;
+                    });
+                    itemsNav += `</ul>`;
+                }
+
                 itemsNav += `</li>`;
                 itemsSeen[item.longname] = true;
             }

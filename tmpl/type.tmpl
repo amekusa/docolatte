@@ -1,9 +1,10 @@
 <?js
     var data = obj;
     var self = this;
-    var $ = this.theme.util;
+    var { theme } = this;
+    var { util: $ } = theme;
 ?>
 <?js= $.list(data, item => $.elem(
     'span', { class: 'param-type' },
-    $.typeString(item)
+    theme.filter('TYPE_STRING', item)
 ))?>

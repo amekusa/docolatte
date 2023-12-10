@@ -121,7 +121,8 @@ function buildItemTypeStrings(item) {
 
     if (item && item.type && item.type.names) {
         item.type.names.forEach(name => {
-            types.push( linkto(name, htmlsafe(name)) );
+            // @HOOK
+            types.push(theme.filter('TYPE_STRING', name));
         });
     }
 

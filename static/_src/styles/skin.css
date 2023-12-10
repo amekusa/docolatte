@@ -29,6 +29,7 @@
 	--border-style:        1px dashed;
 	--stripes-angle:       300deg;
 	--topbar-filter:       blur(8px);
+	--bold-in-dark:        normal;  /* some texts should be bold in dark mode */
 
 	/* Colors */
 	--c-theme:             hsl(34, 23%, 88%);  /* thematic color */
@@ -128,6 +129,9 @@
  * Dark theme
  */
 :root[data-color-scheme="dark"] {
+	/* Misc. */
+	--bold-in-dark:        bold;  /* some texts should be bold in dark mode */
+
 	/* Colors */
 	--c-theme:             hsl(239, 12%, 10%);  /* thematic color */
 	--c-backdrop:          hsl(239, 12%, 12%);  /* background of the main content area */

@@ -277,22 +277,64 @@
 				// methods, members
 				ul {
 					.my(.35em; .75em);
-					.pl(1.5em);
+					.pl(1em);
 					.ff(var(--font-code));
 					.regular;
 
+					@icon-size: 1em;
+					&.members, &.methods {
+						a {
+							.pl(1.25em);
+
+							// icon
+							&::before {
+								.pos-tl(0; 0; absolute);
+								.block;
+								.wh(@icon-size);
+								.lh(@icon-size);
+								.mr(.25em);
+								.round(.5em);
+								.align(center);
+								.bg-c(var(--c-sidebar-link));
+								.c(var(--c-sidebar));
+								.regular;
+								.ff(Georgia, serif;);
+								.trans(left; .25s; ease-out);
+							}
+							&[data-current] {
+								.pl(1.5em);
+
+								&::before {
+									left: .25em;
+								}
+							}
+						}
+					}
+					&.members {
+						a::before {
+							content: "v";
+							.roman;
+						}
+					}
+					&.methods {
+						a::before {
+							content: "ƒ";
+							.italic;
+						}
+					}
+
 					a {
 						.pos(relative);
-						.trans(padding-left, color;);
+						.trans(padding-left, color; .25s; ease-out);
 
 						// arrow
 						&:hover, &:focus,
 						&[data-current] {
-							&::before {
+							&::after {
 								.empty;
 								@w: .5em;
 								@h: .62em;
-								.pos-tl(.38em; -1em; absolute);
+								.pos-tl(.25em; -1em; absolute);
 								.block;
 								.dim(0; 0; content-box);
 								.bx(@w solid; none);
@@ -300,7 +342,7 @@
 							}
 						}
 						&:hover, &:focus {
-							&::before {
+							&::after {
 								.op(.5);
 							}
 						}
@@ -308,7 +350,7 @@
 							.bold;
 							.pl(.25em);
 
-							&::before {
+							&::after {
 								.op(1);
 							}
 						}

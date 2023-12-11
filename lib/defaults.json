@@ -7,6 +7,9 @@
     "docolatte": {
       "imports": [],
       "minify": true,
+      "data": {
+        "removeOrphans": true
+      },
       "lightSwitch": {
         "hide": false,
         "default": "auto",

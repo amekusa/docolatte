@@ -480,10 +480,11 @@ exports.publish = (taffyData, opts, tutorials) => {
     // set up tutorials for helper
     helper.setTutorials(tutorials);
 
+    data = helper.prune(data);
+
     // @HOOK
     theme.action('INIT_DATA', data);
 
-    data = helper.prune(data);
     data.sort('longname, version, since');
     helper.addEventListeners(data);
 

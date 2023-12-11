@@ -58,5 +58,8 @@
     "highlight.js": "^11.9.0",
     "lodash": "^4.17.21",
     "simplebar": "^5.3.9"
+  },
+  "develarms": {
+    "jsdoc": "^3.6.11"
   }
 }

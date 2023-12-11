@@ -5,6 +5,10 @@
   "source": {
     "include": [
       "./fixtures",
+      "./node_modules/jsdoc/lib/jsdoc/doclet.js",
+      "./node_modules/jsdoc/lib/jsdoc/name.js",
+      "./node_modules/jsdoc/lib/jsdoc/schema.js",
+      "./node_modules/jsdoc/lib/jsdoc/util/templateHelper.js",
       "./lib",
       "./README.md"
     ]

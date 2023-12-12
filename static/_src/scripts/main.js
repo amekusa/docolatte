@@ -250,8 +250,9 @@ import Debugger from './Debugger.js';
 				// show the results
 				for (let i = 0; i < results.length; i++) {
 					let item = results[i].item;
-					let label = item.longname.replaceAll(/(\W)/g, '<i class="symbol">$1</i><wbr>'); // insert <WBR> at every symbol chars
-					let li = elem('li', null, elem('a', { href: item.url }, label));
+					let url   = item.$[0];
+					let label = item.$[1].replaceAll(/(\W)/g, '<i class="symbol">$1</i><wbr>'); // insert <WBR> at every symbol chars
+					let li = elem('li', null, elem('a', { href: url }, label));
 					if (i == 0) li.classList.add('selected'); // select the 1st item
 					dropdown.appendChild(li);
 				}

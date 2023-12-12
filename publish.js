@@ -383,6 +383,8 @@ function linktoExternal(longName, name) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
+    try { return theme.override('buildNav', members); } catch (e) {}
+
     let globalNav;
     let nav = '';
 

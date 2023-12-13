@@ -319,41 +319,25 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         let itemsNav = '';
 
         items.forEach(item => {
+            let displayName;
 
             if ( !hasOwnProp.call(item, 'longname') ) {
-                itemsNav += '<li>' + linktoFn('', item.name) + '</li>';
-
-            } else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                itemsNav += `<li>`;
-
-                let displayName = env.conf.templates.default.useLongnameInNav ? item.longname : item.name;
-                itemsNav += linktoFn(item.longname, displayName.replace(/\b(module|event):/g, ''));
-
-                let members = find({ kind:'member', memberof: item.longname });
-                if (members.length) {
-                    itemsNav += `<ul class="members">`;
-                    members.forEach(member => {
-                        itemsNav += `<li>${linkto(member.longname, member.name)}</li>`;
-                    });
-                    itemsNav += `</ul>`;
+                itemsNav += `<li>${linktoFn('', item.name)}</li>`;
+            }
+            else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
+                if (env.conf.templates.default.useLongnameInNav) {
+                    displayName = item.longname;
+                } else {
+                    displayName = item.name;
                 }
+                itemsNav += `<li>${linktoFn(item.longname, displayName.replace(/\b(module|event):/g, ''))}</li>`;
 
-                members = find({ kind:'function', memberof: item.longname });
-                if (members.length) {
-                    itemsNav += `<ul class="methods">`;
-                    members.forEach(member => {
-                        itemsNav += `<li>${linkto(member.longname, member.name)}</li>`;
-                    });
-                    itemsNav += `</ul>`;
-                }
-
-                itemsNav += `</li>`;
                 itemsSeen[item.longname] = true;
             }
         });
 
         if (itemsNav !== '') {
-            nav += `<nav><h3>${itemHeading}</h3><ul>${itemsNav}</ul></nav>`;
+            nav += `<h3>${itemHeading}</h3><ul>${itemsNav}</ul>`;
         }
     }
 
@@ -383,18 +367,13 @@ function linktoExternal(longName, name) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    try { return theme.override('buildNav', members); } catch (e) {}
+    try { return theme.override('buildNav', members); } catch (e) {} // @OVERRIDE
 
     let globalNav;
-    let nav = '';
-
-    // search box
-    nav += view.partial('search-box.tmpl');
-
+    let nav = '<h2><a href="index.html">Home</a></h2>';
     const seen = {};
     const seenTutorials = {};
 
-    nav += buildMemberNav(members.tutorials, 'Tutorials', seenTutorials, linktoTutorial);
     nav += buildMemberNav(members.modules, 'Modules', {}, linkto);
     nav += buildMemberNav(members.externals, 'Externals', seen, linktoExternal);
     nav += buildMemberNav(members.namespaces, 'Namespaces', seen, linkto);
@@ -402,6 +381,7 @@ function buildNav(members) {
     nav += buildMemberNav(members.interfaces, 'Interfaces', seen, linkto);
     nav += buildMemberNav(members.events, 'Events', seen, linkto);
     nav += buildMemberNav(members.mixins, 'Mixins', seen, linkto);
+    nav += buildMemberNav(members.tutorials, 'Tutorials', seenTutorials, linktoTutorial);
 
     if (members.globals.length) {
         globalNav = '';
@@ -415,10 +395,10 @@ function buildNav(members) {
 
         if (!globalNav) {
             // turn the heading into a link so you can actually get to the global page
-            nav += `<nav><h3>${linkto('global', 'Global')}</h3></nav>`;
+            nav += `<h3>${linkto('global', 'Global')}</h3>`;
         }
         else {
-            nav += `<nav><h3>Global</h3><ul>${globalNav}</ul></nav>`;
+            nav += `<h3>Global</h3><ul>${globalNav}</ul>`;
         }
     }
 
@@ -500,6 +480,7 @@ exports.publish = (taffyData, opts, tutorials) => {
                 let caption;
                 let code;
 
+                // @FIX
                 let found = example.match(/^\s*<caption>([\s\S]+?)<\/caption>(\s*[\n\r])([\s\S]+)$/i);
                 if (found) {
                     caption = found[1];

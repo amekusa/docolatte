@@ -11,6 +11,19 @@
         "exclude": [],
         "removeOrphans": true
       },
+      "nav": {
+        "menus": {
+          "tutorials":  "Tutorials",
+          "modules":    "Modules",
+          "externals":  "Externals",
+          "namespaces": "Namespaces",
+          "classes":    "Classes",
+          "interfaces": "Interfaces",
+          "events":     "Events",
+          "mixins":     "Mixins",
+          "globals":    "Global"
+        }
+      },
       "lightSwitch": {
         "hide": false,
         "default": "auto",

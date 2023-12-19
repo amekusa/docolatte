@@ -8,7 +8,13 @@ const { taffy } = require('@jsdoc/salty');
 const template = require('jsdoc/template');
 const util = require('util');
 
-const theme = require('./lib/Docolatte').new();
+const Hooks = require('./lib/Hooks');
+const actions   = new Hooks();
+const filters   = new Hooks();
+const overrides = new Hooks({ only: 'last' });
+const theme = new (require('./lib/Docolatte'))({
+    actions, filters, overrides
+});
 
 const htmlsafe = helper.htmlsafe;
 const linkto = helper.linkto;
@@ -94,8 +100,8 @@ function getSignatureAttributes({optional, nullable}) {
 }
 
 function updateItemName(item) {
-    // @OVERRIDE
-    try { return theme.override('updateItemName', item); } catch (e) {}
+    // @HOOK
+    if (overrides.has('updateItemName')) return overrides.apply('updateItemName', item);
 
     const attributes = getSignatureAttributes(item);
     let itemName = item.name || '';
@@ -122,7 +128,7 @@ function buildItemTypeStrings(item) {
     if (item && item.type && item.type.names) {
         item.type.names.forEach(name => {
             // @HOOK
-            types.push(theme.filter('TYPE_STRING', name));
+            types.push(filters.apply('TYPE_STRING', name));
         });
     }
 
@@ -242,7 +248,7 @@ function generate(title, docs, filename, resolveLinks) {
     }
 
     // @HOOK
-    html = theme.filter('FINAL_HTML', html);
+    html = filters.apply('FINAL_HTML', html);
 
     fs.writeFileSync(outpath, html, 'utf8');
 }
@@ -266,7 +272,7 @@ function generateSourceFiles(sourceFiles, encoding = 'utf8') {
         }
 
         // @HOOK
-        source = theme.filter('SOURCE_DOCLET', source, { file, encoding });
+        source = filters.apply('SOURCE_DOCLET', source, { file, encoding });
 
         generate(`Source: ${sourceFiles[file].shortened}`, [source], sourceOutfile,
             false);
@@ -367,7 +373,8 @@ function linktoExternal(longName, name) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    try { return theme.override('buildNav', members); } catch (e) {} // @OVERRIDE
+    // @HOOK
+    if (overrides.has('buildNav')) return overrides.apply('buildNav', members);
 
     let globalNav;
     let nav = '<h2><a href="index.html">Home</a></h2>';
@@ -440,7 +447,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     conf.default = conf.default || {};
 
     // @HOOK
-    theme.action('INIT', { env, config: conf });
+    actions.do('INIT', { env, config: conf });
 
     templatePath = path.normalize(opts.template);
     view = new template.Template( path.join(templatePath, 'tmpl') );
@@ -465,7 +472,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     data = helper.prune(data);
 
     // @HOOK
-    theme.action('INIT_DATA', data);
+    actions.do('INIT_DATA', data);
 
     data.sort('longname, version, since');
     helper.addEventListeners(data);
@@ -520,7 +527,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     fs.mkPath(outdir);
 
     // @HOOK
-    theme.action('OUTDIR_READY', outdir);
+    actions.do('OUTDIR_READY', outdir);
 
     // copy the template's static files to outdir
     fromDir = path.join(templatePath, 'static');
@@ -615,7 +622,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     members.tutorials = tutorials.children;
 
     // @HOOK
-    theme.action('DATA_READY', data, { members });
+    actions.do('DATA_READY', data, { members });
 
     // output pretty-printed source files by default
     outputSourceFiles = conf.default && conf.default.outputSourceFiles !== false;
@@ -629,7 +636,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.outputSourceFiles = outputSourceFiles;
 
     // @HOOK
-    theme.action('TEMPLATES_READY', view);
+    actions.do('TEMPLATES_READY', view);
 
     // once for all
     view.nav = buildNav(members);
@@ -650,7 +657,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         packages.concat(
             [{
                 kind: 'mainpage',
-                readme: theme.filter('README_HTML', opts.readme), // @HOOK
+                readme: filters.apply('README_HTML', opts.readme), // @HOOK
                 longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'
             }]
         ).concat(files), indexUrl);
@@ -701,7 +708,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         const tutorialData = {
             title: title,
             header: tutorial.title,
-            content: theme.filter('README_HTML', tutorial.parse()), // @HOOK
+            content: filters.apply('README_HTML', tutorial.parse()), // @HOOK
             children: tutorial.children
         };
         const tutorialPath = path.join(outdir, filename);
@@ -711,7 +718,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
 
         // @HOOK
-        html = theme.filter('FINAL_HTML', html);
+        html = filters.apply('FINAL_HTML', html);
 
         fs.writeFileSync(tutorialPath, html, 'utf8');
     }

@@ -11,7 +11,7 @@
         "exclude": [],
         "removeOrphans": true
       },
-      "nav": {
+      "toc": {
         "menus": {
           "tutorials":  "Tutorials",
           "modules":    "Modules",

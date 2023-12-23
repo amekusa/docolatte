@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.0.0]
+
+### Added
+- New config options:
+  - `toc.menus`,
+  -
+
+
+---
+
 ## [3.5.1]
 
 ### Fixed

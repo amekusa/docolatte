@@ -220,6 +220,7 @@
 }
 
 .sidebar {
+	--c: var(--c-sidebar-link);
 	.fs(@fs-m);
 	.pos-tl(0; 0; fixed; @z-sidebar);
 	.dim(@sidebar-w; 100%; border-box);
@@ -228,10 +229,10 @@
 	-webkit-overflow-scrolling: touch; // momentum scrolling for mobile
 
 	a {
-		.c(var(--c-sidebar-link));
+		.c(var(--c));
 
 		&:hover, &:focus {
-			.c(var(--c-sidebar-link-hov));
+			--c: var(--c-sidebar-link-hov);
 		}
 	}
 	.toc {
@@ -240,41 +241,37 @@
 		.p(@gutter);
 		.of(auto);
 
-		a {
-			&[data-current] {
-				.c(var(--c-sidebar-link-sel));
-			}
-		}
-		h2, h3 {
+		h3 {
 			.fs(unit(@fs-m, em));
 			.heading;
 			.c(var(--c-sidebar-heading));
 		}
-		h2 { // maybe unnecessary
-			.p(0);
-			.b(none);
-		}
 		nav {
+			.mb(3em);
+
 			ul {
 				.pl(0);
 				.no-bullets;
-				.bold;
 
 				li {
 					&::before {
-						content: none;
-					}
-					&:hover, &:focus {
-						a {
-							.c(var(--c-sidebar-link-hov));
-						}
+						.remove; // remove pseudo bullet
 					}
 				}
 				a {
+					.iblock;
+					.lh(1.25);
+					.py(.33em);
 					.mr(@gutter);
+					// word-wrap: break-word;
+					// word-break: break-all;
+
+					&[data-current] {
+						--c: var(--c-sidebar-link-sel);
+					}
 				}
 
-				// methods, members
+				// methods, functions
 				ul {
 					.my(.35em; .75em);
 					.pl(1em);
@@ -282,20 +279,20 @@
 					.regular;
 
 					@icon-size: 1em;
-					&.members, &.methods {
+					&.members, &.functions {
 						a {
 							.pl(1.25em);
 
 							// icon
 							&::before {
-								.pos-tl(0; 0; absolute);
+								.pos-tl(.45em; 0; absolute);
 								.block;
 								.wh(@icon-size);
 								.lh(@icon-size);
 								.mr(.25em);
 								.round(.5em);
 								.align(center);
-								.bg-c(var(--c-sidebar-link));
+								.bg-c(var(--c));
 								.c(var(--c-sidebar));
 								.regular;
 								.fw(var(--bold-in-dark));
@@ -317,7 +314,7 @@
 							.roman;
 						}
 					}
-					&.methods {
+					&.functions {
 						a::before {
 							content: "ƒ";
 							.italic;

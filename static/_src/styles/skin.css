@@ -94,7 +94,7 @@
 
 	--c-sidebar:           var(--c-theme);
 	--c-sidebar-heading:   var(--c-heading);
-	--c-sidebar-link:      var(--c-sidebar-heading);
+	--c-sidebar-link:      var(--c-heading);
 	--c-sidebar-link-hov:  var(--c-sidebar-link);
 	--c-sidebar-link-sel:  var(--c-sidebar-link-hov);
 
@@ -195,7 +195,7 @@
 
 	--c-sidebar:           var(--c-theme);
 	--c-sidebar-heading:   var(--c-heading);
-	--c-sidebar-link:      var(--c-sidebar-heading);
+	--c-sidebar-link:      var(--c-heading);
 	--c-sidebar-link-hov:  var(--c-sidebar-link);
 	--c-sidebar-link-sel:  var(--c-sidebar-link-hov);
 

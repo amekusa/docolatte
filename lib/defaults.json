@@ -12,6 +12,9 @@
         "removeOrphans": true
       },
       "toc": {
+        "icons": {
+          "hide": false
+        },
         "menus": {
           "tutorials":  "Tutorials",
           "modules":    "Modules",
@@ -28,9 +31,9 @@
         "hide": false,
         "default": "auto",
         "icons": {
-          "auto": "halfmoon",
+          "auto":  "halfmoon",
           "light": "sun",
-          "dark": "moon"
+          "dark":  "moon"
         }
       },
       "meta": {

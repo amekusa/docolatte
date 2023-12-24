@@ -34,7 +34,7 @@ var { util:$, config } = theme;
         `<style>${config.style}</style>`
     )?>
 </head>
-<body>
+<body<?js= theme.bodyClass ?>>
 <div class="site">
 
     <header class="header">
@@ -65,7 +65,7 @@ var { util:$, config } = theme;
         </div>
     </header>
 
-    <div class="primary<?js= config.footer.hide ? '' : ' has-footer' ?>">
+    <div class="primary">
         <main class="main">
             <?js= content ?>
         </main>

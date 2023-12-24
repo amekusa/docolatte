@@ -75,7 +75,14 @@
         "hideGenerator": false
       },
       "code": {
-        "theme": "base16/espresso"
+        "theme": "base16/espresso",
+        "examples": {
+          "captionPrefix": [
+            "// ",
+            "- ",
+            "# "
+          ]
+        }
       },
       "search": {
         "limit": 8,
@@ -90,9 +97,8 @@
           { "name": "name",           "weight": 10 },
           { "name": "longname",       "weight": 9 },
           { "name": "meta.shortpath", "weight": 6 },
-          { "name": "classdesc",      "weight": 4 },
-          { "name": "description",    "weight": 4 },
-          { "name": "examples",       "weight": 1 }
+          { "name": "classdesc",      "weight": 2 },
+          { "name": "description",    "weight": 2 }
         ]
       }
     }

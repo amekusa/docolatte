@@ -85,7 +85,15 @@
           "body": [
             "Type <em>any key</em> to focus."
           ]
-        }
+        },
+        "keys": [
+          { "name": "name",           "weight": 10 },
+          { "name": "longname",       "weight": 9 },
+          { "name": "meta.shortpath", "weight": 6 },
+          { "name": "classdesc",      "weight": 4 },
+          { "name": "description",    "weight": 4 },
+          { "name": "examples",       "weight": 1 }
+        ]
       }
     }
   }

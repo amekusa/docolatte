@@ -13,7 +13,8 @@
       },
       "toc": {
         "icons": {
-          "hide": false
+          "variables": { "hide": false },
+          "functions": { "hide": false }
         },
         "menus": {
           "tutorials":  "Tutorials",

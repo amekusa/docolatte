@@ -278,10 +278,10 @@
 					.ff(var(--font-code));
 					.regular;
 
-					body.has-toc-icons & {
+					&.has-icons {
 						@icon-size: 1em;
 
-						&.members,
+						&.variables,
 						&.functions {
 							a {
 								.pl(1.25em);
@@ -311,7 +311,7 @@
 								}
 							}
 						}
-						&.members {
+						&.variables {
 							a::before {
 								content: "v";
 								.roman;

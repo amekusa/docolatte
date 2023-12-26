@@ -271,12 +271,21 @@
 					}
 				}
 
-				// methods, functions
+				// variables, functions
 				ul {
-					.my(.35em; .75em);
-					.pl(1em);
 					.ff(var(--font-code));
 					.regular;
+
+					&.variables,
+					&.functions {
+						a {
+							.pl(1.25em);
+						}
+					}
+
+					&:last-child {
+						.mb(@gutter * .5);
+					}
 
 					&.has-icons {
 						@icon-size: 1em;
@@ -284,18 +293,16 @@
 						&.variables,
 						&.functions {
 							a {
-								.pl(1.25em);
-
 								// icon
 								&::before {
 									.pos-tl(.45em; 0; absolute);
 									.block;
 									.wh(@icon-size);
 									.lh(@icon-size);
+									.of(hidden);
 									.mr(.25em);
 									.round(.5em);
 									.align(center);
-									.bg-c(var(--c));
 									.c(var(--c-sidebar));
 									.regular;
 									.fw(var(--bold-in-dark));
@@ -315,12 +322,14 @@
 							a::before {
 								content: "v";
 								.roman;
+								.bg-c(var(--c-icon-variable));
 							}
 						}
 						&.functions {
 							a::before {
 								content: "ƒ";
 								.italic;
+								.bg-c(var(--c-icon-function));
 							}
 						}
 					}
@@ -418,8 +427,7 @@
 					transition: none;
 
 					> i.symbol {
-						.op(.3);
-						.mx(.25em);
+						.op(.33);
 						.roman;
 					}
 				}

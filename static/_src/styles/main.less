@@ -238,7 +238,7 @@
 	.toc {
 		.pos-bl(0; 0; absolute);
 		.dim(100%; calc(100% - @topbar-h); border-box);
-		.p(@gutter);
+		.p-b(@gutter; @gutter * 2);
 		.of(auto);
 
 		h3 {
@@ -247,15 +247,22 @@
 			.c(var(--c-sidebar-heading));
 		}
 		.menu {
-			.mb(3em);
-
 			ul {
 				.pl(0);
+				.m(0);
 				.no-bullets;
+				// .bold;
+				// .ff(var(--font-heading));
+				// .ff(var(--font-code));
 
 				li {
 					&::before {
 						.remove; // remove pseudo bullet
+					}
+					&.has-child {
+						+ li {
+							.mt(@gutter * .5);
+						}
 					}
 				}
 				a {
@@ -275,17 +282,6 @@
 				ul {
 					.ff(var(--font-code));
 					.regular;
-
-					&.variables,
-					&.functions {
-						a {
-							.pl(1.25em);
-						}
-					}
-
-					&:last-child {
-						.mb(@gutter * .5);
-					}
 
 					&.has-icons {
 						@icon-size: 1em;
@@ -310,8 +306,6 @@
 									.trans(left; .25s; ease-out);
 								}
 								&[data-current] {
-									.pl(1.5em);
-
 									&::before {
 										left: .25em;
 									}
@@ -336,6 +330,7 @@
 
 					a {
 						.pos(relative);
+						.pl(1.25em);
 						.trans(padding-left, color; .25s; ease-out);
 
 						// arrow
@@ -344,8 +339,8 @@
 							&::after {
 								.empty;
 								@w: .5em;
-								@h: .62em;
-								.pos-tl(.25em; -1em; absolute);
+								@h: 1em;
+								.pos-tl(.45em; -@gutter; absolute);
 								.block;
 								.dim(0; 0; content-box);
 								.bx(@w solid; none);
@@ -358,8 +353,8 @@
 							}
 						}
 						&[data-current] {
+							.pl(1.5em);
 							.bold;
-							.pl(.25em);
 
 							&::after {
 								.op(1);

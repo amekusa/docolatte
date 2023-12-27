@@ -8,14 +8,6 @@ const { taffy } = require('@jsdoc/salty');
 const template = require('jsdoc/template');
 const util = require('util');
 
-const Hooks = require('./lib/Hooks');
-const actions   = new Hooks();
-const filters   = new Hooks();
-const overrides = new Hooks({ only: 'last' });
-const theme = new (require('./lib/Docolatte'))({
-    actions, filters, overrides
-});
-
 const htmlsafe = helper.htmlsafe;
 const linkto = helper.linkto;
 const resolveAuthorLinks = helper.resolveAuthorLinks;
@@ -25,6 +17,14 @@ let data;
 let view;
 
 let outdir = path.normalize(env.opts.destination);
+
+const Hooks = require('./lib/Hooks');
+const actions   = new Hooks();
+const filters   = new Hooks();
+const overrides = new Hooks({ only: 'last' });
+new (require('./lib/Docolatte'))({
+    actions, filters, overrides
+});
 
 function find(spec) {
     return helper.find(data, spec);
@@ -472,7 +472,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     data = helper.prune(data);
 
     // @HOOK
-    actions.do('INIT_DATA', data);
+    actions.do('INIT_DATA', { data });
 
     data.sort('longname, version, since');
     helper.addEventListeners(data);
@@ -527,7 +527,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     fs.mkPath(outdir);
 
     // @HOOK
-    actions.do('OUTDIR_READY', outdir);
+    actions.do('OUTDIR_READY', { outdir });
 
     // copy the template's static files to outdir
     fromDir = path.join(templatePath, 'static');
@@ -622,7 +622,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     members.tutorials = tutorials.children;
 
     // @HOOK
-    actions.do('DATA_READY', data, { members });
+    actions.do('DATA_READY', { data, members });
 
     // output pretty-printed source files by default
     outputSourceFiles = conf.default && conf.default.outputSourceFiles !== false;
@@ -636,7 +636,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     view.outputSourceFiles = outputSourceFiles;
 
     // @HOOK
-    actions.do('TEMPLATES_READY', view);
+    actions.do('TEMPLATES_READY', { ctx: view });
 
     // once for all
     view.nav = buildNav(members);

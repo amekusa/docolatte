@@ -64,8 +64,9 @@
 	@sidebar-w2: 320px;
 	.sidebar {
 		.z((@z-header + 2));
-		.pos-l(-@sidebar-w2);
-		.w(@sidebar-w2);
+		.pos-l(-100%);
+		.w(70%);
+		.w-min(@sidebar-w2);
 		transition: left .16s ease-out;
 
 		.toc {

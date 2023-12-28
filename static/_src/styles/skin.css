@@ -97,10 +97,10 @@
 
 	/* Sidebar */
 	--c-sidebar:           var(--c-theme);
-	--c-sidebar-heading:   var(--c-text-thin);
-	--c-sidebar-link:      var(--c-heading);
-	--c-sidebar-link-hov:  var(--c-sidebar-link);
-	--c-sidebar-link-sel:  var(--c-sidebar-link-hov);
+	--c-toc-heading:       var(--c-text-thin);
+	--c-toc-link:          var(--c-heading);
+	--c-toc-link-hov:      var(--c-toc-link);
+	--c-toc-link-sel:      var(--c-toc-link-hov);
 	--c-icon-variable:     var(--c-params-attr);
 	--c-icon-function:     var(--c-member);
 
@@ -123,7 +123,7 @@
 
 	/* Only for mobile */
 	--c-menu-btn:          var(--c-sidebar);
-	--c-menu-btn-icon:     var(--c-sidebar-link);
+	--c-menu-btn-icon:     var(--c-toc-link);
 	--c-menu-btn-close:      var(--c-backdrop);
 	--c-menu-btn-close-icon: var(--c-text);
 	--c-menu-btn-shadow:   hsla(0, 0%, 0%, 0.5);
@@ -200,10 +200,10 @@
 
 	/* Sidebar */
 	--c-sidebar:           var(--c-theme);
-	--c-sidebar-heading:   var(--c-text-thin);
-	--c-sidebar-link:      var(--c-heading);
-	--c-sidebar-link-hov:  var(--c-sidebar-link);
-	--c-sidebar-link-sel:  var(--c-sidebar-link-hov);
+	--c-toc-heading:       var(--c-text-thin);
+	--c-toc-link:          var(--c-heading);
+	--c-toc-link-hov:      var(--c-toc-link);
+	--c-toc-link-sel:      var(--c-toc-link-hov);
 	--c-icon-variable:     var(--c-params-attr);
 	--c-icon-function:     var(--c-member);
 
@@ -226,7 +226,7 @@
 
 	/* Only for mobile */
 	--c-menu-btn:          var(--c-sidebar);
-	--c-menu-btn-icon:     var(--c-sidebar-link);
+	--c-menu-btn-icon:     var(--c-toc-link);
 	--c-menu-btn-close:      var(--c-backdrop);
 	--c-menu-btn-close-icon: var(--c-text);
 	--c-menu-btn-shadow:   hsla(0, 0%, 0%, 0.5);

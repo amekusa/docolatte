@@ -235,12 +235,16 @@
 			--c: var(--c-sidebar-link-hov);
 		}
 	}
-	.toc {
+	.wrap {
 		.pos-bl(0; 0; absolute);
 		.dim(100%; calc(100% - @topbar-h); border-box);
 		.p-b(@gutter; @gutter * 2);
 		.of(auto);
-
+	}
+	.toc {
+		.menu {
+			.mt(@gutter);
+		}
 		h3 {
 			.fs(unit(@fs-xs, em));
 			.ff(var(--font-toc-heading));
@@ -250,117 +254,115 @@
 			.align(right);
 			.c(var(--c-sidebar-heading));
 		}
-		.menu {
+		ul {
+			.pl(0);
+			.m(0);
+			.no-bullets;
+			.ff(var(--font-toc-item));
+
+			li {
+				&::before {
+					.remove; // remove pseudo bullet
+				}
+				&.has-child {
+					+ li {
+						.mt(@gutter * .5);
+					}
+				}
+			}
+			a {
+				.iblock;
+				.lh(1.25);
+				.py(.33em);
+				.mr(@gutter);
+				// word-wrap: break-word;
+				// word-break: break-all;
+
+				&[data-current] {
+					--c: var(--c-sidebar-link-sel);
+				}
+			}
+
+			// variables, functions
 			ul {
-				.pl(0);
-				.m(0);
-				.no-bullets;
-				.ff(var(--font-toc-item));
+				.ff(var(--font-toc-member));
+				.regular;
 
-				li {
-					&::before {
-						.remove; // remove pseudo bullet
-					}
-					&.has-child {
-						+ li {
-							.mt(@gutter * .5);
-						}
-					}
-				}
-				a {
-					.iblock;
-					.lh(1.25);
-					.py(.33em);
-					.mr(@gutter);
-					// word-wrap: break-word;
-					// word-break: break-all;
+				&.has-icons {
+					@icon-size: 1em;
 
-					&[data-current] {
-						--c: var(--c-sidebar-link-sel);
-					}
-				}
-
-				// variables, functions
-				ul {
-					.ff(var(--font-toc-member));
-					.regular;
-
-					&.has-icons {
-						@icon-size: 1em;
-
-						&.variables,
-						&.functions {
-							a {
-								// icon
-								&::before {
-									.pos-tl(.45em; 0; absolute);
-									.block;
-									.wh(@icon-size);
-									.lh(@icon-size);
-									.of(hidden);
-									.mr(.25em);
-									.round(.5em);
-									.align(center);
-									.c(var(--c-sidebar));
-									.regular;
-									.fw(var(--bold-in-dark));
-									.ff(Georgia, serif;);
-									.trans(left; .25s; ease-out);
-								}
-								&[data-current] {
-									&::before {
-										left: .25em;
-									}
-								}
-							}
-						}
-						&.variables {
-							a::before {
-								content: "v";
-								.roman;
-								.bg-c(var(--c-icon-variable));
-							}
-						}
-						&.functions {
-							a::before {
-								content: "ƒ";
-								.italic;
-								.bg-c(var(--c-icon-function));
-							}
-						}
-					}
-
-					a {
-						.pos(relative);
-						.pl(1.25em);
-						.trans(padding-left, color; .25s; ease-out);
-
-						// arrow
-						&:hover, &:focus,
-						&[data-current] {
-							&::after {
-								.empty;
-								@w: .5em;
-								@h: 1em;
-								.pos-tl(.45em; -@gutter; absolute);
+					&.variables,
+					&.functions {
+						a {
+							// icon
+							&::before {
+								.pos-tl(.45em; 0; absolute);
 								.block;
-								.dim(0; 0; content-box);
-								.bx(@w solid; none);
-								.by((@h / 2) solid transparent);
+								.wh(@icon-size);
+								.lh(@icon-size);
+								.of(hidden);
+								.mr(.25em);
+								.round(.5em);
+								.align(center);
+								.c(var(--c-sidebar));
+								.regular;
+								.fw(var(--bold-in-dark));
+								.ff(Georgia, serif;);
+								.trans(left; .25s; ease-out);
+							}
+							&[data-current] {
+								&::before {
+									left: .25em;
+								}
 							}
 						}
-						&:hover, &:focus {
-							&::after {
-								.op(.5);
-							}
+					}
+					&.variables {
+						a::before {
+							content: "v";
+							.roman;
+							.bg-c(var(--c-icon-variable));
 						}
-						&[data-current] {
-							.pl(1.5em);
-							.bold;
+					}
+					&.functions {
+						a::before {
+							content: "ƒ";
+							.italic;
+							.bg-c(var(--c-icon-function));
+						}
+					}
+				}
 
-							&::after {
-								.op(1);
-							}
+				a {
+					.pos(relative);
+					.pl(1.25em);
+					.trans(padding-left, color; .25s; ease-out);
+
+					// arrow
+					&:hover, &:focus,
+					&[data-current] {
+						&::after {
+							.empty;
+							@w: .5em;
+							@h: 1em;
+							.pos-tl(.45em; -@gutter; absolute);
+							.block;
+							.dim(0; 0; content-box);
+							.bx(@w solid; none);
+							.by((@h / 2) solid transparent);
+						}
+					}
+					&:hover, &:focus {
+						&::after {
+							.op(.5);
+						}
+					}
+					&[data-current] {
+						.pl(1.5em);
+						.bold;
+
+						&::after {
+							.op(1);
 						}
 					}
 				}

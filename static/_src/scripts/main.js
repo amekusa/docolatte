@@ -175,32 +175,35 @@ import Debugger from './Debugger.js';
 		// window scroll watcher
 		const sw = new ScrollWatcher(window);
 
-		// table of contents
-		const toc = q('.sidebar .toc', 0);
-		const tocScroll = new SimpleBar(toc).getScrollElement();
+		// sidebar & TOC
+		const sidebar = q('.sidebar .wrap', 0);
+		const sidebarScr = new SimpleBar(sidebar).getScrollElement();
+		const toc = find(sidebar, '.toc', 0);
 
-		// restore TOC scroll position
-		tocScroll.scrollTo({
+		// restore sidebar scroll position
+		sidebarScr.scrollTo({
 			left: parseInt(storage.getItem('scrollX') || 0),
 			top:  parseInt(storage.getItem('scrollY') || 0),
 			behavior: 'instant'
 		});
-		toc.setAttribute('data-ready', 1);
+		sidebar.setAttribute('data-ready', 1);
 
-		// save TOC scroll position
+		// save sidebar scroll position
 		onbeforeunload = () => {
-			storage.setItem('scrollX', tocScroll.scrollLeft);
-			storage.setItem('scrollY', tocScroll.scrollTop);
+			storage.setItem('scrollX', sidebarScr.scrollLeft);
+			storage.setItem('scrollY', sidebarScr.scrollTop);
 		};
 
-		// highlight the anchors pointing at the current page
-		find(toc, `a[href="${currentPage}"]`).forEach(a => { a.setAttribute('data-current', 1) });
+		// highlight TOC item that is pointing at the current page
+		find(toc, `a[href="${currentPage}"]`).forEach(a => {
+			a.setAttribute('data-current', 1);
+		});
 
 		// toggle switch for sidebar
 		const sidebarToggle = q('input#docolatte-sidebar-toggle', 0);
 
 		// close sidebar when user clicked one of the menu items
-		find(toc, 'a').forEach(a => {
+		find(sidebar, 'a').forEach(a => {
 			a.addEventListener('click', ev => {
 				sidebarToggle.checked = false;
 			});
@@ -225,7 +228,7 @@ import Debugger from './Debugger.js';
 				JSON.parse(q('#docolatte-search-options', 0).innerHTML), // options (including keys)
 				Fuse.parseIndex(JSON.parse(q('#docolatte-search-index', 0).innerHTML)) // search index
 			);
-			let base = find(toc, '.search-box', 0);
+			let base = find(sidebar, '.search-box', 0);
 			let input = find(base, 'input[type=text]', 0);
 			let dropdown = find(base, '.dropdown', 0);
 			let hint = find(base, '.hint', 0); // can be not present
@@ -308,7 +311,7 @@ import Debugger from './Debugger.js';
 				sidebarToggle.checked = true;
 
 				// scroll sidebar to top
-				tocScroll.scrollTo({
+				sidebarScr.scrollTo({
 					left: 0,
 					top: 0,
 					behavior: 'instant'
@@ -349,15 +352,15 @@ import Debugger from './Debugger.js';
 					if (!curr.a.length) break;
 					curr.a.forEach(a => { a.setAttribute(flag, 1) });
 
-					// scroll TOC if necessary
+					// scroll sidebar if necessary
 					let a = curr.a[curr.a.length - 1];
 					if (!curr.wrap) curr.wrap = closest(a, ['ul', 'li']);
-					let view = tocScroll;
+					let view = sidebarScr;
 					let panning = pan(
 						view.scrollTop,
 						view.scrollTop + view.offsetHeight,
-						getOffset(curr.wrap, toc).top,
-						getOffset(a, toc).top + a.getBoundingClientRect().height,
+						getOffset(curr.wrap, sidebar).top,
+						getOffset(a, sidebar).top + a.getBoundingClientRect().height,
 						1
 					);
 					if (panning || view.scrollLeft) {

@@ -110,8 +110,11 @@ var { util:$, config } = theme;
     </label>
 
     <div class="sidebar">
-        <div class="toc" data-ready="0">
-            <?js= this.nav ?>
+        <div class="wrap" data-ready="0">
+            <?js= this.partial('search-box.tmpl') ?>
+            <div class="toc">
+                <?js= this.nav ?>
+            </div>
         </div>
     </div>
 </div>

@@ -242,8 +242,12 @@
 		.of(auto);
 
 		h3 {
-			.fs(unit(@fs-m, em));
-			.heading;
+			.fs(unit(@fs-xs, em));
+			.ff(var(--font-toc-heading));
+			.regular;
+			.uppercase;
+			.ls(.15em);
+			.align(right);
 			.c(var(--c-sidebar-heading));
 		}
 		.menu {
@@ -251,9 +255,7 @@
 				.pl(0);
 				.m(0);
 				.no-bullets;
-				// .bold;
-				// .ff(var(--font-heading));
-				// .ff(var(--font-code));
+				.ff(var(--font-toc-item));
 
 				li {
 					&::before {
@@ -280,7 +282,7 @@
 
 				// variables, functions
 				ul {
-					.ff(var(--font-code));
+					.ff(var(--font-toc-member));
 					.regular;
 
 					&.has-icons {

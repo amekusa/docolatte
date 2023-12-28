@@ -21,9 +21,12 @@
  */
 :root {
 	/* Fonts */
-	--font-body:     HelveticaNeue, Helvetica, Arial, sans-serif;
-	--font-heading:  Avenir, "Century Gothic", var(--font-body);
-	--font-code:     "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+	--font-body:           HelveticaNeue, Helvetica, Arial, sans-serif;
+	--font-heading:        Avenir, "Century Gothic", var(--font-body);
+	--font-code:           "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
+	--font-toc-heading:    var(--font-heading);
+	--font-toc-item:       var(--font-heading);
+	--font-toc-member:     var(--font-code);  /* variables, functions */
 
 	/* Misc. */
 	--border-style:        1px dashed;
@@ -94,7 +97,7 @@
 
 	/* Sidebar */
 	--c-sidebar:           var(--c-theme);
-	--c-sidebar-heading:   var(--c-heading);
+	--c-sidebar-heading:   var(--c-text-thin);
 	--c-sidebar-link:      var(--c-heading);
 	--c-sidebar-link-hov:  var(--c-sidebar-link);
 	--c-sidebar-link-sel:  var(--c-sidebar-link-hov);
@@ -120,7 +123,7 @@
 
 	/* Only for mobile */
 	--c-menu-btn:          var(--c-sidebar);
-	--c-menu-btn-icon:     var(--c-sidebar-heading);
+	--c-menu-btn-icon:     var(--c-sidebar-link);
 	--c-menu-btn-close:      var(--c-backdrop);
 	--c-menu-btn-close-icon: var(--c-text);
 	--c-menu-btn-shadow:   hsla(0, 0%, 0%, 0.5);
@@ -197,7 +200,7 @@
 
 	/* Sidebar */
 	--c-sidebar:           var(--c-theme);
-	--c-sidebar-heading:   var(--c-heading);
+	--c-sidebar-heading:   var(--c-text-thin);
 	--c-sidebar-link:      var(--c-heading);
 	--c-sidebar-link-hov:  var(--c-sidebar-link);
 	--c-sidebar-link-sel:  var(--c-sidebar-link-hov);
@@ -223,7 +226,7 @@
 
 	/* Only for mobile */
 	--c-menu-btn:          var(--c-sidebar);
-	--c-menu-btn-icon:     var(--c-sidebar-heading);
+	--c-menu-btn-icon:     var(--c-sidebar-link);
 	--c-menu-btn-close:      var(--c-backdrop);
 	--c-menu-btn-close-icon: var(--c-text);
 	--c-menu-btn-shadow:   hsla(0, 0%, 0%, 0.5);

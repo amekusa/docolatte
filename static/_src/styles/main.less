@@ -271,15 +271,39 @@
 				}
 			}
 			a {
+				.pos(relative);
 				.iblock;
 				.lh(1.25);
 				.py(.33em);
 				.mr(@gutter);
 				// word-wrap: break-word;
 				// word-break: break-all;
+				.trans(padding-left, color; .25s; ease-out);
 
+				// highlight border
+				&::after {
+					.empty;
+					.pos-tl(0; -@gutter; absolute);
+					.block;
+					.dim(0; 100%; content-box);
+					.br(0 solid);
+					.op(.5);
+					.trans(opacity, border-right-width; .25s; ease-out);
+				}
+				&:hover, &:focus,
+				&[data-current] {
+					&::after {
+						border-right-width: .33em;
+					}
+				}
 				&[data-current] {
 					--c: var(--c-sidebar-link-sel);
+					.pl(.25em);
+					.bold;
+
+					&::after {
+						.op(1);
+					}
 				}
 			}
 
@@ -288,6 +312,27 @@
 				.ff(var(--font-toc-member));
 				.regular;
 
+				a {
+					.pl(1.25em);
+
+					&[data-current] {
+						.pl(1.5em);
+					}
+				}
+				&.variables {
+					a {
+						&::after {
+							border-color: var(--c-icon-variable);
+						}
+					}
+				}
+				&.functions {
+					a {
+						&::after {
+							border-color: var(--c-icon-function);
+						}
+					}
+				}
 				&.has-icons {
 					@icon-size: 1em;
 
@@ -318,51 +363,27 @@
 						}
 					}
 					&.variables {
-						a::before {
-							content: "v";
-							.roman;
-							.bg-c(var(--c-icon-variable));
+						a {
+							&::before {
+								content: "v";
+								.roman;
+								.bg-c(var(--c-icon-variable));
+							}
+							&::after {
+								border-color: var(--c-icon-variable);
+							}
 						}
 					}
 					&.functions {
-						a::before {
-							content: "ƒ";
-							.italic;
-							.bg-c(var(--c-icon-function));
-						}
-					}
-				}
-
-				a {
-					.pos(relative);
-					.pl(1.25em);
-					.trans(padding-left, color; .25s; ease-out);
-
-					// arrow
-					&:hover, &:focus,
-					&[data-current] {
-						&::after {
-							.empty;
-							@w: .5em;
-							@h: 1em;
-							.pos-tl(.45em; -@gutter; absolute);
-							.block;
-							.dim(0; 0; content-box);
-							.bx(@w solid; none);
-							.by((@h / 2) solid transparent);
-						}
-					}
-					&:hover, &:focus {
-						&::after {
-							.op(.5);
-						}
-					}
-					&[data-current] {
-						.pl(1.5em);
-						.bold;
-
-						&::after {
-							.op(1);
+						a {
+							&::before {
+								content: "ƒ";
+								.italic;
+								.bg-c(var(--c-icon-function));
+							}
+							&::after {
+								border-color: var(--c-icon-function);
+							}
 						}
 					}
 				}

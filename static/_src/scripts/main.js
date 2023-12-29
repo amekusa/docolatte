@@ -153,7 +153,8 @@ import Debugger from './Debugger.js';
 
 	// ---- Tasks -------- *
 
-	const ls = new LightSwitch();
+	// initialize light switch
+	const ls = global.lightSwitch = new LightSwitch();
 	ls.setStorage(localStorage, 'lightSwitch');
 	ls.setRoom(document.documentElement, 'data-color-scheme');
 	ls.load(); // apply color scheme to <html> *BEFORE* DOM loaded

@@ -5,112 +5,132 @@
 
 const puppeteer = require('puppeteer-core');
 
-(async () => {
-	let browser = await puppeteer.launch({
+const conf = {
+	browser: {
 		headless: true,
 		executablePath: '/Applications/Chromium.app/Contents/MacOS/Chromium',
 		args: ['--start-maximized']
+	},
+	ua:  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+	url: 'file://' + __dirname + '/docs/',
+	dst: __dirname + '/gallery/',
+	close: true,
+};
+
+
+// ---- Utils -------- *
+
+function delay(s) {
+	return new Promise(done => {
+		setTimeout(done, s * 1000);
 	});
-	let ua = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36';
+}
+
+
+// ---- Main -------- *
+
+(async () => {
+	let browser = await puppeteer.launch(conf.browser);
 	console.log(`Taking screenshots using`, await browser.version(), '...');
 
 	// pages to go
-	let base = 'file://' + __dirname + '/fixtures-doc/';
 	let pages = [
 		{
-			url: base + 'module-mixins_signalable-Signal.html',
-			viewport: [1024, 560],
-			scroll: [0, 0],
-			saveAs: 'class.png'
-		}, {
-			url: base + 'module-ink_collector.html',
-			viewport: [1024, 640],
-			scroll: [0, 300],
-			saveAs: 'methods.png'
-		}, {
-			url: base + 'module-base.html',
-			viewport: [1024, 640],
-			saveAs: 'footer.png'
-		}, {
-			url: base + 'documents_collector.js.html#line7',
-			viewport: [1024, 512],
+			url: 'Docolatte.html',
+			viewport: [800, 480],
+			theme: 'light',
+			saveAs: 'light.png',
+		},
+		{
+			url: 'Docolatte.html',
+			viewport: [800, 480],
+			theme: 'dark',
+			saveAs: 'dark.png',
+		},
+		{
+			url: 'lib_Docolatte.js.html#line15',
+			viewport: [800, 480],
+			scroll: [0, 170],
 			saveAs: 'source.png'
-		}, {
-			url: base + 'base_chains.html',
+		},
+		{
+			url: 'Docolatte.html',
 			viewport: [375, 667],
 			saveAs: 'mobile.png'
-		}, {
-			url: base + 'base_chains.html',
+		},
+		{
+			url: 'Docolatte.html',
 			viewport: [375, 667],
 			click: '.menu-button',
 			saveAs: 'mobile-menu.png'
-		}
+		},
 	];
 
 	// process each page
-	for (let i of pages) {
-		if (!i.scroll) i.scroll = [0, 0];
+	for (let p of pages) {
+		if (!p.scroll) p.scroll = [0, 0];
 
+		// setup page
 		let page = await browser.newPage();
-		await page.setUserAgent(ua);
+		await page.exposeFunction('delay', delay);
+		await page.setUserAgent(conf.ua);
 		await page.setViewport({
-			width:  i.viewport[0] + i.scroll[0],
-			height: i.viewport[1] + i.scroll[1]
+			width:  p.viewport[0] + p.scroll[0],
+			height: p.viewport[1] + p.scroll[1]
 		});
 
 		// start browsing
-		await page.goto(i.url, {
+		await page.goto(conf.url + p.url, {
 			waitUntil: 'networkidle0',
 			timeout: 60000
 		});
 
-		// reset TOC scroll position
-		await page.evaluate(i => {
-			document.querySelector('.sidebar .toc').scrollTo({
+		// scripting
+		await page.evaluate(async p => {
+			// reset sidebar scroll position
+			document.querySelector('.sidebar .wrap').scrollTo({
 				left: 0, top: 0,
 				behavior: 'auto'
 			});
-			Promise.resolve();
-		}, i);
-
-		// scroll window
-		if (i.scroll) {
-			await page.evaluate(i => {
-				window.scrollTo({
-					left: i.scroll[0],
-					top:  i.scroll[1],
-					behavior: 'auto'
-				});
-				Promise.resolve();
-			}, i);
-			// wait for scroll
-			await page.waitForTimeout(1000);
-		}
+			// change theme
+			if (p.theme) {
+				let ls = window.$docolatte.lightSwitch;
+				ls.setState(p.theme);
+				await delay(1);
+			}
+			// scroll window
+			window.scrollTo({
+				left: p.scroll[0],
+				top:  p.scroll[1],
+				behavior: 'auto'
+			});
+			await delay(1);
+		}, p);
 
 		// click
-		if (i.click) {
-			await page.click(i.click);
-			await page.waitForTimeout(1000);
+		if (p.click) {
+			await page.click(p.click);
+			await delay(1);
 		}
 
 		// compute clipping area
-		if (!i.clip) i.clip = { x: 0, y: 0 };
-		if (!('width'  in i.clip)) i.clip.width  = i.viewport[0];
-		if (!('height' in i.clip)) i.clip.height = i.viewport[1];
-		i.clip.x += i.scroll[0];
-		i.clip.y += i.scroll[1];
+		if (!p.clip) p.clip = { x: 0, y: 0 };
+		if (!('width'  in p.clip)) p.clip.width  = p.viewport[0];
+		if (!('height' in p.clip)) p.clip.height = p.viewport[1];
+		p.clip.x += p.scroll[0];
+		p.clip.y += p.scroll[1];
 
 		// take screenshot
-		let saveTo = __dirname + '/gallery/' + i.saveAs;
+		let saveTo = conf.dst + p.saveAs;
 		await page.screenshot({
 			path: saveTo,
 			fullPage: false,
-			clip: i.clip
+			clip: p.clip
 		});
 		console.log(saveTo);
 	}
 
 	// close the browser
-	await browser.close();
+	if (conf.close) await browser.close();
 	console.log('Done.');
 })();

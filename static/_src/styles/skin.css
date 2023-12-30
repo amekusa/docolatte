@@ -3,13 +3,13 @@
  *
  * ## How to customise
  * 1. Copy this file (skin.css) to under your project directory, and edit it.
- * 2. Import the file with `templates.docolatte.imports` option in your JSDoc config JSON.
+ * 2. Import the file with `templates.docolatte.import` option in your JSDoc config JSON.
  *
  *   Example JSON:
  *   {
  *     "templates": {
  *       "docolatte": {
- *         "imports": [
+ *         "import": [
  *           "./skin.css"
  *         ]
  *       }

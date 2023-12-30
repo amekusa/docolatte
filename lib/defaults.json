@@ -5,7 +5,7 @@
   ],
   "templates": {
     "docolatte": {
-      "imports": [],
+      "import": [],
       "minify": true,
       "data": {
         "exclude": [],

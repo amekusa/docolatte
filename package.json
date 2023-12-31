@@ -21,7 +21,8 @@
     "debug": "echo 'Open chrome://inspect/ in browser\n'; node inspect \"$(which jsdoc)\" -c jsdoc.json",
     "screenshot": "node screenshot.js",
     "bump": "ncu -u -t minor -x jsdoc,@jsdoc/salty,@jsdoc/util",
-    "bump-major": "ncu -u -x jsdoc,@jsdoc/salty,@jsdoc/util"
+    "bump-major": "ncu -u -x jsdoc,@jsdoc/salty,@jsdoc/util",
+    "docs:publish": "git subtree push --prefix docs origin gh-pages"
   },
   "repository": {
     "type": "git",

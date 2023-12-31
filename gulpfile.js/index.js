@@ -91,7 +91,8 @@ const T = {
 					rStrip({
 						include: `${paths.src.scripts}/*.js`,
 						functions: [
-							'console.*',
+							'console.log',
+							'console.debug',
 							'assert.*',
 							'debug.*',
 						]
@@ -209,16 +210,17 @@ const T = {
 			'README.md',
 			'publish.js',
 			'lib/*.{js,json}',
+			`${paths.src.scripts}/*.js`,
 			`${paths.tmpl}/*.tmpl`,
 			`${jsdoc.opts.tutorials}/**/*`,
 		], T.docs_build);
 
 		// copy scripts/styles to docs on change
 		$.watch([
-			`${paths.src.scripts}/**/*`,
-			`${paths.src.styles}/**/*`,
-			`${paths.scripts}/**/*`,
-			`${paths.styles}/**/*`,
+			`${paths.src.scripts}/*.js`,
+			`${paths.src.styles}/*.{less,css}`,
+			`${paths.scripts}/*`,
+			`${paths.styles}/*`,
 		]).on('change', src => {
 			let dst = src.replace(/^static\//, `${paths.docs}/`);
 			sh.exec(`cp '${src}' '${dst}'`).then(() => {

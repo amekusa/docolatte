@@ -1,0 +1,94 @@
+// scrollable table wrapper
+.table-wrap {
+	.of(auto);
+
+	.table-wrap {
+		.of(initial);
+	}
+}
+
+// code highlighter
+.prettyprint {
+	.pos(relative);
+	.w(auto);
+	.of(auto);
+	.fs(@fs-s; 1.5);
+	.round(.5rem);
+	.ff(var(--font-code));
+
+	._char { // for measuring char width
+		.pos-tl(0; 0; absolute);
+		.op(0);
+	}
+	code {
+		.block;
+		.py(.5em) !important;
+		.px(1em);
+	}
+	.linenums {
+		.pos-tl(0; 0; absolute);
+
+		.linenum {
+			.border-box;
+			.op(.9);
+
+			&:first-child { .pt(.5em); }
+			&:last-child { .pb(.5em); }
+
+			a {
+				.block;
+				.br(solid 1px);
+				.align(right);
+				.no-deco;
+				.c(inherit);
+				.op(.35);
+
+				&:hover, &:focus {
+					.op(.75);
+				}
+			}
+
+			&[data-selected] {
+
+				a {
+					.op(1);
+				}
+			}
+		}
+	}
+	&.has-caption {
+		@capt-h: 2.5em;
+
+		// @example <caption>...</caption>
+		.code-caption {
+			.ff(var(--font-body));
+			.block;
+			.pos-tl(0; 0; absolute);
+			.w(100%; border-box);
+			.px(1em);
+			.oneline(@capt-h; auto);
+			.no-scrollbar;
+			.align(right);
+
+			.bg-c(var(--c-code-capt));
+			.stripes(var(--stripes-angle); var(--c-code-capt-stripe1); var(--c-code-capt-stripe2); 1px; 3px);
+		}
+		code {
+			.pt((@capt-h + .5em)) !important;
+		}
+	}
+}
+
+.icon {
+	.pos(relative);
+	.iblock;
+	.v-align(middle);
+
+	svg& {
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+	}
+}

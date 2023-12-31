@@ -4,11 +4,12 @@
   },
   "source": {
     "include": [
-      "./fixtures",
       "./node_modules/jsdoc/lib/jsdoc/doclet.js",
       "./node_modules/jsdoc/lib/jsdoc/name.js",
       "./node_modules/jsdoc/lib/jsdoc/schema.js",
+      "./node_modules/jsdoc/lib/jsdoc/tutorial.js",
       "./node_modules/jsdoc/lib/jsdoc/util/templateHelper.js",
+      "./static/_src/scripts",
       "./lib",
       "./README.md"
     ]
@@ -30,8 +31,12 @@
   "templates": {
     "docolatte": {
       "minify": false,
+      "meta": {
+        "description": "Bitter sweet JSDoc theme",
+        "keywords": "jsdoc, theme, responsive"
+      },
       "branding": {
-        "title": "My Project",
+        "title": "DOCOLATTE",
         "icon": "github"
       },
       "code": {
@@ -45,6 +50,9 @@
       "footer": {
         "copyright": "Docolatte &copy; 2023 Satoshi Soma",
         "license": "Licensed under the Apache License 2.0"
+      },
+      "search": {
+        "limit": 8
       }
     },
     "cleverLinks": false,

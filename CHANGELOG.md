@@ -3,9 +3,34 @@
 ## [4.0.0]
 
 ### Added
+- "LightSwitch" feature
+  - This provides light/dark theme-switching mechanics
+- URL hash is synced with the current heading as the page scrolls
 - New config options:
-  - `toc.menus`,
-  -
+  - `toc.menus`
+  - `toc.icons`
+  - `code.examples.captionPrefix`
+  - `search.keys`
+  - `search.limit`
+  - `search.hint.body`
+  - `data.exclude`
+  - `data.removeOrphans`
+  - `lightSwitch.*`
+
+### Changes
+- Breaking changes:
+  - Deprecated `imports` config option. Use `import` key (without `s`) instead
+  - Changed the HTML structure and classes in some parts
+- Design changes:
+  - Added icons to variables & functions in TOC items
+  - Changed the style of highlighted items in TOC
+  - Changed the style of headings in TOC
+  - Added "Scroll to Top" button
+  - A few minor adjustments for better legibility
+
+### Fixed
+- Eliminated the possibilities of broken links shown in search results.
+- Now SVG icons are properly shown without any warning for a local site (browsed with `file://` protocol).
 
 
 ---

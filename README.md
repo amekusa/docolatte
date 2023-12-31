@@ -5,8 +5,15 @@
 
 <!-- TOC depthfrom:2 -->
 
+- [Docolatte v4 is out! :tada:](#docolatte-v4-is-out-tada)
+    - [New Features](#new-features)
+    - [Fixes](#fixes)
 - [Notes for users](#notes-for-users)
 - [Screenshots](#screenshots)
+    - [Light Theme](#light-theme)
+    - [Dark Theme](#dark-theme)
+    - [Source](#source)
+    - [Mobile](#mobile)
 - [Features](#features)
     - [Keyboard-only Search & Navigation](#keyboard-only-search--navigation)
     - [Interactive TOC Table of Contents](#interactive-toc-table-of-contents)
@@ -25,6 +32,21 @@
 
 <!-- /TOC -->
 
+## Docolatte v4 is out! :tada:
+
+### New Features
+- Finally, **dark theme** is implemented!
+- All the colors and fonts are now **CSS variables**, which means you can customize the overall look & feel of Docolatte just by overwriting the variables in your custom CSS. On top of that, you can customize light theme and dark theme separately.
+- A lot of design improvements
+- Added icons to variables and functions in TOC
+- Added "Scroll to Top" button
+- URL hash is now synced with the current heading as the page scrolls
+- Several new options (See below for details)
+
+### Fixes
+- Eliminated the possibilities of broken links shown in search results.
+- Now SVG icons are properly shown without any warning for a local site (browsed with `file://` protocol).
+
 ## Notes for users
 What's new in the latest update?
 > See: [CHANGELOG.md](https://github.com/amekusa/docolatte/blob/trunk/CHANGELOG.md)
@@ -33,14 +55,24 @@ What's coming out in the next update?
 > See: [TODO.md](https://github.com/amekusa/docolatte/tree/trunk/TODO.md)
 
 Is this compatible with JSDoc v4.x?
-> Search-indexing partially breaks with jsdoc@4.0.0. I recommend sticking with jsdoc v3.
+> Search-indexing is partially not working with jsdoc@4.0.0. I recommend sticking with jsdoc v3.
 
 
 ## Screenshots
-![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/class.png)
-![screenshot methods](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/methods.png)
-![screenshot source](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/source.png)
-![screenshot mobile](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile.png)![screenshot mobile menu](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile-menu.png)
+
+### Light Theme
+![screenshot class](gallery/light.png)
+
+### Dark Theme
+![screenshot class](gallery/dark.png)
+
+### Source
+![screenshot source](gallery/source.png)
+
+### Mobile
+| Menu:Off | Menu:On  |
+|:--------:|:--------:|
+| ![screenshot mobile menu off](gallery/mobile.png) | ![screenshot mobile menu on](gallery/mobile-menu.png) |
 
 (The sample codes in the screenshots are derived from [docdash/fixtures](https://github.com/clenemt/docdash/tree/master/fixtures))
 
@@ -48,26 +80,39 @@ Is this compatible with JSDoc v4.x?
 
 
 ## Features
-- Responsive with wide variety of screen width
-- Colorful, but not distracting
-- Indexed search which is quick
+- Switchable dark/light themes
+  - Theme preference can be saved to the browser's local storage
+  - Can be synced with the user's system preference
+- Responsive design with a wide variety of screen widths supported
+- Indexed search, which:
+  - is very quick
+  - works on the local, without a server
 - Code highlighting with [highlight.js](https://highlightjs.org/)
 - Customizability
+  - You can customize:
+    - Header text, URL, and icon in the header
+    - Copyright & license text in the footer
+    - Meta tags, language settings, etc.
   - All the highlight.js themes are supported
-  - Header text, URL, and icon
-  - Copyright & license text on the footer
-  - Custom CSS and JS
+  - Custom CSS and JS are supported
+  - All the colors and fonts are easily customizable thanks to CSS variables
+- Lightweight, no bloat
+  - Docolatte doesn't rely on any frameworks for its front-end codebase. They are just basic JS, CSS, and HTML, but coded with good care.
 
 ### Keyboard-only Search & Navigation
-![screenshot search demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/search-demo.gif)
+You can easily navigate the entire site without using a mouse but only a keyboard. You don't need to click on the search box to type in.
+
+https://www.youtube.com/watch?v=-HefBq5ZA40
 
 ### Interactive TOC (Table of Contents)
-![screenshot navigation demo](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/nav-demo.gif)
+The TOC on the sidebar is always synced with the current section you are looking at.
+
+https://www.youtube.com/watch?v=Ejo8vogt920
 
 
 ## Install
 ```sh
-$ npm i --save-dev docolatte
+npm i --save-dev docolatte
 ```
 
 
@@ -80,7 +125,7 @@ $ jsdoc entry-file.js -t node_modules/docolatte
 
 Or set the path to `opts.template` in your JSDoc configuration file:
 
-```json
+```jsonc
 {
   "opts": {
     "template": "node_modules/docolatte",
@@ -88,14 +133,18 @@ Or set the path to `opts.template` in your JSDoc configuration file:
 }
 ```
 
+
 ## Customize
 You can customize docolatte by setting options in JSDoc configuration file like this example:
 
-```json
+```jsonc
 {
   "templates": {
     "docolatte": {
-      "imports": [ ... ],
+      "import": [
+        "custom.css",
+        "custom.js"
+      ],
       "branding": {
         "title": "My Project",
         "link":  "https://example.com/project/",
@@ -122,87 +171,160 @@ You can customize docolatte by setting options in JSDoc configuration file like 
 }
 ```
 
+You can see **the full list of available options here: [lib/defaults.json](lib/defaults.json)**. Copy this file and edit it as you like.
+
 ### Available Options
-The following list is written in YAML format only for the sake of readability.
+The following list is written in YAML format for the sake of readability.
 You need to write the actual config in JSON format just like the above example.
 
 ```yml
 # Docolatte specific options
 templates.docolatte:
-  minify: Whether to use minified JS and CSS [default: true]
+  import: Custom asset files to import (Explained later)
+  minify: Whether to use minified JS and CSS [default:true]
 
-  imports: Custom asset files to import (Explained later)
-
-  branding: # Settings for the header on the top left
+  # Settings for the header on the top left
+  branding:
     title: Title text
     link:  Link URL of the title
-    icon:  Icon on the left [default: "home"] # See https://feathericons.com/
+    icon:  Icon on the left [default:"home"]
+           # See https://feathericons.com/
 
-    font:  # Font settings for the title
+    # Font settings for the title
+    font:
       size:   Font size
       family: Font family
 
-  code: # Settings for code blocks
-    theme: highlight.js theme [default: "base16/espresso"] # See https://highlightjs.org/static/demo/
+  # Settings for code blocks
+  code:
+    theme: highlight.js theme [default:'base16/espresso']
+           # See https://highlightjs.org/static/demo/
 
-  home: # Settings for the home page (index.html)
-    package: # Settings for package.json info
-      hide: Whether to hide the info [default: false]
+    # Settings for `@example` blocks
+    examples:
+      captionPrefix: Prefixes to mark a line as a caption
+        # Default values:
+        - '// '
+        - '- '
+        - '# '
+        # Example:
+        #   `@example // This text is parsed as a caption`
 
-  readme: # Settings for README & tutorials
-    truncate: Whether to enable the truncation tags [default: true]
-              # This removes the content between <!--TRUNCATE:START--> and <!--TRUNCATE:END-->
+  # Settings for light/dark themes
+  lightSwitch:
+    hide: Whether to hide the switching button [default:false]
+    default: Default theme [default:'auto']
+             # NOTE: 'auto' theme tries to sync with
+             #       user's system preference
+    icons: Icons of the button for each theme
 
-    emoji: # Settings for emoji conversion
-      replace: Type(s) of emoji to be replaced [default: 'colons']
+  # Settings for search
+  search:
+    limit: Max number of items shown in a dropdown menu [default:8]
+    placeholder: Placeholder text for the search box
+
+    hint:
+      hide: Whether to hide the hint [default:false]
+      body: Hint text
+
+    keys: Keys of a doclet to match for search queries
+          # See https://www.fusejs.io/api/options.html#keys
+
+  # Settings for TOC
+  toc:
+    icons:
+      variables: Whether to hide icons for variables
+      functions: Whether to hide icons for functions
+
+    # List of menu sections in order
+    menus: {
+      # Key   = Section key
+      # Value = Heading text of the section
+      #
+      # Available section keys:
+      #   tutorials
+      #   modules
+      #   externals
+      #   namespaces
+      #   classes
+      #   interfaces
+      #   events
+      #   mixins
+      #   globals
+    }
+
+  # Settings for the home page (index.html)
+  home:
+    package:
+      hide: Whether to hide the package.json info [default:false]
+
+  # Settings for README & tutorials
+  readme:
+    truncate: Whether to enable the truncation tags [default:true]
+      # This removes the content between
+      # <!--TRUNCATE:START--> and <!--TRUNCATE:END-->
+
+    emoji:
+      replace: Type(s) of emoji to be replaced [default:'colons']
         # Available types:
         - 'colons'
         - 'unified'
         - 'emoticons'
         - 'emoticons_with_colons'
 
-      options: # Options for js-emoji  # See https://github.com/iamcal/js-emoji
-        replace_mode: [default: 'unified'],
-        allow_native: [default: true]
+      options: # Options for js-emoji
+        replace_mode: [default:'unified'],
+        allow_native: [default:true]
+        # See https://github.com/iamcal/js-emoji
 
-  meta: # Settings for meta tags
-    lang:        `lang` attribute of <html> [default: "en"]
+  # Settings for meta tags
+  meta:
+    lang:        `lang` attribute of <html> [default:'en']
     title:       Content of <title> element [defaults to `branding.title`]
     description: `content` attribute of <meta name="description">
     keywords:    `content` attribute of <meta name="keywords">
     author:      `content` attribute of <meta name="author">
     favicon:     Favicon image URL(s). Use array for multiple entries
 
-  footer: # Settings for the footer
+  # Settings for the footer
+  footer:
     copyright: Copyright text
     license:   License text
-    hide:      Whether to hide the footer [true | false]
+    hide:      Whether to hide the footer
 
-# All the options for the JSDoc's default theme are also compatible with Docolatte
-templates.default: { ... } # See https://jsdoc.app/about-configuring-default-template.html
+  # Settings for data manipulation
+  data:
+    exlude: Doclet items to exclude (longname)
+    removeOrphans: Whether to remove orphaned doclet items [default:true]
+
+# All the options for the JSDoc's default theme
+# are also compatible with Docolatte.
+templates.default: { ... }
+# See https://jsdoc.app/about-configuring-default-template.html
 ```
 
 ## Custom Assets
-With **`imports`** option, you can import **user-specific assets** like CSS, JavaScript, or images, etc. to completely customize the look & feel of your documentation site.
+With the **`import`** option, you can use your own assets like CSS, JavaScript images, etc. for your documentation site.
 
-```json
-"imports": [
-  "my_scripts/alfa.js",
-  "my_styles/bravo.css",
-  "my_fonts/charlie.woff"
+```jsonc
+// Example
+"import": [
+  "my-scripts/alfa.js",
+  "my-styles/bravo.css",
+  "my-fonts/charlie.woff"
 ]
 ```
 
-This config results copying the files in the array to subdirectories under the JSDoc output directory.
-The subdirectory name is determined by the file type of each import.
+This config results in copying the files to subdirectories under the JSDoc output directory.
+The subdirectory name is determined by the file extension.
 
-| File Ext. | File Type | Output Directory |
-|----------:|:----------|:-----------------|
-| `.js`     | script    | `scripts/`       |
-| `.css`    | style     | `styles/`        |
-| others    | asset     | `assets/`        |
+| File Ext. | Output Directory |
+|----------:|:-----------------|
+| `.js`     | `scripts/`       |
+| `.css`    | `styles/`        |
+| others    | `assets/`        |
 
-And then, Docolatte writes the proper `<script>` and `<link>` tags linking to the imported scripts and styles in HTML like this:
+Then, Docolatte writes the proper `<script>` and `<link>` tags linking to the imported scripts and styles in HTML like this:
 
 ```html
 <head>
@@ -214,44 +336,44 @@ And then, Docolatte writes the proper `<script>` and `<link>` tags linking to th
 ```
 
 ### More complex options
-Instead of just a filepath string, you can use an **object** to specify more complex rules for each file import.
+Instead of just a file path, you can use an **object** to specify more complex rules for each file to import.
 
-```json
-"imports": [
-  { "src": "my_scripts/alfa.js",  "dst": "foo/bar" },
-  { "src": "my_scripts/bravo.js", "dst": "foo/bar", "as": "delta.js" }
+```jsonc
+"import": [
+  { "src": "my-scripts/alfa.js",  "dst": "foo/bar" },
+  { "src": "my-scripts/bravo.js", "dst": "foo/bar", "as": "delta.js" }
 ]
 ```
 
 - **`dst`** property specifies the destination directory of import.
-- **`as`** property specifies new filename for the imported file.
+- **`as`** property specifies a new filename for the imported file.
 
 #### Loading remote CSS & JS
-With **`resolve`** property, you can specify how Docolatte looks up the `src`.
-If you set it to `false`, Docolatte won't check the file existence and attempt to copy, only write `<script>` (or `<link>` for *.css) tag linking to the `src` in HTML.
+With the **`resolve`** property, you can specify how Docolatte looks up the `src`.
+If you set `resolve` to `false`, Docolatte won't attempt to copy the file. Instead, only write `<script>` (or `<link>` for `*.css`) tag pointing at the `src` in HTML.
 
-```json
-"imports": [
+```jsonc
+"import": [
   { "resolve": false, "src": "https://example.com/hello.js" }
 ]
 ```
 
 #### Importing Node modules
-By setting `resolve` property to `'module'`, you can import files from Node modules that you installed via `package.json` of your current project.
+By setting the `resolve` property to `'module'`, you can import files from Node modules in the dependencies of your current project.
 
-```json
-"imports": [
+```jsonc
+"import": [
   { "resolve": "module", "src": "p5/lib/p5.js" }
 ]
 ```
 
 #### Private import
-If you set **`private`** property to `true`, Docolatte will copy the file to the JSDoc ouput directory normally, but won't write `<script>` (or `<link>` for styles) tags linking to it in HTML.
+If you set the **`private`** property to `true`, Docolatte will copy the file to the JSDoc output directory normally, but won't write `<script>` or `<link>` tags in HTML.
 
 This is useful if you want to `@import` a CSS file from other CSS.
 
-```json
-"imports": [
+```jsonc
+"import": [
   { "src": "my_styles/style.css" },
   { "src": "my_styles/variables.css", "private": true }
 ]
@@ -262,12 +384,12 @@ This is useful if you want to `@import` a CSS file from other CSS.
 ```
 
 #### Ordering imports
-The order of `<script>` and `<link>` tags for imports is determined by **`order`** property of each import.
+The order of `<script>` and `<link>` tags for imports is determined by the **`order`** property of each import.
 The default value of `order` is `0`. The greater the value, the lower the tag is placed.
-Negative value makes the tag gets loaded earlier than the default scripts & styles of Docolatte.
+A negative value makes the tag placed earlier than the default scripts & styles of Docolatte.
 
-```json
-"imports": [
+```jsonc
+"import": [
   { "order": 5, "src": "second.css" },
   { "order": 5, "src": "third.css" },
   { "order": 2, "src": "first.css" }
@@ -282,9 +404,6 @@ Negative value makes the tag gets loaded earlier than the default scripts & styl
   ...
 </head>
 ```
-
-## Thanks
-[Docdash](https://github.com/clenemt/docdash) …… Lodash inspired JSDoc 3 template/theme
 
 
 ## License

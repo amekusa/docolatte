@@ -27,7 +27,6 @@
         - [Importing Node modules](#importing-node-modules)
         - [Private import](#private-import)
         - [Ordering imports](#ordering-imports)
-- [Thanks](#thanks)
 - [License](#license)
 
 <!-- /TOC -->
@@ -102,12 +101,12 @@ Is this compatible with JSDoc v4.x?
 ### Keyboard-only Search & Navigation
 You can easily navigate the entire site without using a mouse but only a keyboard. You don't need to click on the search box to type in.
 
-https://www.youtube.com/watch?v=-HefBq5ZA40
+[<img src="gallery/demo-keyboard-only-navigation.png">](https://www.youtube.com/watch?v=-HefBq5ZA40)
 
 ### Interactive TOC (Table of Contents)
 The TOC on the sidebar is always synced with the current section you are looking at.
 
-https://www.youtube.com/watch?v=Ejo8vogt920
+[<img src="gallery/demo-interactive-toc.png">](https://www.youtube.com/watch?v=Ejo8vogt920)
 
 
 ## Install

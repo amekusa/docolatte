@@ -1,0 +1,265 @@
+h1, h2, h3, h4, h5, h6 {
+	.c(var(--c-heading));
+
+	a {
+		.c(var(--c-heading-link));
+
+		&:hover, &:focus {
+			.c(var(--c-heading-link-hov));
+		}
+		&:visited {
+			.c(var(--c-heading-link-vis));
+		}
+	}
+}
+
+a {
+	.c(var(--c-link));
+	overflow-wrap: break-word;
+
+	&:hover, &:focus {
+		.c(var(--c-link-hov));
+		.underline;
+	}
+	&:visited {
+		.c(var(--c-link-vis));
+	}
+	code {
+		.c(inherit);
+	}
+}
+
+code:not(.hljs) {
+	.px(.25em);
+	.c(var(--c-code));
+}
+
+table {
+	.bb(4px solid var(--c-table-border); 1px solid var(--c-table-border));
+}
+tr {
+	+ tr > * {
+		.bt(1px solid var(--c-table-border));
+	}
+}
+td + td,
+th + th,
+th + td {
+	.bl(1px dashed var(--c-table-border));
+}
+td + th {
+	.bl(1px solid var(--c-table-border));
+}
+thead {
+	.c(var(--c-thead-text));
+
+	> tr {
+		.bg-c(var(--c-thead));
+		.stripes(var(--stripes-angle); var(--c-thead-stripe1); var(--c-thead-stripe2); 1px; 3px);
+
+		> * + * {
+			.bl(none);
+		}
+	}
+}
+
+dl {
+	.dl-side-by-side(fit-content(6rem); (@gutter * .25) (@gutter * .5));
+	.my((@gutter * .5); 0);
+	.bl(1px solid var(--c-border-thin));
+	.pl(@gutter);
+	.of(auto);
+
+	&:empty {
+		.no-disp;
+	}
+	&.details {
+		.mt(@gutter);
+	}
+}
+dt {
+	.fs(@fs-s; 1.25);
+	.py(.25em);
+	.align(right);
+	white-space: nowrap;
+	.c(var(--c-text-thin));
+}
+dd {
+	// return type
+	&.type {
+		.ff(var(--font-code));
+	}
+}
+
+hr {
+	.bt(var(--border-style) var(--c-border); none);
+}
+
+img,
+video,
+iframe {
+	.w-max(100%);
+}
+
+blockquote {
+	.ml(0);
+	.pl(@gutter);
+	.bl(1px solid var(--c-border-thin));
+}
+
+article {
+	.m(@gutter);
+	.w-max(960px);
+	.of(hidden);
+
+	&.readme {
+		&:first-child {
+			.mt((@gutter * 2));
+		}
+		h1 {
+			.fs(@fs-xl);
+		}
+		h2, h3 {
+			.fs(@fs-l);
+		}
+		h2 {
+			.subsection-title;
+		}
+		h4, h5, h6 {
+			.fs(@fs-m);
+		}
+		pre > code {
+			.fs(@fs-s);
+		}
+	}
+	&.src {
+		.w-max(1280px);
+
+		.prettyprint {
+			.m(0);
+		}
+	}
+	&.tutorial {
+		// TODO
+	}
+}
+
+// class overview
+.container-overview {
+
+	// "Constructor" heading
+	h2 {
+		.subsection-title;
+	}
+}
+
+// method parameters
+.signature {
+	.ml(.5em);
+	.ff(var(--font-code));
+	.fs(@fs-m);
+
+	.signature-attributes {
+		.tag;
+		.ml(.25em);
+		.c(var(--c-params-attr-text));
+	}
+}
+
+// class name in header
+h2.name {
+	.signature {
+		.signature-attributes {
+			.bg-c(var(--c-heading));
+		}
+	}
+}
+
+// member name
+h4.name {
+	.mt((@gutter * 2));
+	.pt(@gutter);
+	.bt(var(--border-style) var(--c-border));
+	.regular;
+	.ff(var(--font-code));
+	.lh(1.5);
+	.c(var(--c-member));
+
+	// 'static', 'abstract', 'readonly', etc.
+	.attribute {
+		.tag;
+		.mr(.25rem);
+		.bg-c(var(--c-member-attr));
+		.c(var(--c-member-attr-text));
+
+		&:last-child {
+			.mr(.5rem);
+		}
+	}
+	// parameters
+	.signature {
+		.c(var(--c-params));
+
+		.signature-attributes {
+			.bg-c(var(--c-params-attr));
+		}
+	}
+	// type
+	.type-signature {
+		.c(var(--c-text-thin));
+
+		.type {
+			&::before,
+			&::after {
+				.op(.5);
+			}
+			&::before {
+				content: "<";
+				.pr(.1em);
+			}
+			&::after {
+				content: ">";
+				.pl(.1em);
+			}
+			.sep {
+				.op(.5);
+				.mx(.25em);
+				.bl(1px solid);
+			}
+		}
+		a {
+			.c(var(--c-link));
+		}
+	}
+}
+
+h4.name:first-of-type,
+.subsection-title + h4.name {
+	.mt(0);
+	.bt(none);
+}
+
+// "Members", "Methods" headings
+.subsection-title {
+	.mt((@gutter * 3));
+	.heading;
+}
+
+td {
+	&.name,
+	&.type,
+	&.default {
+		.ff(var(--font-code));
+		.fs(@fs-s);
+	}
+	i.attribute {
+		.tag;
+		.v-align(middle);
+		.bg-c(var(--c-params-attr));
+		.c(var(--c-params-attr-text));
+
+		+ i.attribute {
+			.ml(.25em);
+		}
+	}
+}

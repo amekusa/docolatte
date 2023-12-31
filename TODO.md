@@ -1,9 +1,11 @@
 # ToDo
 
 ## Features to implement
-- [ ] Dark theme
-- [ ] More customizability
-  - [ ] Colors
+- [ ] Use iosevka for mobile
+- [ ] "Copy to clipboard" button
+- [x] Dark theme
+- [x] More customizability
+  - [x] Colors
   - [x] Custom CSS
 - [ ] README in TOC
 - [ ] Improve README & tutorial pages
@@ -11,7 +13,4 @@
   - [ ] Support modal images
 
 ## Known issues to fix
-- [x] Searching does not work in tutorial pages
-
-## Others
-- [ ] Try [monorepo](https://monorepo.tools/#what-is-a-monorepo)
+- [x] Searching does not work on tutorial pages

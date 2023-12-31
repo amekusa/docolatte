@@ -17,7 +17,6 @@
   "scripts": {
     "build": "gulp build",
     "dev": "gulp dev",
-    "prepack": "gulp dist",
     "debug": "echo 'Open chrome://inspect/ in browser\n'; node inspect \"$(which jsdoc)\" -c jsdoc.json",
     "screenshot": "node screenshot.js",
     "bump": "ncu -u -t minor -x jsdoc,@jsdoc/salty,@jsdoc/util",

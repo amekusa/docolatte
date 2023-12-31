@@ -28,6 +28,7 @@
         - [Importing Node modules](#importing-node-modules)
         - [Private import](#private-import)
         - [Ordering imports](#ordering-imports)
+- [Customizing CSS Variables](#customizing-css-variables)
 - [License](#license)
 
 <!-- /TOC -->
@@ -119,7 +120,7 @@ npm i --save-dev docolatte
 Specify the path to docolatte ( normally: `node_modules/docolatte` ) as the JSDoc template with `-t` option of `jsdoc` command:
 
 ```sh
-$ jsdoc entry-file.js -t node_modules/docolatte
+jsdoc entry-file.js -t node_modules/docolatte
 ```
 
 Or set the path to `opts.template` in your JSDoc configuration file:
@@ -127,7 +128,7 @@ Or set the path to `opts.template` in your JSDoc configuration file:
 ```json
 {
   "opts": {
-    "template": "node_modules/docolatte",
+    "template": "node_modules/docolatte"
   }
 }
 ```
@@ -170,7 +171,7 @@ You can customize docolatte by setting options in JSDoc configuration file like 
 }
 ```
 
-You can see **the full list of available options here: [lib/defaults.json](lib/defaults.json)**. Copy this file and edit it as you like.
+You can see **the full list of available options here: [lib/defaults.json](https://github.com/amekusa/docolatte/blob/trunk/lib/defaults.json)**. Copy this file and edit it as you like.
 
 ### Available Options
 The following list is written in YAML format for the sake of readability.
@@ -186,7 +187,7 @@ templates.docolatte:
   branding:
     title: Title text
     link:  Link URL of the title
-    icon:  Icon on the left [default:"home"]
+    icon:  Icon on the left [default:'home']
            # See https://feathericons.com/
 
     # Font settings for the title
@@ -402,6 +403,11 @@ A negative value makes the tag placed earlier than the default scripts & styles 
   ...
 </head>
 ```
+
+
+## Customizing CSS Variables
+All the CSS variables that Docolatte is using are defined in [static/_src/styles/skin.css](https://github.com/amekusa/docolatte/blob/trunk/static/_src/styles/skin.css).
+To customize those variables, copy the file and `import` it. Then, edit the variable values as you like.
 
 
 ## License

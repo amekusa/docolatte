@@ -37,7 +37,8 @@
       },
       "branding": {
         "title": "DOCOLATTE",
-        "icon": "github"
+        "icon": "github",
+        "link": "https://github.com/amekusa/docolatte"
       },
       "code": {
         "theme": "base16/espresso"
@@ -59,8 +60,8 @@
     "monospaceLinks": false,
     "default": {
       "outputSourceFiles": true,
-      "includeDate": true,
-      "useLongnameInNav": true
+      "includeDate": false,
+      "useLongnameInNav": false
     }
   }
 }

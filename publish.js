@@ -657,7 +657,7 @@ exports.publish = (taffyData, opts, tutorials) => {
         packages.concat(
             [{
                 kind: 'mainpage',
-                readme: filters.apply('README_HTML', opts.readme), // @HOOK
+                readme: filters.apply('README_HTML', opts.readme || ''), // @HOOK
                 longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'
             }]
         ).concat(files), indexUrl);

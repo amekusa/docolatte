@@ -14,6 +14,7 @@
     - [Dark Theme](#dark-theme)
     - [Source](#source)
     - [Mobile](#mobile)
+- [Working Sample](#working-sample)
 - [Features](#features)
     - [Keyboard-only Search & Navigation](#keyboard-only-search--navigation)
     - [Interactive TOC Table of Contents](#interactive-toc-table-of-contents)
@@ -60,22 +61,21 @@ Is this compatible with JSDoc v4.x?
 ## Screenshots
 
 ### Light Theme
-![screenshot class](gallery/light.png)
+![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/light.png)
 
 ### Dark Theme
-![screenshot class](gallery/dark.png)
+![screenshot class](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/dark.png)
 
 ### Source
-![screenshot source](gallery/source.png)
+![screenshot source](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/source.png)
 
 ### Mobile
 | Menu:Off | Menu:On  |
 |:--------:|:--------:|
-| ![screenshot mobile menu off](gallery/mobile.png) | ![screenshot mobile menu on](gallery/mobile-menu.png) |
+| ![screenshot mobile menu off](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile.png) | ![screenshot mobile menu on](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile-menu.png) |
 
-(The sample codes in the screenshots are derived from [docdash/fixtures](https://github.com/clenemt/docdash/tree/master/fixtures))
-
-[All screenshots](https://github.com/amekusa/docolatte/tree/trunk/gallery)
+## Working Sample
+[https://amekusa.github.io/@amekusa/docolatte](https://amekusa.github.io/@amekusa/docolatte/)
 
 
 ## Features
@@ -101,12 +101,12 @@ Is this compatible with JSDoc v4.x?
 ### Keyboard-only Search & Navigation
 You can easily navigate the entire site without using a mouse but only a keyboard. You don't need to click on the search box to type in.
 
-[<img src="gallery/demo-keyboard-only-navigation.png">](https://www.youtube.com/watch?v=-HefBq5ZA40)
+[<img src="https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/demo-keyboard-only-navigation.png">](https://www.youtube.com/watch?v=-HefBq5ZA40)
 
 ### Interactive TOC (Table of Contents)
 The TOC on the sidebar is always synced with the current section you are looking at.
 
-[<img src="gallery/demo-interactive-toc.png">](https://www.youtube.com/watch?v=Ejo8vogt920)
+[<img src="https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/demo-interactive-toc.png">](https://www.youtube.com/watch?v=Ejo8vogt920)
 
 
 ## Install

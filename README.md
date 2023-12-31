@@ -124,7 +124,7 @@ $ jsdoc entry-file.js -t node_modules/docolatte
 
 Or set the path to `opts.template` in your JSDoc configuration file:
 
-```jsonc
+```json
 {
   "opts": {
     "template": "node_modules/docolatte",
@@ -136,7 +136,7 @@ Or set the path to `opts.template` in your JSDoc configuration file:
 ## Customize
 You can customize docolatte by setting options in JSDoc configuration file like this example:
 
-```jsonc
+```json
 {
   "templates": {
     "docolatte": {
@@ -305,8 +305,7 @@ templates.default: { ... }
 ## Custom Assets
 With the **`import`** option, you can use your own assets like CSS, JavaScript images, etc. for your documentation site.
 
-```jsonc
-// Example
+```json
 "import": [
   "my-scripts/alfa.js",
   "my-styles/bravo.css",
@@ -337,7 +336,7 @@ Then, Docolatte writes the proper `<script>` and `<link>` tags linking to the im
 ### More complex options
 Instead of just a file path, you can use an **object** to specify more complex rules for each file to import.
 
-```jsonc
+```json
 "import": [
   { "src": "my-scripts/alfa.js",  "dst": "foo/bar" },
   { "src": "my-scripts/bravo.js", "dst": "foo/bar", "as": "delta.js" }
@@ -351,7 +350,7 @@ Instead of just a file path, you can use an **object** to specify more complex r
 With the **`resolve`** property, you can specify how Docolatte looks up the `src`.
 If you set `resolve` to `false`, Docolatte won't attempt to copy the file. Instead, only write `<script>` (or `<link>` for `*.css`) tag pointing at the `src` in HTML.
 
-```jsonc
+```json
 "import": [
   { "resolve": false, "src": "https://example.com/hello.js" }
 ]
@@ -360,7 +359,7 @@ If you set `resolve` to `false`, Docolatte won't attempt to copy the file. Inste
 #### Importing Node modules
 By setting the `resolve` property to `'module'`, you can import files from Node modules in the dependencies of your current project.
 
-```jsonc
+```json
 "import": [
   { "resolve": "module", "src": "p5/lib/p5.js" }
 ]
@@ -371,7 +370,7 @@ If you set the **`private`** property to `true`, Docolatte will copy the file to
 
 This is useful if you want to `@import` a CSS file from other CSS.
 
-```jsonc
+```json
 "import": [
   { "src": "my_styles/style.css" },
   { "src": "my_styles/variables.css", "private": true }
@@ -387,7 +386,7 @@ The order of `<script>` and `<link>` tags for imports is determined by the **`or
 The default value of `order` is `0`. The greater the value, the lower the tag is placed.
 A negative value makes the tag placed earlier than the default scripts & styles of Docolatte.
 
-```jsonc
+```json
 "import": [
   { "order": 5, "src": "second.css" },
   { "order": 5, "src": "third.css" },

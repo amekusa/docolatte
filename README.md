@@ -75,7 +75,7 @@ Is this compatible with JSDoc v4.x?
 | ![screenshot mobile menu off](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile.png) | ![screenshot mobile menu on](https://raw.githubusercontent.com/amekusa/docolatte/trunk/gallery/mobile-menu.png) |
 
 ## Working Sample
-[https://amekusa.github.io/@amekusa/docolatte](https://amekusa.github.io/@amekusa/docolatte/)
+[https://amekusa.github.io/docolatte](https://amekusa.github.io/docolatte/)
 
 
 ## Features

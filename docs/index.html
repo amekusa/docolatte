@@ -372,6 +372,12 @@ templates.docolatte:
     exlude: Doclet items to exclude (longname)
     removeOrphans: Whether to remove orphaned doclet items [default:true]
 
+  # Settings for minor tweakings
+  tweak:
+    nojekyll: If `true`, places `.nojekyll` file
+              at the root of the output directory [default:true]
+              # This is useful if you publish the docs to gh-pages
+
 # All the options for the JSDoc's default theme
 # are also compatible with Docolatte.
 templates.default: { ... }

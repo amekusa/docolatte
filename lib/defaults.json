@@ -101,6 +101,9 @@
           { "name": "classdesc",      "weight": 2 },
           { "name": "description",    "weight": 2 }
         ]
+      },
+      "tweak": {
+        "nojekyll": true
       }
     }
   }

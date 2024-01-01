@@ -42,7 +42,7 @@
     
 <article class="src">
     <pre class="prettyprint source linenums lang-js"><span class="_char">_</span><code>const path = require('path');
-const { existsSync, copyFileSync } = require('fs');
+const { existsSync, copyFileSync, writeFileSync } = require('fs');
 const { mkPath } = require('jsdoc/fs');
 const { error, arr, map, ext, splitLast } = require('./Util');
 
@@ -86,7 +86,7 @@ class FileImporter {
 			default:
 				throw error(`invalid type: ${typeof item}`);
 			}
-			if (!item.src) throw error(`'src' property is missing`);
+			if (!('src' in item)) throw error(`'src' property is missing`);
 			this.queue.push(Object.assign({
 				order: 0,
 				resolve: 'local',
@@ -152,9 +152,13 @@ class FileImporter {
 
 			} else { // needs resolution
 				let { dst:dstDir, as:dstFile } = item;
-				src = this.resolve(src, item.resolve);
-				// destination filename
-				if (!dstFile) dstFile = path.basename(src);
+				let create = item.resolve == 'create'; // needs creation?
+				if (create) {
+					if (!dstFile) throw error(`'as' property is required with { resolve: 'create' }`);
+				} else {
+					src = this.resolve(src, item.resolve);
+					if (!dstFile) dstFile = path.basename(src);
+				}
 				// file type
 				if (!type) type = map(ext(dstFile), typeMap);
 				// destination dir
@@ -163,13 +167,20 @@ class FileImporter {
 				url = path.join(dstDir, dstFile);
 				let dst = path.join(this.config.dst, url);
 
-				console.log('---- File Import ----')
-				console.log(' type:', type);
-				console.log('  src:', src);
-				console.log('  dst:', dst);
-
 				mkPath(path.dirname(dst));
-				copyFileSync(src, dst);
+
+				if (create) {
+					writeFileSync(dst, src);
+					console.log('---- File Creation ----')
+					console.log(' type:', type);
+					console.log('  dst:', dst);
+				} else {
+					copyFileSync(src, dst);
+					console.log('---- File Import ----')
+					console.log(' type:', type);
+					console.log('  src:', src);
+					console.log('  dst:', dst);
+				}
 			}
 
 			if (!item.private) {

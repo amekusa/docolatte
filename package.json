@@ -18,6 +18,7 @@
     "build": "gulp build",
     "dev": "gulp dev",
     "debug": "echo 'Open chrome://inspect/ in browser\n'; node inspect \"$(which jsdoc)\" -c jsdoc.json",
+    "test": "c8 mocha --enable-source-maps",
     "screenshot": "node screenshot.js",
     "bump": "ncu -u -t minor -x jsdoc,@jsdoc/salty,@jsdoc/util",
     "bump-major": "ncu -u -x jsdoc,@jsdoc/salty,@jsdoc/util",
@@ -61,6 +62,8 @@
     "simplebar": "^5.3.9"
   },
   "develarms": {
-    "jsdoc": "^3.6.11"
+    "jsdoc": "^3.6.11",
+    "mocha": "^10.2.0",
+    "c8": "^8.0.1"
   }
 }

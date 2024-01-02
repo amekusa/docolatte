@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/amekusa/docolatte/issues"
   },
-  "homepage": "https://github.com/amekusa/docolatte",
+  "homepage": "https://amekusa.github.io/docolatte",
   "devDependencies": {
     "@amekusa/nodeutil": "^1.2.1",
     "@rollup/plugin-commonjs": "^25.0.7",

@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.2.0]
+
+### Added
+- New config option:
+ - `toc.allowHorizontalScroll`
+
+
+---
+
+## [4.1.0]
+
+### Added
+- New config option:
+  - `tweak.nojekyll`
+
+
+---
+
 ## [4.0.0]
 
 ### Added

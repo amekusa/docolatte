@@ -25,7 +25,7 @@
 	--font-heading:        Avenir, "Century Gothic", var(--font-body);
 	--font-code:           "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
 	--font-toc-heading:    var(--font-heading);
-	--font-toc-item:       var(--font-heading);
+	--font-toc-item:       var(--font-body);
 	--font-toc-member:     var(--font-code);  /* variables, functions */
 
 	/* Misc. */

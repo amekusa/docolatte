@@ -231,7 +231,11 @@
 		.pos-bl(0; 0; absolute);
 		.dim(100%; calc(100% - @topbar-h); border-box);
 		.p-b(@gutter; @gutter * 2);
-		.of(auto);
+		.of(hidden auto);
+
+		.config.sidebar-h-scroll & {
+			.of-x(auto);
+		}
 	}
 	.toc {
 		.menu {
@@ -268,10 +272,16 @@
 				.lh(1.25);
 				.py(.33em);
 				.mr(@gutter);
-				// word-wrap: break-word;
-				// word-break: break-all;
 				.c(var(--c-toc-link));
 				.trans(padding-left, color; .25s; ease-out);
+
+				overflow-wrap: break-word;
+				word-break: break-word;
+
+				.config.sidebar-h-scroll & {
+					overflow-wrap: normal;
+					word-break: normal;
+				}
 
 				&:hover, &:focus {
 					.c(var(--c-toc-link-hov));

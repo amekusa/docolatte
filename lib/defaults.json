@@ -26,7 +26,8 @@
           "events":     "Events",
           "mixins":     "Mixins",
           "globals":    "Global"
-        }
+        },
+        "allowHorizontalScroll": false
       },
       "lightSwitch": {
         "hide": false,

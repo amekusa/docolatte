@@ -252,10 +252,11 @@ import Debugger from './Debugger.js';
 				if (hint) hint.classList.add('hidden'); // hide hint
 
 				// show the results
+				let symbols = /([\/.#$:~-])/g;
 				for (let i = 0; i < results.length; i++) {
 					let item = results[i].item;
 					let url   = item.$[0];
-					let label = item.$[1].replaceAll(/(\W)/g, '<i class="symbol">$1</i><wbr>'); // insert <WBR> at every symbol chars
+					let label = item.$[1].replaceAll(symbols, '<i class="symbol">$1</i><wbr>'); // insert <WBR> at every symbol chars
 					let li = elem('li', null, elem('a', { href: url }, label));
 					if (i == 0) li.classList.add('selected'); // select the 1st item
 					dropdown.appendChild(li);

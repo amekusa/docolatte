@@ -1,6 +1,8 @@
 # ToDo
 
 ## Features to implement
+- [ ] JSDoc v4 compatibility
+- [ ] Foldable TOC items
 - [ ] Use iosevka for mobile
 - [ ] "Copy to clipboard" button
 - [x] Dark theme

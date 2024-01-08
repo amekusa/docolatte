@@ -2,7 +2,6 @@
 
 .c(@color) { color: @color }
 .op(@opacity) { opacity: @opacity }
-.of(@overflow) { overflow: @overflow }
 .align(@text-align) { text-align: @text-align }
 .empty() { content: "" }
 .remove() { content: none }
@@ -16,6 +15,14 @@
 .visible() { visibility: visible }
 
 .v-align(@v-align) { vertical-align: @v-align }
+
+.of(@overflow) {
+	overflow: @overflow;
+}
+.of-x(@overflow-x) { overflow-x: @overflow-x }
+.of-y(@overflow-y) { overflow-y: @overflow-y }
+.tof(@text-overflow) { text-overflow: @text-overflow }
+.ellipsis() { text-overflow: ellipsis }
 
 
 // ---- Background ----

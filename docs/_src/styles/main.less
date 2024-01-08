@@ -120,12 +120,12 @@
 	.pos(relative);
 	.w(100%; border-box);
 	.h-min(100%);
-	.py(@topbar-h; (@gutter * 2));
+	.py(@topbar-h; @footer-h + @gutter * 2);
 	.px(@sidebar-w; 0);
 	.bg-c(var(--c-backdrop));
 
-	body.has-footer & {
-		.pb((@footer-h + @gutter * 2));
+	.config.no-footer & {
+		.pb(@gutter * 4);
 	}
 }
 
@@ -143,6 +143,10 @@
 	.bg-c(var(--c-footer));
 	.stripes(var(--stripes-angle); var(--c-footer-stripe1); var(--c-footer-stripe2); 1px; 4px);
 	.bg-fixed;
+
+	.config.no-footer & {
+		.bg(none);
+	}
 
 	.lines {
 		.p-b(@gutter);
@@ -231,7 +235,11 @@
 		.pos-bl(0; 0; absolute);
 		.dim(100%; calc(100% - @topbar-h); border-box);
 		.p-b(@gutter; @gutter * 2);
-		.of(auto);
+		.of(hidden auto);
+
+		.config.sidebar-h-scroll & {
+			.of-x(auto);
+		}
 	}
 	.toc {
 		.menu {
@@ -268,10 +276,16 @@
 				.lh(1.25);
 				.py(.33em);
 				.mr(@gutter);
-				// word-wrap: break-word;
-				// word-break: break-all;
 				.c(var(--c-toc-link));
 				.trans(padding-left, color; .25s; ease-out);
+
+				overflow-wrap: break-word;
+				word-break: break-word;
+
+				.config.sidebar-h-scroll & {
+					overflow-wrap: normal;
+					word-break: normal;
+				}
 
 				&:hover, &:focus {
 					.c(var(--c-toc-link-hov));

@@ -253,6 +253,11 @@ templates.docolatte:
       #   globals
     }
 
+    allowHorizontalScroll: [default:false]
+      # If false, Docolatte tries to insert <wbr> tags into TOC items
+      #    to avoid long item names to trigger horizontal scroller.
+      # If true, Docolatte does not try to insert <wbr> tags.
+
   # Settings for the home page (index.html)
   home:
     package:

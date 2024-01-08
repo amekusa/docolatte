@@ -33,5 +33,41 @@ describe(main, () => {
 			['^re.ge.xp$'],
 			'\\^re\\.ge\\.xp\\$'
 		]
-	], 'equal');
+	], 'strictEqual');
+
+	testMethod($, 'toLiteral', [
+		[
+			[123], '123'
+		],
+		[
+			[true], 'true'
+		],
+		[
+			[false], 'false'
+		],
+		[
+			['abc'], '"abc"'
+		],
+		[
+			['abc', { quote: "'" }],
+			"'abc'"
+		],
+		[
+			['string with "QUOTES"'],
+			'"string with \\"QUOTES\\""'
+		],
+		[
+			[[123, true, false, 'abc']],
+			'[123,true,false,"abc"]'
+		],
+		[
+			[{ num: 123, bool: true, str: 'abc' }],
+			'{"num":123,"bool":true,"str":"abc"}'
+		],
+		[
+			[{ num: 123, bool: true, str: 'abc' }, { quoteKeys: false }],
+			'{num:123,bool:true,str:"abc"}'
+		]
+	], 'strictEqual');
+
 });

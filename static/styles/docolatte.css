@@ -302,7 +302,7 @@ svg.icon {
   --font-heading: Avenir, "Century Gothic", var(--font-body);
   --font-code: "Fira Code", "Source Code Pro", Menlo, "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace;
   --font-toc-heading: var(--font-heading);
-  --font-toc-item: var(--font-heading);
+  --font-toc-item: var(--font-body);
   --font-toc-member: var(--font-code);
   /* variables, functions */
   /* Misc. */
@@ -635,13 +635,13 @@ svg.icon {
   width: 100%;
   min-height: 100%;
   padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 15rem;
   padding-left: 16rem;
   padding-right: 0;
   background-color: var(--c-backdrop);
 }
-body.has-footer .primary {
-  padding-bottom: 15rem;
+.config.no-footer .primary {
+  padding-bottom: 6rem;
 }
 .main h1,
 .main h2,
@@ -964,6 +964,9 @@ body.has-footer .primary {
   background-image: repeating-linear-gradient(var(--stripes-angle), var(--c-footer-stripe2) 0, var(--c-footer-stripe1) 1px, var(--c-footer-stripe1) 1px, var(--c-footer-stripe2) 2px, var(--c-footer-stripe2) 5px);
   background-attachment: fixed;
 }
+.config.no-footer .footer {
+  background: none;
+}
 .footer .lines {
   padding-top: 1.5rem;
   padding-left: 1.5rem;
@@ -1070,7 +1073,10 @@ body.has-footer .primary {
   width: 100%;
   height: calc(100% - 3rem);
   padding: 1.5rem 1.5rem 3rem 1.5rem;
-  overflow: auto;
+  overflow: hidden auto;
+}
+.config.sidebar-h-scroll .sidebar .wrap {
+  overflow-x: auto;
 }
 .sidebar .toc .menu {
   margin-top: 1.5rem;
@@ -1107,6 +1113,12 @@ body.has-footer .primary {
   transition-property: padding-left, color;
   transition-duration: 0.25s;
   transition-timing-function: ease-out;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.config.sidebar-h-scroll .sidebar .toc ul a {
+  overflow-wrap: normal;
+  word-break: normal;
 }
 .sidebar .toc ul a:hover,
 .sidebar .toc ul a:focus {

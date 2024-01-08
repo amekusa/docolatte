@@ -1,5 +1,8 @@
 # ToDo
 
+## Considering to ...
+- [ ] Migrate the CSS codebase from Less to JSS
+
 ## Features to implement
 - [ ] JSDoc v4 compatibility
 - [ ] Foldable TOC items

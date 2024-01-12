@@ -50,8 +50,8 @@
     "terser": "^5.26.0"
   },
   "dependencies": {
-    "@jsdoc/salty": "^0.2.2",
-    "@jsdoc/util": "^0.2.7",
+    "@jsdoc/salty": "^0.2.7",
+    "@jsdoc/util": "^0.3.2",
     "common-path-prefix": "^3.0.0",
     "emoji-js": "^3.8.0",
     "feather-icons": "^4.29.1",
@@ -62,7 +62,7 @@
     "simplebar": "^5.3.9"
   },
   "develarms": {
-    "jsdoc": "^3.6.11",
+    "jsdoc": "^4.0.2",
     "mocha": "^10.2.0",
     "c8": "^8.0.1"
   }

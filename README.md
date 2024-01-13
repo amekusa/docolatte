@@ -417,7 +417,7 @@ A negative value makes the tag placed earlier than the default scripts & styles 
 
 
 ## Customizing CSS Variables
-All the CSS variables that Docolatte is using are defined in [static/_src/styles/skin.css](https://github.com/amekusa/docolatte/blob/trunk/static/_src/styles/skin.css).
+All the CSS variables that Docolatte is using are defined in [src/styles/skin.css](https://github.com/amekusa/docolatte/blob/trunk/src/styles/skin.css).
 To customize those variables, copy the file and `import` it. Then, edit the variable values as you like.
 
 

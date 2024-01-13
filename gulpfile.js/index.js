@@ -38,8 +38,8 @@ const jsdoc = require(`${home}/jsdoc.json`);
 
 const paths = {
 	src: {
-		scripts:  'static/_src/scripts',
-		styles:   'static/_src/styles'
+		scripts:  'src/scripts',
+		styles:   'src/styles'
 	},
 	scripts:  'static/scripts',
 	styles:   'static/styles',
@@ -222,12 +222,12 @@ const T = {
 			`${paths.scripts}/*`,
 			`${paths.styles}/*`,
 		]).on('change', src => {
-			let dst = src.replace(/^static\//, `${paths.docs}/`);
+			let dst = `${paths.docs}/` + src.replace(/^static\//, '');
 			sh.exec(`cp '${src}' '${dst}'`).then(() => {
 				log(' :: File - Copied:');
 				log('  src:', src);
 				log('  dst:', dst);
-				if (!dst.match(/\/_src\//) && dst.match(/\.(js|css)$/)) {
+				if (!dst.match(/\/src\//) && dst.match(/\.(js|css)$/)) {
 					log(' :: Browsersync - Reload:', dst);
 					bs.reload(basename(dst));
 					bs.notify(`<b style="color:lime">Reloaded</b>: <code>${dst}</code>`);

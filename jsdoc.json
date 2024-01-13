@@ -9,7 +9,7 @@
       "./node_modules/jsdoc/lib/jsdoc/schema.js",
       "./node_modules/jsdoc/lib/jsdoc/tutorial.js",
       "./node_modules/jsdoc/lib/jsdoc/util/templateHelper.js",
-      "./static/_src/scripts",
+      "./src/scripts",
       "./lib",
       "./README.md"
     ]

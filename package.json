@@ -52,7 +52,6 @@
   "dependencies": {
     "@jsdoc/salty": "^0.2.7",
     "@jsdoc/util": "^0.3.2",
-    "common-path-prefix": "^3.0.0",
     "emoji-js": "^3.8.0",
     "feather-icons": "^4.29.1",
     "fuse.js": "^6.6.2",

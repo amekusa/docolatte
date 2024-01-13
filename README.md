@@ -1,5 +1,5 @@
 # [Docolatte](https://amekusa.github.io/docolatte/)
-:chocolate_bar: Bittersweet theme for JSDoc 3
+:chocolate_bar: Bittersweet theme for JSDoc 3 & 4
 
 [![npm package](https://img.shields.io/badge/dynamic/json?label=npm%0Apackage&query=%24%5B%27dist-tags%27%5D%5B%27latest%27%5D&url=https%3A%2F%2Fregistry.npmjs.org%2Fdocolatte%2F)](https://www.npmjs.com/package/docolatte)
 
@@ -36,6 +36,7 @@
 ## Docolatte v4 is out! :tada:
 
 ### New Features
+- **[NEW]** Now it's fully compatible with JSDoc 4! (from Docolatte v4.3)
 - Finally, **dark theme** is implemented!
 - All the colors and fonts are now **CSS variables**, which means you can customize the overall look & feel of Docolatte just by overwriting the variables in your custom CSS. On top of that, you can customize light theme and dark theme separately.
 - A lot of design improvements
@@ -56,7 +57,7 @@ What's coming out in the next update?
 > See: [TODO.md](https://github.com/amekusa/docolatte/tree/trunk/TODO.md)
 
 Is this compatible with JSDoc v4.x?
-> Search-indexing is partially not working with jsdoc@4.0.0. I recommend sticking with jsdoc v3.
+> Yes! Now it's fully compatible with JSDoc 4. JSDoc 3 is still supported as well.
 
 
 ## Screenshots

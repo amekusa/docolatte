@@ -7,6 +7,7 @@
 
 ### Changes
 - Removed some unnecessary dependencies
+- Removed `_src` directory from output
 
 
 ---

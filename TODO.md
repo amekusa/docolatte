@@ -4,7 +4,7 @@
 - [ ] Migrate the CSS codebase from Less to JSS
 
 ## Features to implement
-- [ ] JSDoc v4 compatibility
+- [x] JSDoc v4 compatibility
 - [ ] Foldable TOC items
 - [ ] Show subpages of tutorials in TOC
 - [ ] Reduce search DB JSON size

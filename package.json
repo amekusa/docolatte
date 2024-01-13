@@ -41,7 +41,6 @@
     "@rollup/plugin-strip": "^3.0.4",
     "browser-sync": "^3.0.2",
     "clean-css": "^5.3.3",
-    "develarms": "^2.3.0",
     "gulp": "^4.0.2",
     "gulp-rename": "^2.0.0",
     "less": "^4.2.0",
@@ -58,10 +57,5 @@
     "highlight.js": "^11.9.0",
     "obj-digger": "^1.2.0",
     "simplebar": "^5.3.9"
-  },
-  "develarms": {
-    "jsdoc": "^4.0.2",
-    "mocha": "^10.2.0",
-    "c8": "^8.0.1"
   }
 }

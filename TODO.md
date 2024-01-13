@@ -6,9 +6,10 @@
 ## Features to implement
 - [ ] JSDoc v4 compatibility
 - [ ] Foldable TOC items
+- [ ] Show subpages of tutorials in TOC
 - [ ] Reduce search DB JSON size
-  - This can be achieved by renaming keys dynamically 
-- [ ] Remove `static/_src` from output
+  - This can be achieved by renaming keys dynamically
+- [x] Remove `static/_src` from output
 - [ ] Use iosevka for mobile
 - [ ] "Copy to clipboard" button
 - [x] Dark theme
@@ -21,4 +22,8 @@
   - [ ] Support modal images
 
 ## Known issues to fix
-- [x] Searching does not work on tutorial pages
+- [x] **FIXED:** Searching does not work on tutorial pages
+
+## Minor annoyances to fix
+- [ ] Change #hash without flooding browser history
+

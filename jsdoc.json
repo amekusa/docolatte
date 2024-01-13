@@ -9,8 +9,9 @@
       "./node_modules/jsdoc/lib/jsdoc/schema.js",
       "./node_modules/jsdoc/lib/jsdoc/tutorial.js",
       "./node_modules/jsdoc/lib/jsdoc/util/templateHelper.js",
-      "./static/_src/scripts",
+      "./src/scripts",
       "./lib",
+      "./fixtures",
       "./README.md"
     ]
   },
@@ -18,7 +19,7 @@
   "opts": {
     "encoding": "utf8",
     "template": "./",
-    "tutorials": "./fixtures/tutorials",
+    "tutorials": "./fixtures/tutorials/",
     "destination": "./docs/",
     "recurse": true,
     "verbose": true
@@ -33,7 +34,7 @@
       "minify": false,
       "meta": {
         "description": "Bitter sweet JSDoc theme",
-        "keywords": "jsdoc, theme, responsive"
+        "keywords": "jsdoc, theme, template, documentation, responsive"
       },
       "branding": {
         "title": "DOCOLATTE",

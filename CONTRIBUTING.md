@@ -8,7 +8,7 @@ publish.js: Site generator (Node.js, JSDoc)
 lib/:  Library for publish.js
 tmpl/: HTML templates for publish.js
 static/: Front-end stuff (Needs build)
-  _src/: Source code
+src/: Source of `static/*`
 gulpfile.js/: Build scripts
 ```
 

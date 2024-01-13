@@ -43,6 +43,7 @@ const paths = {
 	},
 	scripts:  'static/scripts',
 	styles:   'static/styles',
+	fixtures: 'fixtures',
 	docs:     'docs',
 	tmpl:     'tmpl'
 };
@@ -170,7 +171,9 @@ const T = {
 	},
 
 	docs_build() {
-		return sh.exec('jsdoc -c jsdoc.json').then(bs.reload);
+		let r = sh.exec('jsdoc -c jsdoc.json');
+		if (sh.dev()) r.then(sh.exec(`mkdir -p "${paths.docs}/src" && cp -R src "${paths.docs}/"`));
+		return r.then(bs.reload);
 	},
 
 	docs_clean() {
@@ -210,30 +213,34 @@ const T = {
 			'README.md',
 			'publish.js',
 			'lib/*.{js,json}',
-			`${paths.src.scripts}/*.js`,
 			`${paths.tmpl}/*.tmpl`,
-			`${jsdoc.opts.tutorials}/**/*`,
-		], T.docs_build);
+			`${paths.fixtures}/**/*`,
+			`${paths.scripts}/*.js`,
+		].concat(sh.prod() ? [
+			`${paths.styles}/*.css`,
+		] : []), T.docs_build);
 
 		// copy scripts/styles to docs on change
-		$.watch([
-			`${paths.src.scripts}/*.js`,
-			`${paths.src.styles}/*.{less,css}`,
-			`${paths.scripts}/*`,
-			`${paths.styles}/*`,
-		]).on('change', src => {
-			let dst = `${paths.docs}/` + src.replace(/^static\//, '');
-			sh.exec(`cp '${src}' '${dst}'`).then(() => {
-				log(' :: File - Copied:');
-				log('  src:', src);
-				log('  dst:', dst);
-				if (!dst.match(/\/src\//) && dst.match(/\.(js|css)$/)) {
-					log(' :: Browsersync - Reload:', dst);
-					bs.reload(basename(dst));
-					bs.notify(`<b style="color:lime">Reloaded</b>: <code>${dst}</code>`);
-				}
+		if (sh.dev()) {
+			$.watch([
+				`${paths.src.scripts}/*.js`,
+				`${paths.src.styles}/*.{less,css}`,
+				// `${paths.scripts}/*`, // Unnecessary since we need to re-build docs for changed JSes anyway
+				`${paths.styles}/*`,
+			]).on('change', src => {
+				let dst = `${paths.docs}/` + src.replace(/^static\//, '');
+				sh.exec(`cp '${src}' '${dst}'`).then(() => {
+					log(' :: File - Copied:');
+					log('  src:', src);
+					log('  dst:', dst);
+					if (!dst.match(/\/src\//) && dst.match(/\.(js|css)$/)) {
+						log(' :: Browsersync - Reload:', dst);
+						bs.reload(basename(dst));
+						bs.notify(`<b style="color:lime">Reloaded</b>: <code>${dst}</code>`);
+					}
+				});
 			});
-		});
+		}
 	},
 };
 

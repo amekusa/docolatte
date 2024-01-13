@@ -56,7 +56,6 @@
     "feather-icons": "^4.29.1",
     "fuse.js": "^6.6.2",
     "highlight.js": "^11.9.0",
-    "lodash": "^4.17.21",
     "obj-digger": "^1.2.0",
     "simplebar": "^5.3.9"
   },

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Source: lib/Nav.js | DOCOLATTE</title>
+    <title>Source: src/scripts/Debugger.js | DOCOLATTE</title>
     <meta name="description" content="Bitter sweet JSDoc theme"><meta name="keywords" content="jsdoc, theme, template, documentation, responsive">
     <link rel="icon" title="dummy" href="data:image/x-icon;base64,AA">
     <script src="scripts/docolatte.js"></script>
@@ -23,7 +23,7 @@
         </div>
         <div class="topbar">
             <h1 class="page-title">
-                <a href="#">Source: lib/Nav.js</a>
+                <a href="#">Source: src/scripts/Debugger.js</a>
             </h1>
             <a class="light-switch" title="Switch light/dark mode" href="#"><i class="label auto">
 <svg  class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -41,162 +41,65 @@
 
     
 <article class="src">
-    <pre class="prettyprint source linenums lang-js"><span class="_char">_</span><code>const helper = require('jsdoc/util/templateHelper');
-const $ = require('./TmplUtil');
-
-/**
- * Navigation builder.
+    <pre class="prettyprint source linenums lang-js"><span class="_char">_</span><code>/**
+ * Debug utility.
  * @author amekusa
  */
-class Nav {
+class Debugger {
 	/**
-	 * @param {object} [opts]
-	 * @param {Doclet[]} opts.data
-	 * @param {string} opts.heading
-	 * @param {string[]} opts.wrap
-	 * - `0`: Opening tag
-	 * - `1`: Ending tag
-	 * @param {string} opts.class
-	 * @param {boolean} opts.wbr
-	 * @param {Ref[]} opts.refs
-	 * @param {function} opts.getLink - Callback to get link for each menu item.
-	 * - Params: `doclet`
-	 * - Return: `{ url, label, text }`
-	 * @param {function} opts.getItems - Callback to retrieve menu items.
-	 * - Params: `data`
-	 * - Return: `&lt;object[]>`
-	 * @param {function} opts.filter - Filter to apply to HTML result.
-	 * - Params: `html, nav, data`
-	 * - Return: Modified HTML
-	 * @param {Nav[]|object[]} opts.children
+	 * @param {string} [label] - Log label
+	 * @param {boolean} [enabled] - Whether to enable debugging
 	 */
-	constructor(opts = {}) {
-		this.data     = opts.data || null;
-		this.heading  = opts.heading || '';
-		this.wrap     = opts.wrap || ['', ''];
-		this.class    = opts.class || '';
-		this.wbr      = opts.wbr;
-		this.refs     = opts.refs;
-		this.getLink  = opts.getLink;
-		this.getItems = opts.getItems;
-		this.filter   = opts.filter;
-
-		this.children = [];
-		if (opts.children) opts.children.forEach(child => { this.addChild(child); });
-
-		this.html;
+	constructor(label = '[DEBUG]', enabled = true) {
+		this.label = label;
+		this.enabled = enabled;
 	}
 	/**
-	 * Registers new ref with the given doclet.
-	 * @param {Doclet} doclet
-	 * @param {object} [link]
-	 * @param {string} link.url
-	 * @param {string} link.label
-	 * @return {Ref} New ref
+	 * Enables debugging.
 	 */
-	newRef(doclet, link = null) {
-		if (!this.refs) this.refs = [];
-		if (!link &amp;&amp; this.getLink) link = this.getLink(doclet);
-		let ref = new Ref(doclet, link);
-		this.refs.push(ref);
-		return ref;
+	enable() {
+		this.enabled = true;
 	}
 	/**
-	 * Returns a ref with the given doclet if it exists.
-	 * @param {Doclet} doclet
-	 * @return {Ref} Ref
+	 * Disables debugging.
 	 */
-	getRef(doclet) {
-		for (let i = 0; i &lt; this.refs.length; i++) {
-			let ref = this.refs[i];
-			if (ref.has(doclet)) return ref;
-		}
-		return;
+	disable() {
+		this.enabled = false;
 	}
 	/**
-	 * Adds the given Nav as a child.
-	 * @param {Nav|object} nav
+	 * Outputs logs to console.
+	 * @param {...any} args - Infos to log
 	 */
-	addChild(nav) {
-		let child = nav instanceof Nav ? nav : new Nav(nav);
-		if (!child.refs) child.refs = this.refs; // share refs
-		if (typeof child.wbr == 'undefined') child.wbr = this.wbr; // inherit wbr flag
-		this.children.push(child);
+	log(...args) {
+		if (!this.enabled) return false;
+		return console.debug(this.label, ...args);
 	}
 	/**
-	 * Builds all the refs and HTML.
-	 * @param {object[]} [data]
-	 * @return {string} HTML
+	 * Calls the given function.
+	 * @param {function} fn - Function to call
+	 * @param {...any} args - Arguments to pass to `fn`
+	 * @return {any} Return of `fn`
 	 */
-	build(data = null) {
-		if (!data) {
-			if (this.html) return this.html;
-			data = this.data || [];
-		}
-		if (this.getItems) data = this.getItems(data);
-		let r = '';
-		data.forEach(doclet => {
-			if (this.getRef(doclet)) return; // avoid duplication
-			let ref = this.newRef(doclet);
-			let sub = '';
-			this.children.forEach(child => {
-				sub += child.build(doclet);
-			});
-			r += `&lt;li${sub ? ' class="has-child"' : ''}>`
-			r +=   `&lt;a href="${ref.url}">${this.wbr ? $.wbr(ref.text) : ref.text}&lt;/a>` + sub
-			r += `&lt;/li>`;
-		});
-		if (r) {
-			let attrs = { class: [] };
-			if (this.class) attrs.class.push(this.class);
-			if (this.wbr)   attrs.class.push('wbr');
-			r = this.wrap[0] + this.heading + `&lt;ul${$.attrs(attrs)}>${r}&lt;/ul>` + this.wrap[1];
-		}
-		if (this.filter) r = this.filter(r, this, data);
-		this.html = r;
+	call(fn, ...args) {
+		if (!this.enabled) return false;
+		return fn(...args);
+	}
+	/**
+	 * Simulates a heavy computing operation.
+	 * @param {number} weight - How heavy
+	 */
+	slow(weight) {
+		if (!this.enabled) return false;
+		console.time(this.label + ' slow');
+		let r = 0;
+		for (let i = Math.pow(weight, 7); i >= 0; i--) r += Math.atan(i) * Math.tan(i);
+		console.timeEnd(this.label + ' slow');
 		return r;
 	}
 }
 
-/**
- * Reference to an individual nav item.
- */
-class Ref {
-	/**
-	 * @param {Doclet} doclet
-	 * @param {object} [link]
-	 * @param {string} link.url - Link URL
-	 * @param {string} link.label - Link label
-	 * @param {string} link.text - Link text (Defaults to `link.label`)
-	 */
-	constructor(doclet, link = null) {
-		this.doclet = doclet;
-		if (!link) link = {};
-		this.url   = link.url || helper.createLink(doclet);
-		this.label = link.label || doclet.name || doclet.longname || '';
-		this.text  = link.text || this.label;
-	}
-	/**
-	 * `&lt;a>` linking to this ref.
-	 * @type string
-	 * @readonly
-	 */
-	get link() {
-		return `&lt;a href="${this.url}">${this.text}&lt;/a>`;
-	}
-	/**
-	 * Whether this ref is associated with the given doclet.
-	 * @param {Doclet} doclet
-	 * @return {boolean}
-	 */
-	has(doclet) {
-		if (this.doclet === doclet) return true;
-		if (this.doclet.___id &amp;&amp; this.doclet.___id == doclet.___id) return true;
-		return false;
-	}
-}
-
-module.exports = Nav;</code></pre>
+export default Debugger;
+</code></pre>
 </article>
 
 

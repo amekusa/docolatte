@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.3.0]
+
+### Added
+- Now it's fully compatible with JSDoc 4
+
+### Changes
+- Removed some unnecessary dependencies
+
+
+---
+
 ## [4.2.0]
 
 ### Added

@@ -36,7 +36,7 @@
 ## Docolatte v4 is out! :tada:
 
 ### New Features
-- **[NEW]** Now it's fully compatible with JSDoc 4! (from Docolatte v4.3)
+- [**New**] Now it's **fully compatible with JSDoc 4!** (from Docolatte v4.3)
 - Finally, **dark theme** is implemented!
 - All the colors and fonts are now **CSS variables**, which means you can customize the overall look & feel of Docolatte just by overwriting the variables in your custom CSS. On top of that, you can customize light theme and dark theme separately.
 - A lot of design improvements
@@ -307,7 +307,13 @@ templates.docolatte:
   tweak:
     nojekyll: If `true`, places `.nojekyll` file
               at the root of the output directory [default:true]
-              # This is useful if you publish the docs to gh-pages
+              # This is useful if you publish the docs to github-pages
+
+    syncHash: When to sync location hash [default:'scrollend']
+      # Available values:
+      - 'scroll'     # This may result in "flooding" browser history
+      - 'scrollend'  # Recommended
+      - false        # Doesn't sync location hash at all
 
 # All the options for the JSDoc's default theme
 # are also compatible with Docolatte.

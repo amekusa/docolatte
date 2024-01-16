@@ -9,7 +9,7 @@
     <link rel="icon" title="dummy" href="data:image/x-icon;base64,AA">
     <script src="scripts/docolatte.js"></script>
     <link type="text/css" rel="stylesheet" href="styles/simplebar.css"><link type="text/css" rel="stylesheet" href="styles/hljs/base16/espresso.css"><link type="text/css" rel="stylesheet" href="styles/docolatte.css">
-    <script>window.$docolatte.config = {"searchLimit":8}</script>
+    <script>window.$docolatte.config = {"searchLimit":8,"syncHash":"scrollend"}</script>
     <noscript><style>[data-ready] { visibility: visible !important; }</style></noscript>
     
 </head>
@@ -203,7 +203,8 @@ class Docolatte {
 						'sidebar-h-scroll': this.config.toc.allowHorizontalScroll,
 					}),
 					scriptConfig: toLiteral({
-						searchLimit: this.config.search.limit
+						searchLimit: this.config.search.limit,
+						syncHash: this.config.tweak.syncHash,
 					}),
 				};
 			}

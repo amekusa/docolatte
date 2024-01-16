@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.4.0]
+
+### Added
+- New config option:
+  - `tweak.syncHash`
+
+
+---
+
 ## [4.3.0]
 
 ### Added

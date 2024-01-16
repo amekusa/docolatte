@@ -9,7 +9,7 @@
     <link rel="icon" title="dummy" href="data:image/x-icon;base64,AA">
     <script src="scripts/docolatte.js"></script>
     <link type="text/css" rel="stylesheet" href="styles/simplebar.css"><link type="text/css" rel="stylesheet" href="styles/hljs/base16/espresso.css"><link type="text/css" rel="stylesheet" href="styles/docolatte.css">
-    <script>window.$docolatte.config = {"searchLimit":8}</script>
+    <script>window.$docolatte.config = {"searchLimit":8,"syncHash":"scrollend"}</script>
     <noscript><style>[data-ready] { visibility: visible !important; }</style></noscript>
     
 </head>
@@ -58,6 +58,7 @@ class ScrollWatcher {
 			init: [],
 			scroll: [],
 			resize: [],
+			scrollend: [],
 		};
 	}
 	/**
@@ -128,9 +129,9 @@ class ScrollWatcher {
 		};
 		for (let i = 0; i &lt; ev.length; i++) {
 			switch (ev[i]) {
-				case 'init':   handler({ type: 'init' }); break; // fake event
-				case 'scroll': this.target.addEventListener('scroll', handler); break;
+				case   'init': handler({ type: 'init' }); break; // fake event
 				case 'resize': window.addEventListener('resize', handler); break;
+				default: this.target.addEventListener(ev[i], handler);
 			}
 		}
 	}

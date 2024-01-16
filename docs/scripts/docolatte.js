@@ -23526,6 +23526,7 @@ class ScrollWatcher {
 			init: [],
 			scroll: [],
 			resize: [],
+			scrollend: [],
 		};
 	}
 	/**
@@ -23589,9 +23590,9 @@ class ScrollWatcher {
 		};
 		for (let i = 0; i < ev.length; i++) {
 			switch (ev[i]) {
-				case 'init':   handler({ type: 'init' }); break; // fake event
-				case 'scroll': this.target.addEventListener('scroll', handler); break;
+				case   'init': handler({ type: 'init' }); break; // fake event
 				case 'resize': window.addEventListener('resize', handler); break;
+				default: this.target.addEventListener(ev[i], handler);
 			}
 		}
 	}
@@ -24290,34 +24291,41 @@ class LightSwitch {
 
 		{ // mark a TOC item as "current" on scroll
 			let headings = q('article.doc h4.name[id]');
-			let curr = { i: -1, a: null, wrap: null };
+			let curr = {
+				i: -1,
+				link: null,
+				wrap: null,
+				hash: document.location.hash,
+			};
 
-			sw.on(['init', 'scroll'], c => {
+			sw.on(['init', 'scroll', 'scrollend'], c => {
 				for (let i = 0; i < headings.length; i++) {
 					if (headings[i].offsetTop < c.curr.y) continue;
 					if (i == curr.i) break;
+					curr.hash = '#' + headings[i].id;
 
-					// change current URL hash
-					let hash = '#' + headings[i].id;
-					history.replaceState(null, null, hash);
+					// update location hash
+					if (config.syncHash == 'scroll' && curr.hash != document.location.hash) {
+						history.replaceState(null, null, curr.hash);
+					}
 
 					// update "current" state of TOC
 					let flag = 'data-current';
-					if (curr.i >= 0 && curr.a.length) curr.a.forEach(a => { a.removeAttribute(flag); });
+					if (curr.i >= 0 && curr.link.length) curr.link.forEach(a => { a.removeAttribute(flag); });
 					curr.i = i;
-					curr.a = find(toc, `a[href="${currentPage + hash}"]`);
-					if (!curr.a.length) break;
-					curr.a.forEach(a => { a.setAttribute(flag, 1); });
+					curr.link = find(toc, `a[href="${currentPage + curr.hash}"]`);
+					if (!curr.link.length) break;
+					curr.link.forEach(link => { link.setAttribute(flag, 1); });
 
 					// scroll sidebar if necessary
-					let a = curr.a[curr.a.length - 1];
-					if (!curr.wrap) curr.wrap = closest(a, ['ul', 'li']);
+					let link = curr.link[curr.link.length - 1];
+					if (!curr.wrap) curr.wrap = closest(link, ['ul', 'li']);
 					let view = sidebarScr;
 					let panning = pan(
 						view.scrollTop,
 						view.scrollTop + view.offsetHeight,
 						getOffset(curr.wrap, sidebar).top,
-						getOffset(a, sidebar).top + a.getBoundingClientRect().height,
+						getOffset(link, sidebar).top + link.getBoundingClientRect().height,
 						1
 					);
 					if (panning || view.scrollLeft) {
@@ -24330,6 +24338,15 @@ class LightSwitch {
 					break;
 				}
 			});
+
+			// update location hash on 'scrollend'
+			if (config.syncHash == 'scrollend') {
+				sw.on('scrollend', c => {
+					if (curr.hash != document.location.hash) {
+						history.replaceState(null, null, curr.hash);
+					}
+				});
+			}
 		}
 
 		{ // code highlight
@@ -24382,7 +24399,7 @@ class LightSwitch {
 		}
 
 		// start window scroll watcher
-		sw.watch(['init', 'scroll']);
+		sw.watch(['init', 'scroll', 'scrollend']);
 
 	}); // DOM setup
 

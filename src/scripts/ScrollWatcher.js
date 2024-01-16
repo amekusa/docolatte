@@ -15,6 +15,7 @@ class ScrollWatcher {
 			init: [],
 			scroll: [],
 			resize: [],
+			scrollend: [],
 		};
 	}
 	/**
@@ -85,9 +86,9 @@ class ScrollWatcher {
 		};
 		for (let i = 0; i < ev.length; i++) {
 			switch (ev[i]) {
-				case 'init':   handler({ type: 'init' }); break; // fake event
-				case 'scroll': this.target.addEventListener('scroll', handler); break;
+				case   'init': handler({ type: 'init' }); break; // fake event
 				case 'resize': window.addEventListener('resize', handler); break;
+				default: this.target.addEventListener(ev[i], handler);
 			}
 		}
 	}

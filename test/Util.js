@@ -113,6 +113,12 @@ describe(main, () => {
 		[
 			[255, '0123456789abcdef'], 'ff'
 		],
+		[
+			[123456789, '0123456789abcdef'], Number(123456789).toString(16)
+		],
+		[
+			[987654321, '0123456789abcdef'], Number(987654321).toString(16)
+		]
 	], 'strictEqual');
 
 });

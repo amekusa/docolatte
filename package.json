@@ -35,7 +35,7 @@
   },
   "homepage": "https://amekusa.github.io/docolatte",
   "devDependencies": {
-    "@amekusa/nodeutil": "^1.3.0",
+    "@amekusa/nodeutil": "^1.4.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-strip": "^3.0.4",

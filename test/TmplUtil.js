@@ -20,7 +20,11 @@ describe(main, () => {
 				arrEmpty: [],
 			}],
 			' str="foo" bool arr="alfa bravo"'
-		]
+		],
+		[
+			[{ camelCasedAttribute: 'camelCasedAttributeValue' }],
+			' camel-cased-attribute="camelCasedAttributeValue"'
+		],
 	], 'deepEqual');
 
 });

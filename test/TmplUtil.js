@@ -27,4 +27,31 @@ describe(main, () => {
 		],
 	], 'deepEqual');
 
+	testMethod($, 'link', [
+		[
+			['http://example.com'],
+			'<a href="http://example.com">http://example.com</a>'
+		],
+		[
+			['https://secure.example.com'],
+			'<a href="https://secure.example.com">https://secure.example.com</a>'
+		],
+		[
+			['Click Here: http://example.com'],
+			'Click Here: <a href="http://example.com">http://example.com</a>'
+		],
+		[
+			['git+http://example.com'],
+			'git+<a href="http://example.com">http://example.com</a>'
+		],
+		[ // failed link
+			['XXXhttp://example.com'],
+			'XXXhttp://example.com'
+		],
+		[ // multiple links
+			['Click Here: http://example.com and\nHere: https://secure.example.com Thank you'],
+			'Click Here: <a href="http://example.com">http://example.com</a> and\nHere: <a href="https://secure.example.com">https://secure.example.com</a> Thank you'
+		]
+	]);
+
 });

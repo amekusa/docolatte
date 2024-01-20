@@ -68,7 +68,13 @@ if (data.defaultvalue && (data.defaultvaluetype === 'object' || data.defaultvalu
 <dd class="tag-copyright"><?js= copyright ?></dd>
 <?js } if (data.license) {?>
 <dt class="tag-license">License:</dt>
-<dd class="tag-license"><?js= license ?></dd>
+<dd class="tag-license"><?js= license + $.if(data.licenseMore,
+    $.tag('input type="checkbox" class="show-more"', {
+        dataLabel: 'Show all',
+        dataLabelHide: 'Hide',
+    }) +
+    $.elem('div class="more"', '{*}')
+)?></dd>
 <?js } if (data.defaultvalue) {?>
 <dt class="tag-default">Default Value:</dt>
 <dd class="tag-default">

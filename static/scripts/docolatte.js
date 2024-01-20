@@ -23514,7 +23514,21 @@ var HighlightJS = /*@__PURE__*/getDefaultExportFromCjs(common);
 
 /**
  * Scroll event watcher for smooth animation.
- * @author amekusa
+ * @author Satoshi Soma (amekusa.com)
+ * @license Apache-2.0
+ * Copyright 2020 Satoshi Soma
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 class ScrollWatcher {
 	/**
@@ -23622,7 +23636,21 @@ class Stats {
 
 /**
  * An array wrapper that has a pointer to one of its items.
- * @author amekusa
+ * @author Satoshi Soma (amekusa.com)
+ * @license Apache-2.0
+ * Copyright 2020 Satoshi Soma
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 class SelectList {
 	/**
@@ -23735,7 +23763,21 @@ class SelectList {
 
 /**
  * Exception thrower.
- * @author amekusa
+ * @author Satoshi Soma (amekusa.com)
+ * @license Apache-2.0
+ * Copyright 2020 Satoshi Soma
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 class Exception {
 	/**
@@ -23806,7 +23848,21 @@ const E = new Exception('[LightSwitch]');
 
 /**
  * Color scheme switcher.
- * @author amekusa
+ * @author Satoshi Soma (amekusa.com)
+ * @license Apache-2.0
+ * Copyright 2020 Satoshi Soma
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 class LightSwitch {
 	/**
@@ -23967,9 +24023,9 @@ class LightSwitch {
 }
 
 /*!
- * The main script for docolatte
+ * The main script for Docolatte
  * @author Satoshi Soma (amekusa.com)
- *
+ * @license Apache-2.0
  * Copyright 2020 Satoshi Soma
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24297,18 +24353,27 @@ class LightSwitch {
 				wrap: null,
 				hash: document.location.hash,
 			};
+			let idleTimer = null;
+			let onIdle = config.syncHash == 'scrollend' ? () => {
+				if (curr.hash == document.location.hash) return;
+				history.replaceState(null, null, curr.hash);
+			} : null;
 
-			sw.on(['init', 'scroll', 'scrollend'], c => {
+			sw.on(['init', 'scroll'], c => {
+
+				if (onIdle) { // refresh idle timer
+					clearTimeout(idleTimer);
+					idleTimer = setTimeout(onIdle, 250);
+				}
 				for (let i = 0; i < headings.length; i++) {
 					if (headings[i].offsetTop < c.curr.y) continue;
 					if (i == curr.i) break;
 					curr.hash = '#' + headings[i].id;
 
 					// update location hash
-					if (config.syncHash == 'scroll' && curr.hash != document.location.hash) {
+					if (!onIdle && curr.hash != document.location.hash) {
 						history.replaceState(null, null, curr.hash);
 					}
-
 					// update "current" state of TOC
 					let flag = 'data-current';
 					if (curr.i >= 0 && curr.link.length) curr.link.forEach(a => { a.removeAttribute(flag); });
@@ -24338,15 +24403,6 @@ class LightSwitch {
 					break;
 				}
 			});
-
-			// update location hash on 'scrollend'
-			if (config.syncHash == 'scrollend') {
-				sw.on('scrollend', c => {
-					if (curr.hash != document.location.hash) {
-						history.replaceState(null, null, curr.hash);
-					}
-				});
-			}
 		}
 
 		{ // code highlight
@@ -24399,7 +24455,7 @@ class LightSwitch {
 		}
 
 		// start window scroll watcher
-		sw.watch(['init', 'scroll', 'scrollend']);
+		sw.watch(['init', 'scroll']);
 
 	}); // DOM setup
 

@@ -1,6 +1,6 @@
 /*!
  * Gulp tasks for Docolatte
- * @author amekusa
+ * @author Satoshi Soma (amekusa.com)
  */
 
 const // node

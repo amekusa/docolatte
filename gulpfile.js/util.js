@@ -1,6 +1,6 @@
 /*!
  * gulp utils
- * @author amekusa
+ * @author Satoshi Soma (amekusa.com)
  */
 
 const { minify } = require('terser');

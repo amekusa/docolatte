@@ -6,9 +6,9 @@ import LightSwitch from './LightSwitch.js';
 import Debugger from './Debugger.js';
 
 /*!
- * The main script for docolatte
+ * The main script for Docolatte
  * @author Satoshi Soma (amekusa.com)
- *
+ * @license Apache-2.0
  * Copyright 2020 Satoshi Soma
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

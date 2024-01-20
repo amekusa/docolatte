@@ -1,8 +1,8 @@
 @charset "utf-8";
 /*!
- * Style for docolatte
+ * Styles for Docolatte
  * @author Satoshi Soma (amekusa.com)
- *
+ * @license Apache-2.0
  * Copyright 2020 Satoshi Soma
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -274,6 +274,28 @@ svg.icon {
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+}
+input[type="checkbox"].show-more {
+  appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  font-size: inherit;
+  margin: 0 0 0 0.5em;
+}
+input[type="checkbox"].show-more ::before {
+  content: "";
+}
+input[type="checkbox"].show-more[data-label]::before {
+  content: attr(data-label);
+}
+input[type="checkbox"].show-more[data-label-hide]:checked::before {
+  content: attr(data-label-hide);
+}
+input[type="checkbox"].show-more:checked + .more {
+  display: block;
+}
+input[type="checkbox"].show-more + .more {
+  display: none;
 }
 /**
  * Custom CSS properties for Docolatte
@@ -948,6 +970,17 @@ svg.icon {
 }
 .main td i.attribute + i.attribute {
   margin-left: 0.25em;
+}
+.main dl.details dd .show-more {
+  color: var(--c-link);
+  font-size: 0.85rem;
+}
+.main dl.details dd .show-more:hover,
+.main dl.details dd .show-more:focus {
+  text-decoration: underline;
+}
+.main dl.details dd .more {
+  font-size: 0.85rem;
 }
 .footer {
   font-size: 1rem;

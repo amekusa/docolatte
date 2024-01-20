@@ -6,9 +6,9 @@ import LightSwitch from './LightSwitch.js';
 import Debugger from './Debugger.js';
 
 /*!
- * The main script for docolatte
+ * The main script for Docolatte
  * @author Satoshi Soma (amekusa.com)
- *
+ * @license Apache-2.0
  * Copyright 2020 Satoshi Soma
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -340,19 +340,31 @@ import Debugger from './Debugger.js';
 				wrap: null,
 				hash: document.location.hash,
 			};
+			let idleTimer = null;
+			let onIdle = config.syncHash == 'scrollend' ? () => {
+				debug.log('scroll idled');
+				if (curr.hash == document.location.hash) return;
+				history.replaceState(null, null, curr.hash);
+				debug.log('sync hash:', curr.hash);
+			} : null;
 
-			sw.on(['init', 'scroll', 'scrollend'], c => {
+			sw.on(['init', 'scroll'], c => {
 				debug.log('toc update started');
+
+				if (onIdle) { // refresh idle timer
+					clearTimeout(idleTimer);
+					idleTimer = setTimeout(onIdle, 250);
+				}
 				for (let i = 0; i < headings.length; i++) {
 					if (headings[i].offsetTop < c.curr.y) continue;
 					if (i == curr.i) break;
 					curr.hash = '#' + headings[i].id;
 
 					// update location hash
-					if (config.syncHash == 'scroll' && curr.hash != document.location.hash) {
+					if (!onIdle && curr.hash != document.location.hash) {
 						history.replaceState(null, null, curr.hash);
+						debug.log('sync hash:', curr.hash);
 					}
-
 					// update "current" state of TOC
 					let flag = 'data-current';
 					if (curr.i >= 0 && curr.link.length) curr.link.forEach(a => { a.removeAttribute(flag) });
@@ -383,15 +395,6 @@ import Debugger from './Debugger.js';
 				}
 				debug.log('toc update done');
 			});
-
-			// update location hash on 'scrollend'
-			if (config.syncHash == 'scrollend') {
-				sw.on('scrollend', c => {
-					if (curr.hash != document.location.hash) {
-						history.replaceState(null, null, curr.hash);
-					}
-				});
-			}
 		}
 
 		{ // code highlight
@@ -444,7 +447,7 @@ import Debugger from './Debugger.js';
 		}
 
 		// start window scroll watcher
-		sw.watch(['init', 'scroll', 'scrollend']);
+		sw.watch(['init', 'scroll']);
 
 	}); // DOM setup
 

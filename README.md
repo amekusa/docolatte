@@ -36,7 +36,11 @@
 ## Docolatte v4 is out! :tada:
 
 ### New Features
-- [**New**] Now it's **fully compatible with JSDoc 4!** (from Docolatte v4.3)
+- **[New]** Now it's **fully compatible with JSDoc 4!** (from Docolatte v4.3)
+- **[New]** Nicely format multi-line `@license` text.
+  - Converts line-breaks into `<br>` tags.
+  - Converts URLs begin with `http(s)://` into `<a>` tags.
+  - Can be toggled `Show all/Hide`.
 - Finally, **dark theme** is implemented!
 - All the colors and fonts are now **CSS variables**, which means you can customize the overall look & feel of Docolatte just by overwriting the variables in your custom CSS. On top of that, you can customize light theme and dark theme separately.
 - A lot of design improvements
@@ -429,4 +433,18 @@ To customize those variables, copy the file and `import` it. Then, edit the vari
 
 
 ## License
-Docolatte is licensed under the [Apache License 2.0](https://github.com/amekusa/docolatte/blob/trunk/LICENSE.md).
+```txt
+Copyright 2020 Satoshi Soma
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```

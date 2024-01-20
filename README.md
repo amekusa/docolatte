@@ -36,7 +36,11 @@
 ## Docolatte v4 is out! :tada:
 
 ### New Features
-- [**New**] Now it's **fully compatible with JSDoc 4!** (from Docolatte v4.3)
+- **[New]** Now it's **fully compatible with JSDoc 4!** (from Docolatte v4.3)
+- **[New]** Nicely format multi-line `@license` text.
+  - Converts line-breaks into `<br>` tags.
+  - Converts URLs begin with `http(s)://` into `<a>` tags.
+  - Can be toggled `Show all/Hide`.
 - Finally, **dark theme** is implemented!
 - All the colors and fonts are now **CSS variables**, which means you can customize the overall look & feel of Docolatte just by overwriting the variables in your custom CSS. On top of that, you can customize light theme and dark theme separately.
 - A lot of design improvements

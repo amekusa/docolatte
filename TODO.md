@@ -7,8 +7,7 @@
 - [x] JSDoc v4 compatibility
 - [ ] Foldable TOC items
 - [ ] Show subpages of tutorials in TOC
-- [ ] Reduce search DB JSON size
-  - This can be achieved by renaming keys dynamically
+- [x] Reduce search DB JSON size
 - [x] Remove `static/_src` from output
 - [ ] Use iosevka for mobile
 - [ ] "Copy to clipboard" button
@@ -25,5 +24,5 @@
 - [x] **FIXED:** Searching does not work on tutorial pages
 
 ## Minor annoyances to fix
-- [ ] Change #hash without flooding browser history
+- [x] Change #hash without flooding browser history
 

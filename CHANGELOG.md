@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.5.0] - 2024-01-20
+
+### Added
+- Nicely format multi-line `@license` text.
+  - Converts line-breaks into `<br>` tags.
+  - Converts URLs begin with `http(s)://` into `<a>` tags.
+  - Can be toggled `Show all/Hide`.
+
+### Improved
+- Reduced size of serialized JSON of search indices.
+- Improved stability of `tweak.syncHash: 'scrollend'`.
+
+
 ## [4.4.0]
 
 ### Added

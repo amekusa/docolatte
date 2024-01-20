@@ -92,3 +92,29 @@
 		fill: none;
 	}
 }
+
+input[type="checkbox"].show-more {
+	appearance: none;
+	cursor: pointer;
+	.iblock;
+	.fs(inherit);
+	.m-l(0; .5em);
+
+	::before {
+		content: "";
+	}
+	&[data-label]::before {
+		content: attr(data-label);
+	}
+	&[data-label-hide]:checked::before {
+		content: attr(data-label-hide);
+	}
+	&:checked {
+		+ .more {
+			.block;
+		}
+	}
+	+ .more {
+		.no-disp;
+	}
+}

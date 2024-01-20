@@ -263,3 +263,19 @@ td {
 		}
 	}
 }
+
+dl.details {
+	dd {
+		.show-more {
+			.c(var(--c-link));
+			.fs(@fs-s);
+
+			&:hover, &:focus {
+				text-decoration: underline;
+			}
+		}
+		.more {
+			.fs(@fs-s);
+		}
+	}
+}

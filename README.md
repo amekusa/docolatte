@@ -1,4 +1,6 @@
 # [Docolatte](https://amekusa.github.io/docolatte/)
+[![NPM Version](https://img.shields.io/npm/v/docolatte?style=for-the-badge&label=npm%20package)](https://www.npmjs.com/package/docolatte) [![NPM License](https://img.shields.io/npm/l/docolatte?style=for-the-badge)](https://github.com/amekusa/docolatte/blob/trunk/LICENSE)
+
 :chocolate_bar: Bittersweet theme for JSDoc 3 & 4
 
 [![npm package](https://img.shields.io/badge/dynamic/json?label=npm%0Apackage&query=%24%5B%27dist-tags%27%5D%5B%27latest%27%5D&url=https%3A%2F%2Fregistry.npmjs.org%2Fdocolatte%2F)](https://www.npmjs.com/package/docolatte)

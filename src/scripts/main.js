@@ -367,11 +367,11 @@ import Debugger from './Debugger.js';
 					}
 					// update "current" state of TOC
 					let flag = 'data-current';
-					if (curr.i >= 0 && curr.link.length) curr.link.forEach(a => { a.removeAttribute(flag) });
+					if (curr.i >= 0 && curr.link.length) curr.link.forEach(a => { a.removeAttribute(flag); });
 					curr.i = i;
 					curr.link = find(toc, `a[href="${currentPage + curr.hash}"]`);
 					if (!curr.link.length) break;
-					curr.link.forEach(link => { link.setAttribute(flag, 1) });
+					curr.link.forEach(link => { link.setAttribute(flag, 1); });
 
 					// scroll sidebar if necessary
 					let link = curr.link[curr.link.length - 1];
@@ -422,13 +422,13 @@ import Debugger from './Debugger.js';
 					r.appendChild(linenum);
 				}
 				pre.appendChild(r);
-			}
+			};
 
 			const onClick = function (ev) {
 				ev.preventDefault();
 				document.location = this.href;
 				selectLine();
-			}
+			};
 
 			const selectLine = () => {
 				let hash = document.location.hash;
@@ -438,7 +438,7 @@ import Debugger from './Debugger.js';
 					if (linenum.id == hash.substring(1)) linenum.setAttribute('data-selected', 1);
 					else linenum.removeAttribute('data-selected');
 				}
-			}
+			};
 
 			q('.prettyprint code').forEach(HLJS.highlightElement);
 			q('.prettyprint.linenums').forEach(linenumify);

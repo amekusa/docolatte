@@ -8,7 +8,7 @@ module.exports = [
 	},
 	{
 		files: [
-			'lib/**/*/js',
+			'lib/**/*.js',
 			'src/**/*.js'
 		],
 		rules: {

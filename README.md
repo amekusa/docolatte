@@ -3,7 +3,6 @@
 
 :chocolate_bar: Bittersweet theme for JSDoc 3 & 4
 
-[![npm package](https://img.shields.io/badge/dynamic/json?label=npm%0Apackage&query=%24%5B%27dist-tags%27%5D%5B%27latest%27%5D&url=https%3A%2F%2Fregistry.npmjs.org%2Fdocolatte%2F)](https://www.npmjs.com/package/docolatte)
 
 <!-- TOC depthfrom:2 -->
 
@@ -39,10 +38,10 @@
 
 ### New Features
 - **[New]** Now it's **fully compatible with JSDoc 4!** (from Docolatte v4.3)
-- **[New]** Nicely format multi-line `@license` text.
-  - Converts line-breaks into `<br>` tags.
+- **[New]** Nicely format **multi-line `@license` text**.
+  - Converts linebreaks into `<br>` tags.
   - Converts URLs begin with `http(s)://` into `<a>` tags.
-  - Can be toggled `Show all/Hide`.
+  - Can be toggled with `Show all / Hide` button.
 - Finally, **dark theme** is implemented!
 - All the colors and fonts are now **CSS variables**, which means you can customize the overall look & feel of Docolatte just by overwriting the variables in your custom CSS. On top of that, you can customize light theme and dark theme separately.
 - A lot of design improvements

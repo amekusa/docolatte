@@ -261,13 +261,10 @@
 			.ff(var(--font-toc-item));
 
 			li {
+				.pos(relative);
+
 				&::before {
 					.remove; // remove pseudo bullet
-				}
-				&.has-child {
-					+ li {
-						.mt(@gutter * .5);
-					}
 				}
 			}
 			a {
@@ -317,10 +314,54 @@
 				}
 			}
 
-			// variables, functions
+			.open {
+				.no-disp;
+
+				~ ul {
+					top: -@gutter * .5;
+					.h(0);
+					.of(hidden);
+					.op(0);
+					.no-hover;
+					.trans(padding-bottom; .25s; ease-out);
+
+					&:last-child {
+						.pb(0);
+					}
+				}
+				+ label {
+					.block;
+					.pos-tr(0; 0; absolute);
+					cursor: pointer;
+					.trans(transform; .05s; ease-out);
+				}
+				&:checked {
+					~ ul {
+						top: 0;
+						.h(auto);
+						.op(1);
+						pointer-events: initial;
+						.trans(top,padding-bottom,opacity; .25s; ease-out);
+
+						&:last-child {
+							.pb(@gutter * .5);
+						}
+					}
+					+ label {
+						transform: rotate(90deg);
+					}
+				}
+			}
+
+			// submenu
 			ul {
+				.pos(relative);
 				.ff(var(--font-toc-member));
 				.regular;
+
+				&:last-child {
+					.pb(@gutter * .5);
+				}
 
 				a {
 					--c-hl: inherit; // highlight color

@@ -30,7 +30,7 @@
 
 	/* Misc. */
 	--border-style:        1px dashed;
-	--stripes-angle:       300deg;
+	--stripes-angle:       120deg;
 	--topbar-filter:       blur(8px);
 	--bold-in-dark:        normal;  /* some texts should be bold in dark mode */
 
